@@ -17,3 +17,12 @@
     '';
   };
 }
+
+
+# if [ -f /etc/nixos/post-install.sh ]; then
+#   echo "You need to exec the post-install script. Just this once."
+#   echo "---------------------------------------------------------"
+#   echo "$ sudo ./post-install.sh"
+#   echo "Then, exit and login again."
+# else
+# fi

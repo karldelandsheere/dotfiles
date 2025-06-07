@@ -12,10 +12,11 @@
 DISK=/dev/vda
 BOOT_SIZE=2GiB
 
-WITH_LUKS=0
+WITH_LUKS=0 # So far, it's not working between Grub, LUKS, and a VM
 PASSWORD=temp0123
 
 HOST=utm
+USER=unnamedplayer
 
 
 # Unmount everything before starting (not working, "no mount point specified", I'll fix that later)
@@ -155,4 +156,36 @@ fi
 # Let's go
 # --------
 nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"
+
+
+# Instructions for the first boot after install (@TODO create a burner post-install script to automate this)
+# ---------------------------------------------
+echo "NixOS has been successfully installed. You can reboot and remove your live boot."
+echo "But it is not finished. You still need to follow these steps:"
+echo "1. $ sudo chown -R $USER: /etc/nixos"
+echo "2. $ nix build /etc/nixos#homeConfigurations.$USER.activationPackage"
+echo "3. $ ./result/activate"
+echo '4. $ exec $SHELL -l'
+
+
+# Make the files accessible for the post-install sh
+# -------------------------------------------------
+# chmod -R 777 /mnt/etc/nixos
+
+
+# Write a burner post-install script that will be executed on user's first login then delete itself
+# -------------------------------------------------------------------------------------------------
+# cat >/etc/nixos/post-install.sh <<EOL
+
+# nix build .#homeConfigurations."$USER".activationPackage
+# ./result/activate
+# exec $SHELL -l
+# chmod -R 755 /mnt/etc/nixos
+# rm /etc/nixos/post-install.sh
+
+# EOL
+
+
+
+
 
