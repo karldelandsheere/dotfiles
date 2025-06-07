@@ -135,13 +135,6 @@ nixos-generate-config --root /mnt
 mv /mnt/etc/nixos /mnt/etc/nixos-generated
 
 
-# Deactivate systemd-boot so we can use Grub
-# ------------------------------------------
-# sed -i 's/boot.loader.systemd-boot.enable = true;/# boot.loader.systemd-boot.enable = true;/g' /mnt/etc/nixos/configuration.nix
-# sed -i 's/boot.loader.efi.canTouchEfiVariables = true;/# boot.loader.efi.canTouchEfiVariables = true;/g' /mnt/etc/nixos/configuration.nix
-# sed -i 's/.\/hardware-configuration.nix/# .\/hardware-configuration.nix/g' /mnt/etc/nixos/configuration.nix
-
-
 # Import our dotfiles and customize them
 # ----------------------------------------
 git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
@@ -160,6 +153,5 @@ fi
 
 # Let's go
 # --------
-#nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"
-
+nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"
 
