@@ -41,6 +41,9 @@
         # q3dm10 = import ./hosts/q3dm10 flakeContext;
       };
 
+      # $ nix build .#homeConfigurations."your.name".activationPackage
+      # $ ./result/activate
+      # $ exec $SHELL -l
       homeConfigurations = {
         unnamedplayer = import ./users/unnamedplayer flakeContext;
       };

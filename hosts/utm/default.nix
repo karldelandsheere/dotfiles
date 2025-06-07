@@ -66,15 +66,6 @@ inputs.nixpkgs.lib.nixosSystem {
     ./hardware-configuration.nix
     ../../modules/system
     nixosModule
-
-    inputs.home-manager.nixosModules.home-manager {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-
-        unnamedplayer = import ./users/unnamedplayer flakeContext;
-      };
-    }
   ];
   system = "aarch64-linux";
 }

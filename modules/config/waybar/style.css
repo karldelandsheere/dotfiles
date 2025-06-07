@@ -1,0 +1,121 @@
+@import "/etc/nixos/modules/themes/catppuccin/mocha.css";
+
+* {
+  font-family: JetBrains Mono Font;
+  font-size: 18px;
+}
+
+#waybar {
+  background: @crust;
+  color: @text;
+}
+
+
+#clock,
+#workspaces,
+#custom-hyprlock {
+  margin: 5px 5px 10px;
+}
+
+#clock,
+#workspaces button,
+#custom-hyprlock,
+#idle_inhibitor {
+  background-color: transparent;
+  color: @surface2;
+}
+
+#clock:hover,
+#workspaces button:not(.active):hover,
+#custom-hyprlock:hover,
+#idle_inhibitor:hover {
+  color: @subtext0;
+}
+
+
+/* Clock */
+#clock {
+  font-weight: bold;
+  padding: 4px 2px;
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 4px 10px 4px 4px;
+}
+
+#workspaces button.active,
+#idle_inhibitor.activated {
+  color: @sky;
+}
+
+
+/* Hyprlock */
+#custom-hyprlock {
+  padding: 4px 10px 4px 4px;
+}
+
+
+#idle_inhibitor {
+  margin: 5px;
+  padding: 4px;
+}
+
+
+
+
+#custom-music,
+#tray,
+#backlight,
+#battery,
+#pulseaudio,
+#custom-power {
+  background-color: @surface0;
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+}
+
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#backlight, #battery {
+    border-radius: 0;
+}
+
+#pulseaudio {
+  color: @maroon;
+  border-radius: 1rem 0px 0px 1rem;
+  margin-left: 1rem;
+}
+
+#custom-music {
+  color: @mauve;
+  border-radius: 1rem;
+}
+
+#custom-power {
+    margin-right: 1rem;
+    border-radius: 0px 1rem 1rem 0px;
+    color: @red;
+}
+
+#tray {
+  background-color: transparent;
+  margin: 5px 5px 20px;
+  padding: 4px 10px 4px 4px;
+}
+

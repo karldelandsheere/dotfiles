@@ -2,8 +2,8 @@
 let
   homeModule = { config, lib, pkgs, ... }: {
     imports = [
-      ./config
-      ./modules
+      ./modules.nix
+      # ./config
     ];
     
     config = {
