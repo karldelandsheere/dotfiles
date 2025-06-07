@@ -130,6 +130,7 @@ mount -t vfat -o defaults,nosuid,nodev,relatime,fmask=0022,dmask=0022,codepage=4
 # Generate hardware-configuration.nix
 # -----------------------------------
 nixos-generate-config --root /mnt
+cp /mnt/etc/nixos/hardware-configuration.nix /tmp/hardware-configuration.nix
 
 
 # Deactivate systemd-boot so we can use Grub
@@ -139,11 +140,10 @@ sed -i 's/boot.loader.efi.canTouchEfiVariables = true;/# boot.loader.efi.canTouc
 sed -i 's/.\/hardware-configuration.nix/# .\/hardware-configuration.nix/g' /mnt/etc/nixos/configuration.nix
 
 
-# Import our .nix files and customize them
+# Import our dotfiles and customize them
 # ----------------------------------------
-curl https://sandbox.madebykarl.be/impermanence/flake.nix -o /mnt/etc/nixos/flake.nix
-curl https://sandbox.madebykarl.be/impermanence/custom.nix -o /mnt/etc/nixos/custom.nix
-curl https://sandbox.madebykarl.be/impermanence/encrypted.nix -o /mnt/etc/nixos/encrypted.nix
+git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
+mv /tmp/hardware-configuration.nix /mnt/etc/nixos/hardware-configuration.nix
 
 sed -i "s/__BOOT_UUID__/$BOOT_UUID/g" /mnt/etc/nixos/modules/system/boot.nix
 sed -i "s/__PRIMARY_PART__/$PRIMARY_PART/g" /mnt/etc/nixos/modules/system/impermanence.nix
