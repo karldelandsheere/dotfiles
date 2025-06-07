@@ -67,12 +67,14 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/system
     nixosModule
 
-    # inputs.home-manager.nixosModules.home-manager {
-    #   home-manager = {
-    #     useGlobalPkgs = true;
-    #     useUserPackages = true;
-    #   };
-    # }
+    inputs.home-manager.nixosModules.home-manager {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+
+        unnamedplayer = import ./users/unnamedplayer flakeContext;
+      };
+    }
   ];
   system = "aarch64-linux";
 }
