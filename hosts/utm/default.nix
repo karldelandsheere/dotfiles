@@ -66,6 +66,13 @@ inputs.nixpkgs.lib.nixosSystem {
     ./hardware-configuration.nix
     ../../modules/system
     nixosModule
+
+    # inputs.home-manager.nixosModules.home-manager {
+    #   home-manager = {
+    #     useGlobalPkgs = true;
+    #     useUserPackages = true;
+    #   };
+    # }
   ];
   system = "aarch64-linux";
 }

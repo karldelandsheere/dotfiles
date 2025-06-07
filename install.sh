@@ -3,6 +3,7 @@
 # Based on
 # - https://www.notashelf.dev/posts/impermanence
 # - https://notes.tiredofit.ca/books/linux/page/installing-nixos-encrypted-btrfs-impermanance
+# - https://willbush.dev/blog/impermanent-nixos/
 # and like the whole inter-web-whateverse I guess...
 
 
