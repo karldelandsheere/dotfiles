@@ -130,20 +130,20 @@ mount -t vfat -o defaults,nosuid,nodev,relatime,fmask=0022,dmask=0022,codepage=4
 # Generate hardware-configuration.nix
 # -----------------------------------
 nixos-generate-config --root /mnt
-cp /mnt/etc/nixos/hardware-configuration.nix /tmp/hardware-configuration.nix
+mv /mnt/etc/nixos /mnt/etc/nixos-generated
 
 
 # Deactivate systemd-boot so we can use Grub
 # ------------------------------------------
-sed -i 's/boot.loader.systemd-boot.enable = true;/# boot.loader.systemd-boot.enable = true;/g' /mnt/etc/nixos/configuration.nix
-sed -i 's/boot.loader.efi.canTouchEfiVariables = true;/# boot.loader.efi.canTouchEfiVariables = true;/g' /mnt/etc/nixos/configuration.nix
-sed -i 's/.\/hardware-configuration.nix/# .\/hardware-configuration.nix/g' /mnt/etc/nixos/configuration.nix
+# sed -i 's/boot.loader.systemd-boot.enable = true;/# boot.loader.systemd-boot.enable = true;/g' /mnt/etc/nixos/configuration.nix
+# sed -i 's/boot.loader.efi.canTouchEfiVariables = true;/# boot.loader.efi.canTouchEfiVariables = true;/g' /mnt/etc/nixos/configuration.nix
+# sed -i 's/.\/hardware-configuration.nix/# .\/hardware-configuration.nix/g' /mnt/etc/nixos/configuration.nix
 
 
 # Import our dotfiles and customize them
 # ----------------------------------------
 git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
-mv /tmp/hardware-configuration.nix /mnt/etc/nixos/hardware-configuration.nix
+cp /mnt/etc/nixos-generated/hardware-configuration.nix /mnt/etc/nixos/hardware-configuration.nix
 
 sed -i "s/__BOOT_UUID__/$BOOT_UUID/g" /mnt/etc/nixos/modules/system/boot.nix
 sed -i "s/__PRIMARY_PART__/$PRIMARY_PART/g" /mnt/etc/nixos/modules/system/impermanence.nix
