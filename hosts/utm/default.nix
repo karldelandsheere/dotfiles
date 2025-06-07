@@ -45,7 +45,7 @@ in
 
 inputs.nixpkgs.lib.nixosSystem {
   modules = [
-    impermanence.nixosModules.impermanence
+    inputs.impermanence.nixosModules.impermanence
     ../../hardware-configuration.nix
     ../../modules/system
     ../../custom.nix

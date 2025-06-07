@@ -11,10 +11,10 @@
 DISK=/dev/vda
 BOOT_SIZE=2GiB
 
-WITH_LUKS=1
+WITH_LUKS=0
 PASSWORD=temp0123
 
-FLAKEHOST=utm
+HOST=utm
 
 
 # Unmount everything before starting (not working, "no mount point specified", I'll fix that later)
@@ -124,7 +124,9 @@ mount -o subvol=var_log,compress=zstd,noatime /dev/disk/by-uuid/"$PRIMARY_UUID" 
 # Mount boot partition
 # --------------------
 mkdir -p /mnt/boot
-mount -t vfat -o defaults,nosuid,nodev,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro /dev/disk/by-uuid/"$BOOT_UUID" /mnt/boot/
+mount -t vfat \
+  -o defaults,nosuid,nodev,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro \
+  /dev/disk/by-uuid/"$BOOT_UUID" /mnt/boot/
 
 
 # Generate hardware-configuration.nix
@@ -143,10 +145,10 @@ mv /mnt/etc/nixos /mnt/etc/nixos-generated
 # Import our dotfiles and customize them
 # ----------------------------------------
 git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
-cp /mnt/etc/nixos-generated/hardware-configuration.nix /mnt/etc/nixos/hardware-configuration.nix
+cp /mnt/etc/nixos-generated/hardware-configuration.nix /mnt/etc/nixos/hosts/"$HOST"/hardware-configuration.nix
 
-sed -i "s/__BOOT_UUID__/$BOOT_UUID/g" /mnt/etc/nixos/modules/system/boot.nix
-sed -i "s/__PRIMARY_PART__/$PRIMARY_PART/g" /mnt/etc/nixos/modules/system/impermanence.nix
+sed -i "s|__BOOT_UUID__|$BOOT_UUID|g" /mnt/etc/nixos/modules/system/boot.nix
+sed -i "s|__PRIMARY_PART__|$PRIMARY_PART|g" /mnt/etc/nixos/modules/system/impermanence.nix
 
 
 # If LUKS, then uncomment the file import
@@ -158,6 +160,6 @@ fi
 
 # Let's go
 # --------
-nixos-install --root /mnt --flake /mnt/etc/nixos#"$FLAKEHOST"
+#nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"
 
 
