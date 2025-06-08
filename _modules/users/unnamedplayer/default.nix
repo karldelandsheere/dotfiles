@@ -15,17 +15,26 @@ let
         username = "unnamedplayer";
         homeDirectory = /home/unnamedplayer;
         packages = with pkgs; [
-          # anytype
-          #bitwarden
           #vlc
           #qbittorrent
-          #openscad
+          
+          # 3d
+          openscad
+          prusa-slicer
+          
+          # webdev
           # hugo
-          #nautilus
+
+          # utils
+          bitwarden
+          nautilus
+
+          # Notes
+          anytype
 
           # communication
-          #thunderbird
-          #signal-desktop
+          thunderbird
+          signal-desktop
 
           # like the cool guys
           cmatrix
