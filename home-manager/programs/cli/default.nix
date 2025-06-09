@@ -6,11 +6,22 @@
   ];
 
 
+  # Helix
+  # -----
   programs.helix = {
     enable = true;
     defaultEditor = true;
   };
 
+  home.sessionVariables.EDITOR = "hx";
 
-  home.packages = [ pkgs.scooter ];
+
+  # Other CLI tools
+  # ---------------
+  home.packages = with pkgs; [
+    cmatrix # like the cool guys
+    fastfetch
+    hugo
+    scooter
+  ];
 }

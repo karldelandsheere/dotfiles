@@ -1,5 +1,4 @@
 { ... }:
-
 {
   boot = {
     # We use Grub with Efi/Gpt

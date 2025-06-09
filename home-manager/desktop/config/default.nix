@@ -1,5 +1,5 @@
 { config, ... }: let
-  configDir = "/etc/nixos/modules/config";
+  configDir = "/etc/nixos/home-manager/desktop/config";
 in
 {
   home.file = {

@@ -139,18 +139,23 @@ mv /mnt/etc/nixos /mnt/etc/nixos-generated
 
 # Import our dotfiles and customize them
 # ----------------------------------------
-git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
-cp /mnt/etc/nixos-generated/hardware-configuration.nix /mnt/etc/nixos/hosts/"$HOST"/hardware-configuration.nix
+git clone -b test https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
+cp /mnt/etc/nixos-generated/hardware-configuration.nix /mnt/etc/nixos/system/hosts/"$HOST"/hardware-configuration.nix
 
-sed -i "s|__BOOT_UUID__|$BOOT_UUID|g" /mnt/etc/nixos/modules/system/boot.nix
-sed -i "s|__PRIMARY_PART__|$PRIMARY_PART|g" /mnt/etc/nixos/modules/system/impermanence.nix
+sed -i "s|__BOOT_UUID__|$BOOT_UUID|g" /mnt/etc/nixos/system/modules/boot.nix
+sed -i "s|__PRIMARY_PART__|$PRIMARY_PART|g" /mnt/etc/nixos/system/modules/impermanence.nix
 
 
 # If LUKS, then uncomment the file import
 # ---------------------------------------
 if [[ "$WITH_LUKS" -eq 1 ]]; then
-  sed -i 's/# .\/luks.nix/.\/luks.nix/g' /mnt/etc/nixos/modules/system/default.nix
+  sed -i 's/# .\/luks.nix/.\/luks.nix/g' /mnt/etc/nixos/system/modules/default.nix
 fi
+
+
+# Avoid the "dirty" warning
+# -------------------------
+git add .
 
 
 # Let's go
@@ -158,14 +163,17 @@ fi
 nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"
 
 
+# nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $SCRIPT_DIR#user;
+
 # Instructions for the first boot after install (@TODO create a burner post-install script to automate this)
 # ---------------------------------------------
-echo "NixOS has been successfully installed. You can reboot and remove your live boot."
-echo "But it is not finished. You still need to follow these steps:"
-echo "1. $ sudo chown -R $USER: /etc/nixos"
-echo "2. $ nix build /etc/nixos#homeConfigurations.$USER.activationPackage"
-echo "3. $ ./result/activate"
-echo '4. $ exec $SHELL -l'
+# echo "NixOS has been successfully installed. You can reboot and remove your live boot."
+# echo "But it is not finished. You still need to follow these steps:"
+# echo "1. $ sudo chown -R $USER: /etc/nixos"
+# echo "2. $ nix build /etc/nixos#homeConfigurations.$USER.activationPackage"
+# echo "3. $ ./result/activate"
+# echo '4. $ exec $SHELL -l'
+
 
 
 # Make the files accessible for the post-install sh

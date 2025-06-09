@@ -42,67 +42,39 @@
       modules = modules ++ [
         inputs.impermanence.nixosModules.impermanence
       ] ++ lists.optionals (useHomeManager) [
-        # home-manager.nixosModules.home-manager
-        # {
-        #   home-manager = {
-        #     useGlobalPkgs = true;
-        #     useUserPackages = true;
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
 
-        #     users.unnamedplayer = {
-        #       imports = [ ./home-manager ];
-        #     };
+            users.unnamedplayer = {
+              imports = [ ./home-manager ];
+            };
 
-        #     extraSpecialArgs = {
-        #       inherit system inputs;
-        #     };
-        #   };
-        # }
+            extraSpecialArgs = {
+              inherit system inputs;
+            };
+          };
+        }
       ];
     };
   in
   {
     ### --- nixos configs
     nixosConfigurations = {
-
-      nixosConfigurations = {
-        # Qemu VM on macOS/UTM
-        utm = mkSystemConfig {
-          system = "aarch64-linux";
-          modules = [ ./system/hosts/utm ];
-        };
-
-        # bare-metal on amd ryzen
-        # q3dm10 = mkSystemConfig {
-        #   system = "x86_64-linux";
-        #   modules = [ ./system/hosts/q3dm10 ];
-        # };
+      # Qemu VM on macOS/UTM
+      utm = mkSystemConfig {
+        system = "aarch64-linux";
+        modules = [ ./system/hosts/utm ];
       };
+
+      # bare-metal on amd ryzen
+      # q3dm10 = mkSystemConfig {
+      #   system = "x86_64-linux";
+      #   modules = [ ./system/hosts/q3dm10 ];
+      # };
     };
   };
-
-  ##########################################################
-  # Not keeping this version
-  #
-  # outputs = inputs:
-  #   let
-  #     flakeContext = {
-  #       inherit inputs;
-  #       dotfiles = ./.;
-  #     };
-  #   in
-  #   {
-  #     nixosConfigurations = {
-  #       utm = import ./hosts/utm flakeContext;
-  #       # q3dm10 = import ./hosts/q3dm10 flakeContext;
-  #     };
-
-  #     # $ nix build .#homeConfigurations."your.name".activationPackage
-  #     # $ ./result/activate
-  #     # $ exec $SHELL -l
-  #     homeConfigurations = {
-  #       unnamedplayer = import ./users/unnamedplayer flakeContext;
-  #     };
-  #   };
-
 }
 

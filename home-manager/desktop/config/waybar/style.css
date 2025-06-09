@@ -1,4 +1,4 @@
-@import "/etc/nixos/modules/themes/catppuccin/mocha.css";
+@import "/etc/nixos/home-manager/desktop/themes/catppuccin/mocha.css";
 
 * {
   font-family: JetBrains Mono Font;

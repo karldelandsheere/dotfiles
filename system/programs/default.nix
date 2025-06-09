@@ -5,12 +5,34 @@
   ];
 
 
-  # Git is needed for at least maintaining these dotfiles
-  # -----------------------------------------------------
-  programs.git.enable = true;
-
-
   config = {
+    # System-wide packages
+    # --------------------
+    environment.systemPackages = with pkgs; [
+      curl
+      git
+      helix
+      nano
+    ];
+
+
+    # Git is needed for at least maintaining these dotfiles
+    # -----------------------------------------------------
+    programs.git.enable = true;
+
+
+    # I like zsh better
+    # -----------------
+    programs.zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+    };
+    environment.shells = [ pkgs.zsh ];
+    users.defaultUserShell = pkgs.zsh;
+
+
     # Activate flakes, etc.
     # ---------------------
     nix.settings = {
@@ -23,6 +45,5 @@
     # I'd like it to be false, but that's not for today is it?
     # --------------------------------------------------------
     nixpkgs.config.allowUnfree = true;
-
   };
 }
