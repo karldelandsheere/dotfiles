@@ -47,33 +47,28 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-
-            users.unnamedplayer = {
-              imports = [ ./home-manager ];
-            };
-
-            extraSpecialArgs = {
-              inherit system inputs;
-            };
+            users.unnamedplayer = { imports = [ ./home-manager ]; };
+            extraSpecialArgs = { inherit system inputs; };
           };
         }
       ];
     };
   in
   {
-    ### --- nixos configs
     nixosConfigurations = {
       # Qemu VM on macOS/UTM
+      # --------------------
       utm = mkSystemConfig {
         system = "aarch64-linux";
         modules = [ ./system/hosts/utm ];
       };
 
       # bare-metal on amd ryzen
-      # q3dm10 = mkSystemConfig {
-      #   system = "x86_64-linux";
-      #   modules = [ ./system/hosts/q3dm10 ];
-      # };
+      # -----------------------
+      q3dm10 = mkSystemConfig {
+        system = "x86_64-linux";
+        modules = [ ./system/hosts/q3dm10 ];
+      };
     };
   };
 }

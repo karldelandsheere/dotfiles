@@ -2,12 +2,12 @@
 {
   imports = [
     ./firefox.nix
-    # ./onlyoffice.nix # only if x86_64-linux
     ./terminal.nix
+  # ] ++ lists.optionals (system == 'x86_64-linux') [
+    ./onlyoffice.nix
   ];
 
   home.packages = with pkgs; [
-    # anytype # only if x86_64-linux
     bitwarden
     nautilus
     openscad
@@ -16,5 +16,7 @@
     signal-desktop
     thunderbird
     #vlc
+  # ] ++ lists.optionals (system == 'x86_64-linux') [
+    anytype
   ];
 }
