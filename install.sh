@@ -153,9 +153,9 @@ if [[ "$WITH_LUKS" -eq 1 ]]; then
 fi
 
 
-# Avoid the "dirty" warning
+# Avoid the "dirty" warning (not working, why?)
 # -------------------------
-git add .
+# git add .
 
 
 # Let's go

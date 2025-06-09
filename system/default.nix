@@ -34,7 +34,7 @@
 
     # Tailscale
     # ---------
-    unnamedplayer.tailscale.enable = true;
+    # unnamedplayer.tailscale.enable = true;
 
 
     # I speak French, but let's keep it simple
@@ -45,47 +45,48 @@
     # Time settings
     # -------------
     time.timeZone = "Europe/Brussels";
-  };
 
 
-  # Fonts (too small for a dedicated file)
-  # -----
-  fonts.packages = with pkgs; [
-    font-awesome
-    nerd-fonts.jetbrains-mono
-  ];
+
+    # Fonts (too small for a dedicated file)
+    # -----
+    fonts.packages = with pkgs; [
+      font-awesome
+      nerd-fonts.jetbrains-mono
+    ];
 
 
-  # Security stuff
-  # --------------
-  security = {
-    # Yeah, read it was better to set that, but honnestly don't know why
-    sudo.extraConfig = ''
-      Defaults lecture = never
-    '';
+    # Security stuff
+    # --------------
+    security = {
+      # Yeah, read it was better to set that, but honnestly don't know why
+      sudo.extraConfig = ''
+        Defaults lecture = never
+      '';
 
-    polkit.enable = true; # Apparently needed for Hyprland?
-  };
-
-
-  # Some basic services
-  # -------------------
-  services = {
-    dbus.implementation = "broker";
-
-    xserver.enable = true;
-
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
+      polkit.enable = true; # Apparently needed for Hyprland?
     };
 
-    pulseaudio.enable = false; # For now
 
-    locate.enable = true;
+    # Some basic services
+    # -------------------
+    services = {
+      dbus.implementation = "broker";
+
+      xserver.enable = true;
+
+      pipewire = {
+        enable = true;
+        alsa = {
+          enable = true;
+          support32Bit = true;
+        };
+        pulse.enable = true;
+      };
+
+      pulseaudio.enable = false; # For now
+
+      locate.enable = true;
+    };
   };
 }
