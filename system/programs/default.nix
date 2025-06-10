@@ -9,6 +9,7 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
+      brightnessctl
       curl
       git
       helix

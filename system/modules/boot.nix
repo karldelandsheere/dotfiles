@@ -1,6 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 {
   boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_6;
+
     # We use Grub with Efi/Gpt
     # ------------------------
     loader = {
@@ -8,7 +10,8 @@
 
       grub = {
         enable = true;
-        device = "/dev/disk/by-uuid/__BOOT_UUID__";
+#        device = "/dev/disk/by-uuid/652D-1F87";
+        device = "nodev";
         efiSupport = true;
         # efiInstallAsRemovable = true;
       };

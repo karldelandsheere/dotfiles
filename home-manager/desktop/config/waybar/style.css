@@ -20,16 +20,18 @@
 #clock,
 #workspaces button,
 #custom-hyprlock,
-#idle_inhibitor {
+#idle_inhibitor,
+#battery,
+#tray {
   background-color: transparent;
-  color: @surface2;
+  color: @subtext0;
 }
 
 #clock:hover,
 #workspaces button:not(.active):hover,
 #custom-hyprlock:hover,
 #idle_inhibitor:hover {
-  color: @subtext0;
+  color: @text;
 }
 
 
@@ -50,24 +52,34 @@
 }
 
 
-/* Hyprlock */
-#custom-hyprlock {
-  padding: 4px 10px 4px 4px;
-}
-
-
-#idle_inhibitor {
-  margin: 5px;
+/* System tray */
+#tray {
+  margin: 5px 5px 10px;
   padding: 4px;
 }
 
 
 
 
+#custom-hyprlock,
+#battery {
+  padding: 4px 10px 4px 4px;
+}
+
+
+/* Idle inhibitor */
+#idle_inhibitor {
+  margin: 5px;
+  padding: 4px;
+}
+
+
+/* Battery states */
+#battery.warning:not(.charging) { color: @red; }
+
+
 #custom-music,
-#tray,
 #backlight,
-#battery,
 #pulseaudio,
 #custom-power {
   background-color: @surface0;
@@ -76,25 +88,12 @@
 }
 
 
-#battery {
-  color: @green;
-}
 
-#battery.charging {
-  color: @green;
-}
-
-#battery.warning:not(.charging) {
-  color: @red;
-}
 
 #backlight {
   color: @yellow;
 }
 
-#backlight, #battery {
-    border-radius: 0;
-}
 
 #pulseaudio {
   color: @maroon;
@@ -113,9 +112,4 @@
     color: @red;
 }
 
-#tray {
-  background-color: transparent;
-  margin: 5px 5px 20px;
-  padding: 4px 10px 4px 4px;
-}
 

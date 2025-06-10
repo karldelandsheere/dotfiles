@@ -13,17 +13,22 @@
     "modules-center": [
     ],
     "modules-right": [
+      "tray",
+      "battery",
       "idle_inhibitor",
       "custom/hyprlock"
     ],
 
 
+    // Simple clock
     "clock": {
       "timezone": "Europe/Brussels",
       "tooltip-format": "{:%Y%m%d (%A)}",
       "format": "{:%H\n%M}",
     },
 
+
+    // Workspaces
     "hyprland/workspaces": {
       "disable-scroll": true,
       "sort-by-name": true,
@@ -38,20 +43,34 @@
         "default": "",
       },
       "persistent-workspaces": {
-        "Virtual-1": [1,2,3,4]
+        "eDP-1": [1,2,3,4],
+        "Virtual-1": [1, 2]
       }
     },
 
+
+    // Battery check (one, two)
+    "battery": {
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{icon}",
+      "format-charging": "",
+      "format-plugged": "",
+      "format-alt": "{icon}",
+      "format-icons": ["", "", "", "", ""]
+    },
+
+
+    // For when you don't want it to go to sleep
     "idle_inhibitor": {
       "tooltip": false,
-      "format": "",
-      "format-icons": {
-        "activated": "",
-        "deactivated": ""
-      }
+      "format": ""
     },
 
     
+    // Lock the screen
     "custom/hyprlock": {
       "tooltip": false,
       "on-click": "exec uwsm app -- hyprlock",
@@ -79,17 +98,6 @@
       "device": "intel_backlight",
       "format": "{icon}",
       "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
-    "battery": {
-      "states": {
-        "warning": 30,
-        "critical": 15
-      },
-      "format": "{icon}",
-      "format-charging": "",
-      "format-plugged": "",
-      "format-alt": "{icon}",
-      "format-icons": ["", "", "", "", ""]
     },
     "pulseaudio": {
       // "scroll-step": 1, // %, can be a float

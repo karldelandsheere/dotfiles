@@ -8,5 +8,9 @@
     networkmanager.enable = true;
     enableIPv6 = true;
   };
+
+  services.tailscale = {
+    enable = true;
+  };
 }
 

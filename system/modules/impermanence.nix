@@ -74,7 +74,7 @@
   #     serviceConfig.Type = "oneshot";
   #     script = ''
   #       mkdir -p /mnt
-  #       mount -o subvol=/ __PRIMARY_PART__ /mnt
+  #       mount -o subvol=/ /dev/nvme0n1p2 /mnt
   #       btrfs subvolume list -o /mnt/root | cut -f9 -d' ' |
   #       while read subvolume; do
   #         echo "Deleting /$subvolume subvolume"
@@ -89,23 +89,22 @@
   #   };
 
 
-  #   # Stuff that needs to persist
-  #   # ---------------------------
-  #   services.persisted-files = {
-  #     description = "Hard-link persisted files from /persist";
-  #     wantedBy = [
-  #       "initrd.target"
-  #     ];
-  #     after = [
-  #       "sysroot.mount"
-  #     ];
-  #     unitConfig.DefaultDependencies = "no";
-  #     serviceConfig.Type = "oneshot";
-  #     script = ''
-  #       mkdir -p /sysroot/etc/
-  #       ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
+  # Stuff that needs to persist
+  # ---------------------------
+  # services.persisted-files = {
+  #   description = "Hard-link persisted files from /persist";
+  #   wantedBy = [
+  #     "initrd.target"
+  #   ];
+  #   after = [
+  #     "sysroot.mount"
+  #   ];
+  #   unitConfig.DefaultDependencies = "no";
+  #   serviceConfig.Type = "oneshot";
+  #   script = ''
+  #     mkdir -p /sysroot/etc/
+  #     ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
   #     '';
-  #   };
   # };
 
 
@@ -117,11 +116,14 @@
   #     "/etc/NetworkManager"              # NetworkManager
   #     "/var/lib/NetworkManager"
   #     "/var/lib/bluetooth"               # Bluetooth
-  #     "/var/lib/docker"                  # Docker
+  # #     "/var/lib/docker"                  # Docker
+
+      
+
   #   ];
     
   #   files = [   
-  #     "/etc/ssh/ssh_host_*"                 # SSH
+  # #     "/etc/ssh/ssh_host_*"                 # SSH
   #     "/etc/machine-id"                     # Needed for SystemD Journal
   #     "/var/lib/NetworkManager/secret_key"  # Network Manager
   #     "/var/lib/NetworkManager/seen-bssids" # Network Manager
@@ -130,4 +132,13 @@
   #   ];
   # };
 
+
+  # Symlinks to keep important files on /persist
+  # --------------------------------------------
+  environment.etc = {
+    "machine-id".source = "/persist/etc/machine-id";
+    "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
+
+  };
+   
 }

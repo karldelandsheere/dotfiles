@@ -9,7 +9,9 @@
 
   home.packages = with pkgs; [
     bitwarden
+    element-desktop
     nautilus
+    opencloud-desktop
     openscad
     prusa-slicer
     #qbittorrent

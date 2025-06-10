@@ -2,7 +2,7 @@
 {
   # ---- Terminal
   programs = {
-    # ghostty.enable = true;
-    terminator.enable = true;
+    ghostty.enable = true;
+    # terminator.enable = true;
   };
 }
