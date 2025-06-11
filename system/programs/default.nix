@@ -14,6 +14,7 @@
       git
       helix
       nano
+      xwayland-satellite
     ];
 
 
