@@ -1,0 +1,11 @@
+input {
+  keyboard {
+    xkb {
+      layout "be"
+    }
+  }
+}
+
+binds {
+  Super+Space { spawn "fuzzel"; }
+}

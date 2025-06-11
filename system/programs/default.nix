@@ -17,6 +17,9 @@
     ];
 
 
+    programs.dconf.enable = true;
+
+
     # Git is needed for at least maintaining these dotfiles
     # -----------------------------------------------------
     programs.git.enable = true;

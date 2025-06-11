@@ -9,11 +9,11 @@
       dots = "cd /etc/nixos/";
     };
 
-    profileExtra = ''
-      if uwsm check may-start; then
-        exec uwsm start -S hyprland-uwsm.desktop
-      fi
-    '';
+    # profileExtra = ''
+    #   if uwsm check may-start; then
+    #     exec uwsm start -S hyprland-uwsm.desktop
+    #   fi
+    # '';
   };
 }
 

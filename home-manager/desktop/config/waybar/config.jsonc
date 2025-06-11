@@ -73,7 +73,7 @@
     // Lock the screen
     "custom/hyprlock": {
       "tooltip": false,
-      "on-click": "exec uwsm app -- hyprlock",
+      // "on-click": "exec uwsm app -- hyprlock",
       "format": "",
     },
 
