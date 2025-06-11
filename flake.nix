@@ -3,12 +3,14 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org"
+      # "https://hyprland.cachix.org"
+      # "https://niri.cachix.org"
     ];
 
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      # "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      # "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
   };
 
@@ -23,14 +25,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+    # hyprland = {
+      # url = "github:hyprwm/Hyprland";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
 
-  outputs = inputs@{ self, nixpkgs, impermanence, home-manager, hyprland, ... }: 
+  outputs = inputs@{ self, nixpkgs, impermanence, home-manager, niri, ... }: 
   let
     inherit (nixpkgs.lib) nixosSystem lists;
 
@@ -41,6 +48,7 @@
 
       modules = modules ++ [
         inputs.impermanence.nixosModules.impermanence
+        niri.nixosModules.niri
 #      ] ++ lists.optionals (useHomeManager) [
 #        home-manager.nixosModules.home-manager
 #        {

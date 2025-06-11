@@ -10,10 +10,10 @@
     portal = {
       config = {
         common.default = [ "gtk" ];
-        hyprland.default = [
-          "gtk"
-          "hyprland"
-        ];
+        # hyprland.default = [
+        #   "gtk"
+        #   "hyprland"
+        # ];
       };
       enable = true;
       extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
@@ -22,12 +22,12 @@
   };
 
   
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-    portalPackage = pkgs.xdg-desktop-portal-hyprland;
-  };
+  # programs.hyprland = {
+  #   enable = true;
+  #   withUWSM = true;
+  #   xwayland.enable = true;
+  #   portalPackage = pkgs.xdg-desktop-portal-hyprland;
+  # };
 
   
   environment = {

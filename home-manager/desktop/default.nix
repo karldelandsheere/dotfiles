@@ -2,7 +2,7 @@
 {
   imports = [
     ./config
-    ./wm/hyprland
+    ./wm/niri
   ];
 
   # Used to be in my Hyprland config but it's not really tied to it, is it?
