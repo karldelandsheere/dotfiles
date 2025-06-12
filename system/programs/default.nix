@@ -14,6 +14,9 @@
       libnotify
       nano
       networkmanagerapplet # is it necessary though?
+      qt5.qtwayland
+      qt6.qtwayland
+      wl-clipboard
       xwayland-satellite
     ];
 

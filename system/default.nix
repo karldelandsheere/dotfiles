@@ -24,7 +24,8 @@
     console = {
       useXkbConfig = true;
       earlySetup = true;
-      font = "JetBrains-mono";
+      # font = "JetBrains Mono Font";
+      font = "Lat2-Terminus16";
     };
 
 
