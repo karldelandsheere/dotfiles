@@ -9,10 +9,10 @@
   # I'm not on a Qwerty, OK?
   # ------------------------
   console.keyMap = "be-latin1";
-  # services.xserver.xkb = {
-    # layout = "be";
+  services.xserver.xkb = {
+    layout = "be";
     # variant = "nodeadkeys";
-  # };
+  };
 
 
   # Networking stuff

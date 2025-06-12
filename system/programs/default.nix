@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [
-    ./hyprland.nix
-  ];
+  imports = [];
 
 
   config = {
@@ -13,7 +11,9 @@
       curl
       git
       helix
+      libnotify
       nano
+      networkmanagerapplet # is it necessary though?
       xwayland-satellite
     ];
 

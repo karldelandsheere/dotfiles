@@ -3,37 +3,33 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
-      # "https://hyprland.cachix.org"
       # "https://niri.cachix.org"
     ];
 
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      # "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       # "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
   };
 
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    
+    nixpkgs.url      = "github:nixos/nixpkgs/nixos-25.05";
     impermanence.url = "github:nix-community/impermanence";
+    niri.url         = "github:sodiboo/niri-flake";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hyprland = {
-      # url = "github:hyprwm/Hyprland";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    # firefox-addons = {
+    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # https://github.com/mrshmllow/affinity-nix
+    # affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
 

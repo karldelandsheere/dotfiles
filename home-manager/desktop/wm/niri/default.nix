@@ -9,4 +9,9 @@
   home.file = {
     ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/desktop/wm/niri/config.kdl";
   };
+
+  # @todo make this shell agnostic
+  programs.zsh.profileExtra = ''
+    exec niri
+  '';
 }

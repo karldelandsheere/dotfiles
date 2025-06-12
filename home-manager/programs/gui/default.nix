@@ -9,6 +9,7 @@
 
   home.packages = with pkgs; [
     bitwarden
+    blender
     element-desktop
     nautilus
     opencloud-desktop
@@ -18,6 +19,7 @@
     signal-desktop
     thunderbird
     #vlc
+    vscodium
   # ] ++ lists.optionals (system == 'x86_64-linux') [
     anytype
   ];
