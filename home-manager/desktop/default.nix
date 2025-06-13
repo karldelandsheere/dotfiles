@@ -32,25 +32,21 @@
     };
 
 
-    # programs.swaylock = {
-    #   enable = true;
-    # };
-    
     services = {
       mako.enable = true;
       
-      swayidle = {
-        enable = true;
-        systemdTarget = "niri-session.target";
-        timeouts = [
-          { timeout = 5; command = "swaylock"; }
-          { timeout = 900; command = "systemctl suspend"; }
-        ];
-        events = [
-          { event = "before-sleep"; command = "swaylock"; }
-          { event = "lock"; command = "swaylock"; }
-        ];
-      };
+      # swayidle = {
+      #   enable = true;
+      #   # systemdTarget = "niri-session.target";
+      #   timeouts = [
+      #     { timeout = 5; command = "swaylock"; }
+      #     { timeout = 900; command = "systemctl suspend"; }
+      #   ];
+      #   events = [
+      #     { event = "before-sleep"; command = "swaylock"; }
+      #     { event = "lock"; command = "swaylock"; }
+      #   ];
+      # };
     };
 
     home.sessionVariables = {
