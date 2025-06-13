@@ -7,19 +7,20 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
+      bluez
       brightnessctl
       curl
       git
       helix
       libnotify
       nano
-      networkmanagerapplet # is it necessary though?
+      networkmanagerapplet
       qt5.qtwayland
       qt6.qtwayland
+      swaylock-effects
       wl-clipboard
       xwayland-satellite
     ];
-
 
     programs.dconf.enable = true;
 

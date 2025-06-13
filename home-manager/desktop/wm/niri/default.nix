@@ -2,6 +2,9 @@
 {
   imports = [
     inputs.niri.homeModules.niri
+
+    # utils
+    ../../utils/fuzzel
   ];
 
   programs.niri.enable = true;

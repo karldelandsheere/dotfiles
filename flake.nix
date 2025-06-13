@@ -1,4 +1,9 @@
 {
+  # @todo Swayidle is not functionning
+  # @todo Swaylock gives me a red screen just before displaying correctly
+  # @todo I can't seem to change my sound volume
+  # @todo Figure out impermanence (fs is ok though)
+
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
     extra-substituters = [

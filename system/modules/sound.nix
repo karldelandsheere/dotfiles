@@ -2,6 +2,7 @@
 
 {
   security.rtkit.enable = true;
+  
   hardware.alsa.enable = true;
 
   # services.pipewire = {
@@ -12,7 +13,6 @@
   # };
 
   environment.systemPackages = with pkgs; [
-    pamixer
-    pavucontrol
+    alsa-utils
   ];
 }

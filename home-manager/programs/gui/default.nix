@@ -21,10 +21,6 @@
     #vlc
     vscodium
 
-    # move that at a better place
-    blueberry
-
-    
   # ] ++ lists.optionals (system == 'x86_64-linux') [
     anytype
   ];
