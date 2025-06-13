@@ -51,27 +51,45 @@ layout {
   }
 }
 
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "waybar"
-spawn-at-startup "ghostty"
 
-// No client-side decorations if possible
-prefer-no-csd
+// Workspaces
+workspace "dev"
+//workspace "browse"
+workspace "comms"
 
-// The path is formatted with strftime(3) to give you the screenshot date and time.
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+//window-rule {
+//  match app-id=r#""#
+//  open-on-workspace ""
+//}
 
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
-animations {
-  // off
+// Rules per app
+
+window-rule {
+  match app-id="com.mitchellh.ghostty"
+  open-on-workspace "dev"
+
+  opacity 0.8
 }
 
-// Work around WezTerm's initial configure bug
+
 window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+  match app-id="thunderbird"
+  open-on-workspace "comms"
+}
+
+window-rule {
+  match app-id="signal"
+  open-on-workspace "comms"
+}
+
+window-rule {
+  match app-id="Element"
+  open-on-workspace "comms"
+}
+
+window-rule {
+  match app-id="Bitwarden"
+  block-out-from "screen-capture"
 }
 
 // Example: block out two password managers from screen capture.
@@ -91,6 +109,26 @@ window-rule {
 window-rule {
     geometry-corner-radius 0
     clip-to-geometry true
+}
+
+
+
+
+// Note that running niri as a session supports xdg-desktop-autostart,
+// which may be more convenient to use.
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "waybar"
+spawn-at-startup "ghostty"
+
+// No client-side decorations if possible
+prefer-no-csd
+
+// The path is formatted with strftime(3) to give you the screenshot date and time.
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
+animations {
+  // off
 }
 
 binds {

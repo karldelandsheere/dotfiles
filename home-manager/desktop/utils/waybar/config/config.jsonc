@@ -8,9 +8,10 @@
     
     "modules-left": [
       "clock",
-      "hyprland/workspaces"
+      "niri/workspaces"
     ],
     "modules-center": [
+      "blueman-tray"
     ],
     "modules-right": [
       "tray",
@@ -29,22 +30,22 @@
 
 
     // Workspaces
-    "hyprland/workspaces": {
+    "niri/workspaces": {
       "disable-scroll": true,
       "sort-by-name": true,
       "show-special": true,
       "active-only": false,
       "format": "{icon}",
       "format-icons": {
-        "1": "",
-        "2": "",
-        "3": "",
-        "4": "",
+        "dev": "",
+        //"2": "",
+        //"3": "",
+        "comms": "",
         "default": "",
       },
       "persistent-workspaces": {
-        "eDP-1": [1,2,3,4],
-        "Virtual-1": [1, 2]
+        "eDP-1": ["dev", "comms"],
+        "Virtual-1": ["dev", "comms"]
       }
     },
 

@@ -32,7 +32,12 @@
     # Hardware (too small for a dedicated file)
     # --------
     hardware = {
-      bluetooth.enable = true;
+      enableAllFirmware = true;
+      
+      bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+      };
       graphics.enable = true;
     };
 

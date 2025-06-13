@@ -7,7 +7,7 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
-      bluez
+      # bluez
       brightnessctl
       curl
       git
