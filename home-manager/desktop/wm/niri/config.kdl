@@ -57,6 +57,9 @@ workspace "dev"
 workspace "3d"
 //workspace "browse"
 workspace "comms"
+workspace "docs"
+workspace "files"
+
 
 //window-rule {
 //  match app-id=r#""#
@@ -99,7 +102,6 @@ window-rule {
   open-on-workspace "3d"
 }
 
-
 window-rule {
   match app-id="thunderbird"
   open-on-workspace "comms"
@@ -119,6 +121,29 @@ window-rule {
   match app-id="Bitwarden"
   block-out-from "screen-capture"
 }
+
+window-rule {
+  match app-id="anytype"
+  open-on-workspace "docs"
+}
+
+window-rule {
+  match app-id="ONLYOFFICE"
+  open-on-workspace "docs"
+}
+
+window-rule {
+  match app-id="desktop.opencloud.eu."
+  open-on-workspace "files"
+}
+
+window-rule {
+  match app-id="nemo"
+  open-on-workspace "files"
+}
+
+
+
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)

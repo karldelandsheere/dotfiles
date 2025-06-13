@@ -8,10 +8,12 @@
     
     "modules-left": [
       "clock",
-      "niri/workspaces"
+      "niri/workspaces",
+      "custom/niri-workspaces"
     ],
     "modules-center": [
-      "blueman-tray"
+      // "blueman-tray"
+      "niri/window"
     ],
     "modules-right": [
       "tray",
@@ -32,15 +34,16 @@
     // Workspaces
     "niri/workspaces": {
       "disable-scroll": true,
-      "sort-by-name": true,
-      "show-special": true,
+      // "sort-by-name": true,
+      // "show-special": true,
       "active-only": true,
       "format": "{icon}",
       "format-icons": {
         "dev": "",
         "3d": "",
-        //"3": "",
         "comms": "",
+        "docs": "",
+        "files": "",
         "default": "",
       },
       // "persistent-workspaces": {
@@ -49,6 +52,10 @@
       // }
     },
 
+    "custom/niri-workspaces": {
+      "exec": "/etc/nixos/home-manager/desktop/wm/niri/niri-waybar-custom.sh",
+      "return-type": "json"
+    },
 
     // Battery check (one, two)
     "battery": {

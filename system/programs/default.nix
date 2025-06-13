@@ -14,6 +14,7 @@
       helix
       libnotify
       nano
+      nemo
       networkmanagerapplet
       qt5.qtwayland
       qt6.qtwayland
@@ -23,7 +24,7 @@
     ];
 
     programs.dconf.enable = true;
-
+    # programs.thunar.enable = true;
 
     # Git is needed for at least maintaining these dotfiles
     # -----------------------------------------------------

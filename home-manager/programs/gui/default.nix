@@ -13,7 +13,7 @@
       bitwarden
       blender
       element-desktop
-      nautilus
+      # nautilus
       opencloud-desktop
       openscad
       prusa-slicer
