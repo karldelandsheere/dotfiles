@@ -10,7 +10,7 @@
 
     home = {
       sessionVariables.EDITOR = "hx";
-      file.".config/helix".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/desktop/config/helix";
+      file.".config/helix".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/config/helix";
     };
   };
 }
