@@ -5,6 +5,7 @@
 
     # utils
     ../../utils/fuzzel
+    ../../utils/waybar
   ];
 
   programs.niri.enable = true;

@@ -2,19 +2,9 @@
 {
   imports = [
     ./git.nix
+    ./helix.nix
     ./zsh.nix
   ];
-
-
-  # Helix
-  # -----
-  programs.helix = {
-    enable = true;
-    defaultEditor = true;
-  };
-
-  home.sessionVariables.EDITOR = "hx";
-
 
   # Other CLI tools
   # ---------------

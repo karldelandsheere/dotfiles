@@ -26,15 +26,8 @@
 
 
     programs = {
-      fuzzel.enable = true;
-
       wlogout = {
         enable = true;
-      };
-
-      waybar = {
-        enable = true;
-        systemd.enable = true;
       };
     };
 
@@ -59,10 +52,6 @@
         ];
       };
     };
-
-    # home.packages = with pkgs; [
-    #   swaylock-effects
-    # ];
 
     home.sessionVariables = {
       CLUTTER_BACKEND = "wayland";
