@@ -8,8 +8,8 @@
         { timeout = 30; command = "systemctl suspend"; }
       ];
       events = [
-        { events = "before-sleep"; command = "swaylock"; }
-        { events = "lock"; command = "swaylock"; }
+        { event = "before-sleep"; command = "swaylock"; }
+        { event = "lock"; command = "swaylock"; }
       ];
     };
 
