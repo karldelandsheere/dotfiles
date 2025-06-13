@@ -8,13 +8,9 @@
     
     "modules-left": [
       "clock",
-      "niri/workspaces",
-      "custom/niri-workspaces"
+      "niri/workspaces"
     ],
-    "modules-center": [
-      // "blueman-tray"
-      "niri/window"
-    ],
+    "modules-center": [],
     "modules-right": [
       "tray",
       "battery",
@@ -52,10 +48,6 @@
       // }
     },
 
-    "custom/niri-workspaces": {
-      "exec": "/etc/nixos/home-manager/desktop/wm/niri/niri-waybar-custom.sh",
-      "return-type": "json"
-    },
 
     // Battery check (one, two)
     "battery": {

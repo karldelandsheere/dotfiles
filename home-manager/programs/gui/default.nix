@@ -9,13 +9,14 @@
 
   home = {
     packages = with pkgs; [
-      bambu-studio
+      # bambu-studio
       bitwarden
       blender
       element-desktop
       # nautilus
       opencloud-desktop
       openscad
+      orca-slicer
       prusa-slicer
       #qbittorrent
       signal-desktop

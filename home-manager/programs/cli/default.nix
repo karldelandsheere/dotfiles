@@ -3,6 +3,7 @@
   imports = [
     ./git.nix
     ./helix.nix
+    ./yazi.nix
     ./zsh.nix
   ];
 
