@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./firefox.nix
@@ -7,21 +7,25 @@
     ./onlyoffice.nix
   ];
 
-  home.packages = with pkgs; [
-    bitwarden
-    blender
-    element-desktop
-    nautilus
-    opencloud-desktop
-    openscad
-    prusa-slicer
-    #qbittorrent
-    signal-desktop
-    thunderbird
-    #vlc
-    vscodium
+  home = {
+    packages = with pkgs; [
+      bambu-studio
+      bitwarden
+      blender
+      element-desktop
+      nautilus
+      opencloud-desktop
+      openscad
+      prusa-slicer
+      #qbittorrent
+      signal-desktop
+      thunderbird
+      #vlc
+      vscodium
 
-  # ] ++ lists.optionals (system == 'x86_64-linux') [
-    anytype
-  ];
+    # ] ++ lists.optionals (system == 'x86_64-linux') [
+      anytype
+    ];
+
+    file.".config/Element/config.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/config/element";
 }

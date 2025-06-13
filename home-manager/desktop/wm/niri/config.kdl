@@ -54,6 +54,7 @@ layout {
 
 // Workspaces
 workspace "dev"
+workspace "3d"
 //workspace "browse"
 workspace "comms"
 
@@ -69,6 +70,18 @@ window-rule {
   open-on-workspace "dev"
 
   opacity 0.8
+}
+
+window-rule {
+  match app-id="codium"
+  open-on-workspace "dev"
+
+  opacity 0.8
+}
+
+window-rule {
+  match app-id="PrusaSlicer"
+  open-on-workspace "3d"
 }
 
 
