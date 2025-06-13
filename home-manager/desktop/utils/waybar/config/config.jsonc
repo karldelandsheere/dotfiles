@@ -34,19 +34,19 @@
       "disable-scroll": true,
       "sort-by-name": true,
       "show-special": true,
-      "active-only": false,
+      "active-only": true,
       "format": "{icon}",
       "format-icons": {
         "dev": "",
-        //"2": "",
+        "3d": "",
         //"3": "",
         "comms": "",
         "default": "",
       },
-      "persistent-workspaces": {
-        "eDP-1": ["dev", "comms"],
-        "Virtual-1": ["dev", "comms"]
-      }
+      // "persistent-workspaces": {
+        // "eDP-1": ["dev", "comms"],
+        // "Virtual-1": ["dev", "comms"]
+      // }
     },
 
 

@@ -84,6 +84,21 @@ window-rule {
   open-on-workspace "3d"
 }
 
+window-rule {
+  match app-id="BambuStudio"
+  open-on-workspace "3d"
+}
+
+window-rule {
+  match app-id="org.openscad."
+  open-on-workspace "3d"
+}
+
+window-rule {
+  match app-id="blender"
+  open-on-workspace "3d"
+}
+
 
 window-rule {
   match app-id="thunderbird"

@@ -28,4 +28,5 @@
     ];
 
     file.".config/Element/config.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/config/element";
+  };
 }
