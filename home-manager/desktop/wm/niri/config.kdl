@@ -100,7 +100,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="BambuStudio"
+  match app-id="OrcaSlicer"
   open-on-workspace "3d"
 }
 
@@ -203,11 +203,16 @@ switch-events {
 
 
 binds {
-  // 1. "$ show-hotkey-overlay" to show a list of important hotkeys
-  // 2. You can also use a shell. Do this if you need pipes, multiple commands, etc.
-  //    Note: the entire command goes as a single argument in the end.
-  //    Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
+  // You can also use a shell. Do this if you need pipes, multiple commands, etc.
+  // Note: the entire command goes as a single argument in the end.
+  // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
 
+
+  // Show a list of binds
+  Mod+H { show-hotkey-overlay; }
+
+
+  // Launch some programs
   Mod+T { spawn "ghostty"; }
   Mod+Space { spawn "fuzzel"; }
 

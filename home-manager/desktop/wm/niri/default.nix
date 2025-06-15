@@ -16,7 +16,7 @@
     ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/desktop/wm/niri/config.kdl";
   };
 
-  services.swayidle.systemdTarget = "niri-session.target";
+  # services.swayidle.systemdTarget = "niri-session.target";
 
   services.blueman-applet.enable = true;
 
