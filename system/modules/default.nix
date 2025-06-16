@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./bluetooth.nix
     ./boot.nix
     ./impermanence.nix
     # ./luks.nix

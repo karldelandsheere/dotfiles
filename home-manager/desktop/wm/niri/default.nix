@@ -18,9 +18,6 @@
 
   # services.swayidle.systemdTarget = "niri-session.target";
 
-  services.blueman-applet.enable = true;
-
-
   # @todo make this shell agnostic
   programs.zsh.profileExtra = ''
     exec niri

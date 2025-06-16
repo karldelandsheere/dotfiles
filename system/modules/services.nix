@@ -11,8 +11,6 @@
       displayManager.startx.enable = true;
     };
 
-    blueman.enable = true;
-
 		locate.enable = true;
   };
 }
