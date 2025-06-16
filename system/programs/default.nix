@@ -19,6 +19,7 @@
       qt5.qtwayland
       qt6.qtwayland
       swaylock-effects
+      unzip
       wl-clipboard
       xwayland-satellite
     ];
