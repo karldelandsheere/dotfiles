@@ -185,6 +185,15 @@ spawn-at-startup "xwayland-satellite"
 spawn-at-startup "waybar"
 spawn-at-startup "ghostty"
 
+
+// No need to get that overlay each time
+hotkey-overlay {
+  skip-at-startup
+}
+
+
+
+
 // No client-side decorations if possible
 prefer-no-csd
 
