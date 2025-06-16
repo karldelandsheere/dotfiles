@@ -16,7 +16,7 @@
         # efiInstallAsRemovable = true;
         gfxmodeEfi = "2880x1800";
         # theme = pkgs.catppuccin-grub;
-        theme = "/etc/nixos/system/themes/test/grub/2880x1800/theme.txt";
+        # theme = "/boot/grub/themes/test/grub/2880x1800/theme.txt";
       };
     };
 
