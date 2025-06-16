@@ -1,18 +1,23 @@
 { pkgs, ... }:
 
 {
-  security.rtkit.enable = true;
-  
-  hardware.alsa.enable = true;
+  security.rtkit.enable = true; 
 
-  # services.pipewire = {
-		# enable = true;
-		# alsa.enable = true;
-		# pulse.enable = true;
+  services = {
+    pulseaudio.enable = false;
+    pipewire = {
+		  enable = true;
+		  alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+		  pulse.enable = true;
   #   wireplumber.enable = true;
-  # };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
-    alsa-utils
+    # alsa-utils
+    pamixer
   ];
 }

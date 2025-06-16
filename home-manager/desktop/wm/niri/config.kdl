@@ -233,9 +233,9 @@ binds {
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "amixer" "-q" "set" "10%+"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "amixer" "-q" "set" "10%-"; }
-  XF86AudioMute        allow-when-locked=true { spawn "amixer" "-D" "pulse" "set" "Master" "1+" "toggle"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "5" "--allow-boost"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "5" "--allow-boost"; }
+  XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
   // XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
   // Similarly, you can bind touchpad scroll "ticks".
