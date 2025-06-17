@@ -15,4 +15,6 @@
     hugo
     scooter
   ];
+
+  programs.yt-dlp.enable = true;
 }
