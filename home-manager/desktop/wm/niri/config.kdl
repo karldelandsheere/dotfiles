@@ -233,9 +233,12 @@ binds {
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "5" "--allow-boost"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "5" "--allow-boost"; }
-  XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+  XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+  // XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "5" "--allow-boost"; }
+  // XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "5" "--allow-boost"; }
+  // XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
   // XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
   // Similarly, you can bind touchpad scroll "ticks".
@@ -408,6 +411,6 @@ binds {
 
   // Close stuff
   Mod+Q { close-window; }
-  Super+Alt+L allow-inhibiting=false { spawn "swaylock"; }
+  Alt+F4 allow-inhibiting=false { spawn "swaylock"; }
   Ctrl+Alt+Delete { quit; }
 }

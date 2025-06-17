@@ -12,12 +12,12 @@
         support32Bit = true;
       };
 		  pulse.enable = true;
-  #   wireplumber.enable = true;
+      wireplumber.enable = true;
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # alsa-utils
-    pamixer
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   # alsa-utils
+  #   pamixer
+  # ];
 }
