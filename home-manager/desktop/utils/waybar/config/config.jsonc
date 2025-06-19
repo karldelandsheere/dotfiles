@@ -16,6 +16,9 @@
       "backlight",
       "pulseaudio",
       "battery",
+      "cpu",
+      "memory",
+      "network",
       "idle_inhibitor",
       "custom/swaylock"
     ],
@@ -51,17 +54,6 @@
     },
 
 
-    // Sound controls
-    "pulseaudio": {
-      "format": "{icon}",
-      "format-icons": ["", "", " "],
-      "tooltip-format": "Sound: {volume}%",
-      "scroll-step": 1,
-      "reverse-scrolling": true,
-      // "on-click": "pavucontrol"
-    },
-
-
     // Backlight controls
     "backlight": {
       "device": "amdgpu_bl1",
@@ -72,6 +64,27 @@
 		  "on-scroll-up" : "brightnessctl set 1%-"
     },
 
+
+    // Sound controls
+    "pulseaudio": {
+      "format": "{icon}",
+      "format-icons": {
+  		  "headphones": "",
+        "default": ["", "", " "],
+  		},
+      "tooltip-format": "Sound: {volume}%",
+      "scroll-step": 1,
+      "reverse-scrolling": true,
+      // "on-click": "pavucontrol"
+    },
+
+
+    // For when you don't want it to go to sleep
+    "idle_inhibitor": {
+      "tooltip": false,
+      "format": ""
+    },
+    
     
     // Battery check (one, two)
     "battery": {
@@ -80,17 +93,33 @@
         "critical": 15
       },
       "format": "{icon}",
-      "format-charging": "",
-      "format-plugged": "",
-      "format-alt": "{icon}",
       "format-icons": ["", "", "", "", ""]
     },
 
 
-    // For when you don't want it to go to sleep
-    "idle_inhibitor": {
-      "tooltip": false,
-      "format": ""
+    "cpu": {
+	    "format": "",
+	  },
+
+
+	  "memory": {
+		  "format": ""
+	  },
+
+
+    "network": {
+      "format": "{icon}",
+		  "format-icons": {
+		    "wifi": "",
+		    "ethernet": "",
+		    "disconnected": ""
+		  },
+  	  "tooltip-format-wifi": "  {essid} |   {signalStrength}%\n@ {ipaddr}/{cidr} via {gwaddr}\n  {bandwidthDownBits} |   {bandwidthUpBits}"
+		  // "tooltip-format": "{ipaddr} / {icon} {signalStrength}%" 
+		  // "format-wifi": "<small>{ipaddr}</small> ({signalStrength}%)<big> </big>",
+		  // "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+		  // "format-disconnected": "<small>Disconnected ⚠</small>",
+		  
     },
 
     
@@ -100,6 +129,21 @@
       "on-click": "swaylock -f",
       "format": "",
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
