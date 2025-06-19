@@ -14,6 +14,8 @@
     homeDirectory = "/home/unnamedplayer";
   };
 
+  news.display = "show";
+
 
   # accounts.email = {
   #   maildirBasePath = "/persist/data/mail";
@@ -57,6 +59,5 @@
 
 
   home.stateVersion = "25.05";
-
   nixpkgs.config.allowUnfree = true;
 }

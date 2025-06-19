@@ -47,7 +47,6 @@
     time.timeZone = "Europe/Brussels";
 
 
-
     # Fonts (too small for a dedicated file)
     # -----
     fonts.packages = with pkgs; [

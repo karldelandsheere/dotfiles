@@ -7,6 +7,7 @@
     syntaxHighlighting.enable = true;
     shellAliases = {
       dots = "cd /etc/nixos/";
+      # rebuild = "nixos-rebuild switch --flake /etc/nixos#q3dm10 && home-manager switch --flake /etc/nixos#unnamedplayer";
     };
 
     # profileExtra = ''

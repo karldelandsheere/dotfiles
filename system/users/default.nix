@@ -7,11 +7,7 @@
     hashedPassword = "$6$BPe.Id8lkpUDdr7Y$HFyDyxc7Bd3uV1Gvx7DhlMEUfPRbHawID5MOuv9XkU7hASw3pG.XgPySR.CEYDGSvh0zdFNLwnB2QlmHBalaC1";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "input" "audio" ];
-    # openssh.authorizedKeys.keys = [];
   };
-
-  # users.users.root.openssh.authorizedKeys.keys =
-  #   config.users.users.unnamedplayer.openssh.authorizedKeys.keys;
 
 
   # Allow running nixos-rebuild, shutdown, and reboot as root without a password.

@@ -9,6 +9,10 @@
   # @todo Implement hibernation
   # @todo Customize Grub
   # @todo Figure out impermanence (fs is ok though)
+  # @todo BambuStudio and OrcaSlicer are crashing
+  # @todo Setup Firefox with addons etc
+  # @todo Find a way to make Affinity work
+  # @todo Setup Tailscale
 
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
@@ -55,17 +59,16 @@
 
       modules = modules ++ [
         inputs.impermanence.nixosModules.impermanence
-        niri.nixosModules.niri
-#      ] ++ lists.optionals (useHomeManager) [
-#        home-manager.nixosModules.home-manager
-#        {
-#          home-manager = {
-#            useGlobalPkgs = true;
-#            useUserPackages = true;
-#            users.unnamedplayer = { imports = [ ./home-manager ]; };
-#            extraSpecialArgs = { inherit system inputs; };
-#          };
-#        }
+      # ] ++ lists.optionals (useHomeManager) [
+      #   home-manager.nixosModules.home-manager
+      #   {
+      #     home-manager = {
+      #       useGlobalPkgs = true;
+      #       useUserPackages = true;
+      #       users.unnamedplayer = { imports = [ ./home-manager ]; };
+      #       extraSpecialArgs = { inherit system inputs; };
+      #     };
+      #   }
       ];
     };
   in

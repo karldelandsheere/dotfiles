@@ -16,7 +16,7 @@
       # nautilus
       opencloud-desktop
       openscad
-      orca-slicer
+      # orca-slicer
       prusa-slicer
       #qbittorrent
       signal-desktop
@@ -28,6 +28,6 @@
       anytype
     ];
 
-    file.".config/Element/config.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/config/element";
+    file.".config/Element/config.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/config/element/config.json";
   };
 }

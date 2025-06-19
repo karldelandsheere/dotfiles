@@ -13,6 +13,7 @@
     cmatrix # like the cool guys
     fastfetch
     hugo
+    moc
     scooter
   ];
 

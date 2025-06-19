@@ -56,6 +56,5 @@
       XDG_SESSION_TYPE = "wayland";
       XCURSOR_SIZE = "24";
     };
-
   };
 }

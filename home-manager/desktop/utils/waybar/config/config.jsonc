@@ -30,10 +30,10 @@
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
+        "default": " ",
+        "performance": " ",
+        "balanced": " ",
+        "power-saver": " "
       }
     },
 
@@ -66,12 +66,12 @@
       "active-only": true,
       "format": "{icon}",
       "format-icons": {
-        "dev": "",
-        "3d": "",
-        "comms": "",
-        "docs": "",
-        "files": "",
-        "default": "",
+        "dev": " ",
+        "3d": " ",
+        "comms": " ",
+        "docs": " ",
+        "files": " ",
+        "default": " ",
       },
       // "persistent-workspaces": {
         // "eDP-1": ["dev", "comms"],
@@ -84,7 +84,7 @@
     "backlight": {
       "device": "amdgpu_bl1",
       "format": "{icon}",
-      "format-icons": ["", "", "", "", "", "", "", "", ""],
+      "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "],
       "tooltip-format": "Backlight: {percent}%",
 		  "on-scroll-down" : "brightnessctl set +1%",
 		  "on-scroll-up" : "brightnessctl set 1%-"
@@ -95,8 +95,8 @@
     "pulseaudio": {
       "format": "{icon}",
       "format-icons": {
-  		  "headphones": "",
-        "default": ["", "", " "],
+  		  "headphones": " ",
+        "default": [" ", " ", " "],
   		},
       "tooltip-format": "Sound: {volume}%",
   		"tooltip-format-bluetooth": "Sound: {volume}% over ",
@@ -109,7 +109,7 @@
     // For when you don't want it to go to sleep
     "idle_inhibitor": {
       "tooltip": false,
-      "format": ""
+      "format": " "
     },
     
     
@@ -120,26 +120,29 @@
         "critical": 15
       },
       "format": "{icon}",
-      "format-icons": ["", "", "", "", ""]
+      "format-icons": {
+        "charging": " ",
+        "default": [" ", " ", " ", " ", " "]
+      }
     },
 
 
     "cpu": {
-	    "format": "",
+	    "format": " ",
 	  },
 
 
 	  "memory": {
-		  "format": ""
+		  "format": " "
 	  },
 
 
     "network": {
       "format": "{icon}",
 		  "format-icons": {
-		    "wifi": "",
-		    "ethernet": "",
-		    "disconnected": ""
+		    "wifi": " ",
+		    "ethernet": " ",
+		    "disconnected": " "
 		  },
   	  "tooltip-format-wifi": "  {essid} |   {signalStrength}%\n@ {ipaddr}/{cidr} via {gwaddr}\n  {bandwidthDownBits} |   {bandwidthUpBits}"
 		  // "tooltip-format": "{ipaddr} / {icon} {signalStrength}%" 
@@ -154,7 +157,7 @@
     "custom/swaylock": {
       "tooltip": false,
       "on-click": "swaylock -f",
-      "format": "",
+      "format": " ",
     },
 
 
