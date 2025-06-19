@@ -25,7 +25,8 @@
 #memory,
 #network
 #idle_inhibitor,
-#custom-swaylock { margin: 3px 5px; padding: 4px; }
+#custom-swaylock,
+#custom-power { margin: 3px 5px; padding: 4px; }
 
 #custom-swaylock,
 #workspaces,
@@ -36,7 +37,7 @@
 
 /* Cause it's the last one
 */
-#custom-swaylock { margin-bottom: 10px; }
+#custom-power { margin-bottom: 10px; }
 
 
 /* 
@@ -50,7 +51,8 @@
 #cpu,
 #memory,
 #pulseaudio,
-#tray { background-color: transparent; color: @subtext0; }
+#tray,
+#custom-power { background-color: transparent; color: @subtext0; }
 
 
 /* Idle inhibitor
@@ -82,8 +84,9 @@
 
 
 
-/* Network states
+/* Network
  */
+#network { margin: 6px 5px; }
 #network.disconnected { color: @red; }
 
 

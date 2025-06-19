@@ -20,8 +20,34 @@
       "memory",
       "network",
       "idle_inhibitor",
-      "custom/swaylock"
+      "custom/power"
     ],
+
+
+
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // Simple clock
@@ -73,6 +99,7 @@
         "default": ["", "", " "],
   		},
       "tooltip-format": "Sound: {volume}%",
+  		"tooltip-format-bluetooth": "Sound: {volume}% over ",
       "scroll-step": 1,
       "reverse-scrolling": true,
       // "on-click": "pavucontrol"
@@ -128,6 +155,21 @@
       "tooltip": false,
       "on-click": "swaylock -f",
       "format": "",
+    },
+
+
+    "custom/power": {
+      "format" : "⏻ ",
+		  "tooltip": false,
+    	"menu": "on-click",
+  		"menu-file": "$HOME/.config/waybar/menu_power.xml",
+  		"menu-actions": {
+  		  "lock": "swaylock -f",
+  			"shutdown": "shutdown",
+  			"reboot": "reboot",
+  			"suspend": "systemctl suspend",
+  			"hibernate": "systemctl hibernate"
+  		}
     },
 
 
