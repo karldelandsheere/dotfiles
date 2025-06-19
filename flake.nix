@@ -1,7 +1,13 @@
 {
   # @todo Swayidle is not functionning
-  # @todo Swaylock gives me a red screen just before displaying correctly
-  # @todo I can't seem to change my sound volume
+  # @todo Customize Swaylock
+  # @todo Correctly setup power profiles
+  # @todo Understand why my Airpods Pro can't connect easily
+  # @todo What's Polkit anyway?
+  # @todo Find out why alt+F4 is not working anymore
+  # @todo Make my workspaces better and find out how to display only the active and not empty ones
+  # @todo Implement hibernation
+  # @todo Customize Grub
   # @todo Figure out impermanence (fs is ok though)
 
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781

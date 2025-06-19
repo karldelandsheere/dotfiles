@@ -3,7 +3,10 @@
   config = {
     programs.waybar = {
       enable = true;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+        # target = "niri-session.target";
+      };
     };
 
     # @todo Find how to not have to type the whole path
