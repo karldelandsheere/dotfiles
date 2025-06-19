@@ -8,6 +8,7 @@
     ../../utils/swayidle
     ../../utils/swaylock
     ../../utils/waybar
+    ../../utils/wlogout
   ];
 
   programs.niri.enable = true;

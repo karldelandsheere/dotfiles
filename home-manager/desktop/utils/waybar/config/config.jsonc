@@ -10,9 +10,10 @@
       "clock",
       "niri/workspaces"
     ],
-    "modules-center": [],
-    "modules-right": [
+    "modules-center": [
       "tray",
+    ],
+    "modules-right": [
       "backlight",
       "pulseaudio",
       "battery",
@@ -20,7 +21,7 @@
       "memory",
       "network",
       "idle_inhibitor",
-      "custom/power"
+      "custom/wlogout"
     ],
 
 
@@ -161,21 +162,11 @@
     },
 
 
-    "custom/power": {
+    "custom/wlogout": {
       "format" : "⏻ ",
 		  "tooltip": false,
-    	"menu": "on-click",
-  		"menu-file": "$HOME/.config/waybar/menu_power.xml",
-  		"menu-actions": {
-  		  "lock": "swaylock -f",
-  			"shutdown": "shutdown",
-  			"reboot": "reboot",
-  			"suspend": "systemctl suspend",
-  			"hibernate": "systemctl hibernate"
-  		}
+    	"on-click": "wlogout",
     },
-
-
 
 
 

@@ -411,6 +411,6 @@ binds {
 
   // Close stuff
   Mod+Q { close-window; }
-  Alt+F4 allow-inhibiting=false { spawn "swaylock -f"; }
+  Alt+Q allow-inhibiting=false { spawn "wlogout"; }
   Ctrl+Alt+Delete { quit; }
 }

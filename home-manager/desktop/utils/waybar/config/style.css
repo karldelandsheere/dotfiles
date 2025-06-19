@@ -26,7 +26,7 @@
 #network
 #idle_inhibitor,
 #custom-swaylock,
-#custom-power { margin: 3px 5px; padding: 4px; }
+#custom-wlogout { margin: 3px 5px; padding: 4px; }
 
 #custom-swaylock,
 #workspaces,
@@ -37,7 +37,7 @@
 
 /* Cause it's the last one
 */
-#custom-power { margin-bottom: 10px; }
+#custom-wlogout { margin-bottom: 10px; }
 
 
 /* 
@@ -50,9 +50,10 @@
 #backlight,
 #cpu,
 #memory,
+#network,
 #pulseaudio,
 #tray,
-#custom-power { background-color: transparent; color: @subtext0; }
+#custom-wlogout { background-color: transparent; color: @subtext0; }
 
 
 /* Idle inhibitor
@@ -74,14 +75,18 @@
 #custom-swaylock:hover,
 #idle_inhibitor:hover,
 #backlight:hover,
-#pulseaudio:hover { color: @text; }
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-wlogout:hover { color: @text; }
 
 
 /* Battery states
  */
 #battery.charging, #battery.plugged { color: @sky; }
 #battery.warning:not(.charging) { color: @red; }
-
 
 
 /* Network
