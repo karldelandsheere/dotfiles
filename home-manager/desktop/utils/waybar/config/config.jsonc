@@ -13,9 +13,11 @@
     "modules-center": [],
     "modules-right": [
       "tray",
+      "backlight",
+      "pulseaudio",
       "battery",
       "idle_inhibitor",
-      "custom/hyprlock"
+      "custom/swaylock"
     ],
 
 
@@ -49,6 +51,28 @@
     },
 
 
+    // Sound controls
+    "pulseaudio": {
+      "format": "{icon}",
+      "format-icons": ["", "", " "],
+      "tooltip-format": "Sound: {volume}%",
+      "scroll-step": 1,
+      "reverse-scrolling": true,
+      // "on-click": "pavucontrol"
+    },
+
+
+    // Backlight controls
+    "backlight": {
+      "device": "amdgpu_bl1",
+      "format": "{icon}",
+      "format-icons": ["", "", "", "", "", "", "", "", ""],
+      "tooltip-format": "Backlight: {percent}%",
+		  "on-scroll-down" : "brightnessctl set +1%",
+		  "on-scroll-up" : "brightnessctl set 1%-"
+    },
+
+    
     // Battery check (one, two)
     "battery": {
       "states": {
@@ -71,9 +95,9 @@
 
     
     // Lock the screen
-    "custom/hyprlock": {
+    "custom/swaylock": {
       "tooltip": false,
-      // "on-click": "exec uwsm app -- hyprlock",
+      "on-click": "swaylock -f",
       "format": "",
     },
 
@@ -93,20 +117,6 @@
       "exec": "playerctl metadata --format='{{ title }}'",
       "on-click": "playerctl play-pause",
       "max-length": 50
-    },
-    "backlight": {
-      "device": "intel_backlight",
-      "format": "{icon}",
-      "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
-    "pulseaudio": {
-      // "scroll-step": 1, // %, can be a float
-      "format": "{icon} {volume}%",
-      "format-muted": "",
-      "format-icons": {
-        "default": ["", "", " "]
-      },
-      "on-click": "pavucontrol"
     },
   }
 ]

@@ -1,115 +1,107 @@
 @import "/etc/nixos/home-manager/desktop/themes/catppuccin/mocha.css";
 
+
+/* Common stuff
+ */
 * {
   font-family: JetBrains Mono Font;
   font-size: 18px;
 }
 
-#waybar {
-  background: @crust;
-  color: @text;
-}
+
+/* Main container
+ */
+#waybar { background: @crust; color: @text; }
 
 
+/* Menu elements
+ */
 #clock,
 #workspaces,
-#custom-hyprlock {
-  margin: 5px 5px 10px;
-}
+#backlight,
+#custom-swaylock { margin: 5px; padding: 4px; }
 
+#custom-swaylock,
+#workspaces,
+#battery { padding-right: 10px; }
+
+
+/* Cause it's the last one
+*/
+#custom-swaylock { margin-bottom: 10px; }
+
+
+/* 
+ */
 #clock,
 #workspaces button,
-#custom-hyprlock,
+#custom-swaylock,
 #idle_inhibitor,
 #battery,
-#tray {
-  background-color: transparent;
-  color: @subtext0;
-}
+#backlight,
+#pulseaudio,
+#tray { background-color: transparent; color: @subtext0; }
 
+
+/* Idle inhibitor
+ */
+#idle_inhibitor { margin: 5px; padding: 4px; }
+
+
+/* Toggled off or deactivated stuff
+ */
+#pulseaudio.muted,
+#idle_inhibitor.deactivated,
+#custom-swaylock { color: @surface1; }
+
+
+/* Hover
+ */
 #clock:hover,
 #workspaces button:not(.active):hover,
-#custom-hyprlock:hover,
-#idle_inhibitor:hover {
-  color: @text;
-}
+#custom-swaylock:hover,
+#idle_inhibitor:hover,
+#backlight:hover,
+#pulseaudio:hover { color: @text; }
 
 
-/* Clock */
-#clock {
-  font-weight: bold;
-  padding: 4px 2px;
-}
-
-/* Workspaces */
-#workspaces {
-  padding: 4px 10px 4px 4px;
-}
-
-#workspaces button.active,
-#idle_inhibitor.activated {
-  color: @sky;
-}
-
-
-/* System tray */
-#tray {
-  margin: 5px 5px 10px;
-  padding: 4px;
-}
-
-
-
-
-#custom-hyprlock,
-#battery {
-  padding: 4px 10px 4px 4px;
-}
-
-
-/* Idle inhibitor */
-#idle_inhibitor {
-  margin: 5px;
-  padding: 4px;
-}
-
-
-/* Battery states */
+/* Battery states
+ */
 #battery.warning:not(.charging) { color: @red; }
 
 
-#custom-music,
-#backlight,
-#pulseaudio,
-#custom-power {
-  background-color: @surface0;
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
-}
+/* Clock
+ */
+#clock { font-weight: bold; padding: 4px 2px; }
+
+
+/* Workspaces
+ */
+#workspaces button.active,
+#idle_inhibitor.activated { color: @sky; }
+
+
+/* System tray
+ */
+#tray { margin: 5px 5px 10px; padding: 4px; }
+
+
+
+/* #custom-music, { */
+  /* background-color: @surface0; */
+  /* padding: 0.5rem 1rem; */
+  /* margin: 5px 0; */
+/* } */
 
 
 
 
-#backlight {
-  color: @yellow;
-}
 
 
-#pulseaudio {
-  color: @maroon;
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
-}
+/* #custom-music { */
+  /* color: @mauve; */
+  /* border-radius: 1rem; */
+/* } */
 
-#custom-music {
-  color: @mauve;
-  border-radius: 1rem;
-}
-
-#custom-power {
-    margin-right: 1rem;
-    border-radius: 0px 1rem 1rem 0px;
-    color: @red;
-}
 
 

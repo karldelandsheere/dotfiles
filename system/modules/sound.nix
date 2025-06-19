@@ -16,8 +16,7 @@
     };
   };
 
-  # environment.systemPackages = with pkgs; [
-  #   # alsa-utils
-  #   pamixer
-  # ];
+  environment.systemPackages = with pkgs; [
+    pavucontrol
+  ];
 }
