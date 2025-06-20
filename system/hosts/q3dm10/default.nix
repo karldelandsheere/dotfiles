@@ -12,6 +12,12 @@
   services.xserver.xkb.layout = "be";
 
 
+  # AMD specific packages
+  # ---------------------
+  environment.systemPackages = with pkgs; [
+    microcode-amd
+  ];
+
 
   # Networking stuff
   # ----------------

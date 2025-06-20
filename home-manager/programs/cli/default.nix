@@ -10,6 +10,7 @@
   # Other CLI tools
   # ---------------
   home.packages = with pkgs; [
+    # audacious # make it look like winamp
     cmatrix # like the cool guys
     exiftool
     fastfetch
