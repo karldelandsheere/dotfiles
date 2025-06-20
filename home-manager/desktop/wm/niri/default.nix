@@ -5,6 +5,7 @@
 
     # utils
     ../../utils/fuzzel
+    ../../utils/hyprpaper
     ../../utils/swayidle
     ../../utils/swaylock
     ../../utils/waybar
