@@ -5,7 +5,7 @@
     # -----
     programs.yazi = {
       enable = true;
-      enableZshIntegration = true;
+      enableZshIntegration = config.programs.zsh.enable;
     };
 
     # home = {

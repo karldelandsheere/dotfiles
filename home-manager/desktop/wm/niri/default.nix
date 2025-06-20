@@ -5,13 +5,13 @@
 
     # utils
     ../../utils/fuzzel
-    ../../utils/hypridle
     ../../utils/mako
-    #../../utils/swayidle
+    ../../utils/swayidle
     ../../utils/swaylock
     ../../utils/waybar
     ../../utils/wlogout
   ];
+
 
   programs.niri.enable = true;
 

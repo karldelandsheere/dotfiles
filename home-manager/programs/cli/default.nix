@@ -11,6 +11,7 @@
   # ---------------
   home.packages = with pkgs; [
     cmatrix # like the cool guys
+    exiftool
     fastfetch
     hugo
     moc
