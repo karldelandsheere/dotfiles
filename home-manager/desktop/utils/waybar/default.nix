@@ -5,7 +5,7 @@
       enable = true;
       systemd = {
         enable = true;
-        # target = "niri-session.target";
+        target = "niri-session.target";
       };
     };
 

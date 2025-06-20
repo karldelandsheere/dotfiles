@@ -3,6 +3,7 @@
   config = {
     services.swayidle = {
       enable = true;
+      systemdTarget = "niri-session.target";
       # timeouts = [
       #   { timeout = 10; command = "niri msg action power-off-monitors"; }
       #   { timeout = 30; command = "systemctl suspend"; }

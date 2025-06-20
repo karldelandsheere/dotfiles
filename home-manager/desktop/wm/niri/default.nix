@@ -5,7 +5,8 @@
 
     # utils
     ../../utils/fuzzel
-    ../../utils/hyprpaper
+    # ../../utils/hyprpaper
+    ../../utils/mako
     ../../utils/swayidle
     ../../utils/swaylock
     ../../utils/waybar
@@ -22,6 +23,6 @@
 
   # @todo make this shell agnostic
   programs.zsh.profileExtra = ''
-    exec niri
+    exec niri --session
   '';
 }
