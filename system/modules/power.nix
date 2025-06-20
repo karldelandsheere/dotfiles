@@ -5,7 +5,7 @@
   # If not, I'll put this in the default.nix
   # ----------------------------------------
 
-  services.power-profiles.daemon.enable = true;
+  # services.power-profiles.daemon.enable = true;
 
   # services.powerstation.enable = true;
   # services.upower.enable = true;

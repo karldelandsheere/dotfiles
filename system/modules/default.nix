@@ -6,6 +6,7 @@
     ./impermanence.nix
     # ./luks.nix
     ./networking.nix
+    ./power.nix
     ./security.nix
     ./services.nix
     ./sound.nix
