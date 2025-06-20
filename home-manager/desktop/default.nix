@@ -6,13 +6,14 @@
 
   config = {
     xdg = {
-      autostart = {
-        enable = true;
-        readOnly = true;
-        entries = [
-          "${pkgs.waybar}/share/systemd/user/waybar.service"
-        ];
-      };
+      # autostart = {
+      #   enable = true;
+      #   readOnly = true;
+      #   entries = [
+      #     # "${pkgs.waybar}/bin/waybar"
+      #     # "${pkgs.swayidle}/bin/swayidle"
+      #   ];
+      # };
       
       portal = {
         enable = true;
