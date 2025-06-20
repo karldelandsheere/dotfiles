@@ -179,10 +179,8 @@ window-rule {
 
 
 
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
 spawn-at-startup "ghostty"
 
 
