@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./element-desktop
+    ./element
     ./firefox.nix
     ./terminal.nix
   # ] ++ lists.optionals (system == 'x86_64-linux') [
