@@ -2,22 +2,15 @@
 {
   imports = [
     inputs.niri.homeModules.niri
-
-    # utils
-    ../../utils/fuzzel
-    ../../utils/mako
-    ../../utils/swayidle
-    ../../utils/swaylock
-    ../../utils/waybar
-    ../../utils/wlogout
+    ./utils.nix
   ];
 
 
   programs.niri.enable = true;
 
-  home.file = {
-    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/desktop/wm/niri/config.kdl";
-  };
+  # @todo Could we get away with the full absolute path?
+  home.file.".config/niri/config.kdl".source =
+    config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/desktop/wm/niri/config.kdl";
 
 
   # @todo make this shell agnostic
