@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ./element-desktop
     ./firefox.nix
     ./terminal.nix
   # ] ++ lists.optionals (system == 'x86_64-linux') [
@@ -12,7 +13,6 @@
       # bambu-studio
       bitwarden
       blender
-      element-desktop
       # nautilus
       opencloud-desktop
       openscad
@@ -27,7 +27,5 @@
     # ] ++ lists.optionals (system == 'x86_64-linux') [
       anytype
     ];
-
-    file.".config/Element/config.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/config/element/config.json";
   };
 }

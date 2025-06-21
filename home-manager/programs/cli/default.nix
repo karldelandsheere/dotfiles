@@ -2,7 +2,7 @@
 {
   imports = [
     ./git.nix
-    ./helix.nix
+    ./helix
     ./moc
     ./yazi.nix
     ./zsh.nix
