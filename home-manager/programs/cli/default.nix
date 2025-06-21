@@ -3,6 +3,7 @@
   imports = [
     ./git.nix
     ./helix.nix
+    ./moc
     ./yazi.nix
     ./zsh.nix
   ];
@@ -15,7 +16,6 @@
     exiftool
     fastfetch
     hugo
-    moc
     scooter
   ];
 
