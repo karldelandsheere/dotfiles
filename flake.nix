@@ -1,18 +1,16 @@
 {
-  # @todo Swayidle is not functionning
-  # @todo Customize Swaylock
   # @todo Correctly setup power profiles
-  # @todo Understand why my Airpods Pro can't connect easily
-  # @todo What's Polkit anyway?
-  # @todo Find out why alt+F4 is not working anymore
-  # @todo Make my workspaces better and find out how to display only the active and not empty ones
   # @todo Implement hibernation
-  # @todo Customize Grub
+  # @todo Swayidle is not functionning
   # @todo Figure out impermanence (fs is ok though)
-  # @todo BambuStudio and OrcaSlicer are crashing
-  # @todo Setup Firefox with addons etc
-  # @todo Find a way to make Affinity work
   # @todo Setup Tailscale
+  # @todo What's Polkit anyway?
+  # @todo Understand why my Airpods Pro can't connect easily
+  # @todo BambuStudio and OrcaSlicer are crashing
+  # @todo Find a way to make Affinity work
+  # @todo Make my workspaces better and find out how to display only the active and not empty ones
+  # @todo Customize Swaylock
+  # @todo Customize Grub
 
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
