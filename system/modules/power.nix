@@ -13,7 +13,6 @@
 
 
   services = {
-    power-profiles-daemon.enable = true;
     # services.powerstation.enable = true;
     # services.upower.enable = true;
 
