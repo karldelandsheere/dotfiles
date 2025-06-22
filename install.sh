@@ -30,6 +30,7 @@ USER=unnamedplayer
 # umount /mnt/var/local/.snapshots
 # umount /mnt/var/local
 # umount /mnt/var/log
+# umount /mnt/swap
 # umount /mnt
 
 
@@ -89,6 +90,8 @@ btrfs subvolume create /mnt/var_local/snapshots
 
 btrfs subvolume create /mnt/var_log
 
+btrfs subvolume create /mnt/swap
+
 
 # Create readonly snapshot of the root in case of abrupt shutdown
 # ---------------------------------------------------------------
@@ -121,6 +124,9 @@ mount -o subvol=var_local/snapshots,compress=zstd,noatime /dev/disk/by-uuid/"$PR
 
 mkdir -p /mnt/var/log
 mount -o subvol=var_log,compress=zstd,noatime /dev/disk/by-uuid/"$PRIMARY_UUID" /mnt/var/log
+
+mkdir -p /mnt/swap
+mount -o subvol=swap,compress=zstd,noatime /dev/disk/by-uuid/"$PRIMARY_UUID" /mnt/swap
 
 
 # Mount boot partition

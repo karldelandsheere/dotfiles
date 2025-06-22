@@ -7,7 +7,7 @@
   # Set up the swapfile, should be the size of RAM
   # ----------------------------------------------
   swapDevices = [ {
-    device = "/var/local/swapfile";
+    device = "/swap/swapfile";
     size = 96*1024;
   } ];
 
