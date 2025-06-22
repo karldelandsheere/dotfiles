@@ -67,11 +67,11 @@
       options = [ "subvol=var_log" ];
     };
 
-  # fileSystems."/swap" =
-  #   { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
-  #     fsType = "btrfs";
-  #     options = [ "subvol=swap" ];
-  #   };
+  fileSystems."/swap" =
+    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+      fsType = "btrfs";
+      options = [ "subvol=swap" ];
+    };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/652D-1F87";
