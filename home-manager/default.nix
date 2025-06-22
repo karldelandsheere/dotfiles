@@ -2,8 +2,10 @@
 {
   imports = [
     ./programs
-    ./desktop
+    ./utils
+    ./wm
   ];
+
 
   # It's the least, right?
   # ----------------------     

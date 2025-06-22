@@ -1,11 +1,13 @@
 { pkgs, ... }:
 {
-  # Power management
+  # Power management and hibernation
   # https://nixos.wiki/wiki/Laptop
   # https://nixos.wiki/wiki/Hibernation
   # -----------------------------------
 
 
+  # Enable powerManagement and set it to powersave
+  # ----------------------------------------------
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "powersave"; #performance, ondemand, schedutil
@@ -13,10 +15,11 @@
 
 
   services = {
-    # services.powerstation.enable = true;
-    # services.upower.enable = true;
-
+    # powerstation.enable = true;
+    upower.enable = true;
     
+    # Service to help with power management
+    # -------------------------------------
     tlp = {
       enable = true;
 
@@ -39,17 +42,36 @@
     };
 
 
+    # Lid and powerKey events
+    # -----------------------
     logind = {
-      lidSwitch = "suspend";
-      # lidSwitch = "suspend-then-hibernate"; # when hibernate will be implemented
+      lidSwitch = "suspend-then-hibernate";
       lidSwitchExternalPower = "suspend";
       lidSwitchDocked = "ignore";
-      # powerKey = "hibernate";
+      powerKey = "hibernate";
       powerKeyLongPress = "poweroff";
     };
   };
 
 
+  # Set up the swapfile for hibernation (should be the size of RAM)
+  # -----------------------------------
+  swapDevices = [ {
+    device = "/swap/swapfile";
+    size = 96*1024;
+  } ];
+
+
+  # Resume after hibernation
+  # ------------------------
+  boot = {
+    kernelParams = [ "resume_offset=6300928" ];
+    resumeDevice = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+  };
+
+
+  #
+  # 
   environment.systemPackages = with pkgs; [
     acpi
     # linuxKernel.packages.linux_zen.cpupower

@@ -8,7 +8,6 @@
 
       grub = {
         enable = true;
-#        device = "/dev/disk/by-uuid/652D-1F87";
         device = "nodev";
         efiSupport = true;
         gfxmodeEfi = "2880x1800";
