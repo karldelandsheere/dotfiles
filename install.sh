@@ -127,7 +127,7 @@ mkdir -p /mnt/var/log
 mount -o subvol=var_log,compress=zstd,noatime /dev/disk/by-uuid/"$PRIMARY_UUID" /mnt/var/log
 
 mkdir -p /mnt/swap
-mount -o subvol=swap,compress=zstd,noatime /dev/disk/by-uuid/"$PRIMARY_UUID" /mnt/swap
+mount -o subvol=swap,compress=none,noatime /dev/disk/by-uuid/"$PRIMARY_UUID" /mnt/swap
 
 
 # Mount boot partition
