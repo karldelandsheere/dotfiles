@@ -3,6 +3,7 @@
   imports = [
     ./bluetooth.nix
     ./boot.nix
+    ./hibernation.nix # also contains swapfile config
     ./impermanence.nix
     # ./luks.nix
     ./networking.nix
@@ -10,7 +11,6 @@
     ./security.nix
     ./services.nix
     ./sound.nix
-    ./swapfile.nix
   ];
 
 

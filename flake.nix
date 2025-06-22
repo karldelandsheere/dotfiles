@@ -1,5 +1,4 @@
 {
-  # @todo Correctly setup power profiles
   # @todo Implement hibernation
   # @todo Swayidle is not functionning
   # @todo Figure out impermanence (fs is ok though)
