@@ -10,7 +10,6 @@
       # bluez
       brightnessctl
       curl
-      gcc
       git
       helix
       libnotify

@@ -11,6 +11,7 @@
 # -------------------------
 DISK=/dev/vda
 BOOT_SIZE=2GiB
+SWAP_SIZE=96GiB
 
 WITH_LUKS=0 # So far, it's not working between Grub, LUKS, and a VM
 PASSWORD=temp0123

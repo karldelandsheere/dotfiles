@@ -60,7 +60,7 @@
     "/swap" = {
       fsType = "btrfs";
       neededForBoot = true;
-      options = [ "subvol=swap" "noatime" ];
+      options = [ "subvol=swap" "compress=none" "noatime" ];
     };
   };
 
