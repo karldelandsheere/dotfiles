@@ -1,8 +1,8 @@
 {
-  # @todo Implement hibernation
-  # @todo Swayidle is not functionning
   # @todo Figure out impermanence (fs is ok though)
+  # @todo Swayidle is not functionning
   # @todo Setup Tailscale
+  # @todo Setup aerc and email accounts
   # @todo What's Polkit anyway?
   # @todo Understand why my Airpods Pro can't connect easily
   # @todo BambuStudio and OrcaSlicer are crashing

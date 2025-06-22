@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
 {
+  # @todo Find out why swayidle is not working
+  # ------------------------------------------
   config = {
-    services.swayidle = {
-      enable = true;
-      systemdTarget = "niri-session.target";
-    };
+    # services.swayidle = {
+    #   enable = true;
+    #   systemdTarget = "niri-session.target";
+    # };
 
 # swayidle = {
 #       path = with pkgs; [ swaylock-effects niri ];

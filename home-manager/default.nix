@@ -20,6 +20,46 @@
   news.display = "show";
 
 
+
+
+  # accounts.email = {
+    # maildirBasePath = "/persist/data/mail";
+
+    # accounts = let
+      # passwordCommand = account:
+      #   "${pkgs.jq}/bin/jq "
+    # in {
+      # "karl_at_delandsheere" = {
+        # primary = true;
+
+        # realName = "Karl Delandsheere";
+        # address = "karl@delandsheere.be";
+
+        # Folders?
+
+        # userName = "karl@delandsheere.be";
+        # passwordCommand = passwordCommand ""
+
+        # flavor = "migadu.com";      
+        # imap = {
+        #   host = "imap.migadu.com";
+          
+        # smtp.host = "smtp.migadu.com";
+
+        # aerc.enable = true;
+      # };
+    # };
+  # };
+
+
+
+
+
+
+
+
+
+
   # accounts.email = {
   #   # maildirBasePath = "/persist/data/mail";
 
