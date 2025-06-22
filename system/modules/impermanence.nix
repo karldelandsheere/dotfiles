@@ -57,11 +57,10 @@
       options = [ "subvol=var_log" "compress=zstd" "noatime" ];
     };
 
-    "/swap" = {
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "subvol=swap" "compress=none" "noatime" ];
-    };
+    # "/swap" = {
+    #   fsType = "btrfs";
+    #   options = [ "subvol=swap" "compress=none" "noatime" ];
+    # };
   };
 
 
