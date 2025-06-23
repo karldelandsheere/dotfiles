@@ -1,6 +1,5 @@
 {
   # @todo Figure out impermanence (fs is ok though)
-  # @todo Swayidle is not functionning
   # @todo Setup Tailscale
   # @todo Setup aerc and email accounts
   # @todo What's Polkit anyway?
@@ -10,6 +9,7 @@
   # @todo Make my workspaces better and find out how to display only the active and not empty ones
   # @todo Customize Swaylock
   # @todo Customize Grub
+  # @todo svg are not showing up in Wlogout
 
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
