@@ -31,7 +31,6 @@
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
   ];
 
-
   environment.etc = {
     "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
 
@@ -41,15 +40,11 @@
   };
 
 
-
-
   # Rollback results in sudo lectures after each reboot
   # ---------------------------------------------------
   security.sudo.extraConfig = ''
     Defaults lecture = never
   '';
-
-
 
 
   boot.initrd.systemd = {
@@ -84,46 +79,23 @@
     };
 
 
-  # Stuff that needs to persist
-  # ---------------------------
-  # services.persisted-files = {
-  #   description = "Hard-link persisted files from /persist";
-  #   wantedBy = [
-  #     "initrd.target"
-  #   ];
-  #   after = [
-  #     "sysroot.mount"
-  #   ];
-  #   unitConfig.DefaultDependencies = "no";
-  #   serviceConfig.Type = "oneshot";
-  #   script = ''
-  #     mkdir -p /sysroot/etc/
-  #     ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
-  #     '';
-  # };
-
-
-  # environment.persistence."/persist" = { 
-  #   hideMounts = true ; 
-    
-  #   directories = [
-  #     "/etc/nixos"                       # NixOS
-  #     "/etc/NetworkManager"              # NetworkManager
-  #     "/var/lib/NetworkManager"
-  #     "/var/lib/bluetooth"               # Bluetooth
-  # #     "/var/lib/docker"                  # Docker
-
-      
-
-  #   ];
-    
-  #   files = [   
-  # #     "/etc/ssh/ssh_host_*"                 # SSH
-  #     "/etc/machine-id"                     # Needed for SystemD Journal
-  #     "/var/lib/NetworkManager/secret_key"  # Network Manager
-  #     "/var/lib/NetworkManager/seen-bssids" # Network Manager
-  #     "/var/lib/NetworkManager/timestamps"  # Network Manager
-  #     { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; } # Nix
-  #   ];
-  # };
+    # Stuff that needs to persist
+    # ---------------------------
+    services.persisted-files = {
+      description = "Hard-link persisted files from /persist";
+      wantedBy = [
+        "initrd.target"
+      ];
+      after = [
+        "sysroot.mount"
+      ];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = ''
+        mkdir -p /sysroot/etc/
+        ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
+        '';
+    };
+  };
 }
+
