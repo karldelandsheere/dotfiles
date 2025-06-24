@@ -1,4 +1,5 @@
 {
+  # Need to work
   # @todo Figure out impermanence (fs is ok though)
   # @todo Setup Tailscale
   # @todo Setup aerc and email accounts
@@ -7,6 +8,8 @@
   # @todo BambuStudio and OrcaSlicer are crashing
   # @todo Find a way to make Affinity work
   # @todo Make my workspaces better and find out how to display only the active and not empty ones
+
+  # Nice to have
   # @todo Customize Swaylock
   # @todo Customize Grub
   # @todo svg are not showing up in Wlogout
