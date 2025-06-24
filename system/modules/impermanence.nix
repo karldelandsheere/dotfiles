@@ -2,15 +2,16 @@
 {
   # 
   # --------------------
-  imports = [
-    inputs.impermanence.nixosModules.impermanence
-  ];
+  # imports = [
+  #   inputs.impermanence.nixosModules.impermanence
+  # ];
 
-  environement.persistence."/persist" = {
+  environment.persistence."/persist" = {
     hideMounts = true;
   
     directories = [
       "/etc/nixos"
+      "/var/lib/nixos" # is it necessary though?
       "/etc/NetworkManager"
       "/var/lib/bluetooth"
     ];
@@ -25,6 +26,7 @@
 
   systemd.tmpfiles.rules = [
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
+    "L /var/lib/nixos - - - - /persist/var/lib/nixos"
 
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
@@ -81,21 +83,21 @@
 
     # Stuff that needs to persist
     # ---------------------------
-    services.persisted-files = {
-      description = "Hard-link persisted files from /persist";
-      wantedBy = [
-        "initrd.target"
-      ];
-      after = [
-        "sysroot.mount"
-      ];
-      unitConfig.DefaultDependencies = "no";
-      serviceConfig.Type = "oneshot";
-      script = ''
-        mkdir -p /sysroot/etc/
-        ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
-        '';
-    };
+    # services.persisted-files = {
+    #   description = "Hard-link persisted files from /persist";
+    #   wantedBy = [
+    #     "initrd.target"
+    #   ];
+    #   after = [
+    #     "sysroot.mount"
+    #   ];
+    #   unitConfig.DefaultDependencies = "no";
+    #   serviceConfig.Type = "oneshot";
+    #   script = ''
+    #     mkdir -p /sysroot/etc/
+    #     ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
+    #     '';
+    # };
   };
 }
 

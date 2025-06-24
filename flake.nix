@@ -58,7 +58,7 @@
       specialArgs = inputs;
 
       modules = modules ++ [
-        # inputs.impermanence.nixosModules.impermanence
+        inputs.impermanence.nixosModules.impermanence
       # ] ++ lists.optionals (useHomeManager) [
       #   home-manager.nixosModules.home-manager
       #   {

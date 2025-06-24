@@ -16,7 +16,7 @@
     cmatrix # like the cool guys
     exiftool
     fastfetch
-    hugo
+    # hugo
     scooter
   ];
 

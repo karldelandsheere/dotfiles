@@ -1,31 +1,31 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./element
+    # ./element
     ./firefox.nix
     ./terminal.nix
   # ] ++ lists.optionals (system == 'x86_64-linux') [
-    ./onlyoffice.nix
+    # ./onlyoffice.nix
   ];
 
   home = {
     packages = with pkgs; [
       # bambu-studio
       bitwarden
-      blender
+      # blender
       # nautilus
       opencloud-desktop
-      openscad
+      # openscad
       # orca-slicer
-      prusa-slicer
+      # prusa-slicer
       #qbittorrent
-      signal-desktop
-      thunderbird
+      # signal-desktop
+      # thunderbird
       #vlc
-      vscodium
+      # vscodium
 
     # ] ++ lists.optionals (system == 'x86_64-linux') [
-      anytype
+      # anytype
     ];
   };
 }
