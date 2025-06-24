@@ -3,6 +3,7 @@
   imports = [
     ./bluetooth.nix
     ./boot.nix
+    ./filesystem.nix
     ./impermanence.nix
     # ./luks.nix
     ./networking.nix
