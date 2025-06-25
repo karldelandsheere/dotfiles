@@ -1,9 +1,11 @@
-{ ... }:
+{ inputs, ... }:
 {
   imports = [
     ./programs
     ./utils
     ./wm
+
+    inputs.impermanence.homeManagerModules.impermanence
   ];
 
 
@@ -91,4 +93,33 @@
   #     smtp.host = "mail.ventrecontent.be";
   #   };
   # };
+
+
+
+
+
+
+
+
+
+  home.persistence."/persist/home/unnamedplayer" = {
+    directories = [
+      "OpenCloud"
+      ".ssh"
+    ];
+
+    files = [
+      
+    ];
+
+    allowOther = true;
+  };
+
+
+
+
+
+
+
+
 }

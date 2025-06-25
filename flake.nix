@@ -58,16 +58,16 @@
 
       modules = modules ++ [
         inputs.impermanence.nixosModules.impermanence
-      # ] ++ lists.optionals (useHomeManager) [
-      #   home-manager.nixosModules.home-manager
-      #   {
-      #     home-manager = {
-      #       useGlobalPkgs = true;
-      #       useUserPackages = true;
-      #       users.unnamedplayer = { imports = [ ./home-manager ]; };
-      #       extraSpecialArgs = { inherit system inputs; };
-      #     };
-      #   }
+      ] ++ lists.optionals (useHomeManager) [
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.unnamedplayer = { imports = [ ./home-manager ]; };
+            extraSpecialArgs = { inherit inputs; };
+          };
+        }
       ];
     };
   in
@@ -88,12 +88,12 @@
       };
     };
 
-    homeConfigurations = {
-      unnamedplayer = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./home-manager ];
-        extraSpecialArgs = { inherit inputs; };
-      };
-    };
+    # homeConfigurations = {
+    #   unnamedplayer = home-manager.lib.homeManagerConfiguration {
+    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    #     modules = [ ./home-manager ];
+    #     extraSpecialArgs = { inherit inputs; };
+    #   };
+    # };
   };
 }

@@ -81,5 +81,8 @@ in
   security.sudo.extraConfig = ''
     Defaults lecture = never
   '';
+
+
+  programs.fuse.userAllowOther = true;
 }
 
