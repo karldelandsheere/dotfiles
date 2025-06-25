@@ -26,7 +26,7 @@ in
 
   # Rollback routine on boot
   # ------------------------
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
+  boot.initrd.postDeviceCommands = lib.mkBefore ''
 
     if [ "$UID" -ne "0" ];
     then
@@ -34,34 +34,21 @@ in
       exit 1
     fi
 
-    MNT_DIR=/mnt
-    mkdir -p ${MNT_DIR}
+    mkdir -p /mnt
+    mount -o subvol=/ /dev/nvme0n1p2 /mnt
 
-    BTRFS_VOL=/dev/nvme0n1p2
-
-    if [ ! -r "$BTRFS_VOL" ];
-    then
-      >&2 echo "Device '$BTRFS_VOL' not found"
-      exit 1
-    fi
-
-    mount -o subvol=/ ${BTRFS_VOL} ${MNT_DIR}
-
-    ROOT_PRISTINE="${MNT_DIR}/root-blank"
-    ROOT_SUBVOL="${MNT_DIR}/root"
-
-    btrfs subvolume list -o ${ROOT_SUBVOL} | cut -f9 -d' ' | while read -r subvolume;
+    btrfs subvolume list -o /mnt/root | cut -f9 -d' ' | while read -r subvolume;
     do
       echo "Deleting /$subvolume subvolume"
-      btrfs subvolume delete "${MNT_DIR}/$subvolume"
+      btrfs subvolume delete "/mnt/$subvolume"
     done &&
     echo "Deleting /root subvolume" &&
-    btrfs subvolume delete ${ROOT_SUBVOL}
+    btrfs subvolume delete /mnt/root
 
     echo "Restoring blank /root subvolume"
-    btrfs subvolume snapshot ${ROOT_PRISTINE} ${ROOT_SUBVOL}
+    btrfs subvolume snapshot /mnt/root-blank /mnt/root
 
-    umount ${MNT_DIR}
+    umount /mnt
     echo "All done, /root is now back to pristine state"
 
   '';
