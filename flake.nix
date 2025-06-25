@@ -62,10 +62,10 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
             useUserPackages = true;
             users.unnamedplayer = { imports = [ ./home-manager ]; };
             extraSpecialArgs = { inherit inputs; };
+            backupFileExtension = "backup";
           };
         }
       ];
