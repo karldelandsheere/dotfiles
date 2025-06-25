@@ -29,25 +29,25 @@ in
   boot.initrd.systemd = {
     enable = true;
 
-    # Rollback routine on boot (not ready to activate it)
+    # Rollback routine on boot
     # ------------------------
-    # services.rollback = {
-    #   description = "Rollback BTRFS root subvolume to a pristine state";
-    #   wantedBy = [
-    #     "initrd.target"
-    #   ];
-    #   # Only enable this when LUKS will be implemented
-    #   # after = [
-    #   #   # LUKS/TPM process
-    #   #   # "systemd-cryptsetup@enc.service"
-    #   # ];
-    #   before = [
-    #     "sysroot.mount"
-    #   ];
-    #   unitConfig.DefaultDependencies = "no";
-    #   serviceConfig.Type = "oneshot";
-    #   script = root-reset-src;
-    # };
+    services.rollback = {
+      description = "Rollback BTRFS root subvolume to a pristine state";
+      wantedBy = [
+        "initrd.target"
+      ];
+      # Only enable this when LUKS will be implemented
+      # after = [
+      #   # LUKS/TPM process
+      #   # "systemd-cryptsetup@enc.service"
+      # ];
+      before = [
+        "sysroot.mount"
+      ];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = root-reset-src;
+    };
 
     # Files that are persisted
     # ------------------------
@@ -88,6 +88,7 @@ in
         # /var/lib/...
         "/var/lib/nixos"
         "/var/lib/bluetooth"
+        "/var/lib/upower"
       ];
 
       files = [
