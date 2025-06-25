@@ -24,72 +24,17 @@ in
   # ];
 
 
-  # Rollback routine on boot
-  # ------------------------
-  # boot.initrd.systemd.postDeviceCommands = lib.mkBefore ''
-
-  #   if [ "$UID" -ne "0" ];
-  #   then
-  #     >&2 echo "One can not simply mount and manipulate the btrfs root subvolume"
-  #     exit 1
-  #   fi
-
-  #   mkdir -p /mnt
-  #   mount -o subvol=/ /dev/nvme0n1p2 /mnt
-
-  #   btrfs subvolume list -o /mnt/root | cut -f9 -d' ' | while read -r subvolume;
-  #   do
-  #     echo "Deleting /$subvolume subvolume"
-  #     btrfs subvolume delete "/mnt/$subvolume"
-  #   done &&
-  #   echo "Deleting /root subvolume" &&
-  #   btrfs subvolume delete /mnt/root
-
-  #   echo "Restoring blank /root subvolume"
-  #   btrfs subvolume snapshot /mnt/root-blank /mnt/root
-
-  #   umount /mnt
-  #   echo "All done, /root is now back to pristine state"
-
-  # '';
-
-
-
-    boot.initrd.systemd = {
-      # Rollback routine on boot
-      # ------------------------
-      services.rollback = {
-        description = "Rollback BTRFS root subvolume to a pristine state";
-        wantedBy = [ "sysroot.mount" ];
-        # Only enable this when LUKS will be implemented
-        # after = [
-        #   # LUKS/TPM process
-        #   # "systemd-cryptsetup@enc.service"
-        # ];
-        before = [ "sysroot.mount" ];
-        unitConfig.DefaultDependencies = "no";
-        serviceConfig.Type = "oneshot";
-        script = root-reset-src;
-      };
-
-    #   # Files that are persisted
-    #   # ------------------------
-    #   services.persisted-files = {
-    #     description = "Hard-link persisted files from /persist";
-    #     wantedBy = [
-    #       "initrd.target"
-    #     ];
-    #     after = [
-    #       "sysroot.mount"
-    #     ];
-    #     unitConfig.DefaultDependencies = "no";
-    #     serviceConfig.Type = "oneshot";
-    #     script = ''
-    #       mkdir -p /sysroot/etc/
-    #       ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
-    #     '';
-    #   };
-    };
+  # Rollback routine on every boot
+  # ------------------------------
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback BTRFS root subvolume to a pristine state";
+    wantedBy = [ "sysroot.mount" ];
+    after = [ "dev-nvme0n1p2.device" ];
+    before = [ "sysroot.mount" ];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig.Type = "oneshot";
+    script = root-reset-src;
+  };
 
 
   environment = {
