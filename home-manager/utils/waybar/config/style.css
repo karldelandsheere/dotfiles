@@ -35,9 +35,13 @@
 #network { padding-right: 10px; }
 
 
+/* Cause it's the first one
+*/
+#clock { margin-top: 10px; }
+
 /* Cause it's the last one
 */
-#custom-wlogout { margin-bottom: 10px; }
+#idle_inhibitor { margin-bottom: 15px; }
 
 
 /* 
@@ -58,7 +62,7 @@
 
 /* Idle inhibitor
  */
-#idle_inhibitor { margin: 5px; padding: 4px; }
+/* #idle_inhibitor { margin: 5px; padding: 4px; } */
 
 
 /* Toggled off or deactivated stuff

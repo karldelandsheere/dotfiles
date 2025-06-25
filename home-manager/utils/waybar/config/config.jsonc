@@ -7,46 +7,22 @@
 
     
     "modules-left": [
-      "clock",
-      "niri/workspaces"
+      "clock"
+      ,"niri/workspaces"
     ],
     "modules-center": [
-      "tray",
+      "tray"
     ],
     "modules-right": [
-      "backlight",
-      "pulseaudio",
-      "battery",
-      "cpu",
-      "memory",
-      "network",
-      "idle_inhibitor",
-      "custom/wlogout"
+      "backlight"
+      ,"pulseaudio"
+      ,"battery"
+      ,"cpu"
+      ,"memory"
+      ,"network"
+      ,"idle_inhibitor"
+      // ,"custom/wlogout"
     ],
-
-
-
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": " ",
-        "performance": " ",
-        "balanced": " ",
-        "power-saver": " "
-      }
-    },
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -153,20 +129,12 @@
 		  
     },
 
-    
-    // Lock the screen
-    "custom/swaylock": {
-      "tooltip": false,
-      "on-click": "swaylock -f",
-      "format": " ",
-    },
 
-
-    "custom/wlogout": {
-      "format" : "⏻ ",
-		  "tooltip": false,
-    	"on-click": "wlogout",
-    },
+    // "custom/wlogout": {
+    //   "format" : "⏻ ",
+		  // "tooltip": false,
+    // 	"on-click": "wlogout",
+    // },
 
 
 
