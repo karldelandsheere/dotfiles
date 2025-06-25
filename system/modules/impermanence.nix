@@ -8,7 +8,7 @@
 # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/persist.nix
 # ---------------------------------------------------------------------------
 { inputs, lib, pkgs, ... }: let
-  # root-reset-src = builtins.readFile ../scripts/root-reset.sh;
+  root-reset-src = builtins.readFile ../scripts/root-reset.sh;
 
   root-diff = pkgs.writeShellApplication {
     name = "root-diff";
@@ -26,58 +26,51 @@ in
 
   # Rollback routine on boot
   # ------------------------
-  boot.initrd.systemd.postDeviceCommands = lib.mkBefore ''
+  # boot.initrd.systemd.postDeviceCommands = lib.mkBefore ''
 
-    if [ "$UID" -ne "0" ];
-    then
-      >&2 echo "One can not simply mount and manipulate the btrfs root subvolume"
-      exit 1
-    fi
+  #   if [ "$UID" -ne "0" ];
+  #   then
+  #     >&2 echo "One can not simply mount and manipulate the btrfs root subvolume"
+  #     exit 1
+  #   fi
 
-    mkdir -p /mnt
-    mount -o subvol=/ /dev/nvme0n1p2 /mnt
+  #   mkdir -p /mnt
+  #   mount -o subvol=/ /dev/nvme0n1p2 /mnt
 
-    btrfs subvolume list -o /mnt/root | cut -f9 -d' ' | while read -r subvolume;
-    do
-      echo "Deleting /$subvolume subvolume"
-      btrfs subvolume delete "/mnt/$subvolume"
-    done &&
-    echo "Deleting /root subvolume" &&
-    btrfs subvolume delete /mnt/root
+  #   btrfs subvolume list -o /mnt/root | cut -f9 -d' ' | while read -r subvolume;
+  #   do
+  #     echo "Deleting /$subvolume subvolume"
+  #     btrfs subvolume delete "/mnt/$subvolume"
+  #   done &&
+  #   echo "Deleting /root subvolume" &&
+  #   btrfs subvolume delete /mnt/root
 
-    echo "Restoring blank /root subvolume"
-    btrfs subvolume snapshot /mnt/root-blank /mnt/root
+  #   echo "Restoring blank /root subvolume"
+  #   btrfs subvolume snapshot /mnt/root-blank /mnt/root
 
-    umount /mnt
-    echo "All done, /root is now back to pristine state"
+  #   umount /mnt
+  #   echo "All done, /root is now back to pristine state"
 
-  '';
+  # '';
 
 
 
-  
-    # systemd = {
-    #   enable = true;
-
-    #   # Rollback routine on boot
-    #   # ------------------------
-    #   services.rollback = {
-    #     description = "Rollback BTRFS root subvolume to a pristine state";
-    #     wantedBy = [
-    #       "initrd.target"
-    #     ];
-    #     # Only enable this when LUKS will be implemented
-    #     # after = [
-    #     #   # LUKS/TPM process
-    #     #   # "systemd-cryptsetup@enc.service"
-    #     # ];
-    #     before = [
-    #       "sysroot.mount"
-    #     ];
-    #     unitConfig.DefaultDependencies = "no";
-    #     serviceConfig.Type = "oneshot";
-    #     script = root-reset-src;
-    #   };
+    boot.initrd.systemd = {
+      # Rollback routine on boot
+      # ------------------------
+      services.rollback = {
+        description = "Rollback BTRFS root subvolume to a pristine state";
+        wantedBy = [ "sysroot.mount" ];
+        # Only enable this when LUKS will be implemented
+        # after = [
+        #   # LUKS/TPM process
+        #   # "systemd-cryptsetup@enc.service"
+        # ];
+        before = [ "sysroot.mount" ];
+        unitConfig.DefaultDependencies = "no";
+        serviceConfig.Type = "oneshot";
+        script = root-reset-src;
+      };
 
     #   # Files that are persisted
     #   # ------------------------
@@ -96,7 +89,7 @@ in
     #       ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
     #     '';
     #   };
-    # };
+    };
 
 
   environment = {
