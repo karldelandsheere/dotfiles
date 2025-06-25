@@ -26,7 +26,7 @@ in
 
   # Rollback routine on boot
   # ------------------------
-  boot.initrd.postDeviceCommands = lib.mkBefore ''
+  boot.initrd.systemd.postDeviceCommands = lib.mkBefore ''
 
     if [ "$UID" -ne "0" ];
     then
