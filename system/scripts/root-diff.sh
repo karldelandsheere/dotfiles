@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# @todo Make it more dynamic and less system dependant
+#       by replacing /nvme0n1p2 with a global const or something
+# --------------------------------------------------------------
 
 _tmp_root=$(mktemp -d)
 mkdir -p "${_tmp_root}"

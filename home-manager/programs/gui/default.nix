@@ -19,7 +19,7 @@
       # orca-slicer
       # prusa-slicer
       #qbittorrent
-      # signal-desktop
+      signal-desktop
       # thunderbird
       #vlc
       # vscodium
