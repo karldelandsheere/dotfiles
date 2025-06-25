@@ -112,38 +112,37 @@ in
     # };
 
 
-    environment = {
-      # Script to find what needs to persist
-      # ------------------------------------
-      systemPackages = lib.mkBefore [ root-diff ];
+  environment = {
+    # Script to find what needs to persist
+    # ------------------------------------
+    systemPackages = lib.mkBefore [ root-diff ];
 
 
-      # Now, opt-in what needs to persist
-      # ---------------------------------
-      persistence."/persist" = {
-        hideMounts = true; # What's it doing really?
+    # Now, opt-in what needs to persist
+    # ---------------------------------
+    persistence."/persist" = {
+      hideMounts = true; # What's it doing really?
 
-        directories = [
-          # /etc/...
-          "/etc/nixos"
-          "/etc/NetworkManager/system-connections"
+      directories = [
+        # /etc/...
+        "/etc/nixos"
+        "/etc/NetworkManager/system-connections"
 
-          # /var/lib/...
-          "/var/lib/nixos"
-          "/var/lib/bluetooth"
-          "/var/lib/upower"
-        ];
+        # /var/lib/...
+        "/var/lib/nixos"
+        "/var/lib/bluetooth"
+        "/var/lib/upower"
+      ];
 
-        files = [
-          # /etc/...
-          "/etc/machine-id"
+      files = [
+        # /etc/...
+        "/etc/machine-id"
 
-          # /var/lib/...
-          "/var/lib/NetworkManager/secret_key"
-          "/var/lib/NetworkManager/seen-bssids"
-          "/var/lib/NetworkManager/timestamps"
-        ];
-      };
+        # /var/lib/...
+        "/var/lib/NetworkManager/secret_key"
+        "/var/lib/NetworkManager/seen-bssids"
+        "/var/lib/NetworkManager/timestamps"
+      ];
     };
   };
 
