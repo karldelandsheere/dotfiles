@@ -28,7 +28,8 @@ in
   # ------------------------------
   boot.initrd.systemd.services.rollback = {
     description = "Rollback BTRFS root subvolume to a pristine state";
-    wantedBy = [ "sysroot.mount" ];
+    wantedBy = [ "initrd.target" ];
+    requires = [ "dev-nvme0n1p2.device" ];
     after = [ "dev-nvme0n1p2.device" ];
     before = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
