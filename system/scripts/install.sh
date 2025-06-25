@@ -9,14 +9,14 @@
 
 # Change that to your taste
 # -------------------------
-DISK=/dev/vda
+DISK=/dev/nvme0n1
 BOOT_SIZE=2GiB
 SWAP_SIZE=96GiB
 
 WITH_LUKS=0 # So far, it's not working between Grub, LUKS, and a VM
 PASSWORD=temp0123
 
-HOST=utm
+HOST=q3dm10
 USER=unnamedplayer
 
 

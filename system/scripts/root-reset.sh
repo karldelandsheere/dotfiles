@@ -17,7 +17,8 @@ then
 	exit 1
 fi
 
-mount -t btrfs -o subvol=/ ${BTRFS_VOL} ${MNT_DIR}
+mount -t btrfs ${BTRFS_VOL} ${MNT_DIR}
+# mount -t btrfs -o subvol=/ ${BTRFS_VOL} ${MNT_DIR}
 
 ROOT_PRISTINE="${MNT_DIR}/root-blank"
 ROOT_SUBVOL="${MNT_DIR}/root"

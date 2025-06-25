@@ -16,7 +16,10 @@
       };
     };
 
-    initrd.systemd.enable = true;
+    initrd = {
+      enable = true;
+      systemd.enable = true;
+    };
 
     supportedFilesystems = [ 
       "btrfs"
