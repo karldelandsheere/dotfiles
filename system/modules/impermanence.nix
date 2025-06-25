@@ -78,7 +78,7 @@ in
     # Now, opt-in what needs to persist
     # ---------------------------------
     persistence."/persist" = {
-      # hideMounts = true; # What's it doing really?
+      hideMounts = true; # What's it doing really?
 
       directories = [
         # /etc/...
