@@ -190,6 +190,8 @@ spawn-at-startup "waybar"
 
 spawn-at-startup "ghostty"
 
+spawn-at-startup "sh" "-c" "ghostty && yazi"
+
 
 // No need to get that overlay each time
 hotkey-overlay {

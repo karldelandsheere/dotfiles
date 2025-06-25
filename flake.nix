@@ -1,6 +1,5 @@
 {
   # Need to work
-  # @todo Figure out impermanence (fs is ok though)
   # @todo Setup Tailscale
   # @todo Setup aerc and email accounts
   # @todo Understand why my Airpods Pro can't connect easily
@@ -11,7 +10,6 @@
   # Nice to have
   # @todo Customize Swaylock
   # @todo Customize Grub
-  # @todo svg are not showing up in Wlogout
 
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
