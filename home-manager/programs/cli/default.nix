@@ -13,6 +13,7 @@
   home.packages = with pkgs; [
     # audacious # make it look like winamp
     bitwarden-cli
+    bottom
     cmatrix # like the cool guys
     exiftool
     fastfetch

@@ -6,6 +6,12 @@
       enable = true;
       userName = "Karl";
       userEmail = "karl@delandsheere.be";
+
+      # @todo implement signing
+      # signing = {
+      #   key = "";
+      #   signByDefault = true;
+      # }
     };
 
 

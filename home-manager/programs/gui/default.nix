@@ -18,10 +18,10 @@
       # openscad
       # orca-slicer
       # prusa-slicer
-      #qbittorrent
-      signal-desktop
+      # qbittorrent
+      # signal-desktop # broken for the moment
       # thunderbird
-      #vlc
+      # vlc
       # vscodium
 
     # ] ++ lists.optionals (system == 'x86_64-linux') [
