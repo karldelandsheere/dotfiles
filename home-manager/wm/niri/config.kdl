@@ -180,9 +180,14 @@ window-rule {
 
 
 spawn-at-startup "xwayland-satellite"
+
 spawn-at-startup "swaybg" "-i" "/etc/nixos/home-manager/themes/wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
+
 spawn-at-startup "swayidle" "-w"
+
+spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
 spawn-at-startup "waybar"
+
 spawn-at-startup "ghostty"
 
 

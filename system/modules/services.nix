@@ -12,5 +12,10 @@
     };
 
 		locate.enable = true;
+
+    ollama = {
+      enable = true;
+      loadModels = [ "deepseek-coder-v2:16b" ];
+    };
   };
 }

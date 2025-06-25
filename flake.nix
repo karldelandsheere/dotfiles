@@ -3,7 +3,6 @@
   # @todo Figure out impermanence (fs is ok though)
   # @todo Setup Tailscale
   # @todo Setup aerc and email accounts
-  # @todo What's Polkit anyway?
   # @todo Understand why my Airpods Pro can't connect easily
   # @todo BambuStudio and OrcaSlicer are crashing
   # @todo Find a way to make Affinity work
