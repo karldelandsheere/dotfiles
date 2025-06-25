@@ -222,10 +222,6 @@ binds {
   // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
 
 
-  // Show a list of binds
-  Mod+H { show-hotkey-overlay; }
-
-
   // Launch some programs
   Mod+T { spawn "ghostty"; }
   Mod+Space { spawn "fuzzel"; }
@@ -416,6 +412,9 @@ binds {
 
   // Close stuff
   Mod+Q { close-window; }
-  Alt+Q allow-inhibiting=false { spawn "wlogout"; }
-  Ctrl+Alt+Delete { quit; }
+
+  Ctrl+Alt+Q allow-inhibiting=false { spawn "sh" "-c" "swaylock -f"; }
+  Ctrl+Alt+S allow-inhibiting=false { spawn "sh" "-c" "swaylock -f && systemctl suspend"; }
+  Ctrl+Alt+D allow-inhibiting=false { spawn "sh" "-c" "swaylock -f && systemctl hibernate"; }
+  Ctrl+Alt+W { spawn "sh" "-c" "loginctl terminate-user $USER"; }
 }

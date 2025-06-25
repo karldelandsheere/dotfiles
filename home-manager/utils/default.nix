@@ -8,7 +8,7 @@
     ./swayidle
     ./swaylock
     ./waybar
-    ./wlogout
+    # ./wlogout # if not used in a couple of weeks, remove it completely
   ];
 
   # Simple packages

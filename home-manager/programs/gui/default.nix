@@ -10,7 +10,7 @@
 
   home = {
     packages = with pkgs; [
-      # bambu-studio
+      # bambu-studio # crashes, don't know why
       bitwarden
       # blender
       # nautilus

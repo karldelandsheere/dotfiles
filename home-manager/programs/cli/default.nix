@@ -4,7 +4,7 @@
     ./git.nix
     ./helix
     ./moc
-    ./yazi.nix
+    ./yazi
     ./zsh.nix
   ];
 
