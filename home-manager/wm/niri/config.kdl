@@ -188,9 +188,9 @@ spawn-at-startup "swayidle" "-w"
 spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
 spawn-at-startup "waybar"
 
+// spawn-at-startup "ghostty" "-e" "..."
+spawn-at-startup "ghostty" "-e" "yazi"
 spawn-at-startup "ghostty"
-
-spawn-at-startup "sh" "-c" "ghostty && yazi"
 
 
 // No need to get that overlay each time
