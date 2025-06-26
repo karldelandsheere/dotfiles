@@ -3,7 +3,7 @@
   imports = [
     # ./element
     ./firefox.nix
-    ./terminal.nix
+    ./ghostty
   # ] ++ lists.optionals (system == 'x86_64-linux') [
     # ./onlyoffice.nix
   ];
