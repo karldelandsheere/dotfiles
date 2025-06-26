@@ -16,22 +16,13 @@ OLD_TRANSID=${OLD_TRANSID#transid marker was }
 sudo btrfs subvolume find-new "${_tmp_root}/home/active" "$OLD_TRANSID" | sed '$d' | cut -f17- -d' ' | sort | uniq | 
 while read -r path; do
     path="/$path"
-    # if [ -L "$path" ]; then
-    #     : # The path is a symbolic link, so is probably handled by NixOS already
-    # elif [ -d "$path" ]; then
-    #     : # The path is a directory, ignore
-    # elif [ "$path" == *"\.mozilla/"* ]; then
-    #     : # Not interested in cache files
-    # else
-        # echo $(realpath "$path")
-
     fpath="$_tmp_root/home/active$path"
-    rpath="$(realpath $fpath)"
-    # if [[ $rpath == $fpath  ]] && [[ $path != *"unnamedplayer/.cache/"* ]]; then
-    if [[ $rpath == $fpath  ]]; then
-        echo $rpath
+    rpath="$(realpath "$fpath")"
+
+    # if [[ $rpath == "$fpath"  ]] && [[ $path != *"unnamedplayer/.cache/"* ]]; then
+    if [[ "$rpath" == "$fpath"  ]]; then
+        echo "$rpath"
     fi
-    # fi
 done
 umount "${_tmp_root}"
 rm -rf "${_tmp_root}"
