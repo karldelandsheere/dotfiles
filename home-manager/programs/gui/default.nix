@@ -13,7 +13,6 @@
       # bambu-studio # crashes, don't know why
       bitwarden
       # blender
-      # nautilus
       opencloud-desktop
       # openscad
       # orca-slicer

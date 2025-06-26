@@ -30,6 +30,11 @@
         # ----
         "intl.accept_languages" = "en-US, en, fr-BE, fr";
 
+        # Enable my extensions
+        # --------------------
+        "extensions.bitwarden.enabled" = true;
+        "extensions.ublock-origin.enabled" = true;
+
         # Security
         # --------
         "dom.security.https_first" = true;

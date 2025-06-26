@@ -1,16 +1,20 @@
 { pkgs, ... }:
 {
+  # CLI tools with configurations
+  # -----------------------------
   imports = [
+    ./aerc
     ./bottom
     ./git.nix
     ./helix
     ./moc
     ./yazi
+    ./yt-dlp
     ./zsh.nix
   ];
 
-  # Other CLI tools
-  # ---------------
+  # CLI tools that either don't need config or are on trial
+  # -------------------------------------------------------
   home.packages = with pkgs; [
     # audacious # make it look like winamp
     bitwarden-cli
@@ -18,11 +22,7 @@
     exiftool
     fastfetch
     # hugo
+    jrnl
     scooter
   ];
-
-  # programs.aerc.enable = true;
-  # programs.aerc.extraConfig.general.unsafe-accounts-conf = true;
-  
-  programs.yt-dlp.enable = true;
 }
