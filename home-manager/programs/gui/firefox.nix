@@ -1,40 +1,99 @@
-{ pkgs, inputs, ... }:
+# Firefox
+# -------
+
+# @todo make the extensions to be activated from the start
+# @todo also, check if it's possible to pre-populate some bitwarden info
+
+{ config, pkgs, ... }:
 {
-  # Firefox
-  # -------
-
-  # @todo make the extensions to be activated from the start
-  # @todo also, check if it's possible to pre-populate some bitwarden info
-
   programs.firefox = {
     enable = true;
+    languagePacks = [ "en-US" "fr" ];
 
-    profiles.default = {
-      id = 0;
-      name = "unnamedplayer";
+    # https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265/16
+    # ------------------------------------------------------------------------------
 
-      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
-        bitwarden
-        ublock-origin
+    /* ---- POLICIES ---- */
+    # Check about:policies#documentation for options.
+    policies = {
+      DisableTelemetry = true;
+      DisableFirefoxStudies = true;
+      EnableTrackingProtection = {
+        Value= true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+      };
+      DisablePocket = true;
+      DisableFirefoxAccounts = true;
+      DisableAccounts = true;
+      DisableFirefoxScreenshots = true;
+      OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
+      DontCheckDefaultBrowser = true;
+      DisplayBookmarksToolbar = "always";
+      DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
+      SearchBar = "unified"; # alternative: "separate"
+
+      /* ---- EXTENSIONS ---- */
+      # To add additional extensions, find it on addons.mozilla.org, find
+      # the short ID in the url (like https://addons.mozilla.org/en-US/firefox/addon/!SHORT_ID!/)
+      # Then, download the XPI by filling it in to the install_url template, unzip it,
+      # run `jq .browser_specific_settings.gecko.id manifest.json` or
+      # `jq .applications.gecko.id manifest.json` to get the UUID
+      # or
+      # Check about:support for extension/add-on ID strings.
+      # Valid strings for installation_mode are "allowed", "blocked",
+      # "force_installed" and "normal_installed".
+      ExtensionSettings = with builtins; let
+        extension = shortId: uuid: {
+          name = uuid;
+          value = {
+            install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
+            installation_mode = "normal_installed";
+          };
+        };
+      in listToAttrs [
+        (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
+        (extension "ublock-origin" "uBlock0@raymondhill.net")
+        (extension "umatrix" "uMatrix@raymondhill.net")
+        (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
       ];
-      
-      # search.engines = {
-      #   Bing.metaData.hidden = true;
-      #   "Amazon.com".metaData.hidden = true;
-      #   "Wikipedia (en)".metaData.hidden = true;
-      #   "Google".metaData.alias = "@g";
-      # };
-      
-      settings = {      
-        # I18n
-        # ----
-        "intl.accept_languages" = "en-US, en, fr-BE, fr";
+  
+      /* ---- PREFERENCES ---- */
+      # Check about:config for options.
+      Preferences = let
+        lock-false = {
+          Value = false;
+          Status = "locked";
+        };
+        lock-true = {
+          Value = true;
+          Status = "locked";
+        };
+      in {
+        # Disable those f***ers
+        # ---------------------
+        "extensions.pocket.enabled" = lock-false;
 
-        # Enable my extensions
-        # --------------------
-        "extensions.bitwarden.enabled" = true;
-        "extensions.ublock-origin.enabled" = true;
-
+        "extensions.screenshots.disabled" = lock-true;
+        "browser.topsites.contile.enabled" = lock-false;
+        "browser.formfill.enable" = lock-false;
+        "browser.search.suggest.enabled" = lock-false;
+        "browser.search.suggest.enabled.private" = lock-false;
+        "browser.urlbar.suggest.searches" = lock-false;
+        "browser.urlbar.showSearchSuggestionsFirst" = lock-false;
+        "browser.newtabpage.activity-stream.feeds.topsites" = lock-false;
+        "browser.newtabpage.activity-stream.feeds.section.topstories" = lock-false;
+        "browser.newtabpage.activity-stream.feeds.snippets" = lock-false;
+        "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
+        "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = lock-false;
+        "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = lock-false;
+        "browser.newtabpage.activity-stream.section.highlights.includeVisited" = lock-false;
+        "browser.newtabpage.activity-stream.showSponsored" = lock-false;
+        "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
+        "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+        
         # Security
         # --------
         "dom.security.https_first" = true;
@@ -45,27 +104,24 @@
 
         # Don't prefetch stuff for nothing
         # --------------------------------
-        "network.dns.disablePrefetch" = true;
-        "network.prefetch-next" = false;
-        "network.predictor.enabled" = false;
+        "network.dns.disablePrefetch" = lock-true;
+        "network.prefetch-next" = lock-false;
+        "network.predictor.enabled" = lock-false;
 
-        # Disable those f***ers
-        # ---------------------
-        "extensions.pocket.enabled" = false;
 
         # No autofills for sensitive data
         # -------------------------------
         # "extensions.formautofill.addresses.enabled" = false;
-        "extensions.formautofill.creditCards.enabled" = false;
+        "extensions.formautofill.creditCards.enabled" = lock-false;
 
         # Opt-out from telemetry, reporting, etc.
         # ---------------------------------------
-        "datareporting.policy.dataSubmissionEnabled" = false;
-        "datareporting.healthreport.uploadEnabled" = false;
+        "datareporting.policy.dataSubmissionEnabled" = lock-false;
+        "datareporting.healthreport.uploadEnabled" = lock-false;
         "toolkit.telemetry.unified" = false;
-        "toolkit.telemetry.enabled" = false;
+        "toolkit.telemetry.enabled" = lock-false;
         "toolkit.telemetry.server" = "data:,";
-        "toolkit.telemetry.archive.enabled" = false;
+        "toolkit.telemetry.archive.enabled" = lock-false;
         "toolkit.telemetry.newProfilePing.enabled" = false;
         "toolkit.telemetry.shutdownPingSender.enabled" = false;
         "toolkit.telemetry.updatePing.enabled" = false;
@@ -86,7 +142,7 @@
 
         # Mitigate tracking
         # -----------------
-        "browser.contentblocking.category" = "strict";
+        "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
         "urlclassifier.trackingSkipURLs" = "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com";
         "urlclassifier.features.socialtracking.skipURLs" = "*.instagram.com, *.twitter.com, *.twimg.com";
         "network.cookie.sameSite.noneRequiresSecure" = true;
@@ -100,6 +156,14 @@
         # ------------------
         "network.http.referer.XOriginTrimmingPolicy" = 2;
 
+        # Passwords
+        # ---------
+        "signon.rememberSignons" = lock-false;
+        "signon.formlessCapture.enabled" = lock-false;
+        "signon.privateBrowsingCapture.enabled" = lock-false;
+        # "network.auth.subresource-http-auth-allow" = 1;
+        # "editor.truncate_user_pastes" = false;
+
         # Downloads preferences
         # ---------------------
         "browser.download.useDownloadDir" = false;
@@ -110,6 +174,14 @@
         # And shut the fuck up
         # --------------------
         "browser.aboutwelcome.enabled" = false;
+        "browser.urlbar.trending.featureGate" = false;
+        "browser.preferences.moreFromMozilla" = false;
+        "browser.aboutConfig.showWarning" = false;
+        "browser.discovery.enabled" = false;
+        "browser.shell.checkDefaultBrowser" = false;
+        "extensions.getAddons.showPane" = false;
+        "extensions.htmlaboutaddons.recommendations.enabled" = false;
+
 
         # # NETWORK
         # "network.buffer.cache.size" = 262144;
@@ -144,16 +216,9 @@
         # "security.insecure_connection_text.enabled" = true;
         # "security.insecure_connection_text.pbmode.enabled" = true;
         # "network.IDN_show_punycode" = true;
-        # # PASSWORDS
-        # "signon.rememberSignons" = false;
-        # "signon.formlessCapture.enabled" = false;
-        # "signon.privateBrowsingCapture.enabled" = false;
-        # "network.auth.subresource-http-auth-allow" = 1;
-        # "editor.truncate_user_pastes" = false;
         # # MIXED CONTENT + CROSS-SITE
         # "pdfjs.enableScripting" = false;
         # "extensions.postDownloadThirdPartyPrompt" = false;
-        # # HEADERS / REFERERS
         # # CONTAINERS
         # "privacy.userContext.ui.enabled" = true;
         # # WEBRTC
@@ -173,15 +238,10 @@
         # "network.connectivity-service.enabled" = false;
         # # MOZILLA UI
         # "browser.privatebrowsing.vpnpromourl" = "";
-        # "extensions.getAddons.showPane" = false;
-        # "extensions.htmlaboutaddons.recommendations.enabled" = false;
-        # "browser.discovery.enabled" = false;
-        # "browser.shell.checkDefaultBrowser" = false;
         # "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
         # "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
-        # "browser.preferences.moreFromMozilla" = false;
         # "browser.tabs.tabmanager.enabled" = false;
-        # "browser.aboutConfig.showWarning" = false;
+
         # # THEME ADJUSTMENTS
         # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         # "browser.compactmode.show" = true;
@@ -194,13 +254,30 @@
         # "cookiebanners.service.mode" = 1;
         # "cookiebanners.service.mode.privateBrowsing" = 1;
         # "cookiebanners.service.enableGlobalRules" = true;
+
         # # URL BAR
         # "browser.urlbar.suggest.calculator" = true;
-        # "browser.urlbar.trending.featureGate" = false;
-        # # NEW TAB PAGE
-        # "browser.newtabpage.activity-stream.feeds.topsites" = false;
-        # "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
       };
+    };
+
+    profiles.default = {
+      id = 0;
+      name = "unnamedplayer";
+
+      
+      # search.engines = {
+      #   Bing.metaData.hidden = true;
+      #   "Amazon.com".metaData.hidden = true;
+      #   "Wikipedia (en)".metaData.hidden = true;
+      #   "Google".metaData.alias = "@g";
+      # };
+      
+      # settings = {      
+      #   # I18n
+      #   # ----
+      #   "intl.accept_languages" = "en-US, en, fr-BE, fr";
+
+      # };
     };
   };
 

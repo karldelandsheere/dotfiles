@@ -41,6 +41,11 @@ environment {
 
 layout {
   gaps 2
+
+// Set transparent workspace background color.
+  background-color "transparent"
+
+
   center-focused-column "never"
 
   preset-column-widths {
@@ -61,6 +66,25 @@ layout {
     active-gradient from="#80c8ff" to="#223366" angle=210 relative-to="workspace-view"
     inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
   }
+}
+
+layer-rule {
+  match namespace="^wallpaper$"
+  place-within-backdrop true
+}
+
+overview {
+  zoom 0.35
+  // Disable the workspace shadows in the overview.
+  workspace-shadow {
+    off
+  }
+}
+
+// Block out mako notifications from screencasts.
+layer-rule {
+    match namespace="^notifications$"
+    block-out-from "screencast"
 }
 
 
@@ -84,7 +108,7 @@ window-rule {
   match app-id="com.mitchellh.ghostty"
   open-on-workspace "dev"
 
-  opacity 0.9
+  opacity 0.85
 }
 
 window-rule {

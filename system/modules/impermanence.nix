@@ -7,7 +7,7 @@
 # Based on so many sources but the latest is
 # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/persist.nix
 # ---------------------------------------------------------------------------
-{ inputs, lib, pkgs, ... }: let
+{ config, inputs, lib, pkgs, ... }: let
   root-reset-src = builtins.readFile ../scripts/root-reset.sh;
   home-reset-src = builtins.readFile ../scripts/home-reset.sh;
 
