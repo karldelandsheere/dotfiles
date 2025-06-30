@@ -19,8 +19,8 @@ while read -r path; do
     fpath="$_tmp_root/home/active$path"
     rpath="$(realpath "$fpath")"
 
-    # if [[ $rpath == "$fpath"  ]] && [[ $path != *"unnamedplayer/.cache/"* ]]; then
-    if [[ "$rpath" == "$fpath"  ]]; then
+    if [[ $rpath == "$fpath"  ]] && [[ $path != *"unnamedplayer/.cache/"* ]]; then
+    # if [[ "$rpath" == "$fpath"  ]]; then
         echo "$rpath"
     fi
 done

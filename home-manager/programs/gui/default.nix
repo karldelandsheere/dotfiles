@@ -1,9 +1,10 @@
 { config, pkgs, ... }:
 {
   imports = [
-    # ./element
+    ./element
     ./firefox.nix
     ./ghostty
+    ./signal
   # ] ++ lists.optionals (system == 'x86_64-linux') [
     # ./onlyoffice.nix
   ];
@@ -18,7 +19,6 @@
       # orca-slicer
       # prusa-slicer
       # qbittorrent
-      # signal-desktop # broken for the moment
       # thunderbird
       # vlc
       # vscodium
