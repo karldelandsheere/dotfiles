@@ -29,7 +29,7 @@ while read -r path; do
 
   if [[ $rpath == "$fpath"  ]] && \
      [[ $path != *"/.cache/"* ]]; then
-    echo "$rpath"
+    echo "$path"
   fi
 done
 
@@ -53,7 +53,7 @@ while read -r path; do
      [[ "$path" != *"Signal/attachments.noindex"*  ]] && \
      [[ "$path" != *"Signal/badges.noindex"* ]] && \
      [[ "$path" != *"Signal/stickers.noindex"* ]]; then
-    echo "$rpath"
+    echo "$path"
   fi
 done
 
