@@ -56,7 +56,6 @@
       in listToAttrs [
         (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
         (extension "ublock-origin" "uBlock0@raymondhill.net")
-        (extension "umatrix" "uMatrix@raymondhill.net")
         (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
       ];
   
