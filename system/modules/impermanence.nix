@@ -8,19 +8,14 @@
 # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/persist.nix
 # ---------------------------------------------------------------------------
 { config, inputs, lib, pkgs, ... }: let
-  root-reset-src = builtins.readFile ../scripts/root-reset.sh;
-  home-reset-src = builtins.readFile ../scripts/home-reset.sh;
+  # rollback-src = builtins.readFile ../scripts/rollback.sh;
+  # root-reset-src = builtins.readFile ../scripts/root-reset.sh;
+  # home-reset-src = builtins.readFile ../scripts/home-reset.sh;
 
-  root-diff = pkgs.writeShellApplication {
-    name = "root-diff";
+  differences = pkgs.writeShellApplication {
+    name = "differences";
     runtimeInputs = [ pkgs.btrfs-progs ];
-    text = builtins.readFile ../scripts/root-diff.sh;
-  };
-
-  home-diff = pkgs.writeShellApplication {
-    name = "home-diff";
-    runtimeInputs = [ pkgs.btrfs-progs ];
-    text = builtins.readFile ../scripts/home-diff.sh;
+    text = builtins.readFile ../scripts/differences.sh;
   };
 in
 {
@@ -33,36 +28,47 @@ in
 
   # Rollback routine on every boot
   # ------------------------------
-  boot.initrd.systemd.services.root-rollback = {
-    description = "Rollback BTRFS root subvolume to a pristine state";
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback BTRFS root and home subvolumes to a pristine state";
     wantedBy = [ "initrd.target" ];
     requires = [ "dev-nvme0n1p2.device" ];
     after = [ "dev-nvme0n1p2.device" ];
     before = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
-    script = root-reset-src;
+    # script = rollback-src;
+    script = builtins.readFile ../scripts/rollback.sh;
   };
 
 
-  boot.initrd.systemd.services.home-rollback = {
-    description = "Rollback BTRFS home subvolume to a pristine state";
-    wantedBy = [ "initrd.target" ];
-    requires = [ "dev-nvme0n1p2.device" ];
-    after = [ "dev-nvme0n1p2.device" ];
-    before = [ "sysroot.mount" ];
-    unitConfig.DefaultDependencies = "no";
-    serviceConfig.Type = "oneshot";
-    script = home-reset-src;
-  };
+  # boot.initrd.systemd.services.root-rollback = {
+  #   description = "Rollback BTRFS root subvolume to a pristine state";
+  #   wantedBy = [ "initrd.target" ];
+  #   requires = [ "dev-nvme0n1p2.device" ];
+  #   after = [ "dev-nvme0n1p2.device" ];
+  #   before = [ "sysroot.mount" ];
+  #   unitConfig.DefaultDependencies = "no";
+  #   serviceConfig.Type = "oneshot";
+  #   script = root-reset-src;
+  # };
+
+  # boot.initrd.systemd.services.home-rollback = {
+  #   description = "Rollback BTRFS home subvolume to a pristine state";
+  #   wantedBy = [ "initrd.target" ];
+  #   requires = [ "dev-nvme0n1p2.device" ];
+  #   after = [ "dev-nvme0n1p2.device" ];
+  #   before = [ "sysroot.mount" ];
+  #   unitConfig.DefaultDependencies = "no";
+  #   serviceConfig.Type = "oneshot";
+  #   script = home-reset-src;
+  # };
 
 
   environment = {
     # Script to find what needs to persist
     # ------------------------------------
     systemPackages = lib.mkBefore [
-      root-diff
-      home-diff
+      differences
     ];
 
 
