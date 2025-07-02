@@ -110,6 +110,9 @@
 
     files = [
       ".zsh_history"
+      ".config/mimeapps.list"
+      ".config/Signal/ephemeral.json"
+      ".config/Signal/config.json"
     ];
 
     allowOther = true;

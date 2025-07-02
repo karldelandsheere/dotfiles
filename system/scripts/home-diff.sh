@@ -19,9 +19,8 @@ while read -r path; do
     fpath="$_tmp_root/home/active$path"
     rpath="$(realpath "$fpath")"
 
-    if [[ $rpath == "$fpath"  ]] && [[ $path != *"unnamedplayer/.cache/"* ]]; then
-    # if [[ "$rpath" == "$fpath"  ]]; then
-        echo "$rpath"
+    if [[ $rpath == "$fpath"  ]] && [[ $path != *"/.cache/"* ]] && [[ "$path" != *"Cache"* ]] && [[ "$path" != *"Signal/attachments.noindex"*  ]] && [[ "$path" != *"Signal/badges.noindex"* ]] && [[ "$path" != *"Signal/stickers.noindex"* ]]; then
+      echo "$rpath"
     fi
 done
 umount "${_tmp_root}"
