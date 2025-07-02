@@ -7,6 +7,7 @@
     ./bottom
     ./git.nix
     ./helix
+    ./jrnl
     ./moc
     ./yazi
     ./yt-dlp
@@ -22,7 +23,6 @@
     exiftool
     fastfetch
     # hugo
-    jrnl
     scooter
   ];
 }
