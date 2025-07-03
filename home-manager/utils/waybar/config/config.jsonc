@@ -12,6 +12,7 @@
     ],
     "modules-center": [
       "tray"
+      // ,"niri/window"
     ],
     "modules-right": [
       "backlight"
@@ -55,6 +56,11 @@
         // "Virtual-1": ["dev", "comms"]
       // }
     },
+
+
+    // "niri/window": {
+      // "format": "{title}"
+    // },
 
 
     // Backlight controls

@@ -21,6 +21,12 @@ input {
   }
 }
 
+gestures {
+  hot-corners {
+    off
+  }
+}
+
 
 // Cursor configuration
 cursor {
@@ -74,7 +80,7 @@ layer-rule {
 }
 
 overview {
-  zoom 0.35
+  zoom 0.5
   // Disable the workspace shadows in the overview.
   workspace-shadow {
     off
@@ -251,7 +257,7 @@ binds {
   // Launch some programs
   Mod+T { spawn "ghostty"; }
   Mod+Space { spawn "fuzzel"; }
-
+  Mod+Tab repeat=false { toggle-overview; }
 
   // Control the monitor brightness
   XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
@@ -376,7 +382,7 @@ binds {
 
 
   // Switches focus between the current and the previous workspace.
-  Mod+Tab { focus-workspace-previous; }
+  // Mod+Tab { focus-workspace-previous; }
 
 
   // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on

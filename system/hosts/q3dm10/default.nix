@@ -5,26 +5,27 @@
     ../../default.nix
   ];
 
-
-  # I'm not on a Qwerty, OK?
-  # ------------------------
-  services.xserver.xkb.layout = "be";
-
-
-  # AMD specific packages
-  # ---------------------
-  environment.systemPackages = with pkgs; [
-    microcode-amd
-  ];
+  config = {
+    # I'm not on a Qwerty, OK?
+    # ------------------------
+    services.xserver.xkb.layout = "be";
 
 
-  # Networking stuff
-  # ----------------
-  networking.hostName = "q3dm10";
+    # AMD specific packages
+    # ---------------------
+    environment.systemPackages = with pkgs; [
+      microcode-amd
+    ];
 
 
-  # NixOS version
-  # -------------
-  system.stateVersion = "25.05";
+    # Networking stuff
+    # ----------------
+    networking.hostName = "q3dm10";
+
+
+    # NixOS version
+    # -------------
+    system.stateVersion = "25.05";
+  };
 }
 

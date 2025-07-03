@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  # @todo test cinny-desktop instead of element
+
   imports = [
     ./element
     ./firefox.nix
@@ -14,12 +16,17 @@
       # bambu-studio # crashes, don't know why
       bitwarden
       # blender
+      grim
+      kooha
       opencloud-desktop
       # openscad
       # orca-slicer
       # prusa-slicer
       # qbittorrent
+      slurp
       # thunderbird
+      xdg-desktop-portal
+      xdg-desktop-portal-wlr
       # vlc
       # vscodium
 

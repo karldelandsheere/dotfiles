@@ -13,10 +13,11 @@
       };
 		  pulse.enable = true;
       wireplumber.enable = true;
+      # jack.enable = true;
     };
   };
 
   environment.systemPackages = with pkgs; [
-    pavucontrol
+    pwvucontrol
   ];
 }

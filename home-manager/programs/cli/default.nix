@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  # @todo test mpv
+  # @todo test fzf
+
   # CLI tools with configurations
   # -----------------------------
   imports = [
@@ -23,6 +26,9 @@
     exiftool
     fastfetch
     # hugo
+    nix-tree
+    progress
     scooter
+    tree
   ];
 }

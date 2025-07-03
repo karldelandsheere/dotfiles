@@ -3,7 +3,7 @@
 {
   services = {
 		dbus.implementation = "broker";
-
+    
 		xserver = {
       enable = true;
 

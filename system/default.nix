@@ -6,16 +6,15 @@
     ./modules
   ];
 
-
-  options.unnamedplayer = {
-    # Nix system
-    # ----------
-    system = lib.mkOption {
-      type = lib.types.str;
-      description = "x86_64-linux || aarch64-linux";
-      default = "x86_64-linux";
-    };
-  };
+  # options.unnamedplayer = {
+  #   # Nix system
+  #   # ----------
+  #   system = lib.mkOption {
+  #     type = lib.types.str;
+  #     description = "x86_64-linux || aarch64-linux";
+  #     default = "x86_64-linux";
+  #   };
+  # };
 
 
   config = {
@@ -52,5 +51,13 @@
       font-awesome
       nerd-fonts.jetbrains-mono
     ];
+
+    
+    # Xdg portal (too small for a dedicated file)
+    # ----------
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+    };
   };
 }

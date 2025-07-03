@@ -262,6 +262,18 @@
     profiles.default = {
       id = 0;
       name = "unnamedplayer";
+      isDefault = true;
+      settings = {
+				"browser.search.defaultenginename" = "DuckDuckGo";
+				"browser.search.order.1" = "DuckDuckGo";
+
+				# "widget.use-xdg-desktop-portal.file-picker" = 1;
+				# "browser.compactmode.show" = true;
+				# "browser.cache.disk.enable" = false;
+				# "widget.disable-workspace-management" = true;
+				# "browser.toolbars.bookmarks.visibility" = "never";
+				# "ui.key.menuAccessKeyFocuses" = false;
+			};
 
       
       # search.engines = {
@@ -280,5 +292,17 @@
     };
   };
 
-  home.sessionVariables.BROWSER = "firefox";
+  home.sessionVariables = {
+    BROWSER = "firefox";
+    MOZ_ENABLE_WAYLAND = "1";
+    MOZ_DBUS_REMOTE = "1";
+  };
+
+  xdg.mimeApps.defaultApplications = {
+		"application/xhtml+xml" = "firefox.desktop";
+		"text/html" = "firefox.desktop";
+		"text/xml" = "firefox.desktop";
+		"x-scheme-handler/http" = "firefox.desktop";
+		"x-scheme-handler/https" = "firefox.desktop";
+  };
 }

@@ -49,10 +49,17 @@
   let
     inherit (nixpkgs.lib) nixosSystem lists;
 
+    globals = {
+      dotfiles = "/etc/nixos";
+    };
+
     mkSystemConfig = { system, modules, useHomeManager ? true, ... }: nixosSystem
     { 
       inherit system;
-      specialArgs = inputs;
+      # inherit settings;
+      specialArgs = {
+        inherit inputs globals;
+      };
 
       modules = modules ++ [
         inputs.impermanence.nixosModules.impermanence

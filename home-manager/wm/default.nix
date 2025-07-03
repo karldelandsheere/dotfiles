@@ -1,20 +1,16 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    ./niri
-  ];
+  # imports = [
+  #   ./niri
+  # ];
 
+  # Common configuration for a window manager, given that
+  # it is based on Wayland and uses a GTK theme
+  # -------------------------------------------
   config = {
+    # XDG essentials
+    # --------------
     xdg = {
-      # autostart = {
-      #   enable = true;
-      #   readOnly = true;
-      #   entries = [
-      #     # "${pkgs.waybar}/bin/waybar"
-      #     # "${pkgs.swayidle}/bin/swayidle"
-      #   ];
-      # };
-      
       portal = {
         enable = true;
         xdgOpenUsePortal = true;
@@ -22,11 +18,15 @@
         extraPortals = with pkgs; [
           xdg-desktop-portal
           xdg-desktop-portal-gtk
-          xdg-desktop-portal-wlr
+          # xdg-desktop-portal-wlr # for wlroots/wayland but niri doesn't care
         ];
       };
+      mimeApps.enable = true;
     };
 
+
+    # GTK
+    # ---
     gtk = {
       enable = true;
       theme = {
@@ -36,10 +36,12 @@
     };
 
 
+    # Variables for all that
+    # ----------------------
     home.sessionVariables = {
       CLUTTER_BACKEND = "wayland";
       DISABLE_QT5_COMPAT = "0"; # should I set this to 1?
-      GDK_BACKEND = "wayland";
+      GDK_BACKEND = "wayland,x11";
       GDK_SCALE = "1";
       GTK_USE_PORTAL = "1";
       NIXOS_OZONE_WL = "1"; # use Ozone Wayland for Electron apps
