@@ -1,8 +1,8 @@
+# Helix
+# -----
 { config, ... }:
 {
   config = {
-    # Helix
-    # -----
     programs.helix = {
       enable = true;
       defaultEditor = true;

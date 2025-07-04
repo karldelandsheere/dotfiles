@@ -210,6 +210,7 @@ window-rule {
 
 
 spawn-at-startup "xwayland-satellite"
+// spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 
 spawn-at-startup "swaybg" "-i" "/etc/nixos/home-manager/themes/wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
 

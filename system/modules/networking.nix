@@ -1,16 +1,33 @@
-{ ... }:
+{ config, ... }:
 {
-  # More stuff to come here, later...
-  # If not, I'll put this in the default.nix
-  # ----------------------------------------
-  networking = {
-    networkmanager.enable = true;
-    enableIPv6 = true;
-    firewall.enable = true;
-  };
+  # Network related stuff (who would have guessed?)
+  # ---------------------
+  config = {
+    networking = {
+      networkmanager.enable = true;
+      enableIPv6 = true;
 
-  # services.tailscale = {
-  #   enable = true;
-  # };
+      # Firewall setup
+      # --------------
+      firewall.enable = true;
+
+      # VPN setup
+      # @todo setup for each VPN I need
+      # -------------------------------
+      # wireguard = {
+      #   enable = true;
+      #   interfaces = {
+          
+      #   };
+      # };
+    };
+
+    # Tailscale setup
+    # @todo setup for Dimeritium
+    # --------------------------
+    # services.tailscale = {
+    #   enable = true;
+    # };
+  };
 }
 

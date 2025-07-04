@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   # Utils with specific config files
   # --------------------------------
@@ -8,12 +8,14 @@
     ./swayidle
     ./swaylock
     ./waybar
-    # ./wlogout # if not used in a couple of weeks, remove it completely
   ];
 
-  # Simple packages
-  # ---------------
-  home.packages = with pkgs; [
-    swaybg
-  ];
+  config = {
+    # Simple packages
+    # ---------------
+    home.packages = with pkgs; [
+      networkmanagerapplet
+      swaybg
+    ];
+  };
 }

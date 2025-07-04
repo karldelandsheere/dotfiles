@@ -1,22 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./users
-    ./programs
     ./modules
   ];
 
-  # options.unnamedplayer = {
-  #   # Nix system
-  #   # ----------
-  #   system = lib.mkOption {
-  #     type = lib.types.str;
-  #     description = "x86_64-linux || aarch64-linux";
-  #     default = "x86_64-linux";
-  #   };
-  # };
 
-
+  # These are too small on their own for a dedicated file
+  # -----------------------------------------------------
   config = {
     # Console
     # -------
@@ -27,7 +18,7 @@
     };
 
 
-    # Hardware (too small for a dedicated file)
+    # Hardware
     # --------
     hardware = {
       enableAllFirmware = true;
@@ -45,19 +36,11 @@
     time.timeZone = "Europe/Brussels";
 
 
-    # Fonts (too small for a dedicated file)
+    # Fonts
     # -----
     fonts.packages = with pkgs; [
       font-awesome
       nerd-fonts.jetbrains-mono
     ];
-
-    
-    # Xdg portal (too small for a dedicated file)
-    # ----------
-    xdg.portal = {
-      enable = true;
-      wlr.enable = true;
-    };
   };
 }

@@ -1,13 +1,9 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [];
-
-
   config = {
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
-      # bluez
       brightnessctl
       curl
       git
@@ -15,7 +11,6 @@
       libnotify
       nano
       nemo
-      networkmanagerapplet
       qt5.qtwayland
       qt6.qtwayland
       swaylock-effects

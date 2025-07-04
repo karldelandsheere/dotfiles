@@ -1,14 +1,15 @@
-{ ... }:
-
+# Security stuff
+# --------------
+{ config, ... }:
 {
-    # Security stuff
-    # --------------
+  config = {
     security = {
-      polkit.enable = true; # at first, enabled for hyprland, still needed?
+      polkit.enable = true;
       pam.services = {
         swaylock = {}; # init I guess?
         swaylock.fprintAuth = false;
       };
     };
+  };
 }
 

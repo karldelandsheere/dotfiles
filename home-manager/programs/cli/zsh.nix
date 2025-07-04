@@ -1,20 +1,16 @@
-{ ... }:
+# I use zsh because I'm edgy but not too much
+# -------------------------------------------
+{ config, ... }:
 {
-  # zsh FTW
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      dots = "cd /etc/nixos/";
-      # rebuild = "nixos-rebuild switch --flake /etc/nixos#q3dm10 && home-manager switch --flake /etc/nixos#unnamedplayer";
+  config = {
+    programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      shellAliases = {
+        dots = "cd /etc/nixos/"; # @todo make it less hard coded
+      };
     };
-
-    # profileExtra = ''
-    #   if uwsm check may-start; then
-    #     exec uwsm start -S hyprland-uwsm.desktop
-    #   fi
-    # '';
   };
 }
 

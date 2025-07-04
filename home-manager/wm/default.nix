@@ -1,30 +1,9 @@
 { config, pkgs, ... }:
 {
-  # imports = [
-  #   ./niri
-  # ];
-
   # Common configuration for a window manager, given that
   # it is based on Wayland and uses a GTK theme
   # -------------------------------------------
   config = {
-    # XDG essentials
-    # --------------
-    xdg = {
-      portal = {
-        enable = true;
-        xdgOpenUsePortal = true;
-        config.common.default = [ "gtk" ];
-        extraPortals = with pkgs; [
-          xdg-desktop-portal
-          xdg-desktop-portal-gtk
-          # xdg-desktop-portal-wlr # for wlroots/wayland but niri doesn't care
-        ];
-      };
-      mimeApps.enable = true;
-    };
-
-
     # GTK
     # ---
     gtk = {
@@ -34,6 +13,11 @@
         package = pkgs.materia-theme;
       };
     };
+
+
+    # Qt
+    # --
+    qt.platformTheme = "gtk";
 
 
     # Variables for all that

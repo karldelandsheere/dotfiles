@@ -2,36 +2,34 @@
 {
   # @todo test cinny-desktop instead of element
 
+  # GUI programs with config
+  # ------------------------
   imports = [
-    ./element
+    # ./element
     ./firefox.nix
     ./ghostty
     ./signal
-  # ] ++ lists.optionals (system == 'x86_64-linux') [
     # ./onlyoffice.nix
   ];
 
-  home = {
-    packages = with pkgs; [
+
+  config = {
+    # GUI programs that either don't need config or are on trial
+    # ----------------------------------------------------------
+    home.packages = with pkgs; [
+      # anytype
       # bambu-studio # crashes, don't know why
       bitwarden
       # blender
-      grim
-      kooha
+      # grim
       opencloud-desktop
       # openscad
       # orca-slicer
       # prusa-slicer
       # qbittorrent
-      slurp
-      # thunderbird
-      xdg-desktop-portal
-      xdg-desktop-portal-wlr
-      # vlc
+      # slurp
+      vlc
       # vscodium
-
-    # ] ++ lists.optionals (system == 'x86_64-linux') [
-      # anytype
     ];
   };
 }

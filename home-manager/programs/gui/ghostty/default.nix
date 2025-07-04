@@ -1,8 +1,8 @@
+# Ghostty terminal emulator
+# -------------------------
 { config, ... }:
 {
   config = {
-    # Ghostty terminal emulator
-    # -------------------------
     programs.ghostty = {
       enable = true;
       enableZshIntegration = true;

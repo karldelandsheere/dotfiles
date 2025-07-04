@@ -1,7 +1,8 @@
-{ ... }:
-
+{ config, ... }:
 {
-  programs.onlyoffice = {
-    enable = true;
+  config = {
+    programs.onlyoffice = {
+      enable = true;
+    };
   };
 }

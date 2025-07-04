@@ -1,18 +1,14 @@
-{ ... }:
+{ config, ... }:
 {
-  # More stuff to come here, later...
-  # If not, I'll put this in the default.nix
-  # ----------------------------------------
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Experimental = true;
-      };
+  # Bluetooth related stuff (hence the name, right?)
+  # -----------------------
+  config = {
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings.General.Experimental = true;
     };
+
+    services.blueman.enable = true;
   };
-
-  services.blueman.enable = true;
 }
-

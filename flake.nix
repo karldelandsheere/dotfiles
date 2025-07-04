@@ -25,6 +25,8 @@
   };
 
 
+  # Pkgs and flakes definitions, aka inputs
+  # ---------------------------------------
   inputs = {
     nixpkgs.url      = "github:nixos/nixpkgs/nixos-25.05";
     impermanence.url = "github:nix-community/impermanence";
@@ -34,6 +36,19 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # @todo Implement stylix
+    # https://github.com/Ly-sec/nixos/blob/main/system/programs/stylix.nix
+    # stylix = {
+    #   url = "github:danth/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # @todo Implement quickshell
+    # quickshell = {
+    #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -45,25 +60,22 @@
   };
 
 
+  # Definition of the system, aka outputs
+  # -------------------------------------
   outputs = inputs@{ self, nixpkgs, impermanence, home-manager, niri, ... }: 
   let
     inherit (nixpkgs.lib) nixosSystem lists;
-
-    globals = {
-      dotfiles = "/etc/nixos";
-    };
 
     mkSystemConfig = { system, modules, useHomeManager ? true, ... }: nixosSystem
     { 
       inherit system;
       # inherit settings;
-      specialArgs = {
-        inherit inputs globals;
-      };
+      specialArgs = inputs;
 
       modules = modules ++ [
         inputs.impermanence.nixosModules.impermanence
       ] ++ lists.optionals (useHomeManager) [
+        # inputs.stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         {
           home-manager = {

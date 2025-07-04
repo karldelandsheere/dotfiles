@@ -1,8 +1,8 @@
+# yt-dlp
+# ------
 { config, ... }:
 {
   config = {
-    # yt-dlp
-    # ------
     programs.yt-dlp.enable = true;
 
     # home = {

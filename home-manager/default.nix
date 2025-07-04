@@ -1,128 +1,55 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     ./programs
     ./utils
-    ./wm
+    ./wm/niri
 
     inputs.impermanence.homeManagerModules.impermanence
   ];
 
 
-  # It's the least, right?
-  # ----------------------     
-  programs.home-manager.enable = true;
-
-  home = {
-    username = "unnamedplayer";
-    homeDirectory = "/home/unnamedplayer";
-    stateVersion = "25.05";
-  };
-
-  news.display = "show";
+  config = {
+    # It's the least, right?
+    # ----------------------     
+    programs.home-manager.enable = true;
 
 
+    # If I'm going to get this notification each time
+    # at least let me check those damn news
+    # ------------------------------------- 
+    news.display = "show";
 
 
-  # accounts.email = {
-    # maildirBasePath = "/persist/data/mail";
-
-    # accounts = let
-      # passwordCommand = account:
-      #   "${pkgs.jq}/bin/jq "
-    # in {
-      # "karl_at_delandsheere" = {
-        # primary = true;
-
-        # realName = "Karl Delandsheere";
-        # address = "karl@delandsheere.be";
-
-        # Folders?
-
-        # userName = "karl@delandsheere.be";
-        # passwordCommand = passwordCommand ""
-
-        # flavor = "migadu.com";      
-        # imap = {
-        #   host = "imap.migadu.com";
-          
-        # smtp.host = "smtp.migadu.com";
-
-        # aerc.enable = true;
-      # };
-    # };
-  # };
-
-
-
-
-
-
-
-
-
-
-  # accounts.email = {
-  #   # maildirBasePath = "/persist/data/mail";
-
-  #   accounts."karl_at_delandsheere" = {
-  #     primary = true;
-  #     name = "karl@delandsheere.be"; # ?
-  #     userName = "karl@delandsheere.be";
-  #     realName = "Karl Delandsheere";
-  #     address = "karl@delandsheere.be";
-  #     flavor = "migadu.com";      
-  #     imap.host = "imap.migadu.com";
-  #     smtp.host = "smtp.migadu.com";
-  #   };
-
-  #   accounts."karl_at_dimeritium" = {
-  #     name = "karl@dimeritium.com"; # ?
-  #     userName = "karl@dimeritium.com";
-  #     realName = "Karl (Dimeritium)";
-  #     address = "karl@dimeritium.com";
-  #     flavor = "outlook.office365.com";
-  #   };
+    # Home-manager version
+    # --------------------
+    home.stateVersion = "25.05";
     
-  #   accounts."expo_ventrecontent" = {
-  #     name = "expo@ventrecontent.be"; # ?
-  #     userName = "expo@ventrecontent.be";
-  #     realName = "Ventre Content";
-  #     address = "expo@ventrecontent.be";
-  #     imap.host = "mail.ventrecontent.be";
-  #     smtp.host = "mail.ventrecontent.be";
-  #   };
-  # };
 
+    # For the moment, I'm the only user
+    # so I leave this here
+    # -------------------- 
+    home = {
+      username = "unnamedplayer";
+      homeDirectory = "/home/unnamedplayer";
 
+      # Opt-in what files and directories should persist
+      # ------------------------------------------------
+      persistence."/persist/home/unnamedplayer" = {
+        directories = [
+          "OpenCloud"
+          ".ssh"
+        ];
 
+        files = [
+          ".zsh_history"
+          ".config/mimeapps.list"
+          ".config/Signal/ephemeral.json"
+          ".config/Signal/config.json"
+        ];
 
-
-
-
-
-
-  home.persistence."/persist/home/unnamedplayer" = {
-    directories = [
-      "OpenCloud"
-      ".ssh"
-    ];
-
-    files = [
-      ".zsh_history"
-      ".config/mimeapps.list"
-      ".config/Signal/ephemeral.json"
-      ".config/Signal/config.json"
-    ];
-
-    allowOther = true;
+        allowOther = true;
+      };
+    };
   };
-
-
-
-
-
-
-
-
 }

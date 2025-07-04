@@ -1,34 +1,36 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   # @todo test mpv
   # @todo test fzf
 
-  # CLI tools with configurations
-  # -----------------------------
+  # CLI programs with config
+  # ------------------------
   imports = [
-    ./aerc
+    # ./aerc
     ./bottom
     ./git.nix
     ./helix
-    ./jrnl
+    # ./jrnl
     ./moc
     ./yazi
-    ./yt-dlp
+    # ./yt-dlp
     ./zsh.nix
   ];
 
-  # CLI tools that either don't need config or are on trial
-  # -------------------------------------------------------
-  home.packages = with pkgs; [
-    # audacious # make it look like winamp
-    bitwarden-cli
-    cmatrix # like the cool guys
-    exiftool
-    fastfetch
-    # hugo
-    nix-tree
-    progress
-    scooter
-    tree
-  ];
+
+  config = {
+    # CLI programs that either don't need config or are on trial
+    # ----------------------------------------------------------
+    home.packages = with pkgs; [
+      # bitwarden-cli
+      cmatrix # like the cool guys
+      exiftool
+      fastfetch # yeah, also like the cool guys
+      gpu-screen-recorder
+      nix-tree
+      progress
+      scooter
+      tree
+    ];
+  };
 }

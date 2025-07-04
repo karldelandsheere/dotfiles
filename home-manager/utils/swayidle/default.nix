@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
-  # @todo Find out why swayidle is not working
-  # ------------------------------------------
+  # @todo Find out why swayidle is not working as a service
+  # -------------------------------------------------------
   config = {
     # services.swayidle = {
     #   enable = true;
