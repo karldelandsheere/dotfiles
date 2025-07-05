@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, osConfig, ... }:
 {
   config = {
     programs.waybar = {
@@ -9,7 +9,7 @@
       };
     };
 
-    # @todo Find how to not have to type the whole path
-    home.file.".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/utils/waybar/config";
+    home.file.".config/waybar".source =
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/utils/waybar/config";
   };
 }

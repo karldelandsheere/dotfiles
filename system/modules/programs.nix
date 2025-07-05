@@ -26,8 +26,8 @@
     programs.git.enable = true;
 
 
-    # I like zsh better
-    # -----------------
+    # I use zsh because I'm edgy but not too much
+    # -------------------------------------------
     programs.zsh = {
       enable = true;
       autosuggestions.enable = true;
@@ -36,6 +36,14 @@
     };
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
+
+
+    # Shell agnostic aliases
+    # ----------------------
+    environment.shellAliases = {
+      dots = "cd ${config.dotfiles}";
+      todo = "grep -rnw ${config.dotfiles} -e '@todo'";
+    };
 
 
     # Activate flakes, etc.

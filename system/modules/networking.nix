@@ -12,19 +12,21 @@
       firewall.enable = true;
 
       # VPN setup
+      # @todo setup Wireguard
       # @todo setup for each VPN I need
       # -------------------------------
       # wireguard = {
       #   enable = true;
       #   interfaces = {
-          
       #   };
       # };
     };
 
+
     # Tailscale setup
-    # @todo setup for Dimeritium
-    # --------------------------
+    # @todo Setup Tailscale
+    # @todo And setup for Dimeritium
+    # ------------------------------
     # services.tailscale = {
     #   enable = true;
     # };

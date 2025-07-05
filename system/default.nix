@@ -1,9 +1,20 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
     ./users
     ./modules
   ];
+
+
+  # Set system wide options
+  # -----------------------
+  options = {
+    dotfiles = lib.mkOption {
+      description = "Path to NixOS dotfiles, defaults to /etc/nixos";
+      type = lib.types.str;
+      default = "/etc/nixos";
+    };
+  };
 
 
   # These are too small on their own for a dedicated file

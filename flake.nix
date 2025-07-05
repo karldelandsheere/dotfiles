@@ -1,6 +1,5 @@
 {
   # Need to work
-  # @todo Setup Tailscale
   # @todo Setup aerc and email accounts
   # @todo Understand why my Airpods Pro can't connect easily
   # @todo BambuStudio and OrcaSlicer are crashing
@@ -89,6 +88,8 @@
     };
   in
   {
+    # Declare the different systems configs
+    # -------------------------------------
     nixosConfigurations = {
       # Qemu VM on macOS/UTM
       # --------------------
@@ -105,6 +106,9 @@
       };
     };
 
+
+    # Declare home-manager as stand-alone
+    # -----------------------------------
     # homeConfigurations = {
     #   unnamedplayer = home-manager.lib.homeManagerConfiguration {
     #     pkgs = nixpkgs.legacyPackages.x86_64-linux;

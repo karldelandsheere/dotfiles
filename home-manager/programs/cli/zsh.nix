@@ -7,9 +7,6 @@
       enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      shellAliases = {
-        dots = "cd /etc/nixos/"; # @todo make it less hard coded
-      };
     };
   };
 }
