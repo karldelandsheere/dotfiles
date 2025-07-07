@@ -7,7 +7,7 @@
 # Based on so many sources but the latest is
 # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/persist.nix
 # ---------------------------------------------------------------------------
-{ config, inputs, lib, pkgs, ... }: let
+{ config, impermanence, lib, pkgs, ... }: let
   differences = pkgs.writeShellApplication {
     name = "differences";
     runtimeInputs = [ pkgs.btrfs-progs ];
@@ -15,9 +15,9 @@
   };
 in
 {
-  # imports = [
-  #   inputs.impermanence.nixosModules.impermanence
-  # ];
+  imports = [
+    impermanence.nixosModules.impermanence
+  ];
 
   config = {
     # Rollback routine on every boot
@@ -86,4 +86,3 @@ in
     programs.fuse.userAllowOther = true;
   };
 }
-

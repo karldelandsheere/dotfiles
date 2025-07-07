@@ -10,6 +10,8 @@
         swaylock.fprintAuth = false;
       };
     };
+
+    services.gnome.gnome-keyring.enable = true;
   };
 }
 

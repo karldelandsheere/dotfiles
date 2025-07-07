@@ -14,6 +14,14 @@
       type = lib.types.str;
       default = "/etc/nixos";
     };
+
+    gui = {
+      enable = lib.mkOption {
+        description = "Is this system console or GUI oriented? Defaults to true";
+        type = lib.types.bool;
+        default = true;
+      };
+    };
   };
 
 

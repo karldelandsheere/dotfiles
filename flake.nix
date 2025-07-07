@@ -65,15 +65,18 @@
   let
     inherit (nixpkgs.lib) nixosSystem lists;
 
-    mkSystemConfig = { system, modules, useHomeManager ? true, ... }: nixosSystem
+    mkSystemConfig = {
+      system,
+      modules,
+      useImpermanence ? true,
+      useHomeManager ? true,
+      ... }: nixosSystem
     { 
       inherit system;
       # inherit settings;
       specialArgs = inputs;
 
-      modules = modules ++ [
-        inputs.impermanence.nixosModules.impermanence
-      ] ++ lists.optionals (useHomeManager) [
+      modules = modules ++ lists.optionals (useHomeManager) [
         # inputs.stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         {
@@ -96,6 +99,7 @@
       utm = mkSystemConfig {
         system = "aarch64-linux";
         modules = [ ./system/hosts/utm ];
+        useImpermanence = false;
       };
 
       # bare-metal on amd ryzen

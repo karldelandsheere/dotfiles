@@ -25,6 +25,7 @@
       supportedFilesystems = [ 
         "btrfs"
         "fat" "vfat" "exfat"
+        "hfsplus"
         "ntfs" # Do I still need this though?
       ];
     };

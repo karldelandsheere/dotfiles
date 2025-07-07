@@ -9,12 +9,15 @@
       git
       helix
       libnotify
+      libsecret
       nano
       nemo
       qt5.qtwayland
       qt6.qtwayland
+      # razergenie
       swaylock-effects
       unzip
+      usbutils
       wl-clipboard
       xwayland-satellite
     ];

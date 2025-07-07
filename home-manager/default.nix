@@ -37,15 +37,18 @@
       # ------------------------------------------------
       persistence."/persist/home/unnamedplayer" = {
         directories = [
-          "OpenCloud"
+          ".config/Element"
+          ".config/Signal"
+          ".local/share/keyrings"
+          ".mozilla/firefox/default"
           ".ssh"
+
+          "OpenCloud"
         ];
 
         files = [
-          ".zsh_history"
           ".config/mimeapps.list"
-          ".config/Signal/ephemeral.json"
-          ".config/Signal/config.json"
+          ".zsh_history"
         ];
 
         allowOther = true;

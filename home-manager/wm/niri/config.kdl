@@ -150,7 +150,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="signal"
+  match app-id="Signal"
   open-on-workspace "comms"
 }
 
@@ -208,7 +208,6 @@ window-rule {
 
 
 
-
 spawn-at-startup "xwayland-satellite"
 // spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 
@@ -217,7 +216,13 @@ spawn-at-startup "swaybg" "-i" "/etc/nixos/home-manager/themes/wallpapers/201810
 spawn-at-startup "swayidle" "-w"
 
 spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
-spawn-at-startup "waybar"
+
+// As udiskie launch waybar itself, let's comment this out for the time being
+// spawn-at-startup "waybar"
+
+// Work around for udiskie to start correctly
+// @todo find the right way to setup udiskie
+spawn-at-startup "systemctl" "--user" "start" "udiskie.service"
 
 spawn-at-startup "ghostty"
 // spawn-at-startup "sh" "-c" "ghostty -e yazi"

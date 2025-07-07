@@ -5,7 +5,7 @@
   # GUI programs with config
   # ------------------------
   imports = [
-    # ./element
+    ./element
     ./firefox.nix
     ./ghostty
     ./signal
