@@ -41,6 +41,7 @@
           ".config/Signal"
           ".local/share/keyrings"
           ".mozilla/firefox/default"
+          ".mullvad"
           ".ssh"
 
           "OpenCloud"

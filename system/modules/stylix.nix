@@ -33,5 +33,7 @@
     #     name = "Noto Color Emoji";
     #   };
     # };
+
+    autoEnable = false;
   };
 }

@@ -22,6 +22,7 @@
       bitwarden
       # blender
       # grim
+      mullvad-browser
       opencloud-desktop
       # openscad
       # orca-slicer

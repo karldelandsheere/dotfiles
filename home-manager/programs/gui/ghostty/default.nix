@@ -1,6 +1,6 @@
 # Ghostty terminal emulator
 # -------------------------
-{ config, ... }:
+{ config, osConfig, ... }:
 {
   config = {
     programs.ghostty = {
@@ -9,7 +9,8 @@
     };
 
     home = {
-      file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/gui/ghostty/config";
+      file.".config/ghostty".source =
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/programs/gui/ghostty/config";
     };
   };
 }

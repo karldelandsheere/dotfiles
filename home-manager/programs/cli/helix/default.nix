@@ -1,6 +1,6 @@
 # Helix
 # -----
-{ config, ... }:
+{ config, osConfig, ... }:
 {
   config = {
     programs.helix = {
@@ -10,7 +10,8 @@
 
     home = {
       sessionVariables.EDITOR = "hx";
-      file.".config/helix".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/cli/helix/config";
+      file.".config/helix".source =
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/programs/cli/helix/config";
     };
   };
 }

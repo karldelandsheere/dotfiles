@@ -46,7 +46,7 @@ environment {
 }
 
 layout {
-  gaps 2
+  gaps 10
 
 // Set transparent workspace background color.
   background-color "transparent"
@@ -112,35 +112,18 @@ workspace "files"
 
 window-rule {
   match app-id="com.mitchellh.ghostty"
-  open-on-workspace "dev"
+  match app-id="codium"
 
+  open-on-workspace "dev"
   opacity 0.85
 }
 
 window-rule {
-  match app-id="codium"
-  open-on-workspace "dev"
-
-  opacity 0.9
-}
-
-window-rule {
   match app-id="PrusaSlicer"
-  open-on-workspace "3d"
-}
-
-window-rule {
   match app-id="OrcaSlicer"
-  open-on-workspace "3d"
-}
-
-window-rule {
   match app-id="org.openscad."
-  open-on-workspace "3d"
-}
-
-window-rule {
   match app-id="blender"
+
   open-on-workspace "3d"
 }
 
@@ -151,12 +134,10 @@ window-rule {
 
 window-rule {
   match app-id="Signal"
-  open-on-workspace "comms"
-}
-
-window-rule {
   match app-id="Element"
+
   open-on-workspace "comms"
+  opacity 0.85
 }
 
 window-rule {
@@ -184,6 +165,9 @@ window-rule {
   open-on-workspace "files"
 }
 
+// window-rule {
+//   match app-id="firefox"
+// }
 
 
 
@@ -428,10 +412,14 @@ binds {
   Mod+F { maximize-column; }
   Mod+Shift+F { fullscreen-window; }
 
+  Mod+Shift+Minus { set-window-height "-10%"; }
+  Mod+Shift+Equal { set-window-height "+10%"; }
 
   // Toggle floating and move the focused window between floating and tiling
   Mod+V       { toggle-window-floating; }
   Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+  Mod+O { toggle-window-rule-opacity; }
 
 
   // Screenshot utils
