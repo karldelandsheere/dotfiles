@@ -38,10 +38,10 @@
 
     # @todo Implement stylix
     # https://github.com/Ly-sec/nixos/blob/main/system/programs/stylix.nix
-    # stylix = {
-    #   url = "github:danth/stylix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    stylix = {
+      url = "github:nix-community/stylix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # @todo Implement quickshell
     # quickshell = {
@@ -61,7 +61,7 @@
 
   # Definition of the system, aka outputs
   # -------------------------------------
-  outputs = inputs@{ self, nixpkgs, impermanence, home-manager, niri, ... }: 
+  outputs = inputs@{ self, nixpkgs, impermanence, home-manager, niri, stylix, ... }: 
   let
     inherit (nixpkgs.lib) nixosSystem lists;
 
@@ -77,7 +77,7 @@
       specialArgs = inputs;
 
       modules = modules ++ lists.optionals (useHomeManager) [
-        # inputs.stylix.nixosModules.stylix
+        stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -116,7 +116,10 @@
     # homeConfigurations = {
     #   unnamedplayer = home-manager.lib.homeManagerConfiguration {
     #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #     modules = [ ./home-manager ];
+    #     modules = [
+    #       stylix.homeModules.stylix
+    #       ./home-manager
+    #     ];
     #     extraSpecialArgs = { inherit inputs; };
     #   };
     # };

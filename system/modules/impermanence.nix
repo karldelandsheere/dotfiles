@@ -49,6 +49,7 @@ in
 
         directories = [
           # /etc/...
+          "/etc/mullvad-vpn"
           "/etc/nixos"
           "/etc/NetworkManager/system-connections"
 
@@ -56,6 +57,9 @@ in
           "/var/lib/nixos"
           "/var/lib/bluetooth"
           "/var/lib/upower"
+
+          # /var/cache
+          "/var/cache/mullvad-vpn"
         ];
 
         files = [
