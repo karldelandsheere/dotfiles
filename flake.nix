@@ -80,7 +80,6 @@
       ... }: nixosSystem
     { 
       inherit system;
-      # inherit settings;
       specialArgs = inputs;
 
       modules = modules ++ lists.optionals (useHomeManager) [
@@ -88,9 +87,9 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useUserPackages = true;
+            useUserPackages     = true;
             users.unnamedplayer = { imports = [ ./home-manager ]; };
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs    = { inherit inputs; };
             backupFileExtension = "backup";
           };
         }
@@ -104,7 +103,7 @@
       # Qemu VM on macOS/UTM
       # --------------------
       utm = mkSystemConfig {
-        system = "aarch64-linux";
+        system  = "aarch64-linux";
         modules = [ ./system/hosts/utm ];
         useImpermanence = false;
       };
@@ -112,7 +111,7 @@
       # bare-metal on amd ryzen
       # -----------------------
       q3dm10 = mkSystemConfig {
-        system = "x86_64-linux";
+        system  = "x86_64-linux";
         modules = [ ./system/hosts/q3dm10 ];
       };
     };

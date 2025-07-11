@@ -1,11 +1,12 @@
 # Signal
 # ------
-{ config, pkgs, ... }:
+{ config, osConfig, pkgs, ... }:
 {
   config = {
     home = {
       packages = with pkgs; [ signal-desktop ];
-      file.".config/Signal/Preferences".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/gui/signal/config/Preferences";
+      file.".config/Signal/Preferences".source =
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/programs/gui/signal/config/Preferences";
     };
   };
 }

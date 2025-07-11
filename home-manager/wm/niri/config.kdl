@@ -137,7 +137,7 @@ window-rule {
   match app-id="Element"
 
   open-on-workspace "comms"
-  opacity 0.85
+  // opacity 0.85
 }
 
 window-rule {
