@@ -1,9 +1,8 @@
-{ ... }:
+{ osConfig, lib, ... }:
 {
-  imports = [
-    ./cli
-    ./gui
-  ];
+  imports =
+    [ ./cli ]
+    ++ lib.lists.optionals ( osConfig.gui.enable ) [ ./gui ];
 
   nixpkgs.config.allowUnfree = true;
 }

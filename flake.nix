@@ -1,14 +1,14 @@
 {
   # Need to work
   # @todo Setup aerc and email accounts
-  # @todo Understand why my Airpods Pro can't connect easily
-  # @todo BambuStudio and OrcaSlicer are crashing
-  # @todo Find a way to make Affinity work
-  # @todo Make my workspaces better and find out how to display only the active and not empty ones
 
   # Nice to have
   # @todo Customize Swaylock
   # @todo Customize Grub
+  # @todo Understand why my Airpods Pro can't connect easily
+  # @todo BambuStudio and OrcaSlicer are crashing
+  # @todo Find a way to make Affinity work
+  # @todo Make my workspaces better and find out how to display only the active and not empty ones
 
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
@@ -36,26 +36,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # @todo Implement stylix
-    # https://github.com/Ly-sec/nixos/blob/main/system/programs/stylix.nix
-    # stylix = {
-    #   url = "github:nix-community/stylix/release-25.05";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    # @todo Implement quickshell
-    # quickshell = {
-    #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # https://github.com/mrshmllow/affinity-nix
-    # affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
 
@@ -67,7 +51,6 @@
     impermanence,
     home-manager,
     niri,
-    # stylix,
     ... }: 
   let
     inherit (nixpkgs.lib) nixosSystem lists;
@@ -76,14 +59,12 @@
       system,
       modules,
       useImpermanence ? true,
-      useHomeManager ? true,
       ... }: nixosSystem
     { 
       inherit system;
       specialArgs = inputs;
 
-      modules = modules ++ lists.optionals (useHomeManager) [
-        # stylix.nixosModules.stylix
+      modules = modules ++ [
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -102,11 +83,11 @@
     nixosConfigurations = {
       # Qemu VM on macOS/UTM
       # --------------------
-      utm = mkSystemConfig {
-        system  = "aarch64-linux";
-        modules = [ ./system/hosts/utm ];
-        useImpermanence = false;
-      };
+      # utm = mkSystemConfig {
+      #   system  = "aarch64-linux";
+      #   modules = [ ./system/hosts/utm ];
+      #   useImpermanence = false;
+      # };
 
       # bare-metal on amd ryzen
       # -----------------------
@@ -114,6 +95,14 @@
         system  = "x86_64-linux";
         modules = [ ./system/hosts/q3dm10 ];
       };
+
+      # Sony Vaio VGN-TX5XN/B
+      # - Intel U1500 / 1GB RAM
+      # -----------------------
+      # q3dm11 = mkSystemConfig {
+      #   system = "i686-linux";
+      #   modules = [ ./system/hosts/q3dm11 ];
+      # };
     };
 
 

@@ -22,14 +22,14 @@
       bitwarden
       # blender
       # grim
-      mullvad-browser
-      opencloud-desktop
+      # mullvad-browser
+      # opencloud-desktop
       # openscad
       # orca-slicer
       # prusa-slicer
       # qbittorrent
       # slurp
-      vlc
+      # vlc
       # vscodium
     ];
   };

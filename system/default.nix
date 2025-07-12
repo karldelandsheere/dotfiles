@@ -17,7 +17,7 @@
 
     gui = {
       enable = lib.mkOption {
-        description = "Is this system console or GUI oriented? Defaults to true";
+        description = "Is this system TTY or GUI oriented? Defaults to true";
         type = lib.types.bool;
         default = true;
       };

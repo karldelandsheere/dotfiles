@@ -5,15 +5,21 @@
 # - https://notes.tiredofit.ca/books/linux/page/installing-nixos-encrypted-btrfs-impermanance
 # - https://willbush.dev/blog/impermanent-nixos/
 # and like the whole inter-web-whateverse I guess...
+#
+# Opinionated on these premises:
+# - I chose to use a swapfile over a swap partition
+# - I chose btrfs
+# And so far, that's it.
 
 
 # Change that to your taste
 # -------------------------
 DISK=/dev/nvme0n1
+PART_PREFIX=p
 BOOT_SIZE=2GiB
 SWAP_SIZE=96GiB
 
-WITH_LUKS=0 # So far, it's not working between Grub, LUKS, and a VM
+WITH_LUKS=1 # Not working on a VM
 PASSWORD=temp0123
 
 HOST=q3dm10
@@ -47,18 +53,18 @@ sgdisk --clear \
 
 # Format boot partition
 # ---------------------
-BOOT_PART="$DISK"1
+BOOT_PART="$DISK$PART_PREFIX"1
 mkfs.vfat -F 32 -n boot "$BOOT_PART"
 
 
 # Create encrypted or non encrypted disk and format it
 # ----------------------------------------------------
 if [[ "$WITH_LUKS" -eq 1 ]]; then
-  echo "${PASSWORD}" | cryptsetup --verify-passphrase -v luksFormat --type luks1 "$DISK"2
-  echo "${PASSWORD}" | cryptsetup luksOpen "$DISK"2 cryptroot
+  echo "${PASSWORD}" | cryptsetup --verify-passphrase -v luksFormat --type luks1 "$DISK$PART_PREFIX"2
+  echo "${PASSWORD}" | cryptsetup luksOpen "$DISK$PART_PREFIX"2 cryptroot
   PRIMARY_PART=/dev/mapper/cryptroot
 else
-  PRIMARY_PART="$DISK"2
+  PRIMARY_PART="$DISK$PART_PREFIX"2
 fi
 
 mkfs.btrfs -f "$PRIMARY_PART"
