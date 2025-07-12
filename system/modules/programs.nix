@@ -13,7 +13,7 @@
       nano
       unzip
       usbutils
-    ] ++ lib.lists.optionals ( gui.enable ) [
+    ] ++ lib.lists.optionals ( config.gui.enable ) [
       nemo
       qt5.qtwayland
       qt6.qtwayland
