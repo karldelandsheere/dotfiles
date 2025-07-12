@@ -15,13 +15,22 @@ mkdir -p ${MNT_DIR}
 
 # @todo Is there a way to make the script less hard coded?
 # --------------------------------------------------------
-BTRFS_VOL=/dev/nvme0n1p2
 
-# Check if the volume exists, if not exit
+# First we check if there is a LUKS encrypted root
+BTRFS_VOL=/dev/mapper/cryptroot 
 if [ ! -r "$BTRFS_VOL" ];
 then
-	>&2 echo "Device '$BTRFS_VOL' not found"
-	exit 1
+  >&2 echo "LUKS encrypted volume not found, trying for a non-encrypted volume."
+
+  # If there is no LUKS encrypted root,
+  # we check for a regular BTRFS volume.
+  BTRFS_VOL=/dev/nvme0n1p2
+  # Check if the volume exists, if not exit
+  if [ ! -r "$BTRFS_VOL" ];
+  then
+    >&2 echo "Device '$BTRFS_VOL' not found"
+    exit 1
+  fi
 fi
 
 # Go on, mount it then
