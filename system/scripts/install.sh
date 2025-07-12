@@ -26,31 +26,9 @@ HOST=q3dm10
 USER=unnamedplayer
 
 
-# Unmount everything before starting (not working, "no mount point specified", I'll fix that later)
+# Unmount everything before starting
 # ----------------------------------
-if [ -r /mnt/boot ]; then umount /mnt/boot fi
-if [ -r /mnt/home/.snapshots ]; then umount /mnt/home/.snapshots fi
-if [ -r /mnt/home ]; then umount /mnt/home fi
-if [ -r /mnt/nix ]; then umount /mnt/nix fi
-if [ -r /mnt/persist/.snapshots ]; then umount /mnt/persist/.snapshots fi
-if [ -r /mnt/persist ]; then umount /mnt/persist fi
-if [ -r /mnt/var/local/.snapshots ]; then umount /mnt/var/local/.snapshots fi
-if [ -r /mnt/var/local ]; then umount /mnt/var/local fi
-if [ -r /mnt/var/log ]; then umount /mnt/var/log fi
-if [ -r /mnt/swap ]; then umount /mnt/swap fi
-if [ -r /mnt ]; then umount /mnt fi
-
-# umount /mnt/boot
-# umount /mnt/home/.snapshots
-# umount /mnt/home
-# umount /mnt/nix
-# umount /mnt/persist/.snapshots
-# umount /mnt/persist
-# umount /mnt/var/local/.snapshots
-# umount /mnt/var/local
-# umount /mnt/var/log
-# umount /mnt/swap
-# umount /mnt
+findmnt -R --target /mnt -o TARGET -ln | sort -r | xargs -r -n1 umount
 
 
 # Erase everything on $DISK (you asked for it)
