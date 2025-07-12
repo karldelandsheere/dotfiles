@@ -13,7 +13,7 @@
         "audio"
         "input"
         "networkmanager"
-        "openrazer"
+        # "openrazer"
         "plugdev"
         "video"
       ];

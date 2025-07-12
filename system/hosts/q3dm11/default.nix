@@ -6,15 +6,18 @@
   ];
 
   config = {
+    gui.enable = false; # full tty on this setup
+  
+  
     # I'm not on a Qwerty, OK?
     # ------------------------
     services.xserver.xkb.layout = "be";
 
 
-    # AMD specific packages
+    # Intel specific packages
     # ---------------------
     environment.systemPackages = with pkgs; [
-      microcode-amd
+      microcode-intel
     ];
 
 
@@ -22,13 +25,13 @@
     # ---------
     swapDevices = [ {
       device = "/swap/swapfile";
-      size   = 96*1024; # Should be at least the size of the RAM (hibernation)
+      size   = 8*1024; # Should be at least the size of the RAM (hibernation)
     } ];
 
 
     # Networking stuff
     # ----------------
-    networking.hostName = "q3dm10";
+    networking.hostName = "q3dm11";
 
 
     # NixOS version
@@ -36,4 +39,3 @@
     system.stateVersion = "25.05";
   };
 }
-

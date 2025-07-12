@@ -99,10 +99,10 @@
       # Sony Vaio VGN-TX5XN/B
       # - Intel U1500 / 1GB RAM
       # -----------------------
-      # q3dm11 = mkSystemConfig {
-      #   system = "i686-linux";
-      #   modules = [ ./system/hosts/q3dm11 ];
-      # };
+      q3dm11 = mkSystemConfig {
+        system = "i686-linux";
+        modules = [ ./system/hosts/q3dm11 ];
+      };
     };
 
 

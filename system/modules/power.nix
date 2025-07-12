@@ -55,10 +55,10 @@
 
     # I chose a swapfile
     # ------------------
-    swapDevices = [ {
-      device = "/swap/swapfile";
-      size = 96*1024; # Swap should be the size of RAM
-    } ];
+    # swapDevices = [ {
+    #   device = "/swap/swapfile";
+    #   size = 96*1024; # Swap should be the size of RAM
+    # } ];
 
 
     # Resume after hibernation

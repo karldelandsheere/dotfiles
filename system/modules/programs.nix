@@ -11,13 +11,14 @@
       libnotify
       libsecret
       nano
+      unzip
+      usbutils
+    ] ++ lib.lists.optionals ( gui.enable ) [
       nemo
       qt5.qtwayland
       qt6.qtwayland
       # razergenie
       swaylock-effects
-      unzip
-      usbutils
       wl-clipboard
       xwayland-satellite
     ];

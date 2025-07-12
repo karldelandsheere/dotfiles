@@ -12,7 +12,6 @@
     ./security.nix
     ./services.nix
     ./sound.nix
-    # ./stylix.nix
   ];
 
 
