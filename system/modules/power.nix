@@ -61,10 +61,10 @@
     # } ];
 
 
-    # Resume after hibernation
+    # Resume after hibernation (and shush harmless acpi warnings)
     # ------------------------
     boot = {
-      kernelParams = [ "resume_offset=6300928" ];
+      kernelParams = [ "resume_offset=6300928" "acpi_enforce_resources=lax" ];
       resumeDevice = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
     };
 
