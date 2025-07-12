@@ -180,7 +180,7 @@ fi
 
 # Avoid the "dirty" warning (not working, why?)
 # -------------------------
-git add /mnt/etc/nixos
+git add --all /mnt/etc/nixos
 
 
 # Let's go
