@@ -152,8 +152,8 @@ mv /mnt/etc/nixos /mnt/etc/nixos-generated
 
 # Import our dotfiles and customize them
 # ----------------------------------------
-git clone -b test https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
-cp /mnt/etc/nixos-generated/hardware-configuration.nix /mnt/etc/nixos/system/hosts/"$HOST"/hardware-configuration.nix
+git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
+cp /mnt/etc/nixos{-generated,/system/hosts/"$HOST"}/hardware-configuration.nix
 
 # sed -i "s|__BOOT_UUID__|$BOOT_UUID|g" /mnt/etc/nixos/system/modules/boot.nix
 # sed -i "s|__PRIMARY_PART__|$PRIMARY_PART|g" /mnt/etc/nixos/system/modules/impermanence.nix
@@ -168,7 +168,7 @@ fi
 
 # Avoid the "dirty" warning (not working, why?)
 # -------------------------
-# git add .
+git add /mnt/etc/nixos
 
 
 # Let's go
