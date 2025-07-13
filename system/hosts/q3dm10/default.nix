@@ -14,6 +14,10 @@
       swapSize            = "96G";
       encryption.enable   = true;
       impermanence.enable = true;
+      hibernation = {
+        enable = true;
+        resume.offset = "1108328";
+      };
     };
 
 
