@@ -7,7 +7,7 @@
 # Based on so many sources but the latest is
 # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/persist.nix
 # ---------------------------------------------------------------------------
-{ config, impermanence, lib, pkgs, ... }: let
+{ config, lib, pkgs, ... }: let
   differences = pkgs.writeShellApplication {
     name = "differences";
     runtimeInputs = [ pkgs.btrfs-progs ];
@@ -15,23 +15,21 @@
   };
 in
 {
-  imports = [
-    impermanence.nixosModules.impermanence
-  ];
-
-  config = {
+  config = lib.mkIf config.nouveauxParadigmes.impermanence.enable {
     # Rollback routine on every boot
     # ------------------------------
-#    boot.initrd.systemd.services.rollback = {
-#      description = "Rollback BTRFS root and home subvolumes to a pristine state";
-#      wantedBy = [ "initrd.target" ];
-#      requires = [ "dev-nvme0n1p2.device" ];
-#      after = [ "dev-nvme0n1p2.device" ];
-#      before = [ "sysroot.mount" ];
-#      unitConfig.DefaultDependencies = "no";
-#      serviceConfig.Type = "oneshot";
-#      script = builtins.readFile ../scripts/rollback.sh;
-#    };
+    boot.initrd.systemd.services.rollback = {
+      description = "Rollback BTRFS root and home subvolumes to a pristine state";
+      wantedBy = [ "initrd.target" ];
+      # requires = [ "dev-nvme0n1p2.device" ];
+      # after = [ "dev-nvme0n1p2.device" ];
+      requires = [ "systemd-cryptsetup@cryptroot.service" ];
+      after = [ "systemd-cryptsetup@cryptroot.service" ];
+      before = [ "sysroot.mount" ];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = builtins.readFile ../scripts/rollback.sh;
+    };
 
 
     environment = {
@@ -44,37 +42,37 @@ in
 
       # Now, opt-in what needs to persist
       # ---------------------------------
- #     persistence."/persist" = {
- #       hideMounts = true; # What's it doing really?
+      persistence."/persist" = {
+        hideMounts = true; # What's it doing really?
 
- #       directories = [
+        directories = [
           # /etc/...
- #         "/etc/mullvad-vpn"
- #         "/etc/nixos"
- #         "/etc/NetworkManager/system-connections"
+          "/etc/mullvad-vpn"
+          "/etc/nixos"
+          "/etc/NetworkManager/system-connections"
 
           # /var/lib/...
- #         "/var/lib/nixos"
- #         "/var/lib/bluetooth"
- #         "/var/lib/upower"
+          "/var/lib/nixos"
+          "/var/lib/bluetooth"
+          "/var/lib/upower"
 
           # /var/cache
- #         "/var/cache/mullvad-vpn"
- #       ];
+          "/var/cache/mullvad-vpn"
+        ];
 
- #       files = [
+        files = [
           # /etc/...
- #         "/etc/machine-id"
+          "/etc/machine-id"
 
           # /var/lib/...
- #         "/var/lib/NetworkManager/secret_key"
- #         "/var/lib/NetworkManager/seen-bssids"
- #         "/var/lib/NetworkManager/timestamps"
+          "/var/lib/NetworkManager/secret_key"
+          "/var/lib/NetworkManager/seen-bssids"
+          "/var/lib/NetworkManager/timestamps"
 
           # /root/...
- #         "/root/.local/share/nix/trusted-settings.json"
- #       ];
- #     };
+          "/root/.local/share/nix/trusted-settings.json"
+        ];
+      };
     };
 
   

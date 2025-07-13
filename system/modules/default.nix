@@ -1,9 +1,10 @@
-{ config, ... }:
+{ config, lib, inputs, ... }:
 {
   imports = [
     ./bluetooth.nix
     ./boot.nix
     ./filesystem.nix
+    ./home-manager.nix
     ./impermanence.nix
     ./luks.nix
     ./networking.nix

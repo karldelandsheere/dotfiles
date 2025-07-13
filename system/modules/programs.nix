@@ -8,6 +8,7 @@
       curl
       git
       helix
+      jq
       libnotify
       libsecret
       nano

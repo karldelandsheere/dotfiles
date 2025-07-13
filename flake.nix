@@ -58,22 +58,14 @@
     mkSystemConfig = {
       system,
       modules,
-      useImpermanence ? true,
       ... }: nixosSystem
     { 
       inherit system;
-      specialArgs = inputs;
+      specialArgs = { inherit inputs; };
 
       modules = modules ++ [
         home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useUserPackages     = true;
-            users.unnamedplayer = { imports = [ ./home-manager ]; };
-            extraSpecialArgs    = { inherit inputs; };
-            backupFileExtension = "backup";
-          };
-        }
+        impermanence.nixosModules.impermanence
       ];
     };
   in
@@ -86,7 +78,6 @@
       # utm = mkSystemConfig {
       #   system  = "aarch64-linux";
       #   modules = [ ./system/hosts/utm ];
-      #   useImpermanence = false;
       # };
 
       # bare-metal on amd ryzen

@@ -11,7 +11,7 @@
     nouveauxParadigmes = {
       hostname            = "q3dm10";
       rootDisk            = "/dev/nvme0n1";
-      swapSize            = "96G";
+      swapSize            = 96*1024;
       encryption.enable   = true;
       impermanence.enable = true;
       hibernation = {
