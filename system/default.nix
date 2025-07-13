@@ -30,7 +30,7 @@
     swapSize = lib.mkOption {
       type        = lib.types.str;
       default     = "8G";
-      description = "Size of swapfile. Defaults to 8G.";
+      description = "Size of swapfile. Defaults to 8G. If hibernation is enabled, it should be at least your RAM size.";
     };
 
     encryption.enable   = lib.mkEnableOption "Use full disk encryption? Defaults to false.";

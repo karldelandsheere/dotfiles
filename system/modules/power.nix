@@ -2,9 +2,39 @@
 # https://nixos.wiki/wiki/Laptop
 # https://nixos.wiki/wiki/Hibernation
 # -----------------------------------
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
+  options.nouveauxParadigmes = {
+    hibernation = {
+      enable = lib.mkEnableOption "Enable hibernation? Defaults to false.";
+
+      resume = {
+        device = lib.mkOption {
+          type = lib.types.str;
+          default = "/dev/mapper/cryptroot";
+          description = "Which device to resume from after hibernation? Defaults to /dev/mapper/cryptroot";
+        };
+
+        offset = lib.mkOption {
+          type    = lib.types.str;
+          default = "0";
+          description = "Offset to resume after hibernation. Defaults to 0. To find the value, use: sudo btrfs inspect-internal map-swapfile -r /swap/swapfile";
+        };
+      };
+    };
+  };
+
+
   config = {
+    # Packages and utilities
+    # ----------------------
+    environment.systemPackages = with pkgs; [
+      acpi
+      powerstat
+      # linuxKernel.packages.linux_zen.cpupower
+    ];
+
+
     # Enable powerManagement and set it to powersave
     # ----------------------------------------------
     powerManagement = {
@@ -56,25 +86,17 @@
     # ------------------
     swapDevices = [ {
       device = "/swap/swapfile";
-      size = 96*1024; # Swap should be the size of RAM
+      size = config.nouveauxParadigmes.swapSize;
     } ];
 
 
     # Resume after hibernation
     # ------------------------
     boot.kernelParams = [
-      "resume=/dev/mapper/cryptroot"
-      "resume_offset=1108328"
       "acpi_enforce_resources=lax" # Shush harmless acpi warnings
-    ];
-
-
-    # Other packages and utilities
-    # ----------------------------
-    environment.systemPackages = with pkgs; [
-      acpi
-      powerstat
-      # linuxKernel.packages.linux_zen.cpupower
+    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.hibernation.enable ) [
+      "resume=${config.nouveauxParadigmes.hibernation.resume.device}"
+      "resume_offset=${config.nouveauxParadigmes.hibernation.resume.offset}"
     ];
   };
 }
