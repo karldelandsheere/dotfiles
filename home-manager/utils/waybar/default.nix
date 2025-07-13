@@ -10,6 +10,6 @@
     };
 
     home.file.".config/waybar".source =
-      config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/utils/waybar/config";
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/utils/waybar/config";
   };
 }

@@ -5,7 +5,7 @@
     ./boot.nix
     ./filesystem.nix
     ./impermanence.nix
-    # ./luks.nix
+    ./luks.nix
     ./networking.nix
     ./power.nix # also contains hibernation and swapfile config
     ./programs.nix

@@ -8,19 +8,38 @@
 
   # Set system wide options
   # -----------------------
-  options = {
-    dotfiles = lib.mkOption {
-      description = "Path to NixOS dotfiles, defaults to /etc/nixos";
-      type = lib.types.str;
-      default = "/etc/nixos";
+  options.nouveauxParadigmes = {
+    rootDisk = lib.mkOption {
+      type        = lib.types.str;
+      default     = "/dev/nvme0n1";
+      description = "Which is the root disk? Defaults to /dev/nvme0n1";
+    };
+    
+    swapSize = lib.mkOption {
+      type        = lib.types.str;
+      default     = "8G";
+      description = "Size of swapfile. Defaults to 8G.";
     };
 
-    gui = {
-      enable = lib.mkOption {
-        description = "Is this system TTY or GUI oriented? Defaults to true";
-        type = lib.types.bool;
-        default = true;
-      };
+    encryption.enable   = lib.mkEnableOption "Use full disk encryption? Defaults to false.";
+    impermanence.enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
+
+    homeManager.enable = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Use Home-Manager? Defaults to true.";
+    };
+
+    gui.enable = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Enable GUI? Defaults to true.";
+    };
+
+    dotfiles = lib.mkOption {
+      type        = lib.types.str;
+      default     = "/etc/nixos";
+      description = "Path to NixOS dotfiles. Defaults to /etc/nixos";
     };
   };
 

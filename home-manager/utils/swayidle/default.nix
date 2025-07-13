@@ -11,7 +11,7 @@
     home = {
       packages = with pkgs; [ swayidle ];
       file.".config/swayidle".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/utils/swayidle/config";
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/utils/swayidle/config";
     };
   };
 }

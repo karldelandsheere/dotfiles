@@ -13,7 +13,7 @@
         luks.devices.cryptroot = {
           allowDiscards = true;
           bypassWorkqueues = true;
-          preLVM = true;
+          # preLVM = true; # @todo Determine if I should enable this
         };
 
         systemd.services.rollback.after = [ "systemd-cryptsetup@cryptroot.service" ];

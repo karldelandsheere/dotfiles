@@ -14,7 +14,6 @@
 
 
     services = {
-      # powerstation.enable = true;
       upower.enable = true;
     
       # Service to help with power management
@@ -55,26 +54,27 @@
 
     # I chose a swapfile
     # ------------------
-    # swapDevices = [ {
-    #   device = "/swap/swapfile";
-    #   size = 96*1024; # Swap should be the size of RAM
-    # } ];
+    swapDevices = [ {
+      device = "/swap/swapfile";
+      size = 96*1024; # Swap should be the size of RAM
+    } ];
 
 
-    # Resume after hibernation (and shush harmless acpi warnings)
+    # Resume after hibernation
     # ------------------------
-    boot = {
-      kernelParams = [ "resume_offset=6300928" "acpi_enforce_resources=lax" ];
-      resumeDevice = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
-    };
+    boot.kernelParams = [
+      "resume=/dev/mapper/cryptroot"
+      "resume_offset=1108328"
+      "acpi_enforce_resources=lax" # Shush harmless acpi warnings
+    ];
 
 
     # Other packages and utilities
     # ----------------------------
     environment.systemPackages = with pkgs; [
       acpi
-      # linuxKernel.packages.linux_zen.cpupower
       powerstat
+      # linuxKernel.packages.linux_zen.cpupower
     ];
   };
 }

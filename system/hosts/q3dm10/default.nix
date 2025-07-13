@@ -18,14 +18,6 @@
     ];
 
 
-    # Swap file
-    # ---------
-    swapDevices = [ {
-      device = "/swap/swapfile";
-      size   = 96*1024; # Should be at least the size of the RAM (hibernation)
-    } ];
-
-
     # Networking stuff
     # ----------------
     networking.hostName = "q3dm10";

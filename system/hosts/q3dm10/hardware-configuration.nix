@@ -14,67 +14,69 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/175f35a1-f08b-4821-ba18-89e6e1250b62";
+
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=home/active" ];
     };
 
   fileSystems."/home/.snapshots" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=home/snapshots" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
 
   fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=persist/active" ];
     };
 
   fileSystems."/persist/.snapshots" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=persist/snapshots" ];
     };
 
   fileSystems."/var/local" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=var_local/active" ];
     };
 
   fileSystems."/var/local/.snapshots" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=var_local/snapshots" ];
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=var_log" ];
     };
 
   fileSystems."/swap" =
-    { device = "/dev/disk/by-uuid/46aa91ff-95fb-4bf7-91bd-828ca14115be";
+    { device = "/dev/disk/by-uuid/6830575f-4a3d-4c3f-915f-2e31752dcf48";
       fsType = "btrfs";
       options = [ "subvol=swap" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/652D-1F87";
+    { device = "/dev/disk/by-uuid/DC40-03F8";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

@@ -11,7 +11,7 @@
     home = {
       sessionVariables.EDITOR = "hx";
       file.".config/helix".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/programs/cli/helix/config";
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/cli/helix/config";
     };
   };
 }

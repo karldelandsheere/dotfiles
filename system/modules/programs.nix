@@ -13,7 +13,7 @@
       nano
       unzip
       usbutils
-    ] ++ lib.lists.optionals ( config.gui.enable ) [
+    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.gui.enable ) [
       nemo
       qt5.qtwayland
       qt6.qtwayland
@@ -45,8 +45,8 @@
     # Shell agnostic aliases
     # ----------------------
     environment.shellAliases = {
-      dots = "cd ${config.dotfiles}";
-      todo = "grep -rnw ${config.dotfiles} -e '@todo'";
+      dots = "cd ${config.nouveauxParadigmes.dotfiles}";
+      todo = "grep -rnw ${config.nouveauxParadigmes.dotfiles} -e '@todo'";
     };
 
 

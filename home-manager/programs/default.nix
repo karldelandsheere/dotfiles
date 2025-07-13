@@ -2,7 +2,7 @@
 {
   imports =
     [ ./cli ]
-    ++ lib.lists.optionals ( osConfig.gui.enable ) [ ./gui ];
+    ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ./gui ];
 
   nixpkgs.config.allowUnfree = true;
 }

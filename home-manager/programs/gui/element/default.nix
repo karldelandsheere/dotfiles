@@ -6,7 +6,7 @@
     home = {
       packages = with pkgs; [ element-desktop ];
       file.".config/Element/config.json".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.dotfiles}/home-manager/programs/gui/element/config/config.json";
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/gui/element/config/config.json";
     };
   };
 }
