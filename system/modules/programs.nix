@@ -17,7 +17,6 @@
       nemo
       qt5.qtwayland
       qt6.qtwayland
-      # razergenie
       swaylock-effects
       wl-clipboard
       xwayland-satellite
@@ -48,19 +47,5 @@
       dots = "cd ${config.nouveauxParadigmes.dotfiles}";
       todo = "grep -rnw ${config.nouveauxParadigmes.dotfiles} -e '@todo'";
     };
-
-
-    # Activate flakes, etc.
-    # ---------------------
-    nix.settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "@wheel" ];
-      warn-dirty = false;
-    };
-
-
-    # I'd like it to be false, but that's not for today is it?
-    # --------------------------------------------------------
-    nixpkgs.config.allowUnfree = true;
   };
 }

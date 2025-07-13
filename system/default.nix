@@ -60,7 +60,7 @@
       description = "Keyboard layout. Defaults to be";
     };
 
-    nixosVersion = lib.mkOption {
+    stateVersion = lib.mkOption {
       type        = lib.types.str;
       default     = "25.05";
       description = "NixOS state version. Defaults to 25.05";
@@ -104,10 +104,5 @@
       font-awesome
       nerd-fonts.jetbrains-mono
     ];
-
-
-    # NixOS version
-    # -------------
-    system.stateVersion = "25.05";
   };
 }

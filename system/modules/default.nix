@@ -15,10 +15,26 @@
   ];
 
 
+  # Nix and NixOS settings
+  # ----------------------
   config = {
-    # Do some cleanup
-    # ---------------
+    # NixOS version
+    # -------------
+    system.stateVersion = config.nouveauxParadigmes.stateVersion;
+
+
     nix = {
+      # Activate flajes, etc.
+      # ---------------------
+      settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+        trusted-users = [ "@wheel" ];
+        warn-dirty = false; # For some reason, it still does...
+      };
+
+
+      # Do some cleanup
+      # ---------------
       gc = {
         automatic = true;
         dates = "weekly";
@@ -28,5 +44,10 @@
       optimise.automatic = true;
       settings.auto-optimise-store = true;
     };
+
+
+    # I'd like it to be false, but that's not for today, is it?
+    # ---------------------------------------------------------
+    nixpkgs.config.allowUnfree = true;
   };
 }

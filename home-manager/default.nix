@@ -23,7 +23,7 @@
 
     # Home-manager version
     # --------------------
-    home.stateVersion = "25.05";
+    home.stateVersion = config.system.stateVersion;
     
 
     # For the moment, I'm the only user
