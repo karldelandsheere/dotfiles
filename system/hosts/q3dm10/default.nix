@@ -6,9 +6,15 @@
   ];
 
   config = {
-    # I'm not on a Qwerty, OK?
-    # ------------------------
-    services.xserver.xkb.layout = "be";
+    # Custom options
+    # --------------
+    nouveauxParadigmes = {
+      hostname            = "q3dm10";
+      rootDisk            = "/dev/nvme0n1";
+      swapSize            = "96G";
+      encryption.enable   = true;
+      impermanence.enable = true;
+    };
 
 
     # AMD specific packages
@@ -16,16 +22,6 @@
     environment.systemPackages = with pkgs; [
       microcode-amd
     ];
-
-
-    # Networking stuff
-    # ----------------
-    networking.hostName = "q3dm10";
-
-
-    # NixOS version
-    # -------------
-    system.stateVersion = "25.05";
   };
 }
 

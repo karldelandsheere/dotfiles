@@ -5,12 +5,12 @@
   config = {
     environment.systemPackages = with pkgs; [
       mullvad
-      # mullvad-vpn
     ];
 
     services.mullvad-vpn.enable = true;
   
     networking = {
+      hostName = config.nouveauxParadigmes.hostname;
       networkmanager.enable = true;
       enableIPv6 = true;
 

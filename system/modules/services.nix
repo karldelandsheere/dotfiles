@@ -11,6 +11,7 @@
 		  xserver = {
         enable = true;
         displayManager.startx.enable = true;
+        xkb.layout = config.nouveauxParadigmes.kbLayout;
       };
     };
   };

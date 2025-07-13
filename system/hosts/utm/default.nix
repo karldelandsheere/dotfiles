@@ -5,27 +5,27 @@
     ../../default.nix
   ];
 
-
-  # I'm not on a Qwerty, OK?
-  # ----
-  console.keyMap = "be-latin1";
-  services.xserver.xkb = {
-    layout = "be";
-    variant = "nodeadkeys";
+  config = {
+    # Custom options
+    # --------------
+    nouveauxParadigmes = {
+      hostName = "utm";
+      system   = "aarch64-linux";
+      rootDisk = "/dev/vda";
+      
+    };
   };
 
 
-  # It's a VM so no need for that, right?
-  # -------------------------------------
-  networking = {
-    hostName = "utm";
-    wireless.enable = false;
-    firewall.enable = false;
-  };
+  # Qemu/UTM specific packages
+  # --------------------------
+  environment.systemPackages = with pkgs; [
+    
+  ];
 
 
-  # NixOS version
-  # -------------
-  system.stateVersion = "25.05";
+  # It's a VM so no need for that
+  # -----------------------------
+  networking.wireless.enable = false;
 }
 

@@ -9,10 +9,22 @@
   # Set system wide options
   # -----------------------
   options.nouveauxParadigmes = {
+    hostname = lib.mkOption {
+      type        = lib.types.str;
+      default     = "unnamedhost";
+      description = "What is the host's name? Defaults to unnamedhost.";
+    };
+    
+    system = lib.mkOption {
+      type        = lib.types.str;
+      default     = "x86_64-linux";
+      description = "What is the system architecture? Defaults to x86_64-linux.";
+    };
+    
     rootDisk = lib.mkOption {
       type        = lib.types.str;
-      default     = "/dev/nvme0n1";
-      description = "Which is the root disk? Defaults to /dev/nvme0n1";
+      default     = "";
+      description = "Which is the root disk?";
     };
     
     swapSize = lib.mkOption {
@@ -40,6 +52,18 @@
       type        = lib.types.str;
       default     = "/etc/nixos";
       description = "Path to NixOS dotfiles. Defaults to /etc/nixos";
+    };
+
+    kbLayout = lib.mkOption {
+      type        = lib.types.str;
+      default     = "be";
+      description = "Keyboard layout. Defaults to be";
+    };
+
+    nixosVersion = lib.mkOption {
+      type        = lib.types.str;
+      default     = "25.05";
+      description = "NixOS state version. Defaults to 25.05";
     };
   };
 
@@ -69,7 +93,7 @@
     i18n.defaultLocale = "en_US.UTF-8";
 
 
-    # Time settings
+    # Time settings (let's assume that for now)
     # -------------
     time.timeZone = "Europe/Brussels";
 
@@ -80,5 +104,10 @@
       font-awesome
       nerd-fonts.jetbrains-mono
     ];
+
+
+    # NixOS version
+    # -------------
+    system.stateVersion = "25.05";
   };
 }
