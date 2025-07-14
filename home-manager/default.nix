@@ -18,6 +18,7 @@
         directories = [
           # ".config/Element"
           # ".config/Signal"
+          ".gnupg"
           ".local/share/keyrings"
           # ".mozilla/firefox/default"
           ".mullvad"

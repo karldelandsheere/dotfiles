@@ -7,7 +7,8 @@
 # -------------------------
 _tmp_root=$(mktemp -d)
 mkdir -p "${_tmp_root}"
-mount -o subvol=/ /dev/nvme0n1p2 "${_tmp_root}" > /dev/null 2>&1
+# mount -o subvol=/ /dev/nvme0n1p2 "${_tmp_root}" > /dev/null 2>&1
+mount -o subvol=/ /dev/mapper/cryptroot "${_tmp_root}" > /dev/null 2>&1
 
 # If any error occurs, exit
 # -------------------------

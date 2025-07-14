@@ -7,11 +7,13 @@
       brightnessctl
       curl
       git
+      # gnupg
       helix
       jq
       libnotify
       libsecret
       nano
+      pinentry
       unzip
       usbutils
     ] ++ lib.lists.optionals ( config.nouveauxParadigmes.gui.enable ) [
@@ -28,6 +30,13 @@
     # Git is needed for at least maintaining these dotfiles
     # -----------------------------------------------------
     programs.git.enable = true;
+
+
+    programs.gnupg.agent = {
+      enable           = true;
+      pinentryPackage  = pkgs.pinentry-curses;
+      enableSSHSupport = true;
+    };
 
 
     # I use zsh because I'm edgy but not too much

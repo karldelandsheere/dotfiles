@@ -8,8 +8,8 @@
       userName = "Karl";
       userEmail = "karl@delandsheere.be";
       signing = {
-        key = "/home/unnamedplayer/.ssh/id_ed25519.pub";
-        format = "ssh";
+        key = "D4EFAA4CD5AE64F4";
+        # format = "openpgp";
         signByDefault = true;
       };
     };
