@@ -1,20 +1,24 @@
 { config, pkgs, ... }:
 {
-  # @todo test mpv
   # @todo test fzf
 
   # CLI programs with config
   # ------------------------
   imports = [
+    # Day to day
     # ./aerc
+    # ./jrnl
+
+    # Utils
     ./bottom
     ./git.nix
     ./helix
-    # ./jrnl
-    ./moc
     ./yazi
-    # ./yt-dlp
     ./zsh.nix
+
+    # Media
+    ./moc
+    ./yt-dlp
   ];
 
 
@@ -22,15 +26,27 @@
     # CLI programs that either don't need config or are on trial
     # ----------------------------------------------------------
     home.packages = with pkgs; [
+      # Secrets
       # bitwarden-cli
-      cmatrix # like the cool guys
+
+      # Utils
       exiftool
-      fastfetch # yeah, also like the cool guys
-      gpu-screen-recorder
       nix-tree
       progress
       scooter
       tree
+
+      # Screen recording but still have to try it out
+      gpu-screen-recorder
+
+      # Media
+      cava
+      ffmpeg
+      mpv
+
+      # Like the cool guys
+      cmatrix
+      fastfetch
     ];
   };
 }
