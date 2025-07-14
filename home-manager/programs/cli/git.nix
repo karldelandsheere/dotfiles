@@ -7,12 +7,11 @@
       enable = true;
       userName = "Karl";
       userEmail = "karl@delandsheere.be";
-
-      # @todo implement signing
-      # signing = {
-      #   key = "";
-      #   signByDefault = true;
-      # }
+      signing = {
+        key = "/home/unnamedplayer/.ssh/id_ed25519.pub";
+        format = "ssh";
+        signByDefault = true;
+      };
     };
 
     
@@ -21,13 +20,13 @@
     home.shellAliases = {
       ga = "git add";
       gaa = "git add --all";
-      gaacm = "git add --all && git commit -m";
+      gaacm = "git add --all && git commit -S -m";
       gb = "git branch";
-      gc = "git commit";
+      gc = "git commit -S";
       gch = "git checkout";
       gchb = "git checkout -b";
       gcl = "git clone";
-      gcm = "git commit -m";
+      gcm = "git commit -S -m";
       gd = "git diff";
       gm = "git merge";
       gpl = "git pull";
