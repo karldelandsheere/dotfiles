@@ -5,7 +5,6 @@
   # Nice to have
   # @todo Customize Swaylock
   # @todo Customize Grub
-  # @todo Understand why my Airpods Pro can't connect easily
   # @todo BambuStudio and OrcaSlicer are crashing
   # @todo Find a way to make Affinity work
   # @todo Make my workspaces better and find out how to display only the active and not empty ones
@@ -45,28 +44,19 @@
 
   # Definition of the system, aka outputs
   # -------------------------------------
-  outputs = inputs@{
-    self,
-    nixpkgs,
-    impermanence,
-    home-manager,
-    niri,
-    ... }: 
+  outputs = inputs@{ self, nixpkgs, ... }: 
   let
     inherit (nixpkgs.lib) nixosSystem lists;
 
-    mkSystemConfig = {
-      system,
-      modules,
-      ... }: nixosSystem
+    mkSystemConfig = { system, modules, ... }: nixosSystem
     { 
       inherit system;
       specialArgs = { inherit inputs; };
 
-      modules = modules ++ [
+      modules = with inputs; [
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
-      ];
+      ] ++ modules;
     };
   in
   {
@@ -90,10 +80,10 @@
       # Sony Vaio VGN-TX5XN/B
       # - Intel U1500 / 1GB RAM
       # -----------------------
-      q3dm11 = mkSystemConfig {
-        system = "i686-linux";
-        modules = [ ./system/hosts/q3dm11 ];
-      };
+      # q3dm11 = mkSystemConfig {
+      #   system = "i686-linux";
+      #   modules = [ ./system/hosts/q3dm11 ];
+      # };
     };
 
 

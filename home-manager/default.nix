@@ -1,11 +1,9 @@
-{ config, osConfig, lib, inputs, ... }:
+{ config, lib, inputs, ... }:
 {
   imports = [
     ./programs
     ./utils
     ./wm/niri
-  ] ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.impermanence.enable ) [
-    inputs.impermanence.homeManagerModules.impermanence
   ];
 
 
@@ -18,19 +16,19 @@
       # ------------------------------------------------
       persistence."/persist/home/unnamedplayer" = {
         directories = [
-      #     ".config/Element"
-      #     ".config/Signal"
-      #     ".local/share/keyrings"
-      #     # ".mozilla/firefox/default"
-      #     ".mullvad"
+          # ".config/Element"
+          # ".config/Signal"
+          ".local/share/keyrings"
+          # ".mozilla/firefox/default"
+          ".mullvad"
           ".ssh"
 
-      #     # "OpenCloud"
+          # "OpenCloud"
         ];
 
         files = [
-      #     ".config/mimeapps.list"
-      #     # ".zsh_history"
+          # ".config/mimeapps.list"
+          ".zsh_history"
         ];
 
         allowOther = true;

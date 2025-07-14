@@ -2,7 +2,6 @@
 # The idea is to wipe /root at every boot to keep things clean
 # except for directories and files declared persistents
 # Needs the impermanence flake
-# @todo see if we can import the flake right here instead of in the main flake
 #
 # Based on so many sources but the latest is
 # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/persist.nix
@@ -13,6 +12,14 @@
     runtimeInputs = [ pkgs.btrfs-progs ];
     text = builtins.readFile ../scripts/differences.sh;
   };
+
+  # isNvme = lib.strings.hasInfix "nvme" config.nouveauxParadigmes.rootDisk;
+  # deviceName = ${config.nouveauxParadigmeS.rootDisk} lib.strings.optionalString isNvme "p";
+
+  # @todo Make this more versatile regarding the disk type etc
+  requiresAfter = if config.nouveauxParadigmes.encryption.enable
+    then "systemd-cryptsetup@cryptroot.service"
+    else "dev-nvme0n1p2.device";
 in
 {
   config = lib.mkIf config.nouveauxParadigmes.impermanence.enable {
@@ -20,14 +27,12 @@ in
     # ------------------------------
     boot.initrd.systemd.services.rollback = {
       description = "Rollback BTRFS root and home subvolumes to a pristine state";
-      wantedBy = [ "initrd.target" ];
-      # requires = [ "dev-nvme0n1p2.device" ];
-      # after = [ "dev-nvme0n1p2.device" ];
-      requires = [ "systemd-cryptsetup@cryptroot.service" ];
-      after = [ "systemd-cryptsetup@cryptroot.service" ];
-      before = [ "sysroot.mount" ];
+      wantedBy    = [ "initrd.target" ];
+      requires    = [ requiresAfter ];
+      after       = [ requiresAfter ];
+      before      = [ "sysroot.mount" ];
       unitConfig.DefaultDependencies = "no";
-      serviceConfig.Type = "oneshot";
+      serviceConfig.Type             = "oneshot";
       script = builtins.readFile ../scripts/rollback.sh;
     };
 
