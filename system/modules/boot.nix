@@ -9,7 +9,7 @@
           enable = true;
           device = "nodev";
           efiSupport = true;
-          gfxmodeEfi = "2880x1800";
+          # gfxmodeEfi = "2880x1800";
           # theme = pkgs.catppuccin-grub;
           # theme = "/boot/grub/themes/test/grub/2880x1800/theme.txt";
         };

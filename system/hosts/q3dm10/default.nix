@@ -10,6 +10,7 @@
     # --------------
     nouveauxParadigmes = {
       hostname            = "q3dm10";
+      cpuFlavor           = "amd";
       rootDisk            = "/dev/nvme0n1";
       swapSize            = 96*1024;
       encryption.enable   = true;
@@ -21,10 +22,10 @@
     };
 
 
-    # AMD specific packages
-    # ---------------------
+    # Host specific packages
+    # ----------------------
     environment.systemPackages = with pkgs; [
-      microcode-amd
+      # microcode-amd
     ];
   };
 }

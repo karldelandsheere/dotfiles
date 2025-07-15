@@ -32,13 +32,11 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+      inputs.nixpkgs.follows = "nixpkgs"; };
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+      inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
 
@@ -80,10 +78,10 @@
       # Sony Vaio VGN-TX5XN/B
       # - Intel U1500 / 1GB RAM
       # -----------------------
-      # q3dm11 = mkSystemConfig {
-      #   system = "i686-linux";
-      #   modules = [ ./system/hosts/q3dm11 ];
-      # };
+      q3dm11 = mkSystemConfig {
+        system = "i686-linux";
+        modules = [ ./system/hosts/q3dm11 ];
+      };
     };
 
 

@@ -9,18 +9,40 @@
   # Set system wide options
   # -----------------------
   options.nouveauxParadigmes = {
+    # Name and networking
     hostname = lib.mkOption {
       type        = lib.types.str;
       default     = "unnamedhost";
       description = "What is the host's name? Defaults to unnamedhost.";
     };
-    
+
+    # System and OS
     system = lib.mkOption {
       type        = lib.types.str;
       default     = "x86_64-linux";
       description = "What is the system architecture? Defaults to x86_64-linux.";
     };
-    
+
+    cpuFlavor = lib.mkOption {
+      type        = lib.types.str;
+      default     = "";
+      description = "amd or intel?";
+    };
+
+    stateVersion = lib.mkOption {
+      type        = lib.types.str;
+      default     = "25.05";
+      description = "NixOS state version. Defaults to 25.05";
+    };
+
+    # Inputs
+    kbLayout = lib.mkOption {
+      type        = lib.types.str;
+      default     = "be";
+      description = "Keyboard layout. Defaults to be";
+    };
+
+    # Filesystem
     rootDisk = lib.mkOption {
       type        = lib.types.str;
       default     = "";
@@ -36,10 +58,11 @@
     encryption.enable   = lib.mkEnableOption "Use full disk encryption? Defaults to false.";
     impermanence.enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
 
-    homeManager.enable = lib.mkOption {
-      type        = lib.types.bool;
-      default     = true;
-      description = "Use Home-Manager? Defaults to true.";
+    # User preferences
+    dotfiles = lib.mkOption {
+      type        = lib.types.str;
+      default     = "/etc/nixos";
+      description = "Path to NixOS dotfiles. Defaults to /etc/nixos";
     };
 
     gui.enable = lib.mkOption {
@@ -48,22 +71,10 @@
       description = "Enable GUI? Defaults to true.";
     };
 
-    dotfiles = lib.mkOption {
-      type        = lib.types.str;
-      default     = "/etc/nixos";
-      description = "Path to NixOS dotfiles. Defaults to /etc/nixos";
-    };
-
-    kbLayout = lib.mkOption {
-      type        = lib.types.str;
-      default     = "be";
-      description = "Keyboard layout. Defaults to be";
-    };
-
-    stateVersion = lib.mkOption {
-      type        = lib.types.str;
-      default     = "25.05";
-      description = "NixOS state version. Defaults to 25.05";
+    homeManager.enable = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Use Home-Manager? Defaults to true.";
     };
   };
 
@@ -78,6 +89,17 @@
       earlySetup = true;
       font = "Lat2-Terminus16";
     };
+
+
+    # System packages
+    # ---------------
+    environment.systemPackages = [
+      # ...
+    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.cpuFlavor == "amd" ) [
+      pkgs.microcode-amd
+    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.cpuFlavor == "intel" ) [
+      pkgs.microcode-intel
+    ];
 
 
     # Hardware

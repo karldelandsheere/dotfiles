@@ -6,36 +6,22 @@
   ];
 
   config = {
-    gui.enable = false; # full tty on this setup
-  
-  
-    # I'm not on a Qwerty, OK?
-    # ------------------------
-    services.xserver.xkb.layout = "be";
+    # Custom options
+    # --------------
+    nouveauxParadigmes = {
+      hostname            = "q3dm11";
+      cpuFlavor           = "intel";
+      rootDisk            = "/dev/sda";
+      encryption.enable   = true;
+      impermanence.enable = true;
+      gui.enable          = false; # full tty on this setup
+      stateVersion        = "23.11";
+    };
 
-
-    # Intel specific packages
-    # ---------------------
+    # Host specific packages
+    # ----------------------
     environment.systemPackages = with pkgs; [
-      microcode-intel
+      # microcode-intel
     ];
-
-
-    # Swap file
-    # ---------
-    swapDevices = [ {
-      device = "/swap/swapfile";
-      size   = 8*1024; # Should be at least the size of the RAM (hibernation)
-    } ];
-
-
-    # Networking stuff
-    # ----------------
-    networking.hostName = "q3dm11";
-
-
-    # NixOS version
-    # -------------
-    system.stateVersion = "25.05";
   };
 }

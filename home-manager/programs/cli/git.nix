@@ -9,7 +9,6 @@
       userEmail = "karl@delandsheere.be";
       signing = {
         key = "D4EFAA4CD5AE64F4";
-        # format = "openpgp";
         signByDefault = true;
       };
     };
