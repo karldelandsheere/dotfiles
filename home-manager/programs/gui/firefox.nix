@@ -1,8 +1,11 @@
 # Firefox
 # -------
+# Based on several dotfiles but a lot on those
+#   https://gitlab.com/maximilian_dietrich/nixos/-/tree/restructure-add-workstation/modules/graphical/apps/browser
+#
 # @todo make the extensions to be activated from the start
 # @todo also, check if it's possible to pre-populate some bitwarden info
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   config = {
     programs.firefox = {
@@ -14,21 +17,34 @@
 
       /* ---- POLICIES ---- */
       # Check about:policies#documentation for options.
-      policies = {
+      policies = let
+        lock-false = {
+          Value = false;
+          Status = "locked";
+        };
+        lock-true = {
+          Value = true;
+          Status = "locked";
+        };
+      in {
         # Right now, I'm still using my account
         # When ready, I'll ditch it
         # DisableAccounts = true;
         # DisableFirefoxAccounts = true;
 
         # Ordered by alphabetical order        
+        AppUpdateURL = "https://localhost";
         CaptivePortal = false;
+        DisableAppUpdate = true;
         DisplayBookmarksToolbar = "always";
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         DisableBuiltinPDFViewer = true;
+        DisableFeedbackCommands = true;
         DisableFirefoxScreenshots = true;
         DisableFirefoxStudies = true;
         DisableFormHistory = true;
         DisablePocket = true;
+        DisableSystemAddonUpdate = true;
         DisableTelemetry = true;
         DNSOverHTTPS = {
           Enabled = false;
@@ -39,6 +55,15 @@
           Locked = true;
           Cryptomining = true;
           Fingerprinting = true;
+        };
+        Extensions = {
+          Uninstall = [
+            "google@search.mozilla.org"
+            "bing@search.mozilla.org"
+            "amazondotcom@search.mozilla.org"
+            "ebay@search.mozilla.org"
+            "twitter@search.mozilla.org"
+          ];
         };
         NetworkPrediction = false;
         NewTabPage = false;
@@ -67,49 +92,51 @@
           };
         in listToAttrs [
           (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
-          (extension "ublock-origin" "uBlock0@raymondhill.net")
-          (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
           (extension "canvasblocker" "CanvasBlocker@kkapsner.de")
+          (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
+          (extension "consent-o-matic" "gdpr@cavi.au.dk")
           (extension "privacy-badger17" "jid1-MnnxcxisBPnSXQ@jetpack")
+          (extension "ublock-origin" "uBlock0@raymondhill.net")
         ];
 
 
         /* ---- PREFERENCES ---- */
         # Check about:config for options.
-        Preferences = let
-          lock-false = {
-            Value = false;
-            Status = "locked";
-          };
-          lock-true = {
-            Value = true;
-            Status = "locked";
-          };
-        in {
-
+        Preferences = {
           "app.normandy.api_url" = "";
           "app.normandy.enabled" = lock-false;
+          "app.normandy.first_run" = lock-false;
           "app.shield.optoutstudies.enabled" = lock-false;
           "app.update.auto" = lock-false;
           "beacon.enabled" = lock-false;
           "breakpad.reportURL" = "";
           "browser.aboutConfig.showWarning" = lock-false;
           "browser.aboutwelcome.enabled" = lock-false;
+          "browser.bookmarks.addedImportButton" = lock-false;
+          "browser.bookmarks.autoExportHTML" = true;
+          "browser.bookmarks.restore_default_bookmarks" = lock-false;
           "browser.cache.offline.enable" = lock-false;
-          "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
+          "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; }; # set to "custom"?
           "browser.crashReports.unsubmittedCheck.autoSubmit" = lock-false;
           "browser.crashReports.unsubmittedCheck.autoSubmit2" = lock-false;
           "browser.crashReports.unsubmittedCheck.enabled" = lock-false;
           "browser.disableResetPrompt" = lock-true;
           "browser.discovery.enabled" = lock-false;
+          # "browser.display.use_document_fonts" = 1;
           "browser.download.always_ask_before_handling_new_types" = lock-true;
           "browser.download.manager.addToRecentDocs" = lock-false;
           "browser.download.open_pdf_attachments_inline" = lock-true;
+          # "browser.download.panel.shown" = true;
           "browser.download.start_downloads_in_tmp_dir" = true;
-          "browser.download.useDownloadDir" = false;
+          # "browser.download.useDownloadDir" = false;
+          "browser.feeds.showFirstRunUI" = false;
           "browser.fixup.alternate.enabled" = lock-false;
+          # "browser.fixup.domainsuffixwhitelist.home" = true;
+          # "browser.fixup.domainwhitelist.server.home" = true;
           "browser.formfill.enable" = lock-false;
           "browser.helperApps.deleteTempFileOnExit" = lock-true;
+          # "browser.link.open_newwindow.restriction" = 0;
+          "browser.messaging-system.whatsNewPanel.enabled" = lock-false;
           "browser.newtab.preload" = lock-false;
           # "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
           # "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
@@ -117,14 +144,33 @@
           "browser.newtabpage.activity-stream.feeds.snippets" = lock-false;
           "browser.newtabpage.activity-stream.feeds.telemetry" = lock-false;
           "browser.newtabpage.activity-stream.feeds.topsites" = lock-false;
+          "browser.newtabpage.activity-stream.feeds.weatherfeed" = lock-false;
+          "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = lock-false;
           "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
           "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = lock-false;
           "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = lock-false;
           "browser.newtabpage.activity-stream.section.highlights.includeVisited" = lock-false;
           "browser.newtabpage.activity-stream.showSponsored" = lock-false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+          "browser.newtabpage.activity-stream.showWeather" = lock-false;
           "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
+          "browser.newtabpage.activity-stream.system.showWeather" = lock-false;
           "browser.newtabpage.activity-stream.telemetry" = lock-false;
+          "browser.newtabpage.activity-stream.weather.locationSearchEnabled" = lock-false;
+          "browser.newtabpage.blocked" = lib.genAttrs [
+            # Youtube
+            "26UbzFJ7qT9/4DhodHKA1Q=="
+            # Facebook
+            "4gPpjkxgZzXPVtuEoAL9Ig=="
+            # Wikipedia
+            "eV8/WsSLxHadrTL1gAxhug=="
+            # Reddit
+            "gLv0ja2RYVgxKdp0I5qwvA=="
+            # Amazon
+            "K00ILysCaEq8+bEqV/3nuw=="
+            # Twitter
+            "T9nJot5PurhJSy8n038xGA=="
+          ] (_: 1);
           "browser.newtabpage.enabled" = lock-false;
           "browser.newtabpage.enhanced" = lock-false;
           "browser.newtabpage.introShown" = lock-true;
@@ -132,6 +178,8 @@
           "browser.preferences.moreFromMozilla" = lock-false;
           # "browser.privatebrowsing.forceMediaMemoryCache" = true;
           # "browser.privatebrowsing.vpnpromourl" = "";
+          # "browser.protections_panel.infoMessage.seen" = true; # disable tracking protection info
+          # "browser.rights.3.shown" = true;
           "browser.safebrowsing.appRepURL" = "";
           "browser.safebrowsing.blockedURIs.enabled" = lock-false;
           "browser.safebrowsing.downloads.enabled" = lock-false;
@@ -140,6 +188,8 @@
           "browser.safebrowsing.enabled" = lock-false;
           "browser.safebrowsing.malware.enabled" = lock-false;
           "browser.safebrowsing.phishing.enabled" = lock-false;
+  				"browser.search.defaultenginename" = "DuckDuckGo";
+  				"browser.search.order.1" = "DuckDuckGo";
           # "browser.search.separatePrivateDefault.ui.enabled" = true;
           "browser.search.suggest.enabled" = lock-false;
           "browser.search.suggest.enabled.private" = lock-false;
@@ -148,18 +198,39 @@
           "browser.sessionstore.interval" = 60000;
           "browser.sessionstore.privacy_level" = 0;
           "browser.shell.checkDefaultBrowser" = lock-false;
+          "browser.shell.defaultBrowserCheckCount" = 1;
+          # "browser.ssb.enabled" = true; # enable site specific browser (@todo try that maybe?)
           "browser.startup.homepage_override.mstone" = "ignore";
+          "browser.startup.page" = 3; # restore previous session
           "browser.tabs.crashReporting.sendReport" = lock-false;
+          "browser.tabs.closeWindowWithLastTab" = lock-false;
+          "browser.tabs.inTitlebar" = 1;
+          "browser.tabs.loadBookmarksInTabs" = true; # open bookmarks in new tab
+          # "browser.tabs.loadDivertedInBackground" = false; # open new tab in background
+          # "browser.tabs.loadInBackground" = true; # open new tab in background
           # "browser.tabs.tabmanager.enabled" = false;
+          "browser.tabs.warnOnClose" = false;
+          "browser.tabs.warnOnCloseOtherTabs" = true;
+          "browser.tabs.warnOnOpen" = false;
+          "browser.tabs.warnOnQuit" = false;
+          "browser.theme.toolbar-theme" = 0;
+          "browser.toolbarbuttons.introduced.sidebar-button" = true;
+          "browser.toolbars.bookmarks.visibility" = "always"; # show bookmarks toolbar
           "browser.topsites.contile.enabled" = lock-false;
+          "browser.translations.automaticallyPopup" = lock-false;
           "browser.uitour.enabled" = lock-false;
           "browser.urlbar.groupLabels.enabled" = lock-false;
           "browser.urlbar.quicksuggest.enabled" = lock-false;
+          "browser.urlbar.quicksuggest.migrationVersion" = 2;
+          "browser.urlbar.quicksuggest.scenario" = "history";
           "browser.urlbar.showSearchSuggestionsFirst" = lock-false;
           "browser.urlbar.speculativeConnect.enabled" = lock-false;
           # "browser.urlbar.suggest.calculator" = true;
-          # "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
-          # "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+          "browser.urlbar.suggest.quicksuggest.nonsponsored" = lock-false;
+          "browser.urlbar.suggest.quicksuggest.sponsored" = lock-false;
+          "browser.urlbar.suggest.topsites" = lock-false;
+          "browser.urlbar.suggest.trending" = lock-false;
+          "browser.urlbar.suggest.yelp" = lock-false;
           "browser.urlbar.suggest.searches" = lock-false;
           "browser.urlbar.trending.featureGate" = lock-false;
           "browser.urlbar.trimURLs" = lock-false;
@@ -172,15 +243,21 @@
           "datareporting.healthreport.service.enabled" = lock-false;
           "datareporting.healthreport.uploadEnabled" = lock-false;
           "datareporting.policy.dataSubmissionEnabled" = lock-false;
+          "datareporting.policy.dataSubmissionPolicyBypassNotification" = lock-true;
+          # "datareporting.sessions.current.clean" = true;
           "device.sensors.ambientLight.enabled" = lock-false;
           "device.sensors.enabled" = lock-false;
           "device.sensors.motion.enabled" = lock-false;
           "device.sensors.orientation.enabled" = lock-false;
           "device.sensors.proximity.enabled" = lock-false;
+          "devtools.cache.disabled" = lock-true;
+          "devtools.onboarding.telemetry.logged" = lock-false;
+          # "devtools.toolbox.host" = "right"; # move devtools to right
           "dom.battery.enabled" = lock-false;
           "dom.event.clipboardevents.enabled" = lock-false;
           "dom.private-attribution.submission.enabled" = lock-false;
           "dom.security.https_first" = true;
+          # "dom.security.https_only_mode" = true; # force https
           "dom.security.sanitizer.enabled" = true;
           "dom.webaudio.enabled" = lock-false;
           # "editor.truncate_user_pastes" = false;
@@ -202,15 +279,22 @@
           "extensions.screenshots.disabled" = lock-true;
           "extensions.shield-recipe-client.api_url" = "";
           "extensions.shield-recipe-client.enabled" = lock-false;
+          "extensions.update.autoUpdateDefault" = false;
+          "extensions.update.enabled" = false;
           "extensions.webservice.discoverURL" = "";
+          "findbar.highlightAll" = true;
+          # "full-screen-api.ignore-widgets" = true; # fullscreen within window
           # "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
           "keyword.enabled" = lock-false;
           "media.autoplay.default" = 1;
           "media.autoplay.enabled" = lock-false;
           "media.eme.enabled" = lock-false;
+          "media.ffmpeg.vaapi.enabled" = true; # enable hardware acceleration
           "media.gmp-widevinecdm.enabled" = lock-false;
           "media.navigator.enabled" = lock-false;
           "media.peerconnection.enabled" = lock-false;
+          "media.rdd-vpx.enabled" = true; # enable hardware acceleration
+          # "media.videocontrols.picture-in-picture.video-toggle.enabled" = true; # disable picture in picture button
           # "media.peerconnection.ice.default_address_only" = true;
           # "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
           "media.video_stats.enabled" = lock-false;
@@ -243,6 +327,8 @@
           # "permissions.default.desktop-notification" = 2;
           # "permissions.default.geo" = 2;
           # "permissions.manager.defaultsUrl" = "";
+          # "privacy.clearOnShutdown.history" = false;
+          "privacy.clearOnShutdown.downloads" = lock-true;
           "privacy.donottrackheader.enabled" = lock-true;
           "privacy.donottrackheader.value" = 1;
           "privacy.firstparty.isolate" = lock-true;
@@ -269,12 +355,28 @@
           # "security.ssl.treat_unsafe_negotiation_as_broken" = true;
           # "security.tls.enable_0rtt_data" = false;
           "services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSite" = lock-false;
+          "sidebar.backupState" = {
+            "launcherWidth" = 64;
+            "expandedLauncherWidth" = 256;
+            "launcherExpanded" = false;
+            "launcherVisible" = true;
+            "panelOpen" = false;
+          };
+          "sidebar.main.tools" = "aichat,history,bookmarks";
+          "sidebar.revamp" = true;
+          "sidebar.revamp.round-content-area" = true;
+          "sidebar.verticalTabs" = true;
+          "sidebar.visibility" = "expand-on-hover";
           "signon.autofillForms" = lock-false;
           "signon.formlessCapture.enabled" = lock-false;
           "signon.privateBrowsingCapture.enabled" = lock-false;
-          "signon.rememberSignons" = lock-false;
+          "signon.rememberSignons" = lock-false; # Using Bitwarden for this
+          "startup.homepage_override_url" = "";
+          "startup.homepage_welcome_url" = "";
+          # "svg.context-properties.content.enabled" = true;
           "toolkit.coverage.opt-out" = lock-true;
           "toolkit.coverage.endpoint.base" = "";
+          # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "toolkit.telemetry.archive.enabled" = lock-false;
           "toolkit.telemetry.bhrPing.enabled" = lock-false;
           "toolkit.telemetry.cachedClientID" = "";
@@ -291,12 +393,14 @@
           "toolkit.telemetry.unified" = lock-false;
           "toolkit.telemetry.unifiedIsOptIn" = lock-false;
           "toolkit.telemetry.updatePing.enabled" = lock-false;
+          # "trailhead.firstrun.didSeeAboutWelcome" = true;
           "urlclassifier.features.socialtracking.skipURLs" = "*.instagram.com, *.twitter.com, *.twimg.com";
           "urlclassifier.trackingSkipURLs" = "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com";
           # "webchannel.allowObject.urlWhitelist" = "";
           "webgl.disabled" = true;
           "webgl.renderer-string-override" = " ";
           "webgl.vendor-string-override" = " ";
+
 
 
           # # THEME ADJUSTMENTS
@@ -308,16 +412,194 @@
           # "layout.css.prefers-color-scheme.content-override" = 2;
           # "browser.privateWindowSeparation.enabled" = false; # WINDOWS
         };
+
+        
+        search = {
+          force = true;
+          default = "ddg";
+          engines = {
+            # don't need these default ones
+            amazondotcom-us.metaData.hidden = lock-true;
+            bing.metaData.hidden = lock-true;
+            ebay.metaData.hidden = lock-true;
+
+            github = {
+              name = "Github";
+              urls = [ { template = "https://github.com/search?q={searchTerms}"; } ];
+              iconMapObj."32" = "https://github.githubassets.com/favicons/favicon-dark.png";
+              definedAliases = [ "@gh" ];
+            };
+
+            nixpkgs = {
+              name = "Nixpkgs";
+              urls = lib.singleton {
+                template = "https://github.com/search";
+                params = lib.attrsToList {
+                  "type" = "code";
+                  "q" = "repo:NixOS/nixpkgs lang:nix {searchTerms}";
+                };
+              };
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@npkgs" ];
+            };
+
+            github-nix = {
+              name = "Github Nix Code";
+              urls = lib.singleton {
+                template = "https://github.com/search";
+                params = lib.attrsToList {
+                  "type" = "code";
+                  "q" = "lang:nix NOT is:fork {searchTerms}";
+                };
+              };
+              iconMapObj."32" = "https://github.com/favicon.ico";
+              definedAliases = [ "@ghn" ];
+            };
+
+            youtube = {
+              name = "Youtube";
+              urls = [ { template = "https://www.youtube.com/results?search_query={searchTerms}"; } ];
+              iconMapObj."32" = "https://www.youtube.com/favicon.ico";
+              definedAliases = [ "@y" ];
+            };
+          };
+        };
       };
 
 
       profiles.default = {
         id = 0;
-        name = "unnamedplayer";
+        name = "default";
         isDefault = true;
         settings = {
-  				"browser.search.defaultenginename" = "DuckDuckGo";
-  				"browser.search.order.1" = "DuckDuckGo";
+          # "browser.compactmode.show" = true;
+          # "browser.uidensity" = 1;
+
+
+          "browser.urlbar.placeholderName" = "What's up dawg?";
+
+
+          # "browser.uiCustomization.navBarWhenVerticalTabs" = [
+          #   "back-button"
+          #   "forward-button"
+          #   "stop-reload-button"
+          #   "customizableui-special-spring1"
+          #   "vertical-spacer"
+          #   "urlbar-container"
+          #   "customizableui-special-spring2"
+          #   "save-to-pocket-button"
+          #   "downloads-button"
+          #   "unified-extensions-button"
+          #   "fxa-toolbar-menu-button"
+          #   "ublock0_raymondhill_net-browser-action"
+          #   "keepassxc-browser_keepassxc_org-browser-action"
+          #   "library-button"
+          #   "sidebar-button"
+          #   "history-panelmenu"
+          #   "firefox-view-button"
+          #   "alltabs-button"
+          # ];
+          # "browser.uiCustomization.horizontalTabstrip" = [
+          #   "firefox-view-button"
+          #   "tabbrowser-tabs"
+          #   "new-tab-button"
+          #   "alltabs-button"
+          # ];
+          # "browser.uiCustomization.state" = {
+          #   "placements" = {
+          #     "widget-overflow-fixed-list" = [ ];
+          #     "unified-extensions-area" = [
+          #       "sponsorblocker_ajay_app-browser-action"
+          #       "firefoxcolor_mozilla_com-browser-action"
+          #     ];
+          #     "nav-bar" = [
+          #       "back-button"
+          #       "forward-button"
+          #       "stop-reload-button"
+          #       "customizableui-special-spring1"
+          #       "vertical-spacer"
+          #       "urlbar-container"
+          #       "customizableui-special-spring2"
+          #       "downloads-button"
+          #       "unified-extensions-button"
+          #       "zotero_chnm_gmu_edu-browser-action"
+          #       "ublock0_raymondhill_net-browser-action"
+          #       "keepassxc-browser_keepassxc_org-browser-action"
+          #       "library-button"
+          #       # "sidebar-button"
+          #       "alltabs-button"
+          #     ];
+          #     "toolbar-menubar" = [ "menubar-items" ];
+          #     "TabsToolbar" = [ ];
+          #     "vertical-tabs" = [ "tabbrowser-tabs" ];
+          #     "PersonalToolbar" = [ "personal-bookmarks" ];
+          #   };
+          #   "seen" = [
+          #     "firefoxcolor_mozilla_com-browser-action"
+          #     "keepassxc-browser_keepassxc_org-browser-action"
+          #     "sponsorblocker_ajay_app-browser-action"
+          #     "ublock0_raymondhill_net-browser-action"
+          #     "developer-button"
+          #   ];
+          #   "dirtyAreaCache" = [
+          #     "unified-extensions-area"
+          #     "nav-bar"
+          #     "vertical-tabs"
+          #     "PersonalToolbar"
+          #     "TabsToolbar"
+          #     "toolbar-menubar"
+          #   ];
+          #   "currentVersion" = 21;
+          #   "newElementCount" = 3;
+          # };
+
+
+          # "identity.fxaccounts.enabled" = false;
+
+          # Layout
+          # "browser.uiCustomization.state" = builtins.toJSON {
+          #   currentVersion = 20;
+          #   newElementCount = 5;
+          #   dirtyAreaCache = [
+          #     "nav-bar"
+          #     "PersonalToolbar"
+          #     "toolbar-menubar"
+          #     "TabsToolbar"
+          #     "widget-overflow-fixed-list"
+          #   ];
+          #   placements = {
+          #     PersonalToolbar = [ "personal-bookmarks" ];
+          #     TabsToolbar = [
+          #       "tabbrowser-tabs"
+          #       "new-tab-button"
+          #       "alltabs-button"
+          #     ];
+          #     nav-bar = [
+          #       "back-button"
+          #       "forward-button"
+          #       "stop-reload-button"
+          #       "urlbar-container"
+          #       "downloads-button"
+          #       "ublock0_raymondhill_net-browser-action"
+          #       "_testpilot-containers-browser-action"
+          #       "reset-pbm-toolbar-button"
+          #       "unified-extensions-button"
+          #     ];
+          #     toolbar-menubar = [ "menubar-items" ];
+          #     unified-extensions-area = [ ];
+          #     widget-overflow-fixed-list = [ ];
+          #   };
+          #   seen = [
+          #     "save-to-pocket-button"
+          #     "developer-button"
+          #     "ublock0_raymondhill_net-browser-action"
+          #     "_testpilot-containers-browser-action"
+          #   ];
+          # };
+
+
+
+          
 
   				# "widget.use-xdg-desktop-portal.file-picker" = 1;
   				# "browser.compactmode.show" = true;
@@ -327,14 +609,15 @@
   				# "ui.key.menuAccessKeyFocuses" = false;
   			};
 
-      
-        # search.engines = {
-        #   Bing.metaData.hidden = true;
-        #   "Amazon.com".metaData.hidden = true;
-        #   "Wikipedia (en)".metaData.hidden = true;
-        #   "Google".metaData.alias = "@g";
-        # };
-      
+
+
+
+
+
+
+
+
+
         # settings = {      
         #   # I18n
         #   # ----
