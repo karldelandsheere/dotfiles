@@ -3,113 +3,368 @@
 # Based on several dotfiles but a lot on those
 #   https://gitlab.com/maximilian_dietrich/nixos/-/tree/restructure-add-workstation/modules/graphical/apps/browser
 #
-# @todo make the extensions to be activated from the start
 # @todo also, check if it's possible to pre-populate some bitwarden info
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: let
+  extensions = import ./extensions.nix;
+in
 {
   config = {
-    programs.firefox = {
+    programs.firefox =
+     # let
+      # extensions = {
+      #   # Installed extensions
+      #   # --------------------
+      #   bitwarden-password-manager = {
+      #     id = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
+      #     installation_mode = "force_installed";
+      #     private_browsing = true;
+      #     settings = { };
+      #     permissions = [ ];
+      #     #   "activeTab"
+      #     #   "clipboardWrite"
+      #     #   "contextMenus"
+      #     #   "cookies"
+      #     #   "nativeMessaging"
+      #     #   "notifications"
+      #     #   "storage"
+      #     #   "tabs"
+      #     #   "webNavigation"
+      #     #   "webRequest"
+      #     #   "webRequestBlocking"
+      #     #   "https://*/*"
+      #     #   "http://*/*"
+      #     #   "https://api.github.com/"
+      #     #   "<all_urls>"
+      #     # ];
+      #   };
+        
+      #   canvasblocker = {
+      #     id = "CanvasBlocker@kkapsner.de";
+      #     installation_mode = "normal_installed";
+      #     private_browsing = true;
+      #     settings = { };
+      #     permissions = [ ];
+      #     #   "activeTab"
+      #     #   "tabs"
+      #     #   "storage"
+      #     #   "<all_urls>"
+      #     # ];
+      #   };
+        
+      #   clearurls = {
+      #     id = "{74145f27-f039-47ce-a470-a662b129930a}";
+      #     installation_mode = "normal_installed";
+      #     private_browsing = true;
+      #     settings = { };
+      #     permissions = [
+      #       "activeTab"
+      #       "tabs"
+      #       "storage"
+      #       "<all_urls>"
+      #     ];
+      #   };
+        
+      #   consent-o-matic = {
+      #     id = "gdpr@cavi.au.dk";
+      #     installation_mode = "normal_installed";
+      #     private_browsing = true;
+      #     settings = { };
+      #     permissions = [
+      #       "activeTab"
+      #       "tabs"
+      #       "storage"
+      #       "<all_urls>"
+      #     ];
+      #   };
+        
+      #   privacy-badger17 = {
+      #     id = "jid1-MnnxcxisBPnSXQ@jetpack";
+      #     installation_mode = "normal_installed";
+      #     private_browsing = true;
+      #     settings = {
+      #       selectedFilterLists = [
+      #         "user-filters"
+      #         "ublock-filters"
+      #         "ublock-badware"
+      #         "ublock-privacy"
+      #         "ublock-unbreak"
+      #         "ublock-quick-fixes"
+      #         "easylist"
+      #         "easyprivacy"
+      #         "urlhaus-1"
+      #         "plowe-0"
+      #       ];
+      #     };
+      #     permissions = [
+      #       "activeTab"
+      #       "tabs"
+      #       "storage"
+      #       "<all_urls>"
+      #     ];
+      #   };
+        
+      #   ublock-origin = {
+      #     id = "uBlock0@raymondhill.net";
+      #     installation_mode = "normal_installed";
+      #     private_browsing = true;
+      #     settings = {
+      #       selectedFilterLists = [
+      #         "user-filters"
+      #         "ublock-filters"
+      #         "ublock-badware"
+      #         "ublock-privacy"
+      #         "ublock-quick-fixes"
+      #         "ublock-unbreak"
+      #         "easylist"
+      #         "easyprivacy"
+      #         "adguard-spyware"
+      #         "adguard-spyware-url"
+      #         "block-lan"
+      #         "urlhaus-1"
+      #         "plowe-0"
+      #         "dpollock-0"
+      #         "fanboy-cookiemonster"
+      #         "ublock-cookies-easylist"
+      #         "adguard-cookies"
+      #         "ublock-cookies-adguard"
+      #         "easylist-chat"
+      #         "easylist-newsletters"
+      #         "easylist-notifications"
+      #         "easylist-annoyances"
+      #         "adguard-mobile-app-banners"
+      #         "adguard-other-annoyances"
+      #       ];
+      #     };
+      #     permissions = [
+      #       "activeTab"
+      #       "tabs"
+      #       "storage"
+      #       "<all_urls>"
+      #     ];
+      #   };
+      # };
+    # in
+    {
       enable = true;
-      languagePacks = [ "en-US" "fr" ];
 
       # https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265/16
       # ------------------------------------------------------------------------------
 
-      /* ---- POLICIES ---- */
-      # Check about:policies#documentation for options.
-      policies = let
-        lock-false = {
-          Value = false;
-          Status = "locked";
-        };
-        lock-true = {
-          Value = true;
-          Status = "locked";
-        };
-      in {
-        # Right now, I'm still using my account
-        # When ready, I'll ditch it
-        # DisableAccounts = true;
-        # DisableFirefoxAccounts = true;
-
+      # Policies (check about:policies#documentation for options)
+      # --------
+      policies = {
         # Ordered by alphabetical order        
+        AppAutoUpdate = false;
         AppUpdateURL = "https://localhost";
+        AutofillAddressEnabled = false;
+        AutofillCreditCardEnabled = false;
+        BackgroundAppUpdate = false;
+
+        # Bookmarks = {
+        #   "type": "array",
+        #   "items": {
+        #     "type": "object",
+        #     "properties": {
+        #       "Title": {
+        #         "type": "string"
+        #       },
+        #       "URL": {
+        #         "type": "URL"
+        #       },
+        #       "Favicon": {
+        #         "type": "URLorEmpty"
+        #       },
+        #       "Placement": {
+        #         "type": "string",
+        #         "enum": [
+        #           "toolbar",
+        #           "menu"
+        #         ]
+        #       },
+        #       "Folder": {
+        #         "type": "string"
+        #       }
+        #     },
+        #     "required": [
+        #       "Title",
+        #       "URL"
+        #     ]
+        #   }
+        # };
+
         CaptivePortal = false;
+        # Certificates = {
+        #   "ImportEnterpriseRoots": {
+        #     "type": "boolean"
+        #   },
+        #   "Install": {
+        #     "type": "array",
+        #     "items": {
+        #       "type": "string"
+        #     }
+        #   }
+        # };
+        ContentAnalysis = { Enabled = false; };
+        Cookies = {
+          Behavior = "reject";
+          BehaviorPrivateBrowsing = "reject";
+          RejectTracker = true;
+        };
+        DisableAccounts = true;
         DisableAppUpdate = true;
-        DisplayBookmarksToolbar = "always";
-        DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
-        DisableBuiltinPDFViewer = true;
         DisableFeedbackCommands = true;
+        DisableFirefoxAccounts = true;
         DisableFirefoxScreenshots = true;
         DisableFirefoxStudies = true;
         DisableFormHistory = true;
-        DisablePocket = true;
+        DisableMasterPasswordCreation = true;
+        DisablePasswordReveal = true;
+        DisableProfileImport = true;
+        DisableProfileRefresh = true;
+        DisableSetDesktopBackground = true;
         DisableSystemAddonUpdate = true;
         DisableTelemetry = true;
-        DNSOverHTTPS = {
-          Enabled = false;
-        };
+        DisplayBookmarksToolbar = "always";
+        DisplayMenuBar = "default-off";
+        DNSOverHTTPS = { Enabled = false; };
         DontCheckDefaultBrowser = true;
-        EnableTrackingProtection = {
-          Value= true;
+        # DownloadDirectory = "/path";
+        EnableTrackingProtection  = {
+          Value = true;
           Locked = true;
           Cryptomining = true;
           Fingerprinting = true;
+          EmailTracking = true;
         };
-        Extensions = {
-          Uninstall = [
-            "google@search.mozilla.org"
-            "bing@search.mozilla.org"
-            "amazondotcom@search.mozilla.org"
-            "ebay@search.mozilla.org"
-            "twitter@search.mozilla.org"
-          ];
+        EncryptedMediaExtensions = { Enabled = false; };
+
+        # Extensions = {
+        #   Install = [
+        #     "https://addons.mozilla.org/en-US/firefox/downloads/latest/{446900e4-71c2-419f-a6a7-df9c091e268b}/latest.xpi"
+        #     "https://addons.mozilla.org/en-US/firefox/downloads/latest/CanvasBlocker@kkapsner.de/latest.xpi"
+        #     "https://addons.mozilla.org/en-US/firefox/downloads/latest/{74145f27-f039-47ce-a470-a662b129930a}/latest.xpi"
+        #     "https://addons.mozilla.org/en-US/firefox/downloads/latest/gdpr@cavi.au.dk/latest.xpi"
+        #     "https://addons.mozilla.org/en-US/firefox/downloads/latest/jid1-MnnxcxisBPnSXQ@jetpack/latest.xpi"
+        #     "https://addons.mozilla.org/en-US/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi"
+        #   ];
+        #   Uninstall = [
+        #     "google@search.mozilla.org"
+        #     "bing@search.mozilla.org"
+        #     "amazondotcom@search.mozilla.org"
+        #     "ebay@search.mozilla.org"
+        #     "twitter@search.mozilla.org"
+        #   ];
+        # };
+
+        ExtensionSettings = lib.mapAttrs(
+          _name: extension: lib.nameValuePair extension.id {
+            inherit (extension) installation_mode private_browsing settings permissions;
+            install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${extension.id}/latest.xpi";
+          }
+        ) extensions;
+        ExtensionUpdate = false;
+        FirefoxHome = {
+          Highlights = false;
+          Locked = true;
+          Pocket = false;
+          Search = false;
+          Snippets = false;
+          SponsoredPocket = false;
+          SponsoredStories = false;
+          SponsoredTopSites = false;
+          Stories = false;
+          TopSites = false;
         };
+        FirefoxSuggest = {
+          ImproveSuggest = false;
+          Locked = true;
+          SponsoredSuggestions = false;
+          WebSuggestions = false;
+        };
+        # Handlers = {}; # @todo implement this
+        Homepage = {
+          # URL = "";
+          Locked = true;
+          StartPage = "none"; # "homepage" when there will be one
+        };
+        InstallAddonsPermission = { Default = true; };
+        LegacyProfiles = true;
+        # LegacySameSiteCookieBehaviorEnabled = true;
+        # ManagedBookmarks = [
+        #   {
+        #     "toplevel_name": "My managed bookmarks folder"
+        #   },
+        #   {
+        #     "url": "example.com",
+        #     "name": "Example"
+        #   },
+        #   {
+        #     "name": "Mozilla links",
+        #     "children": [
+        #       {
+        #         "url": "https://mozilla.org",
+        #         "name": "Mozilla.org"
+        #       },
+        #       {
+        #         "url": "https://support.mozilla.org/",
+        #         "name": "SUMO"
+        #       }
+        #     ]
+        #   }
+        # ];
         NetworkPrediction = false;
         NewTabPage = false;
+        NoDefaultBookmarks = true;
+        OfferToSaveLogins = false;
         OverrideFirstRunPage = "";
         OverridePostUpdatePage = "";
-        SearchBar = "unified"; # alternative: "separate"
+        PasswordManagerEnabled = false;
 
+        # "Permissions": { # @todo implement that, with a loop for easier management
+        #   "Camera": {
+        #     "Allow": ["https://example.org","https://example.org:1234"],
+        #     "Block": ["https://example.edu"],
+        #     "BlockNewRequests": true | false,
+        #     "Locked": true | false
+        #   },
+        #   "Microphone": {
+        #     "Allow": ["https://example.org"],
+        #     "Block": ["https://example.edu"],
+        #     "BlockNewRequests": true | false,
+        #     "Locked": true | false
+        #   },
+        #   "Location": {
+        #     "Allow": ["https://example.org"],
+        #     "Block": ["https://example.edu"],
+        #     "BlockNewRequests": true | false,
+        #     "Locked": true | false
+        #   },
+        #   "Notifications": {
+        #     "Allow": ["https://example.org"],
+        #     "Block": ["https://example.edu"],
+        #     "BlockNewRequests": true | false,
+        #     "Locked": true | false
+        #   },
+        #   "Autoplay": {
+        #     "Allow": ["https://example.org"],
+        #     "Block": ["https://example.edu"],
+        #     "Default": "allow-audio-video" | "block-audio" | "block-audio-video",
+        #     "Locked": true | false
+        #   }
+        # };
 
-        /* ---- EXTENSIONS ---- */
-        # To add additional extensions, find it on addons.mozilla.org, find
-        # the short ID in the url (like https://addons.mozilla.org/en-US/firefox/addon/!SHORT_ID!/)
-        # Then, download the XPI by filling it in to the install_url template, unzip it,
-        # run `jq .browser_specific_settings.gecko.id manifest.json` or
-        # `jq .applications.gecko.id manifest.json` to get the UUID
-        # or
-        # Check about:support for extension/add-on ID strings.
-        # Valid strings for installation_mode are "allowed", "blocked",
-        # "force_installed" and "normal_installed".
-        ExtensionSettings = with builtins; let
-          extension = shortId: uuid: {
-            name = uuid;
-            value = {
-              install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
-              installation_mode = "normal_installed";
-            };
-          };
-        in listToAttrs [
-          (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
-          (extension "canvasblocker" "CanvasBlocker@kkapsner.de")
-          (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
-          (extension "consent-o-matic" "gdpr@cavi.au.dk")
-          (extension "privacy-badger17" "jid1-MnnxcxisBPnSXQ@jetpack")
-          (extension "ublock-origin" "uBlock0@raymondhill.net")
-        ];
+        PictureInPicture = { Enabled = false; Locked = true; };
+        PopupBlocking = {
+          Default = true;
+          # Allow = [];
+        };
+        PostQuantumKeyAgreementEnabled = true;
 
-
-        /* ---- PREFERENCES ---- */
-        # Check about:config for options.
-        Preferences = {
-          "app.normandy.api_url" = "";
-          "app.normandy.enabled" = lock-false;
-          "app.normandy.first_run" = lock-false;
-          "app.shield.optoutstudies.enabled" = lock-false;
-          "app.update.auto" = lock-false;
-          "beacon.enabled" = lock-false;
-          "breakpad.reportURL" = "";
+        Preferences = let  # (check about:config for options)
+          lock-false = { Value = false; Status = "locked"; };
+          lock-true  = { Value = true;  Status = "locked"; };
+        in
+        {
           "browser.aboutConfig.showWarning" = lock-false;
           "browser.aboutwelcome.enabled" = lock-false;
           "browser.bookmarks.addedImportButton" = lock-false;
@@ -157,20 +412,6 @@
           "browser.newtabpage.activity-stream.system.showWeather" = lock-false;
           "browser.newtabpage.activity-stream.telemetry" = lock-false;
           "browser.newtabpage.activity-stream.weather.locationSearchEnabled" = lock-false;
-          "browser.newtabpage.blocked" = lib.genAttrs [
-            # Youtube
-            "26UbzFJ7qT9/4DhodHKA1Q=="
-            # Facebook
-            "4gPpjkxgZzXPVtuEoAL9Ig=="
-            # Wikipedia
-            "eV8/WsSLxHadrTL1gAxhug=="
-            # Reddit
-            "gLv0ja2RYVgxKdp0I5qwvA=="
-            # Amazon
-            "K00ILysCaEq8+bEqV/3nuw=="
-            # Twitter
-            "T9nJot5PurhJSy8n038xGA=="
-          ] (_: 1);
           "browser.newtabpage.enabled" = lock-false;
           "browser.newtabpage.enhanced" = lock-false;
           "browser.newtabpage.introShown" = lock-true;
@@ -240,18 +481,9 @@
           # "cookiebanners.service.enableGlobalRules" = true;
           # "cookiebanners.service.mode" = 1;
           # "cookiebanners.service.mode.privateBrowsing" = 1;
-          "datareporting.healthreport.service.enabled" = lock-false;
-          "datareporting.healthreport.uploadEnabled" = lock-false;
           "datareporting.policy.dataSubmissionEnabled" = lock-false;
           "datareporting.policy.dataSubmissionPolicyBypassNotification" = lock-true;
           # "datareporting.sessions.current.clean" = true;
-          "device.sensors.ambientLight.enabled" = lock-false;
-          "device.sensors.enabled" = lock-false;
-          "device.sensors.motion.enabled" = lock-false;
-          "device.sensors.orientation.enabled" = lock-false;
-          "device.sensors.proximity.enabled" = lock-false;
-          "devtools.cache.disabled" = lock-true;
-          "devtools.onboarding.telemetry.logged" = lock-false;
           # "devtools.toolbox.host" = "right"; # move devtools to right
           "dom.battery.enabled" = lock-false;
           "dom.event.clipboardevents.enabled" = lock-false;
@@ -261,10 +493,6 @@
           "dom.security.sanitizer.enabled" = true;
           "dom.webaudio.enabled" = lock-false;
           # "editor.truncate_user_pastes" = false;
-          "experiments.activeExperiment" = lock-false;
-          "experiments.enabled" = lock-false;
-          "experiments.manifest.uri" = "";
-          "experiments.supported" = lock-false;
           "extensions.ClearURLs@kevinr.whiteList" = "";
           "extensions.autoDisableScopes" = 14;
           "extensions.formautofill.addresses.enabled" = false;
@@ -279,10 +507,7 @@
           "extensions.screenshots.disabled" = lock-true;
           "extensions.shield-recipe-client.api_url" = "";
           "extensions.shield-recipe-client.enabled" = lock-false;
-          "extensions.update.autoUpdateDefault" = false;
-          "extensions.update.enabled" = false;
           "extensions.webservice.discoverURL" = "";
-          "findbar.highlightAll" = true;
           # "full-screen-api.ignore-widgets" = true; # fullscreen within window
           # "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
           "keyword.enabled" = lock-false;
@@ -327,34 +552,119 @@
           # "permissions.default.desktop-notification" = 2;
           # "permissions.default.geo" = 2;
           # "permissions.manager.defaultsUrl" = "";
-          # "privacy.clearOnShutdown.history" = false;
-          "privacy.clearOnShutdown.downloads" = lock-true;
-          "privacy.donottrackheader.enabled" = lock-true;
-          "privacy.donottrackheader.value" = 1;
-          "privacy.firstparty.isolate" = lock-true;
           "privacy.globalprivacycontrol.enabled" = lock-true;
-          "privacy.globalprivacycontrol.functionality.enabled" = lock-true;
           # "privacy.history.custom" = true;
-          "privacy.query_stripping" = lock-true;
-          "privacy.resistFingerprinting" = lock-true;
-          "privacy.trackingprotection.cryptomining.enabled" = lock-true;
-          "privacy.trackingprotection.enabled" = lock-true;
-          "privacy.trackingprotection.fingerprinting.enabled" = lock-true;
-          "privacy.trackingprotection.pbmode.enabled" = lock-true;
-          "privacy.usercontext.about_newtab_segregation.enabled" = lock-true;
           # "privacy.userContext.ui.enabled" = true;
           "security.mixed_content.block_display_content" = true;
           "security.mixed_content.upgrade_display_content" = true;
-          "security.mixed_content.upgrade_display_content.image" = true;
           # "security.OCSP.enabled" = 0;
           # "security.pki.crlite_mode" = 2;
           # "security.remote_settings.crlite_filters.enabled" = true;
           # "security.insecure_connection_text.enabled" = true;
           # "security.insecure_connection_text.pbmode.enabled" = true;
-          "security.ssl.disable_session_identifiers" = lock-true;
           # "security.ssl.treat_unsafe_negotiation_as_broken" = true;
           # "security.tls.enable_0rtt_data" = false;
-          "services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSite" = lock-false;
+          "signon.autofillForms" = lock-false;
+          "signon.formlessCapture.enabled" = lock-false;
+          "signon.privateBrowsingCapture.enabled" = lock-false;
+          "signon.rememberSignons" = lock-false; # Using Bitwarden for this
+          # "svg.context-properties.content.enabled" = true;
+          # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          # "trailhead.firstrun.didSeeAboutWelcome" = true;
+          # "webchannel.allowObject.urlWhitelist" = "";
+
+          # # THEME ADJUSTMENTS
+          # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          # "browser.compactmode.show" = true;
+          # "browser.uidensity" = 1;
+          # "browser.display.focus_ring_on_anything" = true;
+          # "browser.display.focus_ring_style" = 0;
+          # "browser.display.focus_ring_width" = 0;
+          # "layout.css.prefers-color-scheme.content-override" = 2;
+        };
+        PrintingEnabled = true;
+        PrivateBrowsingModeAvailability = 0; # 0 = available / 2 = forced
+        PromptForDownloadLocation = false;
+        SanitizeOnShutdown = {
+          Cache = true;
+          Cookies = true;
+          FormData = true;
+          History = true;
+          Locked = false;
+          Sessions = false;
+          SiteSettings = true;
+        };
+        SearchBar = "unified";
+
+        SearchEngines = {
+          Default = "DuckDuckGo";
+          PreventInstalls = true;
+          Remove = [ "Bing" "Google" "Wikipedia" "Youtube" ]; # @todo Correct this
+          # Add = [
+            # {
+            #   "Name": "Example1",
+            #   "URLTemplate": "https://www.example.org/q={searchTerms}",
+            #   "Method": "GET" | "POST",
+            #   "IconURL": "https://www.example.org/favicon.ico",
+            #   "Alias": "example",
+            #   "Description": "Description",
+            #   "PostData": "name=value&q={searchTerms}",
+            #   "SuggestURLTemplate": "https://www.example.org/suggestions/q={searchTerms}"
+            # }
+          # ];
+        };
+
+        SearchSuggestEnabled = false;
+        ShowHomeButton = false;
+        SkipTermsOfUse = true;
+        # SSLVersionMin = "tls1.2";
+        StartDownloadsInTempDirectory = true;
+        TranslateEnabled = false;
+        UserMessaging = {
+          ExtensionRecommendations = false;
+          FeatureRecommendations = false;
+          FirefoxLabs = false;
+          Locked = true;
+          MoreFromMozilla = false;
+          SkipOnboarding = false;
+          UrlbarInterventions = false;
+        };
+        UseSystemPrintDialog = true;
+      };
+
+      # Profile (check about:config for options)
+      # -------
+      profiles.default = {
+        id = 0;
+        name = "default";
+        isDefault = true;
+        settings = {
+          "app.normandy.api_url" = "";
+          "app.normandy.enabled" = false;
+          "app.normandy.first_run" = false;
+          "app.shield.optoutstudies.enabled" = false;
+          "beacon.enabled" = false;
+          "breakpad.reportURL" = "";
+          "datareporting.healthreport.service.enabled" = false;
+          "datareporting.healthreport.uploadEnabled" = false;
+          "device.sensors.ambientLight.enabled" = false;
+          "device.sensors.enabled" = false;
+          "device.sensors.motion.enabled" = false;
+          "device.sensors.orientation.enabled" = false;
+          "device.sensors.proximity.enabled" = false;
+          "devtools.cache.disabled" = true;
+          "devtools.onboarding.telemetry.logged" = false;
+          "experiments.activeExperiment" = false;
+          "experiments.enabled" = false;
+          "experiments.manifest.uri" = "";
+          "experiments.supported" = false;
+          "findbar.highlightAll" = true;
+          "privacy.donottrackheader.enabled" = true;
+          "privacy.donottrackheader.value" = 1;
+          "privacy.firstparty.isolate" = true;
+          "privacy.query_stripping" = true;
+          "privacy.resistFingerprinting" = true;
+          "privacy.usercontext.about_newtab_segregation.enabled" = true;
           "sidebar.backupState" = {
             "launcherWidth" = 64;
             "expandedLauncherWidth" = 256;
@@ -367,116 +677,38 @@
           "sidebar.revamp.round-content-area" = true;
           "sidebar.verticalTabs" = true;
           "sidebar.visibility" = "expand-on-hover";
-          "signon.autofillForms" = lock-false;
-          "signon.formlessCapture.enabled" = lock-false;
-          "signon.privateBrowsingCapture.enabled" = lock-false;
-          "signon.rememberSignons" = lock-false; # Using Bitwarden for this
-          "startup.homepage_override_url" = "";
-          "startup.homepage_welcome_url" = "";
-          # "svg.context-properties.content.enabled" = true;
-          "toolkit.coverage.opt-out" = lock-true;
+          "toolkit.coverage.opt-out" = true;
           "toolkit.coverage.endpoint.base" = "";
-          # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          "toolkit.telemetry.archive.enabled" = lock-false;
-          "toolkit.telemetry.bhrPing.enabled" = lock-false;
+          "toolkit.telemetry.archive.enabled" = false;
+          "toolkit.telemetry.bhrPing.enabled" = false;
           "toolkit.telemetry.cachedClientID" = "";
-          "toolkit.telemetry.coverage.opt-out" = lock-true;
-          "toolkit.telemetry.enabled" = lock-false;
-          "toolkit.telemetry.firstShutdownPing.enabled" = lock-false;
-          "toolkit.telemetry.hybridContent.enabled" = lock-false;
-          "toolkit.telemetry.newProfilePing.enabled" = lock-false;
+          "toolkit.telemetry.coverage.opt-out" = true;
+          "toolkit.telemetry.enabled" = false;
+          "toolkit.telemetry.firstShutdownPing.enabled" = false;
+          "toolkit.telemetry.hybridContent.enabled" = false;
+          "toolkit.telemetry.newProfilePing.enabled" = false;
           "toolkit.telemetry.prompted" = 2;
-          "toolkit.telemetry.rejected" = lock-true;
-          "toolkit.telemetry.reportingpolicy.firstRun" = lock-false;
+          "toolkit.telemetry.rejected" = true;
+          "toolkit.telemetry.reportingpolicy.firstRun" = false;
           "toolkit.telemetry.server" = "";
-          "toolkit.telemetry.shutdownPingSender.enabled" = lock-false;
-          "toolkit.telemetry.unified" = lock-false;
-          "toolkit.telemetry.unifiedIsOptIn" = lock-false;
-          "toolkit.telemetry.updatePing.enabled" = lock-false;
-          # "trailhead.firstrun.didSeeAboutWelcome" = true;
+          "toolkit.telemetry.shutdownPingSender.enabled" = false;
+          "toolkit.telemetry.unified" = false;
+          "toolkit.telemetry.unifiedIsOptIn" = false;
+          "toolkit.telemetry.updatePing.enabled" = false;
           "urlclassifier.features.socialtracking.skipURLs" = "*.instagram.com, *.twitter.com, *.twimg.com";
           "urlclassifier.trackingSkipURLs" = "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com";
-          # "webchannel.allowObject.urlWhitelist" = "";
           "webgl.disabled" = true;
           "webgl.renderer-string-override" = " ";
           "webgl.vendor-string-override" = " ";
 
 
 
-          # # THEME ADJUSTMENTS
-          # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          # "browser.compactmode.show" = true;
-          # "browser.display.focus_ring_on_anything" = true;
-          # "browser.display.focus_ring_style" = 0;
-          # "browser.display.focus_ring_width" = 0;
-          # "layout.css.prefers-color-scheme.content-override" = 2;
-          # "browser.privateWindowSeparation.enabled" = false; # WINDOWS
-        };
+
+
 
         
-        search = {
-          force = true;
-          default = "ddg";
-          engines = {
-            # don't need these default ones
-            amazondotcom-us.metaData.hidden = lock-true;
-            bing.metaData.hidden = lock-true;
-            ebay.metaData.hidden = lock-true;
-
-            github = {
-              name = "Github";
-              urls = [ { template = "https://github.com/search?q={searchTerms}"; } ];
-              iconMapObj."32" = "https://github.githubassets.com/favicons/favicon-dark.png";
-              definedAliases = [ "@gh" ];
-            };
-
-            nixpkgs = {
-              name = "Nixpkgs";
-              urls = lib.singleton {
-                template = "https://github.com/search";
-                params = lib.attrsToList {
-                  "type" = "code";
-                  "q" = "repo:NixOS/nixpkgs lang:nix {searchTerms}";
-                };
-              };
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@npkgs" ];
-            };
-
-            github-nix = {
-              name = "Github Nix Code";
-              urls = lib.singleton {
-                template = "https://github.com/search";
-                params = lib.attrsToList {
-                  "type" = "code";
-                  "q" = "lang:nix NOT is:fork {searchTerms}";
-                };
-              };
-              iconMapObj."32" = "https://github.com/favicon.ico";
-              definedAliases = [ "@ghn" ];
-            };
-
-            youtube = {
-              name = "Youtube";
-              urls = [ { template = "https://www.youtube.com/results?search_query={searchTerms}"; } ];
-              iconMapObj."32" = "https://www.youtube.com/favicon.ico";
-              definedAliases = [ "@y" ];
-            };
-          };
-        };
-      };
 
 
-      profiles.default = {
-        id = 0;
-        name = "default";
-        isDefault = true;
-        settings = {
-          # "browser.compactmode.show" = true;
-          # "browser.uidensity" = 1;
-
-
-          "browser.urlbar.placeholderName" = "What's up dawg?";
 
 
           # "browser.uiCustomization.navBarWhenVerticalTabs" = [
@@ -614,6 +846,56 @@
 
 
 
+        search = {
+          force = true;
+          default = "ddg";
+          engines = {
+            # don't need these default ones
+            # amazondotcom-us.metaData.hidden = true;
+            # bing.metaData.hidden = true;
+            # ebay.metaData.hidden = true;
+
+            github = {
+              name = "Github";
+              urls = [ { template = "https://github.com/search?q={searchTerms}"; } ];
+              iconMapObj."32" = "https://github.githubassets.com/favicons/favicon-dark.png";
+              definedAliases = [ "@gh" ];
+            };
+
+            nixpkgs = {
+              name = "Nixpkgs";
+              urls = lib.singleton {
+                template = "https://github.com/search";
+                params = lib.attrsToList {
+                  "type" = "code";
+                  "q" = "repo:NixOS/nixpkgs lang:nix {searchTerms}";
+                };
+              };
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@npkgs" ];
+            };
+
+            github-nix = {
+              name = "Github Nix Code";
+              urls = lib.singleton {
+                template = "https://github.com/search";
+                params = lib.attrsToList {
+                  "type" = "code";
+                  "q" = "lang:nix NOT is:fork {searchTerms}";
+                };
+              };
+              iconMapObj."32" = "https://github.com/favicon.ico";
+              definedAliases = [ "@ghn" ];
+            };
+
+            youtube = {
+              name = "Youtube";
+              urls = [ { template = "https://www.youtube.com/results?search_query={searchTerms}"; } ];
+              iconMapObj."32" = "https://www.youtube.com/favicon.ico";
+              definedAliases = [ "@y" ];
+            };
+          };
+        };
 
 
 

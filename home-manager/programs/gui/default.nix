@@ -6,7 +6,7 @@
   # ------------------------
   imports = [
     ./element
-    ./firefox.nix
+    ./firefox
     ./ghostty
     ./signal
     # ./onlyoffice.nix
