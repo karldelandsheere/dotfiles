@@ -156,11 +156,6 @@ if [[ "$WITH_LUKS" -eq 1 ]]; then
 fi
 
 
-# Avoid the "dirty" warning (not working, why?)
-# -------------------------
-git add --all /mnt/etc/nixos
-
-
 # Let's go
 # --------
 nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"

@@ -4,7 +4,6 @@
 
   # Nice to have
   # @todo Customize Swaylock
-  # @todo Customize Grub
   # @todo BambuStudio and OrcaSlicer are crashing
   # @todo Find a way to make Affinity work
   # @todo Make my workspaces better and find out how to display only the active and not empty ones
