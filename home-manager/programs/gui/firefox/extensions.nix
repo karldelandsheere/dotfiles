@@ -2,8 +2,8 @@
 {
   # Installed extensions
   # --------------------
-  bitwarden-password-manager = {
-    id = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
+  "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+    id = "bitwarden-password-manager";
     installation_mode = "force_installed";
     private_browsing = true;
     settings = { };
@@ -26,8 +26,8 @@
     # ];
   };
   
-  canvasblocker = {
-    id = "CanvasBlocker@kkapsner.de";
+  "CanvasBlocker@kkapsner.de" = {
+    id = "canvasblocker";
     installation_mode = "normal_installed";
     private_browsing = true;
     settings = { };
@@ -39,8 +39,8 @@
     # ];
   };
   
-  clearurls = {
-    id = "{74145f27-f039-47ce-a470-a662b129930a}";
+  "{74145f27-f039-47ce-a470-a662b129930a}" = {
+    id = "clearurls";
     installation_mode = "normal_installed";
     private_browsing = true;
     settings = { };
@@ -52,8 +52,8 @@
     ];
   };
   
-  consent-o-matic = {
-    id = "gdpr@cavi.au.dk";
+  "gpdr@cavi.au.dk" = {
+    id = "consent-o-matic";
     installation_mode = "normal_installed";
     private_browsing = true;
     settings = { };
@@ -65,8 +65,8 @@
     ];
   };
   
-  privacy-badger17 = {
-    id = "jid1-MnnxcxisBPnSXQ@jetpack";
+  "jid1-MnnxcxisBPnSXQ@jetpack" = {
+    id = "privacy-badger17";
     installation_mode = "normal_installed";
     private_browsing = true;
     settings = {
@@ -91,8 +91,8 @@
     ];
   };
   
-  ublock-origin = {
-    id = "uBlock0@raymondhill.net";
+  "uBlock0@raymondhill.net" = {
+    id = "ublock-origin";
     installation_mode = "normal_installed";
     private_browsing = true;
     settings = {

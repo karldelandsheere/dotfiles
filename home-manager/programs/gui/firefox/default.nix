@@ -122,10 +122,18 @@ in
         # };
 
         ExtensionSettings = lib.mapAttrs(
-          _name: extension: lib.nameValuePair extension.id {
-            inherit (extension) installation_mode private_browsing settings permissions;
-            install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${extension.id}/latest.xpi";
+          name: definition: {
+            inherit (definition) installation_mode private_browsing settings permissions;
+            install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${definition.id}/latest.xpi";
           }
+
+
+
+        
+          # _name: extension: lib.nameValuePair extension.id {
+          #   inherit (extension) installation_mode private_browsing settings permissions;
+          #   install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${_name}/latest.xpi";
+          # }
         ) extensions;
         ExtensionUpdate = false;
         FirefoxHome = {

@@ -41,7 +41,7 @@
     # ------------------------------
     # services.tailscale = {
       # enable = true;
-      # authKeyFile = config.age.secrets.tailscale-key.path;
+      # authKeyFile = config.age.secrets.dimeritium-tailscale-key.path;
       # useRoutingFeatures = "client";
       # extraUpFlages = [
         # "--login-server=https://headscale.sunflower-cloud.com"
