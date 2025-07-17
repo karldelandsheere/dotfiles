@@ -25,15 +25,19 @@
   # Pkgs and flakes definitions, aka inputs
   # ---------------------------------------
   inputs = {
+    # Core parts of my systems
     nixpkgs.url      = "github:nixos/nixpkgs/nixos-25.05";
     impermanence.url = "github:nix-community/impermanence";
-    niri.url         = "github:sodiboo/niri-flake";
-
-    home-manager = {
+    agenix.url       = "github:ryantm/agenix";
+    home-manager     = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs"; };
 
-    firefox-addons = {
+    # GUI/WM
+    niri.url         = "github:sodiboo/niri-flake";
+
+    # Optional add-ons
+    firefox-addons   = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs"; };
   };
@@ -51,6 +55,7 @@
       specialArgs = { inherit inputs; };
 
       modules = with inputs; [
+        agenix.nixosModules.default
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
       ] ++ modules;

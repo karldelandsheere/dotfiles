@@ -1,23 +1,34 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # Network related stuff (who would have guessed?)
   # ---------------------
   config = {
-    environment.systemPackages = with pkgs; [
-      mullvad
-    ];
-
-    services.mullvad-vpn.enable = true;
-  
+    # And finally the whole network
+    # -----------------------------  
     networking = {
       hostName = config.nouveauxParadigmes.hostname;
       networkmanager.enable = true;
       enableIPv6 = true;
 
-      # Firewall setup
-      # --------------
+      # Firewall
+      # --------
       firewall.enable = true;
     };
+
+
+    # OpenSSH
+    # -------
+    services.openssh = {
+      enable = true;
+      openFirewall = false; # for now
+      # banner = "";
+    };
+
+    
+    # Mullvad VPN
+    # -----------
+    environment.systemPackages = [ pkgs.mullvad ]; # Really needed?
+    services.mullvad-vpn.enable = true;
 
 
     # Tailscale setup
@@ -25,7 +36,21 @@
     # @todo And setup for Dimeritium
     # ------------------------------
     # services.tailscale = {
-    #   enable = true;
+      # enable = true;
+      # authKeyFile = config.age.secrets.tailscale-key.path;
+      # useRoutingFeatures = "client";
+      # extraUpFlages = [
+        # "--login-server=https://headscale.sunflower-cloud.com"
+        # "--accept-routes"
+        # "--exit-node-allow-lan-access"
+      # ];
+    # };
+
+    # systemd.services.tailscaled.wantedBy = lib.mkForce []; # no autostart
+    # networking.firewall = {
+    #   trustedInterfaces = [ "tailscale0" ];
+    #   allowedUDPPorts = [ config.services.tailscale.port ];
+    #   allowedTCPPorts = [ 22 ];
     # };
   };
 }
