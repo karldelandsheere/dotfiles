@@ -11,6 +11,7 @@
       backupFileExtension = "backup";
 
       sharedModules = [
+        # inputs.agenix.homeManagerModules.default
         {
           # Enable home-manager
           # -------------------

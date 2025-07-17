@@ -35,5 +35,12 @@
         allowOther = true;
       };
     };
+
+    # age = {
+    #   identityPaths = [ "/home/unnamedplayer/.ssh/id_ed25519" ];
+    #   secrets = {
+    #     unnamedplayer.file = ../secrets/unnamedplayer-secrets.age;
+    #   };
+    # };
   };
 }

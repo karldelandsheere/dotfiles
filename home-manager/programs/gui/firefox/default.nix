@@ -375,7 +375,7 @@ in
           "extensions.webservice.discoverURL" = "";
           # "full-screen-api.ignore-widgets" = true; # fullscreen within window
           # "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
-          "keyword.enabled" = lock-false;
+          "keyword.enabled" = true;
           "media.autoplay.default" = 1;
           "media.autoplay.enabled" = lock-false;
           "media.eme.enabled" = lock-false;
