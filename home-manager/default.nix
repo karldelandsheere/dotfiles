@@ -34,6 +34,10 @@
 
         allowOther = true;
       };
+
+      # shellAliases = {
+      #   tsup-dimeritium = "tailscale up --login-server=https://headscale.sunflower-cloud.com --auth-key ${config.age}"
+      # };
     };
 
     # age = {

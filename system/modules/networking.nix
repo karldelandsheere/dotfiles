@@ -39,16 +39,16 @@
     # @todo Setup Tailscale
     # @todo And setup for Dimeritium
     # ------------------------------
-    # services.tailscale = {
-      # enable = true;
+    services.tailscale = {
+      enable = true;
       # authKeyFile = config.age.secrets.dimeritium-tailscale-key.path;
-      # useRoutingFeatures = "client";
+      useRoutingFeatures = "client";
       # extraUpFlages = [
         # "--login-server=https://headscale.sunflower-cloud.com"
         # "--accept-routes"
         # "--exit-node-allow-lan-access"
       # ];
-    # };
+    };
 
     # systemd.services.tailscaled.wantedBy = lib.mkForce []; # no autostart
     # networking.firewall = {

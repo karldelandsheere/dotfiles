@@ -5,8 +5,9 @@
 
     age = {
       secrets = {
-        q3dm10.file = ../../secrets/q3dm10-secrets.age;
-        dimeritium-tailscale-key.file = ../../secrets/dimeritium-tailscale-key.age;
+        "auth/mail/karl_at_delandsheere_be".file = ../../secrets/auth/mail/karl_at_delandsheere_be.age;
+        "auth/mail/karl_at_nouveaux-paradigmes_be".file = ../../secrets/auth/mail/karl_at_nouveaux-paradigmes_be.age;
+        "auth/tailscale/dimeritium".file = ../../secrets/auth/tailscale/dimeritium.age;
       };
     #   # wg-DE = {
     #   #   file = ../../secrets/wg-DE.age;
