@@ -1,8 +1,4 @@
 {
-  # Need to work
-  # @todo Setup aerc and email accounts
-
-  # Nice to have
   # @todo Customize Swaylock
   # @todo BambuStudio and OrcaSlicer are crashing
   # @todo Find a way to make Affinity work
@@ -28,7 +24,9 @@
     # Core parts of my systems
     nixpkgs.url      = "github:nixos/nixpkgs/nixos-25.05";
     impermanence.url = "github:nix-community/impermanence";
-    agenix.url       = "github:ryantm/agenix";
+    agenix           = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs"; };
     home-manager     = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs"; };

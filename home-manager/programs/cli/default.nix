@@ -6,7 +6,7 @@
   # ------------------------
   imports = [
     # Day to day
-    # ./aerc
+    ./aerc
     # ./jrnl
 
     # Utils
@@ -27,7 +27,7 @@
     # ----------------------------------------------------------
     home.packages = with pkgs; [
       # Secrets
-      # bitwarden-cli
+      bitwarden-cli
 
       # Utils
       exiftool

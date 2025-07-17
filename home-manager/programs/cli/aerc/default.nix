@@ -5,7 +5,7 @@
     # ----
     programs.aerc = {
       enable = true;
-      # extraConfig.general.unsafe-accounts-conf = true;
+      extraConfig.general.unsafe-accounts-conf = true;
     };
 
     # home.packages = with pkgs; [

@@ -7,6 +7,7 @@ let
   unnamedplayer = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGDS5LeM6v9nnZHlQ9rVZ0QppIvKKMvbMYXg9X9VPDRb";
 in
 {
+  "auth/bw.age".publicKeys = hosts ++ [ unnamedplayer ];
   "auth/mail/karl_at_delandsheere_be.age".publicKeys = hosts ++ [ unnamedplayer ];
   "auth/mail/karl_at_nouveaux-paradigmes_be.age".publicKeys = hosts ++ [ unnamedplayer ];
   "auth/tailscale/dimeritium.age".publicKeys = hosts ++ [ unnamedplayer ];
