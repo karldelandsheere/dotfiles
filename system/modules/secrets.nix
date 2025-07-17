@@ -8,7 +8,7 @@
         mode  = "0440";
       };
 
-      # Users
+      # # Users
       unnamedplayer = {
         file = ../../secrets/unnamedplayer.age;
         owner = "unnamedplayer";
