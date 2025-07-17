@@ -7,6 +7,10 @@
       enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
+
+      loginShellInit = ''
+        source /run/agenix/${config.home.username}
+      '';
     };
   };
 }
