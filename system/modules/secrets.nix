@@ -7,11 +7,6 @@
         group = "wheel";
         mode  = "0440";
       };
-      secret1 = {
-        file  = ../../secrets/secret1.age;
-        group = "wheel";
-        mode  = "0440";
-      };
 
       # Users
       unnamedplayer = {
