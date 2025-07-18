@@ -19,7 +19,8 @@
           # ".config/Element"
           # ".config/Signal"
           ".gnupg"
-          # ".local/share/gurk" # @todo Check what I really want to keep
+          ".local/share/gurk"
+          ".local/share/iamb"
           ".local/share/keyrings"
           # ".mozilla/firefox/default"
           ".mullvad"
@@ -30,6 +31,7 @@
 
         files = [
           # ".config/mimeapps.list"
+          ".config/Bitwarden CLI/data.json"
           ".zsh_history"
         ];
 

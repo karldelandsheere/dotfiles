@@ -10,5 +10,6 @@ in
   "auth/bw.age".publicKeys = hosts ++ [ unnamedplayer ];
   "auth/mail/karl_at_delandsheere_be.age".publicKeys = hosts ++ [ unnamedplayer ];
   "auth/mail/karl_at_nouveaux-paradigmes_be.age".publicKeys = hosts ++ [ unnamedplayer ];
+  "auth/matrix/dimeritium.age".publicKeys = hosts ++ [ unnamedplayer ];
   "auth/tailscale/dimeritium.age".publicKeys = hosts ++ [ unnamedplayer ];
 }

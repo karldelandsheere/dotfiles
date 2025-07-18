@@ -1,4 +1,3 @@
-data_path = "/home/unnamedplayer/.local/share/gurk/gurk.data.json"
 signal_db_path = "/home/unnamedplayer/.local/share/gurk/signal-db"
 first_name_only = false
 show_receipts = true
