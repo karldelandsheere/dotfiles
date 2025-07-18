@@ -6,12 +6,15 @@
     age = {
       secrets = {
         "auth/bw" = {
-          owner = "unnamedplayer";
           file = ../../secrets/auth/bw.age;
+          owner = "unnamedplayer";
         };
         "auth/mail/karl_at_delandsheere_be".file = ../../secrets/auth/mail/karl_at_delandsheere_be.age;
         "auth/mail/karl_at_nouveaux-paradigmes_be".file = ../../secrets/auth/mail/karl_at_nouveaux-paradigmes_be.age;
-        "auth/tailscale/dimeritium".file = ../../secrets/auth/tailscale/dimeritium.age;
+        "auth/tailscale/dimeritium" = {
+          file = ../../secrets/auth/tailscale/dimeritium.age;
+          owner = "unnamedplayer";
+        };
       };
     #   # wg-DE = {
     #   #   file = ../../secrets/wg-DE.age;

@@ -1,0 +1,53 @@
+default_profile = "dimeritium"
+
+[profiles."dimeritium"]
+url = "https://matrix.dimeritium.com"
+user_id = "@karldelandsheere:matrix.dimeritium.com"
+
+[settings]
+# default_room = "#iamb-users:0x.badd.cafe"
+# open_command = ["my-open", "--file"]
+# external_edit_file_suffix = ".md"
+log_level="warn"
+user_gutter_width = 30
+username_display = "username"
+
+[settings.notifications]
+enabled = true
+
+[settings.image_preview]
+protocol.type = "sixel"
+size = { "width" = 66, "height" = 20 }
+
+[settings.sort]
+rooms = [ "unread", "favorite", "name", "lowpriority" ]
+members = [ "id", "power" ]
+
+# [settings.users]
+# "@user:matrix.org" = { "name" = "John Doe", "color" = "magenta" }
+
+[layout]
+style = "config"
+
+[[layout.tabs]]
+window = "iamb://dms"
+
+[[layout.tabs]]
+window = "iamb://rooms"
+
+# [[layout.tabs]]
+# split = [
+#     { "window" = "#iamb-users:0x.badd.cafe" },
+#     { "window" = "#iamb-dev:0x.badd.cafe" }
+# ]
+
+# [macros.insert]
+# "jj" = "<Esc>"
+
+# [macros."normal|visual"]
+# "V" = "<C-W>m"
+
+# [dirs]
+# cache = "/home/user/.cache/iamb/"
+# logs = "/home/user/.local/share/iamb/logs/"
+# downloads = "/home/user/Downloads/"

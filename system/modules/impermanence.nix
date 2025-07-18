@@ -77,6 +77,8 @@ in
           "/var/lib/NetworkManager/secret_key"
           "/var/lib/NetworkManager/seen-bssids"
           "/var/lib/NetworkManager/timestamps"
+          "/var/lib/tailscale/tailscaled.log.conf"
+          "/var/lib/tailscale/tailscaled.state"
 
           # /root/...
           "/root/.local/share/nix/trusted-settings.json"

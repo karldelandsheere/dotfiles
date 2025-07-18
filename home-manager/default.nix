@@ -19,6 +19,7 @@
           # ".config/Element"
           # ".config/Signal"
           ".gnupg"
+          # ".local/share/gurk" # @todo Check what I really want to keep
           ".local/share/keyrings"
           # ".mozilla/firefox/default"
           ".mullvad"
@@ -35,10 +36,12 @@
         allowOther = true;
       };
 
-
-      # shellAliases = {
-      #   tsup-dimeritium = "tailscale up --login-server=https://headscale.sunflower-cloud.com --auth-key ${config.age}"
-      # };
+      shellAliases = {
+        tsup-dimeritium = "mullvad disconnect && \
+                           tailscale up --login-server=https://headscale.sunflower-cloud.com \
+                           --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)";
+        tsdown = "tailscale down && mullvad connect";
+      };
     };
 
     accounts.email = {

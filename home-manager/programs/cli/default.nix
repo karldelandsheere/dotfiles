@@ -7,6 +7,8 @@
   imports = [
     # Day to day
     ./aerc
+    ./gurk
+    ./iamb
     # ./jrnl
 
     # Utils

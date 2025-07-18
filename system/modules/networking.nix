@@ -50,12 +50,11 @@
       # ];
     };
 
-    # systemd.services.tailscaled.wantedBy = lib.mkForce []; # no autostart
-    # networking.firewall = {
-    #   trustedInterfaces = [ "tailscale0" ];
-    #   allowedUDPPorts = [ config.services.tailscale.port ];
-    #   allowedTCPPorts = [ 22 ];
-    # };
+    systemd.services.tailscaled.wantedBy = lib.mkForce []; # no autostart
+    networking.firewall = {
+      trustedInterfaces = [ "tailscale0" ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      allowedTCPPorts = [ 22 ];
+    };
   };
 }
-

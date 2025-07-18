@@ -19,9 +19,15 @@
     };
 
 
+    # loginShellInit = ''
+
+    # '';
+
+
+
     # @todo make this shell agnostic
     programs.zsh.profileExtra = ''
       exec niri --session
     '';
-  };  
+  };
 }

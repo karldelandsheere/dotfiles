@@ -46,9 +46,9 @@
       autosuggestions.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      loginShellInit = ''
-        source /run/agenix/unnamedplayer
-      '';
+      # loginShellInit = ''
+      #   source /run/agenix/unnamedplayer
+      # '';
     };
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;

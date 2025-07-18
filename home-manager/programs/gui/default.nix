@@ -5,11 +5,13 @@
   # GUI programs with config
   # ------------------------
   imports = [
-    ./element
     ./firefox
     ./ghostty
-    ./signal
+
     # ./onlyoffice.nix
+
+    # ./element # replaced by ../cli/iamb
+    # ./signal # replaced by ../cli/gurk
   ];
 
 
@@ -27,10 +29,10 @@
       # openscad
       # orca-slicer
       # prusa-slicer
-      # qbittorrent
+      qbittorrent
       # slurp
       # vlc
-      # vscodium
+      vscodium
     ];
   };
 }
