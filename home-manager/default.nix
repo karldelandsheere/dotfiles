@@ -32,6 +32,7 @@
         files = [
           # ".config/mimeapps.list"
           ".config/Bitwarden CLI/data.json"
+          ".local/share/nix/trusted-settings.json"
           ".zsh_history"
         ];
 

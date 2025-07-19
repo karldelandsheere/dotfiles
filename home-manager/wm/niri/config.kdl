@@ -98,8 +98,8 @@ layer-rule {
 workspace "dev"
 workspace "3d"
 //workspace "browse"
-workspace "comms"
-workspace "docs"
+// workspace "comms"
+// workspace "docs"
 workspace "files"
 
 
@@ -125,24 +125,6 @@ window-rule {
   match app-id="blender"
 
   open-on-workspace "3d"
-}
-
-window-rule {
-  match app-id="thunderbird"
-  open-on-workspace "comms"
-}
-
-window-rule {
-  match app-id="Signal"
-  match app-id="Element"
-
-  open-on-workspace "comms"
-  // opacity 0.85
-}
-
-window-rule {
-  match app-id="Bitwarden"
-  block-out-from "screen-capture"
 }
 
 window-rule {

@@ -81,7 +81,7 @@
       };
       
       logind.lidSwitch = if config.nouveauxParadigmes.hibernation.enable
-        then "suspend-then-hibernate"
+        then "hibernate" # "suspend-then-hibernate"
         else "suspend";
 
       logind.powerKey = if config.nouveauxParadigmes.hibernation.enable
