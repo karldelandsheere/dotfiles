@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
 {
-  # @todo test cinny-desktop instead of element
-
   # GUI programs with config
   # ------------------------
   imports = [

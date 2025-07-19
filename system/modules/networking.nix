@@ -35,19 +35,11 @@
     services.mullvad-vpn.enable = true;
 
 
-    # Tailscale setup
-    # @todo Setup Tailscale
-    # @todo And setup for Dimeritium
-    # ------------------------------
+    # Tailscale
+    # ---------
     services.tailscale = {
       enable = true;
-      # authKeyFile = config.age.secrets.dimeritium-tailscale-key.path;
       useRoutingFeatures = "client";
-      # extraUpFlages = [
-        # "--login-server=https://headscale.sunflower-cloud.com"
-        # "--accept-routes"
-        # "--exit-node-allow-lan-access"
-      # ];
     };
 
     systemd.services.tailscaled.wantedBy = lib.mkForce []; # no autostart
