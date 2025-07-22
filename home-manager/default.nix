@@ -98,28 +98,28 @@
         aerc.enable = true;
       };
 
-      accounts."karl_at_dimeritium_com" = {
-        name = "Dimeritium";
-        userName = "karl@dimeritium.com";
-        realName = "Karl Delandsheere";
-        address = "karl@dimeritium.com";
-        signature = {
-          showSignature = "append";
-          # delimiter = "#-- ¯\\_(ツ)_/¯ --#";
-          text = ''
-            #-- <b>¯\_(ツ)_/¯</b> --#
-            <b>Karl Delandsheere</b>
-            <a href="https://longrushtranquille.be">Impression 3D et pleins d'autres choses !</a>
-            --
-            Liège, Belgique
-            Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
-          '';
-        };
-        flavor = "outlook.office365.com";
-        passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/karl@dimeritium.com";
+      # accounts."karl_at_dimeritium_com" = {
+      #   name = "Dimeritium";
+      #   userName = "karl@dimeritium.com";
+      #   realName = "Karl Delandsheere";
+      #   address = "karl@dimeritium.com";
+      #   signature = {
+      #     showSignature = "append";
+      #     # delimiter = "#-- ¯\\_(ツ)_/¯ --#";
+      #     text = ''
+      #       #-- <b>¯\_(ツ)_/¯</b> --#
+      #       <b>Karl Delandsheere</b>
+      #       <a href="https://longrushtranquille.be">Impression 3D et pleins d'autres choses !</a>
+      #       --
+      #       Liège, Belgique
+      #       Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
+      #     '';
+      #   };
+      #   flavor = "outlook.office365.com";
+      #   passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/karl@dimeritium.com";
 
-        aerc.enable = true;
-      };
+      #   aerc.enable = true;
+      # };
     };
 
     # age = {
