@@ -19,6 +19,7 @@
           # ".config/Element"
           # ".config/Signal"
           ".gnupg"
+          ".local/share/calcurse"
           ".local/share/gurk"
           ".local/share/iamb"
           ".local/share/keyrings"

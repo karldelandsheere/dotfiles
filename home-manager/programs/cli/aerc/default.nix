@@ -17,6 +17,7 @@
           dirlist-tree = true;
           dirlist-collapse = 1;
           threading-enabled = true;
+          styleset-name = "catppuccin-mocha";
         };
 
         compose = {
