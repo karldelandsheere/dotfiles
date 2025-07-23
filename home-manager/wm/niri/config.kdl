@@ -46,31 +46,21 @@ environment {
 }
 
 layout {
-  gaps 10
-
-// Set transparent workspace background color.
   background-color "transparent"
-
-
   center-focused-column "never"
-
-  preset-column-widths {
-    proportion 0.5
-    proportion 0.66667
-  }
 
   // If you leave the brackets empty, the windows themselves will decide their initial width.
   default-column-width { proportion 0.5; }
 
-  // border {
   focus-ring {
-    width 1
-
-    // active-color "#7fc8ff"
-    inactive-color "#505050"
-
     active-gradient from="#80c8ff" to="#223366" angle=210 relative-to="workspace-view"
     inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    width 1
+  }
+  gaps 10
+  preset-column-widths {
+    proportion 0.5
+    proportion 0.66667
   }
 }
 
@@ -81,7 +71,6 @@ layer-rule {
 
 overview {
   zoom 0.5
-  // Disable the workspace shadows in the overview.
   workspace-shadow {
     off
   }
@@ -93,20 +82,19 @@ layer-rule {
     block-out-from "screencast"
 }
 
+window-rule {
+  geometry-corner-radius 0
+  clip-to-geometry true
+}
+
 
 // Workspaces
-workspace "dev"
+workspace "tty"
+workspace "browse"
 workspace "3d"
-//workspace "browse"
-// workspace "comms"
 // workspace "docs"
 workspace "files"
 
-
-//window-rule {
-//  match app-id=r#""#
-//  open-on-workspace ""
-//}
 
 // Rules per app
 
@@ -114,8 +102,13 @@ window-rule {
   match app-id="com.mitchellh.ghostty"
   match app-id="codium"
 
-  open-on-workspace "dev"
+  open-on-workspace "tty"
   opacity 0.85
+}
+
+window-rule {
+  match app-id="firefox"
+  open-on-workspace "browse"
 }
 
 window-rule {
@@ -147,30 +140,8 @@ window-rule {
   open-on-workspace "files"
 }
 
-// window-rule {
-//   match app-id="firefox"
-// }
 
 
-
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-    block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
-}
-
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-window-rule {
-    geometry-corner-radius 0
-    clip-to-geometry true
-}
 
 
 
@@ -276,7 +247,7 @@ binds {
     // Mod+J     { focus-window-or-workspace-down; }
     // Mod+K     { focus-window-or-workspace-up; }
     // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
-    // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
 
     Mod+Shift+Left  { focus-monitor-left; }

@@ -7,23 +7,23 @@
     installation_mode = "force_installed";
     private_browsing = true;
     settings = { };
-    permissions = [ ];
-    #   "activeTab"
-    #   "clipboardWrite"
-    #   "contextMenus"
-    #   "cookies"
-    #   "nativeMessaging"
-    #   "notifications"
-    #   "storage"
-    #   "tabs"
-    #   "webNavigation"
-    #   "webRequest"
-    #   "webRequestBlocking"
-    #   "https://*/*"
-    #   "http://*/*"
-    #   "https://api.github.com/"
-    #   "<all_urls>"
-    # ];
+    permissions = [
+      "activeTab"
+      "clipboardWrite"
+      "contextMenus"
+      "cookies"
+      "nativeMessaging"
+      "notifications"
+      "storage"
+      "tabs"
+      "webNavigation"
+      "webRequest"
+      "webRequestBlocking"
+      "https://*/*"
+      "http://*/*"
+      "https://api.github.com/"
+      "<all_urls>"
+    ];
   };
   
   "CanvasBlocker@kkapsner.de" = {
@@ -31,12 +31,12 @@
     installation_mode = "normal_installed";
     private_browsing = true;
     settings = { };
-    permissions = [ ];
-    #   "activeTab"
-    #   "tabs"
-    #   "storage"
-    #   "<all_urls>"
-    # ];
+    permissions = [
+      "activeTab"
+      "tabs"
+      "storage"
+      "<all_urls>"
+    ];
   };
   
   "{74145f27-f039-47ce-a470-a662b129930a}" = {
@@ -52,7 +52,7 @@
     ];
   };
   
-  "gpdr@cavi.au.dk" = {
+  "gdpr@cavi.au.dk" = {
     id = "consent-o-matic";
     installation_mode = "normal_installed";
     private_browsing = true;

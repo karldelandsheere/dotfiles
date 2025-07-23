@@ -39,7 +39,7 @@
       };
     };
 
-    # home.file.".config/aerc".source =
-    #   config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/cli/aerc/config";
+    home.file.".config/aerc/stylesets".source =
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/cli/aerc/config/stylesets";
   };
 }

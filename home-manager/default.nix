@@ -16,14 +16,12 @@
       # ------------------------------------------------
       persistence."/persist/home/unnamedplayer" = {
         directories = [
-          # ".config/Element"
-          # ".config/Signal"
           ".gnupg"
           ".local/share/calcurse"
           ".local/share/gurk"
           ".local/share/iamb"
           ".local/share/keyrings"
-          # ".mozilla/firefox/default"
+          ".mozilla/firefox/default"
           ".mullvad"
           ".ssh"
 

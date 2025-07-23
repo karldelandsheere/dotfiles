@@ -44,9 +44,9 @@
       "active-only": true,
       "format": "{icon}",
       "format-icons": {
-        "dev": " ",
+        "tty": " ",
+        "browse": " ",
         "3d": " ",
-        "comms": " ",
         "docs": " ",
         "files": " ",
         "default": " ",

@@ -1,10 +1,10 @@
 # Firefox
-# -------
+#
 # Based on several dotfiles but a lot on those
 #   https://gitlab.com/maximilian_dietrich/nixos/-/tree/restructure-add-workstation/modules/graphical/apps/browser
-#
-# @todo also, check if it's possible to pre-populate some bitwarden info
+# --------------------------------------------
 { config, pkgs, lib, ... }: let
+  bookmarks  = import ./bookmarks.nix;
   extensions = import ./extensions.nix;
 in
 {
@@ -24,39 +24,7 @@ in
         AutofillAddressEnabled = false;
         AutofillCreditCardEnabled = false;
         BackgroundAppUpdate = false;
-
-        # Bookmarks = {
-        #   "type": "array",
-        #   "items": {
-        #     "type": "object",
-        #     "properties": {
-        #       "Title": {
-        #         "type": "string"
-        #       },
-        #       "URL": {
-        #         "type": "URL"
-        #       },
-        #       "Favicon": {
-        #         "type": "URLorEmpty"
-        #       },
-        #       "Placement": {
-        #         "type": "string",
-        #         "enum": [
-        #           "toolbar",
-        #           "menu"
-        #         ]
-        #       },
-        #       "Folder": {
-        #         "type": "string"
-        #       }
-        #     },
-        #     "required": [
-        #       "Title",
-        #       "URL"
-        #     ]
-        #   }
-        # };
-
+        # Bookmarks = [];
         CaptivePortal = false;
         # Certificates = {
         #   "ImportEnterpriseRoots": {
@@ -71,8 +39,9 @@ in
         # };
         ContentAnalysis = { Enabled = false; };
         Cookies = {
-          Behavior = "reject";
+          Behavior = "reject-tracker-and-partition-foreign";
           BehaviorPrivateBrowsing = "reject";
+          Locked = true;
           RejectTracker = true;
         };
         DisableAccounts = true;
@@ -126,14 +95,6 @@ in
             inherit (definition) installation_mode private_browsing settings permissions;
             install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${definition.id}/latest.xpi";
           }
-
-
-
-        
-          # _name: extension: lib.nameValuePair extension.id {
-          #   inherit (extension) installation_mode private_browsing settings permissions;
-          #   install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${_name}/latest.xpi";
-          # }
         ) extensions;
         ExtensionUpdate = false;
         FirefoxHome = {
@@ -187,7 +148,7 @@ in
         # ];
         NetworkPrediction = false;
         NewTabPage = false;
-        NoDefaultBookmarks = true;
+        NoDefaultBookmarks = false; # https://github.com/nix-community/home-manager/issues/5821
         OfferToSaveLogins = false;
         OverrideFirstRunPage = "";
         OverridePostUpdatePage = "";
@@ -717,6 +678,10 @@ in
 
 
 
+        bookmarks = {
+          force = true;
+          settings = bookmarks;
+        };
 
 
         search = {
