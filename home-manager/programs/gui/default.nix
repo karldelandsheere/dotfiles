@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   # GUI programs with config
   # ------------------------
@@ -17,6 +17,9 @@
     # GUI programs that either don't need config or are on trial
     # ----------------------------------------------------------
     home.packages = with pkgs; [
+      inputs.affinity-nix.packages.x86_64-linux.designer
+      # inputs.affinity-nix.packages.x86_64-linux.photo
+      # inputs.affinity-nix.packages.x86_64-linux.publisher
       # anytype
       # bambu-studio # crashes, don't know why
       bitwarden

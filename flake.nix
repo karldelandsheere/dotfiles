@@ -1,19 +1,16 @@
 {
-  # @todo Customize Swaylock
-  # @todo BambuStudio and OrcaSlicer are crashing
-  # @todo Find a way to make Affinity work
-  # @todo Make my workspaces better and find out how to display only the active and not empty ones
-
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://niri.cachix.org"
+      "https://cache.garnix.io"
     ];
 
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 
@@ -34,10 +31,13 @@
     # GUI/WM
     niri.url         = "github:sodiboo/niri-flake";
 
+    # Applications
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
+
     # Optional add-ons
-    firefox-addons   = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs"; };
+    # firefox-addons   = {
+    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    #   inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
 

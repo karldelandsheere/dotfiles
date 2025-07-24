@@ -142,6 +142,18 @@ window-rule {
 
 
 
+// window-rule {
+//   match title="aerc"
+// }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -161,9 +173,10 @@ spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
 // @todo find the right way to setup udiskie
 spawn-at-startup "systemctl" "--user" "start" "udiskie.service"
 
-spawn-at-startup "ghostty"
-// spawn-at-startup "sh" "-c" "ghostty -e yazi"
-// spawn-at-startup "sh" "-c" "ghostty -e btm"
+// Open startup TUI apps
+spawn-at-startup "sh" "-c" "/etc/nixos/home-manager/utils/scripts/startup.sh"
+
+// spawn-at-startup "ghostty"
 
 
 // No need to get that overlay each time
@@ -228,19 +241,19 @@ binds {
 
 
 
-  Mod+Left  { focus-column-left; }
-  Mod+Down  { focus-window-down; }
-  Mod+Up    { focus-window-up; }
-  Mod+Right { focus-column-right; }
-  Mod+Home { focus-column-first; }
-  Mod+End  { focus-column-last; }
+  Mod+Left       { focus-column-left; }
+  Mod+Down       { focus-window-down; }
+  Mod+Up         { focus-window-up; }
+  Mod+Right      { focus-column-right; }
+  Mod+Home       { focus-column-first; }
+  Mod+End        { focus-column-last; }
 
   Mod+Ctrl+Left  { move-column-left; }
   Mod+Ctrl+Down  { move-window-down; }
   Mod+Ctrl+Up    { move-window-up; }
   Mod+Ctrl+Right { move-column-right; }
-  Mod+Ctrl+Home { move-column-to-first; }
-  Mod+Ctrl+End  { move-column-to-last; }
+  Mod+Ctrl+Home  { move-column-to-first; }
+  Mod+Ctrl+End   { move-column-to-last; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
@@ -250,14 +263,14 @@ binds {
     Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
 
-    Mod+Shift+Left  { focus-monitor-left; }
-    Mod+Shift+Down  { focus-monitor-down; }
-    Mod+Shift+Up    { focus-monitor-up; }
-    Mod+Shift+Right { focus-monitor-right; }
-    Mod+Shift+H     { focus-monitor-left; }
-    Mod+Shift+J     { focus-monitor-down; }
-    Mod+Shift+K     { focus-monitor-up; }
-    Mod+Shift+L     { focus-monitor-right; }
+  Mod+Shift+Left  { focus-monitor-left; }
+  Mod+Shift+Down  { focus-monitor-down; }
+  Mod+Shift+Up    { focus-monitor-up; }
+  Mod+Shift+Right { focus-monitor-right; }
+  Mod+Shift+H     { focus-monitor-left; }
+  Mod+Shift+J     { focus-monitor-down; }
+  Mod+Shift+K     { focus-monitor-up; }
+  Mod+Shift+L     { focus-monitor-right; }
 
     Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }

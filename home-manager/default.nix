@@ -38,10 +38,14 @@
         allowOther = true;
       };
 
+      # @todo 
       shellAliases = {
-        tsup-dimeritium = "mullvad disconnect && \
-                           tailscale up --login-server=https://headscale.sunflower-cloud.com \
-                           --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)";
+        tsup-dimeritium = ''
+          mullvad disconnect && \
+          tailscale up --force-reauth --operator=$USER \
+            --login-server=https://headscale.sunflower-cloud.com:8080 \
+            --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)
+        '';
         tsdown = "tailscale down && mullvad connect";
       };
     };
@@ -92,6 +96,28 @@
         };
         flavor = "migadu.com";
         passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/karl@nouveaux-paradigmes.be";
+
+        aerc.enable = true;
+      };
+
+      accounts."expo_at_ventrecontent_be" = {
+        name = "Expo @ Ventre Content";
+        userName = "expo@ventrecontent.be";
+        realName = "Ventre Content";
+        address = "expo@ventrecontent.be";
+        signature = {
+          showSignature = "append";
+          # delimiter = "#-- ¯\\_(ツ)_/¯ --#";
+          text = ''
+            --
+            <b>Karl pour Ventre Content<a href="https://ventrecontent.be">Ventre Content</a></b>
+            --
+            Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
+          '';
+        };
+        imap.host = "mail.ventrecontent.be";
+        smtp.host = "mail.ventrecontent.be";
+        passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/expo@ventrecontent.be";
 
         aerc.enable = true;
       };
