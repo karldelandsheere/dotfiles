@@ -32,7 +32,7 @@
     niri.url         = "github:sodiboo/niri-flake";
 
     # Applications
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    # affinity-nix.url = "github:mrshmllow/affinity-nix"; # Not working "Unable to find runtime blablabla"
 
     # Optional add-ons
     # firefox-addons   = {

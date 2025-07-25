@@ -45,6 +45,7 @@
       "format": "{icon}",
       "format-icons": {
         "tty": " ",
+        "daily" : " ",
         "browse": " ",
         "3d": " ",
         "docs": " ",

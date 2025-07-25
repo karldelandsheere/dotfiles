@@ -3,13 +3,16 @@
   # GUI programs with config
   # ------------------------
   imports = [
+    # Day to day
+    # ./element # replaced by ../cli/iamb
     ./firefox
+    # ./signal # replaced by ../cli/gurk
+
+    # Utils
     ./ghostty
 
+    # Office
     # ./onlyoffice.nix
-
-    # ./element # replaced by ../cli/iamb
-    # ./signal # replaced by ../cli/gurk
   ];
 
 
@@ -17,23 +20,39 @@
     # GUI programs that either don't need config or are on trial
     # ----------------------------------------------------------
     home.packages = with pkgs; [
-      inputs.affinity-nix.packages.x86_64-linux.designer
-      # inputs.affinity-nix.packages.x86_64-linux.photo
-      # inputs.affinity-nix.packages.x86_64-linux.publisher
-      # anytype
-      # bambu-studio # crashes, don't know why
+      # Secrets && privacy
       bitwarden
-      # blender
-      # grim
       # mullvad-browser
+          
+      # Day to day
+      # anytype
       # opencloud-desktop
+
+      # Utils
+      qbittorrent
+
+      # Dev
+      vscodium
+      
+      # 3d design && 3d printing
+      # bambu-studio # crashes, don't know why
+      # blender
       # openscad
       # orca-slicer
       # prusa-slicer
-      qbittorrent
-      # slurp
+      
+      # Graphic design
+      # Not working on 20250725, try again later if no good alternative found 
+      # inputs.affinity-nix.packages.x86_64-linux.designer
+      # inputs.affinity-nix.packages.x86_64-linux.photo
+      # inputs.affinity-nix.packages.x86_64-linux.publisher
+
+      # Media
       # vlc
-      vscodium
+
+      # Screensharing, but can't get it to work so far
+      # grim
+      # slurp
     ];
   };
 }

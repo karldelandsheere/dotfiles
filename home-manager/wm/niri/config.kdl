@@ -91,7 +91,8 @@ window-rule {
 // Workspaces
 workspace "tty"
 workspace "browse"
-workspace "3d"
+workspace "daily"
+// workspace "3d"
 // workspace "docs"
 workspace "files"
 
@@ -111,24 +112,24 @@ window-rule {
   open-on-workspace "browse"
 }
 
-window-rule {
-  match app-id="PrusaSlicer"
-  match app-id="OrcaSlicer"
-  match app-id="org.openscad."
-  match app-id="blender"
+// window-rule {
+//   match app-id="PrusaSlicer"
+//   match app-id="OrcaSlicer"
+//   match app-id="org.openscad."
+//   match app-id="blender"
 
-  open-on-workspace "3d"
-}
+//   open-on-workspace "3d"
+// }
 
-window-rule {
-  match app-id="anytype"
-  open-on-workspace "docs"
-}
+// window-rule {
+//   match app-id="anytype"
+//   open-on-workspace "docs"
+// }
 
-window-rule {
-  match app-id="ONLYOFFICE"
-  open-on-workspace "docs"
-}
+// window-rule {
+//   match app-id="ONLYOFFICE"
+//   open-on-workspace "docs"
+// }
 
 window-rule {
   match app-id="desktop.opencloud.eu."
@@ -142,9 +143,14 @@ window-rule {
 
 
 
-// window-rule {
-//   match title="aerc"
-// }
+window-rule {
+  match title="aerc"
+  match title="calcurse"
+  match title="gurk"
+  match title="iamb"
+
+  open-on-workspace "daily"
+}
 
 
 
@@ -173,8 +179,6 @@ spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
 // @todo find the right way to setup udiskie
 spawn-at-startup "systemctl" "--user" "start" "udiskie.service"
 
-// Open startup TUI apps
-spawn-at-startup "sh" "-c" "/etc/nixos/home-manager/utils/scripts/startup.sh"
 
 // spawn-at-startup "ghostty"
 
@@ -210,7 +214,10 @@ binds {
   // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
 
 
-  // Launch some programs
+  // Launch or open stuff
+  // --------------------
+  Mod+Ctrl+D { spawn "launch-dailies"; }
+
   Mod+T { spawn "ghostty"; }
   Mod+Space { spawn "fuzzel"; }
   Mod+Tab repeat=false { toggle-overview; }
@@ -407,6 +414,6 @@ binds {
 
   Ctrl+Alt+Q allow-inhibiting=false { spawn "sh" "-c" "swaylock -f"; }
   Ctrl+Alt+S allow-inhibiting=false { spawn "sh" "-c" "swaylock -f && systemctl suspend"; }
-  Ctrl+Alt+D allow-inhibiting=false { spawn "sh" "-c" "swaylock -f && systemctl hibernate"; }
+  Ctrl+Alt+D allow-inhibiting=false { spawn "sh" "-c" "systemctl hibernate"; }
   Ctrl+Alt+W { spawn "sh" "-c" "loginctl terminate-user $USER"; }
 }
