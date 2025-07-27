@@ -2,11 +2,8 @@
 {
   config = {
     boot = {
-      kernelParams = [
-        "quiet"
-        "splash"
-        "pci=noaer" # shush AE_ALREADY_EXISTS harmless errors
-      ];
+      kernelParams = [ "quiet" "splash" ];
+
       loader = {
         efi.canTouchEfiVariables = true;
 
