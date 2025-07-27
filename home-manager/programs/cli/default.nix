@@ -22,6 +22,9 @@
     # Media
     ./moc
     ./yt-dlp
+
+    # Like the cool kids
+    ./fastfetch
   ];
 
 
@@ -49,9 +52,8 @@
       ffmpeg
       mpv
 
-      # Like the cool guys
+      # Like the cool kids
       cmatrix
-      fastfetch
     ];
   };
 }
