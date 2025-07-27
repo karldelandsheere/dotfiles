@@ -36,10 +36,10 @@
       
       # 3d design && 3d printing
       # bambu-studio # crashes, don't know why
-      # blender
-      # openscad
+      blender
+      openscad
       # orca-slicer
-      # prusa-slicer
+      prusa-slicer
       
       # Graphic design
       # Not working on 20250725, try again later if no good alternative found 

@@ -92,7 +92,7 @@ window-rule {
 workspace "tty"
 workspace "browse"
 workspace "daily"
-// workspace "3d"
+workspace "3d"
 // workspace "docs"
 workspace "files"
 
@@ -112,14 +112,15 @@ window-rule {
   open-on-workspace "browse"
 }
 
-// window-rule {
-//   match app-id="PrusaSlicer"
-//   match app-id="OrcaSlicer"
-//   match app-id="org.openscad."
-//   match app-id="blender"
+window-rule {
+  match app-id="PrusaSlicer"
+  match app-id="OrcaSlicer"
+  match app-id="org.openscad."
+  match app-id="blender"
 
-//   open-on-workspace "3d"
-// }
+  open-on-workspace "3d"
+  open-maximized true
+}
 
 // window-rule {
 //   match app-id="anytype"

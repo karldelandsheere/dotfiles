@@ -2,17 +2,18 @@
 // https://github.com/icanseetime/fastfetch/blob/main/themes/Catppuccin-Mocha/config.jsonc
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-  // "logo": {
-  //   "type": "kitty",
-  //   "source": "~/.config/fastfetch/logo/catppuccin_logo.png",
-  //   "width": 40,
-  //   "height": 20,
-  //   "padding": {
-  //     "top": 2,
-  //     "left": 2,
-  //     "right": 2
-  //   }
-  // },
+  "logo": {
+    "width": 40,
+    "height": 20,
+    "color": {
+      "1": "#a6adc8",
+      "2": "#9399b2"
+    },
+    "padding": {
+      "left": 2,
+      "right": 2
+    }
+  },
   "display": {
     "separator": " \u001b[38;2;203;166;247m\u001b[0m ",
     "constants": [
@@ -50,6 +51,10 @@
       "keyColor": "#f5c2e7"
     },
     {
+      "type": "swap",
+      "keyColor": "#f5c2e7"
+    },
+    {
       "type": "display",
       "keyColor": "#f5c2e7"
     },
@@ -73,14 +78,14 @@
       "type": "kernel",
       "keyColor": "#f5c2e7"
     },
-    {
-      "type": "lm",
-      "keyColor": "#f5c2e7"
-    },
-    {
-      "type": "de",
-      "keyColor": "#f5c2e7"
-    },
+    // {
+    //   "type": "lm",
+    //   "keyColor": "#f5c2e7"
+    // },
+    // {
+    //   "type": "de",
+    //   "keyColor": "#f5c2e7"
+    // },
     {
       "type": "wm",
       "keyColor": "#f5c2e7"

@@ -70,8 +70,9 @@
       "format": "{icon}",
       "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "],
       "tooltip-format": "Backlight: {percent}%",
-		  "on-scroll-down" : "brightnessctl set +1%",
-		  "on-scroll-up" : "brightnessctl set 1%-"
+      "min_brightness": 1,
+      "scroll-step": 1,
+      "reverse-scrolling": true,
     },
 
 
@@ -86,7 +87,6 @@
   		"tooltip-format-bluetooth": "Sound: {volume}% over ",
       "scroll-step": 1,
       "reverse-scrolling": true,
-      // "on-click": "pavucontrol"
     },
 
 
@@ -101,7 +101,7 @@
     "battery": {
       "states": {
         "warning": 30,
-        "critical": 15
+        "critical": 9
       },
       "format": "{icon}",
       "format-icons": {
@@ -142,22 +142,6 @@
 		  // "tooltip": false,
     // 	"on-click": "wlogout",
     // },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     "tray": {
