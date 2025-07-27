@@ -202,10 +202,10 @@ animations {
   // off
 }
 
-switch-events {
-  lid-close { spawn "notify-send" "-r" "69" "-a" "niri" "laptop lid closed" "-t" "888" "-u" "low"; }
-  lid-open { spawn "notify-send" "-r" "69" "-a" "niri" "laptop lid open" "-t" "888" "-u" "low"; }
-}
+// switch-events {
+//   lid-close { spawn "notify-send" "-r" "69" "-a" "niri" "laptop lid closed" "-t" "888" "-u" "low"; }
+//   lid-open { spawn "notify-send" "-r" "69" "-a" "niri" "laptop lid open" "-t" "888" "-u" "low"; }
+// }
 
 
 binds {
@@ -221,6 +221,7 @@ binds {
   Mod+T { spawn "ghostty"; }
   Mod+Space { spawn "fuzzel"; }
   Mod+Tab repeat=false { toggle-overview; }
+  Alt+Tab { spawn "/etc/nixos/home-manager/utils/scripts/fuzzel-niri"; }
 
   // Control the monitor brightness
   XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
