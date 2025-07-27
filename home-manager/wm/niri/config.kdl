@@ -109,7 +109,9 @@ window-rule {
 
 window-rule {
   match app-id="firefox"
+
   open-on-workspace "browse"
+  open-maximized true
 }
 
 window-rule {
