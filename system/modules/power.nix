@@ -101,7 +101,6 @@
     # Resume after hibernation
     # ------------------------
     boot.kernelParams = [
-      "acpi_enforce_resources=lax" # Shush harmless acpi warnings
     ] ++ lib.lists.optionals ( config.nouveauxParadigmes.hibernation.enable ) [
       "resume=${config.nouveauxParadigmes.hibernation.resume.device}"
       "resume_offset=${config.nouveauxParadigmes.hibernation.resume.offset}"
