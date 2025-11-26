@@ -46,6 +46,12 @@
             --login-server=https://headscale.sunflower-cloud.com:8080 \
             --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)
         '';
+        tsup-np = ''
+          mullvad disconnect && \
+          tailscale up --force-reauth --operator=$USER \
+            --login-server=https://headscale.nouveaux-paradigmes.be \
+            --auth-key $(cat /run/agenix/auth/tailscale/nouveauxparadigmes)
+        '';
         tsdown = "tailscale down && mullvad connect";
       };
     };
