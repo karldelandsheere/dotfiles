@@ -4,6 +4,7 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
+      basalt
       brightnessctl
       curl
       git
