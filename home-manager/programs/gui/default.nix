@@ -6,7 +6,7 @@
     # Day to day
     # ./element # replaced by ../cli/iamb
     ./firefox
-    # ./obsidian
+    ./obsidian
     # ./signal # replaced by ../cli/gurk
 
     # Utils

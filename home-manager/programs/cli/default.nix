@@ -36,6 +36,7 @@
       bitwarden-cli
 
       # Day to day
+      basalt
 
       # Utils
       exiftool

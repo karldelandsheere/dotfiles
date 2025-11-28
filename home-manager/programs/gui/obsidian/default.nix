@@ -3,14 +3,17 @@
 { config, osConfig, ... }:
 {
   config = {
-    programs.obsidian.enable = true;
-    # programs.obsidian = {
-      # enable = true;
-    # };
+    programs.obsidian = {
+      enable = true;
+      # vaults.Braindump = {
+      #   enable = true;
+      #   target = "Data/Notes/Braindump";
+      # };
+    };
 
     # home = {
-    #   file.".config/ghostty".source =
-    #     config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/gui/ghostty/config";
+    #   file.".config/obsidian".source =
+    #     config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/gui/obsidian/config";
     # };
   };
 }

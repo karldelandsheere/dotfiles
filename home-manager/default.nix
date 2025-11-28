@@ -25,7 +25,8 @@
           ".mullvad"
           ".ssh"
 
-          # "OpenCloud"
+          # Obsidian vaults, OpenCloud data, ...
+          "Data"
         ];
 
         files = [
