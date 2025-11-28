@@ -22,7 +22,7 @@
     # ----------------------------------------------------------
     home.packages = with pkgs; [
       # Secrets && privacy
-      bitwarden
+      bitwarden-desktop
       # mullvad-browser
           
       # Day to day

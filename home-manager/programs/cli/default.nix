@@ -20,7 +20,7 @@
     ./zsh.nix
 
     # Media
-    ./moc
+    # ./moc # commented until version number is fixed in NixOS 25.11
     ./yt-dlp
 
     # Like the cool kids
@@ -51,6 +51,7 @@
       cava
       ffmpeg
       mpv
+      termusic
 
       # Like the cool kids
       cmatrix

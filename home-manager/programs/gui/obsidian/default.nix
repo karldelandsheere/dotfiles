@@ -1,11 +1,12 @@
-# Ghostty terminal emulator
-# -------------------------
+# Obsidian
+# --------
 { config, osConfig, ... }:
 {
   config = {
-    programs.obsidian = {
-      enable = true;
-    };
+    programs.obsidian.enable = true;
+    # programs.obsidian = {
+      # enable = true;
+    # };
 
     # home = {
     #   file.".config/ghostty".source =

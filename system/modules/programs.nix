@@ -4,7 +4,6 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
-      basalt
       brightnessctl
       curl
       git
@@ -14,7 +13,7 @@
       libnotify
       libsecret
       nano
-      pinentry
+      pinentry-curses
       unzip
       usbutils
     ] ++ lib.lists.optionals ( config.nouveauxParadigmes.gui.enable ) [

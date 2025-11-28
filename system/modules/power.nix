@@ -72,21 +72,19 @@
 
       # Lid and powerKey events (@todo But what if gui is not enabled?)
       # -----------------------
-      logind = {
-        # lidSwitch = "suspend-then-hibernate";
-        lidSwitchExternalPower = "suspend";
-        lidSwitchDocked = "ignore";
-        # powerKey = "hibernate";
-        powerKeyLongPress = "poweroff";
-      };
-      
-      logind.lidSwitch = if config.nouveauxParadigmes.hibernation.enable
-        then "hibernate" # "suspend-then-hibernate"
-        else "suspend";
+      logind.settings.Login = {
+        HandleLidSwitchExternalPower = "suspend";
+        HandleLidSwitchDocked = "ignore";
+        HandlePowerKeyLongPress = "poweroff";
 
-      logind.powerKey = if config.nouveauxParadigmes.hibernation.enable
-        then "hibernate"
-        else "suspend";
+        HandleLidSwitch = if config.nouveauxParadigmes.hibernation.enable
+          then "hibernate" # "suspend-then-hibernate"
+          else "suspend";
+
+        HandlePowerKey = if config.nouveauxParadigmes.hibernation.enable
+          then "hibernate"
+          else "suspend";
+      };
     };
 
 

@@ -4,10 +4,12 @@
 {
   config = {
     programs.git = {
-      enable = true;
-      userName = "Karl";
-      userEmail = "karl@delandsheere.be";
-      signing = {
+      enable        = true;
+      settings.user = {
+        name  = "Karl";
+        email = "karl@delandsheere.be";
+      };
+      signing       = {
         key = "D4EFAA4CD5AE64F4";
         signByDefault = true;
       };

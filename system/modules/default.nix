@@ -14,6 +14,7 @@
     ./security.nix
     ./services.nix
     ./sound.nix
+    ./xdg.nix
   ];
 
 

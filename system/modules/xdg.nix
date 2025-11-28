@@ -25,7 +25,6 @@
         ];
       };
 
-      
       # mimeApps.defaultApplications = {
       #   "application/xhtml+xml" = "firefox.desktop";
       #   "text/html" = "firefox.desktop";
@@ -34,5 +33,9 @@
       #   "x-scheme-handler/https" = "firefox.desktop";
       # };
     };
+
+    environment.pathsToLink = [
+      "/share/xdg-desktop-portal"
+      "/share/applications" ];
   };    
 }
