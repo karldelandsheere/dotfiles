@@ -27,10 +27,8 @@
 
 
     nix = {
-      # Activate flajes, etc.
-      # ---------------------
       settings = {
-        experimental-features = [ "nix-command" "flakes" ];
+        experimental-features = [ "nix-command" "flakes" ]; # Activate flakes, etc.
         trusted-users = [ "@wheel" ];
         warn-dirty = false; # For some reason, it still does...
       };

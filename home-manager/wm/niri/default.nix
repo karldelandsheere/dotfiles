@@ -44,7 +44,10 @@ in
 
     # @todo make this shell agnostic
     programs.zsh.profileExtra = ''
-      exec niri --session
+      # Check if the terminal is tty1 so we only autolaunch niri on that one
+      if [[ "$(tty)" == "/dev/tty1" ]]; then
+        exec niri --session
+      fi
     '';
   };
 }

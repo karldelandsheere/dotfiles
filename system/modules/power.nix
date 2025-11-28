@@ -70,7 +70,7 @@
       };
 
 
-      # Lid and powerKey events (@todo But what if gui is not enabled?)
+      # Lid and powerKey events
       # -----------------------
       logind.settings.Login = {
         HandleLidSwitchExternalPower = "suspend";

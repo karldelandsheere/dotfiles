@@ -20,7 +20,6 @@
     ./zsh.nix
 
     # Media
-    # ./moc # commented until version number is fixed in NixOS 25.11
     ./yt-dlp
 
     # Like the cool kids
@@ -36,7 +35,7 @@
       bitwarden-cli
 
       # Day to day
-      basalt
+      # basalt @todo check in a couple months where the dev is at
 
       # Utils
       exiftool
@@ -49,12 +48,12 @@
       gpu-screen-recorder
 
       # Media
-      cava
       ffmpeg
       mpv
-      termusic
+      termusic # @todo config that
 
       # Like the cool kids
+      cava
       cmatrix
     ];
   };
