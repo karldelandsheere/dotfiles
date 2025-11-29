@@ -3,7 +3,8 @@
   imports = [
     ./programs
     ./utils
-    ./wm/niri
+    # ./wm/niri
+    ./gui
   ];
 
 

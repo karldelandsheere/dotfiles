@@ -30,6 +30,11 @@
 
     # GUI/WM
     niri.url         = "github:sodiboo/niri-flake";
+    noctalia         = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs"; };
+
+
 
     # Applications
     # affinity-nix.url = "github:mrshmllow/affinity-nix"; # Not working "Unable to find runtime blablabla"

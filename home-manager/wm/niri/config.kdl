@@ -3,6 +3,18 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
 
 
+// Startup sequence
+//  
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "swayidle" "-w"
+spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
+
+// Work around for udiskie to start correctly
+// @todo find the right way to setup udiskie
+spawn-at-startup "systemctl" "--user" "start" "udiskie.service"
+
+
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 // 
 input {
@@ -65,16 +77,6 @@ overview {
     off
   }
 }
-
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "swaybg" "-i" "/etc/nixos/home-manager/themes/wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
-spawn-at-startup "swayidle" "-w"
-spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
-// spawn-at-startup "waybar"
-
-// Work around for udiskie to start correctly
-// @todo find the right way to setup udiskie
-spawn-at-startup "systemctl" "--user" "start" "udiskie.service"
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs

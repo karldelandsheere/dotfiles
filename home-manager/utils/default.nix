@@ -7,15 +7,12 @@
     ./mako
     ./swayidle
     ./swaylock
-    ./waybar
   ];
 
   config = {
     # Simple packages
     # ---------------
     home.packages = with pkgs; [
-      networkmanagerapplet
-      swaybg
     ];
 
 
