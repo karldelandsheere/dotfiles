@@ -39,10 +39,6 @@
 
       # Utils
       # exiftool
-      # nix-tree
-      # progress
-      # scooter
-      tree
 
       # Screen recording but still have to try it out
       # gpu-screen-recorder
@@ -53,7 +49,6 @@
       # termusic # @todo config that
 
       # Like the cool kids
-      # cava
       # cmatrix
     ];
   };

@@ -4,26 +4,17 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
-      brightnessctl
       curl
-      git
-      # gnupg
       helix
       jq
-      libnotify
       libsecret
-      nano
+      nix-tree
       pinentry-curses
+      progress
+      scooter
       tree
       unzip
       usbutils
-    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.gui.enable ) [
-      nemo
-      qt5.qtwayland
-      qt6.qtwayland
-      # swaylock-effects
-      wl-clipboard
-      xwayland-satellite
     ];
 
     programs.dconf.enable = true;
@@ -54,6 +45,14 @@
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
 
+
+    # Also, I'm using Helix
+    # ---------------------
+    environment.variables = {
+      EDITOR = "hx";
+      VISUAL = "hx";
+    };
+    
 
     # Shell agnostic aliases
     # ----------------------
