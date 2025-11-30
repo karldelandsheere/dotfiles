@@ -49,7 +49,9 @@
             "left": [
                 {
                     "colorizeDistroLogo": true,
+                    "colorizeSystemIcon": "primary",
                     "customIconPath": "",
+                    "enableColorization": true,
                     "icon": "",
                     "id": "ControlCenter",
                     "useDistroLogo": true
@@ -129,7 +131,7 @@
         "matugenSchemeType": "scheme-tonal-spot",
         "predefinedScheme": "Tokyo Night",
         "schedulingMode": "off",
-        "useWallpaperColors": true
+        "useWallpaperColors": false
     },
     "controlCenter": {
         "cards": [
@@ -244,7 +246,7 @@
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4485"
+        "nightTemp": "4165"
     },
     "notifications": {
         "backgroundOpacity": 1,
@@ -343,13 +345,13 @@
     },
     "templates": {
         "alacritty": false,
-        "cava": false,
+        "cava": true,
         "code": false,
         "discord": false,
         "emacs": false,
         "enableUserTemplates": false,
         "foot": false,
-        "fuzzel": false,
+        "fuzzel": true,
         "ghostty": true,
         "gtk": true,
         "kcolorscheme": true,
@@ -370,13 +372,13 @@
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 1,
         "panelsAttachedToBar": true,
-        "settingsPanelAttachToBar": false,
+        "settingsPanelAttachToBar": true,
         "tooltipsEnabled": true
     },
     "wallpaper": {
         "directory": "/home/unnamedplayer/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
-        "enabled": true,
+        "enabled": false,
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": true,
@@ -386,11 +388,11 @@
         "panelPosition": "center",
         "randomEnabled": false,
         "randomIntervalSec": 300,
-        "recursiveSearch": true,
+        "recursiveSearch": false,
         "setWallpaperOnAllMonitors": true,
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
-        "transitionType": "random",
+        "transitionType": "fade",
         "useWallhaven": false,
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",

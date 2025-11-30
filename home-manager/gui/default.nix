@@ -14,6 +14,12 @@ in
         # qt6.qtwayland
         xwayland-satellite
       ];
+
+
+      # Config files/folders
+      # --------------------
+      file."Pictures/Wallpapers".source =
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/themes/wallpapers";
     };
   };
 }

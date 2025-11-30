@@ -10,15 +10,21 @@ in
 
 
     home = {
-      file.".config/niri/config.kdl".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/gui/niri/config/config.kdl";
-
+      # Vars
+      # ----
       sessionVariables = {
         XDG_CURRENT_DESKTOP = "niri";
         XDG_SESSION_DESKTOP = "niri";
       };
 
+      
+      # Utils
+      # -----
       packages = with pkgs; [
+        # Temporary, until Noctalia sorts the wallpaper management
+        swaybg
+
+        
         # (writeShellScriptBin "launch-dailies" ''
         #   # Startup script to launch the TUI apps I use daily
         #   # -------------------------------------------------
@@ -40,6 +46,13 @@ in
         #   niri msg action focus-column-left # Recenter by focussing on column 1
         # '')
       ];
+      
+
+      # Config files/folders
+      # --------------------
+      file.".config/niri/config.kdl".source =
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/gui/niri/config/config.kdl";
+
     };
 
 

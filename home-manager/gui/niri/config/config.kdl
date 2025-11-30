@@ -4,15 +4,18 @@
 
 
 // Startup sequence
-//  
+//
+
+// Temporary, until Noctalia sorts the wallpaper management
+// spawn-at-startup "swaybg" "-i" "~/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
+spawn-at-startup "swaybg" "-i" "/home/unnamedplayer/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
+
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "noctalia-shell"
-// spawn-at-startup "swayidle" "-w"
-// spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
 
 // Work around for udiskie to start correctly
 // @todo find the right way to setup udiskie
-spawn-at-startup "systemctl" "--user" "start" "udiskie.service"
+spawn-at-startup "sh" "-c" "systemctl --user start udiskie.service"
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
@@ -219,9 +222,10 @@ binds {
 
   // Launch different kinds of menu
   // ------------------------------
-  Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+  // Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+  Mod+Space { spawn "sh" "-c" "noctalia-shell ipc call launcher toggle"; }
   Mod+Tab repeat=false { toggle-overview; }
-  Alt+Tab { spawn "/etc/nixos/home-manager/utils/scripts/fuzzel-niri"; } // @todo Turn this into a function call
+  // Alt+Tab { spawn "/etc/nixos/home-manager/utils/scripts/fuzzel-niri"; } // @todo Turn this into a function call
 
 
   // Open stuff
@@ -311,4 +315,3 @@ binds {
   Ctrl+Alt+D allow-inhibiting=false { spawn "sh" "-c" "systemctl hibernate"; }
   Ctrl+Alt+W { spawn "sh" "-c" "loginctl terminate-user $USER"; }
 }
-// include "./noctalia.kdl"
