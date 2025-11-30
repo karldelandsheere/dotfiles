@@ -17,6 +17,7 @@
       # ------------------------------------------------
       persistence."/persist/home/unnamedplayer" = {
         directories = [
+          ".config"
           ".gnupg"
           ".local/share/calcurse"
           ".local/share/gurk"
@@ -32,7 +33,7 @@
 
         files = [
           # ".config/mimeapps.list"
-          ".config/Bitwarden CLI/data.json"
+          # ".config/Bitwarden CLI/data.json"
           ".local/share/nix/trusted-settings.json"
           ".zsh_history"
         ];

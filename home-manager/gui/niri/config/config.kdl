@@ -6,9 +6,9 @@
 // Startup sequence
 //  
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "qs" "-c" "noctalia-shell"
-spawn-at-startup "swayidle" "-w"
-spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
+spawn-at-startup "noctalia-shell"
+// spawn-at-startup "swayidle" "-w"
+// spawn-at-startup "systemctl" "--user" "reset-failed" "waybar.service"
 
 // Work around for udiskie to start correctly
 // @todo find the right way to setup udiskie
@@ -219,7 +219,7 @@ binds {
 
   // Launch different kinds of menu
   // ------------------------------
-  Mod+Space { spawn "fuzzel"; }
+  Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
   Mod+Tab repeat=false { toggle-overview; }
   Alt+Tab { spawn "/etc/nixos/home-manager/utils/scripts/fuzzel-niri"; } // @todo Turn this into a function call
 
@@ -311,4 +311,4 @@ binds {
   Ctrl+Alt+D allow-inhibiting=false { spawn "sh" "-c" "systemctl hibernate"; }
   Ctrl+Alt+W { spawn "sh" "-c" "loginctl terminate-user $USER"; }
 }
-include "./noctalia.kdl"
+// include "./noctalia.kdl"
