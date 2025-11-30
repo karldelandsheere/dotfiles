@@ -3,10 +3,10 @@
   # Utils with specific config files
   # --------------------------------
   imports = [
-    ./fuzzel
-    ./mako
+    # ./fuzzel
+    # ./mako
     ./swayidle
-    ./swaylock
+    # ./swaylock
   ];
 
   config = {

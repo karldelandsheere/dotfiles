@@ -9,13 +9,16 @@ in
     programs.noctalia-shell = {
       enable = true;
       systemd.enable = true;
-      settings = ".config/noctalia/settings.json";
+      # settings = ".config/noctalia/settings.json";
     };
     
 
     home = {
       file.".config/noctalia".source =
         config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/gui/noctalia/config";
+
+      file."Pictures/Wallpapers".source =
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/themes/wallpapers";
     };
   };
 }

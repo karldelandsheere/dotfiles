@@ -11,7 +11,7 @@ in
 
     home = {
       file.".config/niri/config.kdl".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/wm/niri/config.kdl";
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/gui/niri/config/config.kdl";
 
       sessionVariables = {
         XDG_CURRENT_DESKTOP = "niri";

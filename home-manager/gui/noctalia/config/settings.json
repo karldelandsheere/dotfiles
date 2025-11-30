@@ -3,14 +3,14 @@
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
-        "enableClipboardHistory": false,
+        "enableClipboardHistory": true,
         "pinnedExecs": [
         ],
         "position": "center",
         "sortByMostUsed": true,
         "terminalCommand": "xterm -e",
         "useApp2Unit": false,
-        "viewMode": "list"
+        "viewMode": "grid"
     },
     "audio": {
         "cavaFrameRate": 30,
@@ -77,6 +77,7 @@
                     ]
                 },
                 {
+                    "deviceNativePath": "",
                     "displayMode": "onhover",
                     "id": "Battery",
                     "warningThreshold": 15
@@ -112,7 +113,7 @@
                 "id": "timer-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             }
         ]
@@ -125,10 +126,10 @@
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-fruit-salad",
-        "predefinedScheme": "Noctalia (default)",
+        "matugenSchemeType": "scheme-tonal-spot",
+        "predefinedScheme": "Tokyo Night",
         "schedulingMode": "off",
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -145,7 +146,7 @@
                 "id": "audio-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             },
             {
@@ -163,10 +164,10 @@
                     "id": "Bluetooth"
                 },
                 {
-                    "id": "ScreenRecorder"
+                    "id": "KeepAwake"
                 },
                 {
-                    "id": "WallpaperSelector"
+                    "id": "NightLight"
                 }
             ],
             "right": [
@@ -174,13 +175,10 @@
                     "id": "Notifications"
                 },
                 {
-                    "id": "PowerProfile"
+                    "id": "WallpaperSelector"
                 },
                 {
-                    "id": "KeepAwake"
-                },
-                {
-                    "id": "NightLight"
+                    "id": "ScreenRecorder"
                 }
             ]
         }
@@ -205,12 +203,12 @@
         "animationSpeed": 1,
         "avatarImage": "/home/unnamedplayer/.face",
         "compactLockScreen": false,
-        "dimmerOpacity": 0.6,
-        "enableShadows": true,
+        "dimmerOpacity": 0.5,
+        "enableShadows": false,
         "forceBlackScreenCorners": false,
         "language": "",
         "lockOnSuspend": true,
-        "radiusRatio": 1,
+        "radiusRatio": 0,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
         "shadowDirection": "bottom_right",
@@ -227,13 +225,13 @@
     "location": {
         "analogClockInCalendar": false,
         "firstDayOfWeek": -1,
-        "name": "Tokyo",
+        "name": "Liège",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
         "use12hourFormat": false,
         "useFahrenheit": false,
-        "weatherEnabled": true,
+        "weatherEnabled": false,
         "weatherShowEffects": true
     },
     "network": {
@@ -352,13 +350,13 @@
         "enableUserTemplates": false,
         "foot": false,
         "fuzzel": false,
-        "ghostty": false,
-        "gtk": false,
-        "kcolorscheme": false,
+        "ghostty": true,
+        "gtk": true,
+        "kcolorscheme": true,
         "kitty": false,
         "niri": false,
         "pywalfox": false,
-        "qt": false,
+        "qt": true,
         "spicetify": false,
         "telegram": false,
         "vicinae": false,
@@ -381,12 +379,12 @@
         "enabled": true,
         "fillColor": "#000000",
         "fillMode": "crop",
-        "hideWallpaperFilenames": false,
+        "hideWallpaperFilenames": true,
         "overviewEnabled": false,
-        "panelPosition": "follow_bar",
+        "panelPosition": "center",
         "randomEnabled": false,
         "randomIntervalSec": 300,
-        "recursiveSearch": false,
+        "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
