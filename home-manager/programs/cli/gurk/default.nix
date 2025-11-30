@@ -6,8 +6,8 @@
     home = {
       packages = [ pkgs.gurk-rs ];
 
-      file.".config/gurk".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/cli/gurk/config";
+      # file.".config/gurk".source =
+        # config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/cli/gurk/config";
     };
   };
 }

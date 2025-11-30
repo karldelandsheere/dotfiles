@@ -6,7 +6,7 @@
     # Day to day
     # ./element # replaced by ../cli/iamb
     ./firefox
-    ./obsidian
+    # ./obsidian
     # ./signal # replaced by ../cli/gurk
 
     # Utils
@@ -30,17 +30,17 @@
       # opencloud-desktop
 
       # Utils
-      qbittorrent
+      # qbittorrent
 
       # Dev
-      vscodium
+      # vscodium
       
       # 3d design && 3d printing
       # bambu-studio # crashes, don't know why
-      blender
-      openscad
+      # blender
+      # openscad
       # orca-slicer
-      prusa-slicer
+      # prusa-slicer
       
       # Graphic design
       # Not working on 20250725, try again later if no good alternative found 

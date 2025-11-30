@@ -17,7 +17,7 @@
       # ------------------------------------------------
       persistence."/persist/home/unnamedplayer" = {
         directories = [
-          ".config"
+          # ".config"
           ".gnupg"
           ".local/share/calcurse"
           ".local/share/gurk"

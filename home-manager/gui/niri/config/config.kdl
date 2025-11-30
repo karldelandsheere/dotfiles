@@ -306,8 +306,8 @@ binds {
   // Close stuff
   // -----------
   Mod+Q      { close-window; }
-  Ctrl+Alt+Q allow-inhibiting=false { spawn "sh" "-c" "swaylock -f"; }
-  Ctrl+Alt+S allow-inhibiting=false { spawn "sh" "-c" "swaylock -f && systemctl suspend"; }
+  Ctrl+Alt+Q allow-inhibiting=false { spawn "sh" "-c" "noctalia-shell ipc call lockScreen lock"; }
+  Ctrl+Alt+S allow-inhibiting=false { spawn "sh" "-c" "noctalia-shell ipc call lockScreen lock && systemctl suspend"; }
   Ctrl+Alt+D allow-inhibiting=false { spawn "sh" "-c" "systemctl hibernate"; }
   Ctrl+Alt+W { spawn "sh" "-c" "loginctl terminate-user $USER"; }
 }

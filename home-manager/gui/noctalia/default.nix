@@ -6,10 +6,14 @@ in
   ];
 
   config = {
-    programs.noctalia-shell = {
-      enable = true;
-      systemd.enable = true;
-      # settings = ".config/noctalia/settings.json";
+    programs = {
+      noctalia-shell = {
+        enable = true;
+        systemd.enable = true;
+      };
+
+      # Utils
+      # -----
     };
     
 

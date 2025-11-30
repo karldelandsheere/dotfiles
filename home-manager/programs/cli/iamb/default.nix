@@ -6,8 +6,8 @@
     home = {
       packages = [ pkgs.iamb ];
 
-      file.".config/iamb".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/cli/iamb/config";
+      # file.".config/iamb".source =
+        # config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/cli/iamb/config";
     };
   };
 }

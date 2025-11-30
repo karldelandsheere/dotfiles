@@ -10,7 +10,7 @@
 
   
     home = {
-      file.".config/yazi".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/cli/yazi/config";
+      # file.".config/yazi".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/home-manager/programs/cli/yazi/config";
 
       packages = with pkgs; [
         ueberzugpp

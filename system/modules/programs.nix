@@ -14,13 +14,14 @@
       libsecret
       nano
       pinentry-curses
+      tree
       unzip
       usbutils
     ] ++ lib.lists.optionals ( config.nouveauxParadigmes.gui.enable ) [
       nemo
       qt5.qtwayland
       qt6.qtwayland
-      swaylock-effects
+      # swaylock-effects
       wl-clipboard
       xwayland-satellite
     ];

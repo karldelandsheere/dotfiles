@@ -9,8 +9,8 @@
     };
 
     home = {
-      file.".config/ghostty".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/gui/ghostty/config";
+      # file.".config/ghostty".source =
+        # config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/gui/ghostty/config";
     };
   };
 }

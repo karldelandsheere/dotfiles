@@ -6,24 +6,24 @@
   # ------------------------
   imports = [
     # Day to day
-    ./aerc
-    ./calcurse
-    ./gurk
-    ./iamb
+    # ./aerc
+    # ./calcurse
+    # ./gurk
+    # ./iamb
     # ./jrnl
 
     # Utils
-    ./bottom
+    # ./bottom
     ./git.nix
     ./helix
-    ./yazi
+    # ./yazi
     ./zsh.nix
 
     # Media
-    ./yt-dlp
+    # ./yt-dlp
 
     # Like the cool kids
-    ./fastfetch
+    # ./fastfetch
   ];
 
 
@@ -38,23 +38,23 @@
       # basalt @todo check in a couple months where the dev is at
 
       # Utils
-      exiftool
-      nix-tree
-      progress
-      scooter
+      # exiftool
+      # nix-tree
+      # progress
+      # scooter
       tree
 
       # Screen recording but still have to try it out
-      gpu-screen-recorder
+      # gpu-screen-recorder
 
       # Media
-      ffmpeg
-      mpv
-      termusic # @todo config that
+      # ffmpeg
+      # mpv
+      # termusic # @todo config that
 
       # Like the cool kids
-      cava
-      cmatrix
+      # cava
+      # cmatrix
     ];
   };
 }

@@ -2,7 +2,7 @@
     "appLauncher": {
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
-        "enableClipPreview": true,
+        "enableClipPreview": false,
         "enableClipboardHistory": true,
         "pinnedExecs": [
         ],
@@ -203,7 +203,7 @@
         "animationSpeed": 1,
         "avatarImage": "/home/unnamedplayer/.face",
         "compactLockScreen": false,
-        "dimmerOpacity": 0.5,
+        "dimmerOpacity": 0.3,
         "enableShadows": false,
         "forceBlackScreenCorners": false,
         "language": "",
