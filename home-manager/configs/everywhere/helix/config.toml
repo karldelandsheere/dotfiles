@@ -1,0 +1,11 @@
+theme = "catppuccin_mocha"
+
+[editor]
+cursorline = true
+line-number = "absolute"
+middle-click-paste = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"

@@ -4,6 +4,7 @@ in
   imports = [
     ./niri
     ./noctalia
+    ../programs/gui
   ];
 
   config = {

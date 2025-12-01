@@ -51,7 +51,6 @@
                     "colorizeDistroLogo": true,
                     "colorizeSystemIcon": "primary",
                     "customIconPath": "",
-                    "enableColorization": true,
                     "icon": "",
                     "id": "ControlCenter",
                     "useDistroLogo": true

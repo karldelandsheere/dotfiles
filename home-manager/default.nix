@@ -1,11 +1,9 @@
 { config, osConfig, lib, inputs, ... }:
 {
-  imports = [
-    ./programs
-    ./utils
-    # ./wm/niri
-    ./gui
-  ];
+  imports =
+  [ ./programs/cli ] # No matter what, we'll always have a tty
+  ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ./gui ];
+
 
 
   config = {
@@ -161,5 +159,21 @@
     #     unnamedplayer.file = ../secrets/unnamedplayer-secrets.age;
     #   };
     # };
+
+
+    # Git ID's and signing options
+    # ----------------------------
+    programs.git = {
+      enable = true;
+      settings.user = {
+        name  = "Karl";
+        email = "karl@delandsheere.be";
+      };
+
+      signing = {
+        key           = "D4EFAA4CD5AE64F4";
+        signByDefault = true;
+      };
+    };
   };
 }
