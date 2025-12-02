@@ -15,15 +15,17 @@
       # ------------------------------------------------
       persistence."/persist/home/unnamedplayer" = {
         directories = [
-          # ".config"
-          ".gnupg"
-          ".local/share/calcurse"
-          ".local/share/gurk"
-          ".local/share/iamb"
+          ".gnupg"                     # Pgp utility
           ".local/share/keyrings"
           ".mozilla/firefox/default"
-          ".mullvad"
-          ".ssh"
+          ".mullvad"                   # VPN
+          ".ssh"                       # Do I need to spell this one?
+
+
+
+          # ".local/share/calcurse"
+          # ".local/share/gurk"
+          # ".local/share/iamb"
 
           # Obsidian vaults, OpenCloud data, ...
           "Data"
