@@ -10,10 +10,5 @@
       #   target = "Data/Notes/Braindump";
       # };
     };
-
-    # home = {
-    #   file.".config/obsidian".source =
-    #     config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/programs/gui/obsidian/config";
-    # };
   };
 }
