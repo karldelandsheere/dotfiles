@@ -5,7 +5,11 @@
   imports = [
     ./firefox    # @todo Should I move to something else?
     ./ghostty    # Terminal
-    ./obsidian   # Markdown note taking app, @todo should I move to something else?
+
+
+    # Unfree apps :/
+    # --------------
+    # ./obsidian   # Markdown note taking app, @todo should I move to something else?
 
 
     # Day to day

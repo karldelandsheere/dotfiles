@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, osConfig, ... }:
 {
   # All the TTY/CLI related stuff that is not mandatory on every host
   # plus the configs that are /home/username related.
@@ -44,6 +44,8 @@
     ];
 
     # Can't I do that for the whole environment though?
+    xdg.configFile.helix.source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config/everywhere/helix";
+
     programs.yazi.enableZshIntegration = config.programs.zsh.enable;
   };
 }

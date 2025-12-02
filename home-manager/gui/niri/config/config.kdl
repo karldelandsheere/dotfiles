@@ -8,7 +8,7 @@
 
 // Temporary, until Noctalia sorts the wallpaper management
 // spawn-at-startup "swaybg" "-i" "~/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
-spawn-at-startup "swaybg" "-i" "/home/unnamedplayer/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
+// spawn-at-startup "swaybg" "-i" "/home/unnamedplayer/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg"
 
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "noctalia-shell"
@@ -112,12 +112,24 @@ layout {
   }
 }
 
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layer-Rules
+// layer-rule {
+//   match namespace="^wallpaper$"
+//   place-within-backdrop true
+// }
+
+
 layer-rule {
-  match namespace="^wallpaper$"
+  match namespace="^noctalia-overview*"
   place-within-backdrop true
 }
+
+
 
 layer-rule {
     match namespace="^notifications$"
@@ -202,6 +214,23 @@ workspace "files"
 animations {
   // off
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings

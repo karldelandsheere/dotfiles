@@ -17,6 +17,13 @@ in
       ];
 
 
+      xdg.configFile.niri = {
+        source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config/everywhere/niri";
+        recursive = true;
+      };
+
+
+
       # Config files/folders
       # --------------------
       file."Pictures/Wallpapers".source =
