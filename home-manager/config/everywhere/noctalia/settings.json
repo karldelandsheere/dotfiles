@@ -288,7 +288,7 @@
     },
     "sessionMenu": {
         "countdownDuration": 10000,
-        "enableCountdown": true,
+        "enableCountdown": false,
         "position": "center",
         "powerOptions": [
             {
@@ -351,7 +351,7 @@
         "emacs": false,
         "enableUserTemplates": false,
         "foot": false,
-        "fuzzel": true,
+        "fuzzel": false,
         "ghostty": true,
         "gtk": true,
         "kcolorscheme": true,

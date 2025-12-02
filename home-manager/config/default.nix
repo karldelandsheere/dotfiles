@@ -1,41 +1,29 @@
 { config, osConfig, inputs, pkgs, ... }: let
   configDir   = "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config";
-  hostname    = "${osConfig.nouveauxParadigmes.hostname}";
-  listConfigs = parent: map(name: "${parent}/${name}")
-          (builtins.attrNames (builtins.readDir "${configDir}/${parent}"));
-  mkSymlink   = path: config.lib.file.mkOutOfStoreSymlink path;
+  # configDir   = ./home-manager/config;
+
+  mkConfigSet = paths:
+    let
+      # List each group of config paths
+      configLists = map (group:
+        let names = builtins.attrNames (builtins.readDir "${configDir}/${group}");
+        in  map (n: { name = n; value = "${group}/${n}"; }) names
+      ) paths;
+
+      # Flatten the lists, turn them to an attrset so there are no duplicates
+      # if a same config is both in everywhere AND in per-host/hostname,
+      # the per-host/hostname one prevails as the most specific one
+      configSet = builtins.listToAttrs (builtins.concatLists configLists);
+    in
+      configSet;
 in
 {
   config = {
-
+    # Automatically import all pertinent configs
+    # ------------------------------------------
     xdg.configFile = builtins.mapAttrs (name: subpath: {
-      source    = mkSymlink "${configDir}/${subpath}";
+      source    = config.lib.file.mkOutOfStoreSymlink "${configDir}/${subpath}";
       recursive = true;
-    }) listConfigs "everywhere" ++ listConfigs "per-host/${hostname}";
-
-    # xdg.configFile = builtins.mapAttrs
-    #   (name: subpath: {
-    #     source = mkSymlink "${configFiles}/${subpath}";
-    #     recursive = true;
-    #   })
-    #   configs;
-
-    # configs = builtins.attrNames (builtins.readDir "${configFiles}/everywhere")
-    #        ++ builtins.attrNames (builtins.readDir "${configFiles}/per-host/${hostname}");
-
-
-# nix eval --impure --expr '
-# let
-#   mkEntries = parent: dir:
-#     map (c: "${c}:${parent}/${c}")
-#       (builtins.attrNames (builtins.readDir dir));
-# in
-#   mkEntries "everywhere" "/etc/nixos/home-manager/config/everywhere"
-#   ++
-#   mkEntries "q3dm10" "/etc/nixos/home-manager/config/per-host/q3dm10"
-# '
-
-
-
+    }) (mkConfigSet [ "everywhere" "per-host/${osConfig.nouveauxParadigmes.hostname}" ]);
   };
 }
