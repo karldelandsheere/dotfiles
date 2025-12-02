@@ -1,8 +1,9 @@
 { config, osConfig, lib, inputs, ... }:
 {
-  imports =
-  [ ./tty ] # No matter what, we'll always have a tty
-  ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ./gui ];
+  imports = [
+    ./config
+    ./tty # No matter what, we'll always have a tty
+  ] ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ./gui ];
 
 
   config = {

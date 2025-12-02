@@ -378,7 +378,7 @@
     "wallpaper": {
         "directory": "/home/unnamedplayer/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
-        "enabled": false,
+        "enabled": true,
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": true,
