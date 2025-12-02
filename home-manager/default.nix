@@ -175,5 +175,9 @@
         signByDefault = true;
       };
     };
+
+    # Shouldn't it be enough to set it once in the system part of the config?
+    # -----------------------------------------------------------------------
+    nixpkgs.config.allowUnfree = osConfig.nouveauxParadigmes.allowUnfree;
   };
 }

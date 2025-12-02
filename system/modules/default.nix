@@ -49,6 +49,6 @@
 
     # I'd like it to be false, but that's not for today, is it?
     # ---------------------------------------------------------
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfree = config.nouveauxParadigmes.allowUnfree;
   };
 }

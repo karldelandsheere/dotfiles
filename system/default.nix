@@ -76,6 +76,13 @@
       default     = true;
       description = "Use Home-Manager? Defaults to true.";
     };
+
+    # Philosophical and pragmatical question...
+    allowUnfree = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Allow unfree software to be installed? Defaults to true, despite that I'd rather not to.";
+    };
   };
 
 

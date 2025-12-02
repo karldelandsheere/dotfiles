@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, osConfig, pkgs, lib, inputs, ... }:
 {
   # GUI programs with config
   # ------------------------
@@ -6,20 +6,17 @@
     ./firefox    # @todo Should I move to something else?
     ./ghostty    # Terminal
 
-
-    # Unfree apps :/
-    # --------------
-    # ./obsidian   # Markdown note taking app, @todo should I move to something else?
-
-
     # Day to day
     # ./element # replaced by ../cli/iamb
     # ./signal # replaced by ../cli/gurk
 
-    # Utils
-
     # Office
     # ./onlyoffice.nix
+
+  ] ++ lib.lists.optionals ( osConfig.nixpkgs.config.allowUnfree ) [
+    # Unfree apps :/
+    # --------------
+    ./obsidian   # Markdown note taking app, @todo should I move to something else?
   ];
 
 
