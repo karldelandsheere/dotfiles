@@ -35,6 +35,16 @@
     };
 
 
+# xdg.configFile = builtins.mapAttrs
+#     (name: subpath: {
+#       source = create_symlink "${dotfiles}/${subpath}";
+#       recursive = true;
+#     })
+#     configs;
+
+
+
+
     # I use zsh because I'm edgy but not too much
     # -------------------------------------------
     programs.zsh = {
@@ -56,6 +66,7 @@
       EDITOR = "hx";
       VISUAL = "hx";
     };
+    xdg.configFile.helix.source = config.lib.file.mkOutOfStoreSymlink "${config.nouveauxParadigmes.dotfiles}/home-manager/config/helix";
 
 
     # Shell agnostic aliases

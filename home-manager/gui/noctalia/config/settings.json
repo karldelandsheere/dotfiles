@@ -51,6 +51,7 @@
                     "colorizeDistroLogo": true,
                     "colorizeSystemIcon": "primary",
                     "customIconPath": "",
+                    "enableColorization": false,
                     "icon": "",
                     "id": "ControlCenter",
                     "useDistroLogo": true
@@ -103,11 +104,11 @@
         "cards": [
             {
                 "enabled": true,
-                "id": "banner-card"
+                "id": "calendar-header-card"
             },
             {
                 "enabled": true,
-                "id": "calendar-card"
+                "id": "calendar-month-card"
             },
             {
                 "enabled": true,
@@ -323,7 +324,7 @@
         ],
         "showHeader": true
     },
-    "settingsVersion": 25,
+    "settingsVersion": 26,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
