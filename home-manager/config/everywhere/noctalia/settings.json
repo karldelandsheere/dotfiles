@@ -49,9 +49,9 @@
             "left": [
                 {
                     "colorizeDistroLogo": true,
-                    "colorizeSystemIcon": "primary",
+                    "colorizeSystemIcon": "tertiary",
                     "customIconPath": "",
-                    "enableColorization": false,
+                    "enableColorization": true,
                     "icon": "",
                     "id": "ControlCenter",
                     "useDistroLogo": true
@@ -73,7 +73,7 @@
                     "blacklist": [
                     ],
                     "colorizeIcons": true,
-                    "drawerEnabled": true,
+                    "drawerEnabled": false,
                     "id": "Tray",
                     "pinned": [
                     ]
@@ -131,7 +131,7 @@
         "matugenSchemeType": "scheme-tonal-spot",
         "predefinedScheme": "Tokyo Night",
         "schedulingMode": "off",
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -196,7 +196,6 @@
         "onlySameOutput": true,
         "pinnedApps": [
         ],
-        "radiusRatio": 0.1,
         "size": 1
     },
     "general": {
@@ -204,10 +203,12 @@
         "animationDisabled": false,
         "animationSpeed": 1,
         "avatarImage": "/home/unnamedplayer/.face",
-        "compactLockScreen": false,
+        "boxRadiusRatio": 1,
+        "compactLockScreen": true,
         "dimmerOpacity": 0.3,
         "enableShadows": false,
         "forceBlackScreenCorners": false,
+        "iRadiusRatio": 1,
         "language": "",
         "lockOnSuspend": true,
         "radiusRatio": 0,
@@ -216,7 +217,7 @@
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
-        "showHibernateOnLockScreen": false,
+        "showHibernateOnLockScreen": true,
         "showScreenCorners": false
     },
     "hooks": {
@@ -293,31 +294,37 @@
         "powerOptions": [
             {
                 "action": "lock",
+                "command": "",
                 "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "suspend",
+                "command": "",
                 "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "hibernate",
+                "command": "systemctl suspend && systemctl hibernate",
                 "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "reboot",
+                "command": "",
                 "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "logout",
+                "command": "",
                 "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "shutdown",
+                "command": "",
                 "countdownEnabled": true,
                 "enabled": true
             }
@@ -356,7 +363,7 @@
         "gtk": true,
         "kcolorscheme": true,
         "kitty": false,
-        "niri": false,
+        "niri": true,
         "pywalfox": false,
         "qt": true,
         "spicetify": false,
@@ -366,9 +373,9 @@
         "wezterm": false
     },
     "ui": {
-        "fontDefault": "Sans Serif",
+        "fontDefault": "JetBrainsMono Nerd Font",
         "fontDefaultScale": 1,
-        "fontFixed": "monospace",
+        "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 1,
         "panelsAttachedToBar": true,
@@ -388,7 +395,7 @@
         "panelPosition": "center",
         "randomEnabled": false,
         "randomIntervalSec": 300,
-        "recursiveSearch": false,
+        "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,

@@ -1,0 +1,34 @@
+// -- input.kdl
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+// 
+input {
+  warp-mouse-to-focus mode="center-xy"
+
+  // Keyboard settings
+  // -----------------
+  keyboard {
+    xkb {
+      layout "be"
+    }
+  }
+
+  // Touchpad settings
+  // -----------------
+  touchpad {
+    tap
+    dwt
+    drag-lock
+    natural-scroll
+    accel-speed 0.2
+    accel-profile "adaptive"
+  }
+}
+
+
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Gestures
+// 
+gestures {
+  hot-corners {
+    off
+  }
+}

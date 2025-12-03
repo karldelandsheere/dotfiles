@@ -11,8 +11,14 @@ in
   ];
 
   config = {
+
+    nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+
     programs = {
-      niri.enable = true;
+      niri = {
+        enable = true;
+        package = pkgs.niri-unstable;
+      };
       noctalia-shell = {
         enable = true;
         systemd.enable = true;

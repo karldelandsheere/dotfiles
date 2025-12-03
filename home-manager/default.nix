@@ -34,6 +34,7 @@
         files = [
           # ".config/mimeapps.list"
           # ".config/Bitwarden CLI/data.json"
+          ".cache/noctalia/wallpapers.json"
           ".local/share/nix/trusted-settings.json"
           ".zsh_history"
         ];

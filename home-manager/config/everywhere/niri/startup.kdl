@@ -1,0 +1,9 @@
+// -- startup.kdl
+// Startup sequence
+//
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "noctalia-shell"
+
+// Work around for udiskie to start correctly
+// @todo find the right way to setup udiskie
+// spawn-at-startup "sh" "-c" "systemctl --user start udiskie.service"
