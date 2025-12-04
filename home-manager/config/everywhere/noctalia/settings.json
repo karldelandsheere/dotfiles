@@ -306,7 +306,7 @@
             },
             {
                 "action": "hibernate",
-                "command": "loginctl lock-sessions && systemctl hibernate",
+                "command": "noctalia-shell ipc call lockScreen lock && systemctl hibernate",
                 "countdownEnabled": true,
                 "enabled": true
             },
