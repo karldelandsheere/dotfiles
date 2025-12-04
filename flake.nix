@@ -1,4 +1,16 @@
 {
+  #############################################################################
+  #
+  # Welcome to my dotfiles. This is a work in progress. Enjoy the ride!
+  # Git repo: https://github.com/karldelandsheere/dotfiles/
+  # 
+  # Next steps:
+  # - @todo Move the dotfiles from /etc/nixos so I can build without --impure,
+  #         or find another solution for drop-in config files.
+  # - @todo 
+  #
+  #############################################################################
+
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
     extra-substituters = [
@@ -90,19 +102,5 @@
         modules = [ ./system/hosts/q3dm11 ];
       };
     };
-
-
-    # Declare home-manager as stand-alone
-    # -----------------------------------
-    # homeConfigurations = {
-    #   unnamedplayer = home-manager.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #     modules = [
-    #       stylix.homeModules.stylix
-    #       ./home-manager
-    #     ];
-    #     extraSpecialArgs = { inherit inputs; };
-    #   };
-    # };
   };
 }

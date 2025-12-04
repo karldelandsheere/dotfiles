@@ -26,6 +26,12 @@
     # CLI programs that either don't need config or are on trial
     # ----------------------------------------------------------
     home.packages = with pkgs; [
+      cmatrix                # Yeah, I know... like the cool kids
+      ffmpeg
+      mpv                    # tty video player
+
+
+
       # Day to day
       # basalt @todo check in a couple months where the dev is at
 
@@ -36,15 +42,9 @@
       # gpu-screen-recorder
 
       # Media
-      # ffmpeg
-      # mpv
       # termusic # @todo config that
 
-      cmatrix # Yeah, I know...
     ];
-
-    # Can't I do that for the whole environment though?
-    xdg.configFile.helix.source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config/everywhere/helix";
 
     programs.yazi.enableZshIntegration = config.programs.zsh.enable;
   };

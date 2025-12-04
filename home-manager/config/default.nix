@@ -1,6 +1,5 @@
 { config, osConfig, inputs, pkgs, ... }: let
   configDir   = "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config";
-  # configDir   = ./home-manager/config;
 
   mkConfigSet = paths:
     let

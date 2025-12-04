@@ -20,12 +20,6 @@
       getty = lib.mkIf config.nouveauxParadigmes.encryption.enable {
         autologinUser = "unnamedplayer";
       };
-
-      # Automatically lock the screen when going to sleep/hibernate
-      # -----------------------------------------------------------
-      logind.settings.Login = ''
-        LockOnSuspend=yes
-      '';
     };
   };
 }

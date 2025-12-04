@@ -4,48 +4,47 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
-      bitwarden-cli # Easy access to my vault from the tty
-      bottom # Process/system monitor
+      bitwarden-cli          # Easy access to my vault from the tty
+      bottom                 # Process/system monitor
       curl
-      fastfetch # (am I a cool kid now?)
-      # git # Git is needed for at least maintaining these dotfiles
-      helix # Helix > vim imho
-      jq
+      fastfetch              # (am I a cool kid now?)
+      helix                  # Helix > vim imho
+      jq                     # sed for json
       libsecret
-      nix-tree
-      pinentry-curses
-      progress
-      scooter
-      tree
-      ueberzugpp # Terminal image viewer (only for yazi so far)
+      nix-tree               # Nix dependencies browser
+      pinentry-curses        # Needed for gnupg
+      progress               # Follow the progression of any script
+      scooter                # Search & replace
+      tree                   # Display a tree of a given folder
+      ueberzugpp             # Terminal image viewer (needed for yazi)
       unzip
       usbutils
-      yazi # A really cool CLI file explorer
+      yazi                   # A really cool CLI file explorer
     ];
 
 
-    programs.dconf.enable = true;
+    programs = {
+      dconf.enable = true;
+      git.enable = true;
+      gnupg.agent = {
+        enable           = true;
+        pinentryPackage  = pkgs.pinentry-curses;
+        enableSSHSupport = true;
+      };
 
-    programs.git.enable = true;
-
-    programs.gnupg.agent = {
-      enable           = true;
-      pinentryPackage  = pkgs.pinentry-curses;
-      enableSSHSupport = true;
+      # I use zsh because I'm edgy but not too much
+      # -------------------------------------------
+      zsh = {
+        enable = true;
+        autosuggestions.enable = true;
+        enableCompletion = true;
+        syntaxHighlighting.enable = true;
+        # loginShellInit = ''
+        #   source /run/agenix/unnamedplayer
+        # '';
+      };
     };
-
-
-    # I use zsh because I'm edgy but not too much
-    # -------------------------------------------
-    programs.zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      enableCompletion = true;
-      syntaxHighlighting.enable = true;
-      # loginShellInit = ''
-      #   source /run/agenix/unnamedplayer
-      # '';
-    };
+    
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
 

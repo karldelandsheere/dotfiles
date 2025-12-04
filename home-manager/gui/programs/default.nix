@@ -4,7 +4,6 @@
   # ------------------------
   imports = [
     ./firefox    # @todo Should I move to something else?
-    ./ghostty    # Terminal
 
     # Day to day
     # ./element # replaced by ../cli/iamb
@@ -24,26 +23,24 @@
     # GUI programs that either don't need config or are on trial
     # ----------------------------------------------------------
     home.packages = with pkgs; [
-      bitwarden-desktop # Passwords & stuff
+      bambu-studio           # Slicer for my Bambu printers
+      bitwarden-desktop      # Passwords & stuff
+      # blender
+      openscad               # Code based CAD
+      prusa-slicer           # Slicer for my Prusa printers
+      # vlc                  # Replaced by mpv (tty video player)
+      vscodium               # Code editor
       
       # mullvad-browser
           
       # Day to day
-      # anytype
       # opencloud-desktop
 
       # Utils
       # qbittorrent
 
-      # Dev
-      # vscodium
       
       # 3d design && 3d printing
-      # bambu-studio # crashes, don't know why
-      # blender
-      # openscad
-      # orca-slicer
-      # prusa-slicer
       
       # Graphic design
       # Not working on 20250725, try again later if no good alternative found 
@@ -52,11 +49,20 @@
       # inputs.affinity-nix.packages.x86_64-linux.publisher
 
       # Media
-      # vlc
 
       # Screensharing, but can't get it to work so far
       # grim
       # slurp
     ];
+
+
+    programs = {
+      # Nice terminal emulator with gpu acceleration
+      # @todo add a check wether gpu acceleration is enabled or not
+      ghostty = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+    };
   };
 }
