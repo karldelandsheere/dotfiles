@@ -23,6 +23,11 @@
 
 
 
+          # @todo Determinate what is really needed here
+          ".config/Bitwarden"
+          ".local/share/prusa-slicer"
+          ".config/PrusaSlicer"
+
           # ".local/share/calcurse"
           # ".local/share/gurk"
           # ".local/share/iamb"
@@ -34,6 +39,7 @@
         files = [
           # ".config/mimeapps.list"
           # ".config/Bitwarden CLI/data.json"
+          
           ".cache/noctalia/wallpapers.json"
           ".local/share/nix/trusted-settings.json"
           ".zsh_history"

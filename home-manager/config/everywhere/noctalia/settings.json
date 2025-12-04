@@ -227,11 +227,11 @@
     },
     "location": {
         "analogClockInCalendar": false,
-        "firstDayOfWeek": -1,
+        "firstDayOfWeek": 1,
         "name": "Liège",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
-        "showWeekNumberInCalendar": false,
+        "showWeekNumberInCalendar": true,
         "use12hourFormat": false,
         "useFahrenheit": false,
         "weatherEnabled": false,
@@ -247,18 +247,18 @@
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4165"
+        "nightTemp": "5273"
     },
     "notifications": {
         "backgroundOpacity": 1,
-        "criticalUrgencyDuration": 15,
+        "criticalUrgencyDuration": 20,
         "enableKeyboardLayoutToast": true,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
         "monitors": [
         ],
-        "normalUrgencyDuration": 8,
+        "normalUrgencyDuration": 6,
         "overlayLayer": true,
         "respectExpireTimeout": false
     },
