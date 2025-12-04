@@ -40,19 +40,11 @@
       # qbittorrent
 
       
-      # 3d design && 3d printing
-      
       # Graphic design
       # Not working on 20250725, try again later if no good alternative found 
       # inputs.affinity-nix.packages.x86_64-linux.designer
       # inputs.affinity-nix.packages.x86_64-linux.photo
       # inputs.affinity-nix.packages.x86_64-linux.publisher
-
-      # Media
-
-      # Screensharing, but can't get it to work so far
-      # grim
-      # slurp
     ];
 
 
