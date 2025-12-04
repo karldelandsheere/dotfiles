@@ -13,7 +13,7 @@
       jq                     # sed for json
       libsecret
       nix-tree               # Nix dependencies browser
-      pinentry-curses        # Needed for gnupg
+      # pinentry-curses        # Needed for gnupg
       progress               # Follow the progression of any script
       scooter                # Search & replace
       tree                   # Display a tree of a given folder
@@ -25,28 +25,25 @@
     ];
 
 
-    programs = {
-      # dconf.enable = true;
-      # git.enable = true;
-      gnupg.agent = {
-        enable           = true;
-        pinentryPackage  = pkgs.pinentry-curses;
-        enableSSHSupport = true;
-      };
 
-      # I use zsh because I'm edgy but not too much
-      # -------------------------------------------
-      zsh = {
-        enable = true;
-        autosuggestions.enable = true;
-        enableCompletion = true;
-        syntaxHighlighting.enable = true;
-        # loginShellInit = ''
-        #   source /run/agenix/unnamedplayer
-        # '';
-      };
+    programs.gnupg.agent = {
+      enable           = true;
+      pinentryPackage  = pkgs.pinentry-curses;
+      enableSSHSupport = true;
     };
-    
+
+
+    # I use zsh because I'm edgy but not too much
+    # -------------------------------------------
+    programs.zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      # loginShellInit = ''
+      #   source /run/agenix/unnamedplayer
+      # '';
+    };
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
 
