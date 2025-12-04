@@ -27,6 +27,8 @@
           ".config/Bitwarden"
           ".local/share/prusa-slicer"
           ".config/PrusaSlicer"
+          ".config/VSCodium"
+          ".vscode-oss"
 
           # ".local/share/calcurse"
           # ".local/share/gurk"

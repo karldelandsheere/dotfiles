@@ -6,7 +6,7 @@
         "enableClipboardHistory": true,
         "pinnedExecs": [
         ],
-        "position": "top_center",
+        "position": "center",
         "sortByMostUsed": true,
         "terminalCommand": "ghostty -e",
         "useApp2Unit": false,
@@ -333,7 +333,7 @@
     "templates": {
         "alacritty": false,
         "cava": true,
-        "code": false,
+        "code": true,
         "discord": false,
         "emacs": false,
         "enableUserTemplates": false,
