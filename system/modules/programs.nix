@@ -8,6 +8,7 @@
       bottom                 # Process/system monitor
       curl
       fastfetch              # (am I a cool kid now?)
+      git                    # Git is required to manage these dotfiles
       helix                  # Helix > vim imho
       jq                     # sed for json
       libsecret
@@ -19,13 +20,14 @@
       ueberzugpp             # Terminal image viewer (needed for yazi)
       unzip
       usbutils
+      xev                    # Event monitor, for debugging
       yazi                   # A really cool CLI file explorer
     ];
 
 
     programs = {
-      dconf.enable = true;
-      git.enable = true;
+      # dconf.enable = true;
+      # git.enable = true;
       gnupg.agent = {
         enable           = true;
         pinentryPackage  = pkgs.pinentry-curses;
@@ -62,6 +64,7 @@
     environment.shellAliases = {
       dots = "cd ${config.nouveauxParadigmes.dotfiles}";
       todo = "grep -rnw ${config.nouveauxParadigmes.dotfiles} -e '@todo'";
+      keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
 
       # Git shortcuts for the lazy ass I am
       ga = "git add";

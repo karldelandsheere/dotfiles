@@ -4,21 +4,33 @@
 binds {
   // Control the monitor brightness
   // ------------------------------
-  XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
+  XF86MonBrightnessUp   allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+  XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
 
   // Control sound level
   // -------------------
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-  XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-  // XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "increase"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+  XF86AudioMute        allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+  Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "increaseInput"; }
+  Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "decreaseInput"; }
+  Shift+XF86AudioMute        allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
+
+
+  //
+  // ------------
+  // XF86TouchpadToggle
+  // XF86AudioPlay
+  // XF86AudioPrev
+  // XF86AudioNext
 
 
   // Launch different kinds of menu
   // ------------------------------
-  Mod+Escape  { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
-  Mod+Comma   { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+  Mod+F12     { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+  Mod+F11     { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+  Mod+F10     { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
   Mod+Space   { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
   Mod+Tab     { toggle-overview; }
 
@@ -105,9 +117,6 @@ binds {
   // Close stuff
   // -----------
   Mod+Q      { close-window; }
-  Ctrl+Alt+Q allow-inhibiting=false { spawn "sh" "-c" "noctalia-shell ipc call lockScreen lock"; }
-  Ctrl+Alt+S allow-inhibiting=false { spawn "sh" "-c" "noctalia-shell ipc call lockScreen lock && systemctl suspend"; }
-  Ctrl+Alt+D allow-inhibiting=false { spawn "sh" "-c" "noctalia-shell ipc call lockScreen lock && systemctl hibernate"; }
   Ctrl+Alt+W { spawn "sh" "-c" "loginctl terminate-user $USER"; }
 }
 
