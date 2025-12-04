@@ -17,10 +17,10 @@ binds {
 
   // Launch different kinds of menu
   // ------------------------------
-  // Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-  Mod+Space { spawn "sh" "-c" "noctalia-shell ipc call launcher toggle"; }
-  Mod+Tab repeat=false { toggle-overview; }
-  // Alt+Tab { spawn "/etc/nixos/home-manager/utils/scripts/fuzzel-niri"; } // @todo Turn this into a function call
+  Mod+Escape  { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+  Mod+Comma   { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+  Mod+Space   { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+  Mod+Tab     { toggle-overview; }
 
 
   // Open stuff
@@ -70,8 +70,8 @@ binds {
   Mod+WheelScrollRight { move-column-right; }
   Mod+WheelScrollLeft  { move-column-left; }
   Mod+C                { center-column; }
-  Mod+Comma            { consume-window-into-column; }
-  Mod+Semicolon        { expel-window-from-column; }
+  Mod+Shift+Comma      { consume-window-into-column; }
+  Mod+Shift+Semicolon  { expel-window-from-column; }
 
 
   // Change the width/height of the focused column/window
@@ -99,7 +99,7 @@ binds {
 
   // Toggle keyboard shortcuts inhibit (such as in remote-desktop and such)
   // ---------------------------------
-  Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+  Mod+Alt+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
 
   // Close stuff

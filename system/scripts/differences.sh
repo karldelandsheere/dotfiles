@@ -29,6 +29,18 @@ while read -r path; do
   rpath="$(realpath "$fpath")"
 
   if [[ $rpath == "$fpath"  ]] && \
+     [[ $path != *"/etc/.clean"* ]] && \
+     [[ $path != *"/etc/group"* ]] && \
+     [[ $path != *"/etc/passwd"* ]] && \
+     [[ $path != *"/etc/resolv.conf"* ]] && \
+     [[ $path != *"/etc/shadow"* ]] && \
+     [[ $path != *"/etc/subgid"* ]] && \
+     [[ $path != *"/etc/subuid"* ]] && \
+     [[ $path != *"/etc/sudoers"* ]] && \
+     [[ $path != *"/etc/.updated"* ]] && \
+     [[ $path != *"/root/.nix-channels"* ]] && \
+     [[ $path != *"/tmp/"* ]] && \
+     [[ $path != *"/var/.updated"* ]] && \
      [[ $path != *"/.cache/"* ]]; then
     echo "$path"
   fi
@@ -49,22 +61,11 @@ while read -r path; do
   rpath="$(realpath "$fpath")"
 
   if [[ $rpath == "$fpath"  ]] && \
-     [[ $path != *"/etc/.clean"* ]] && \
-     [[ $path != *"/etc/group"* ]] && \
-     [[ $path != *"/etc/passwd"* ]] && \
-     [[ $path != *"/etc/resolv.conf"* ]] && \
-     [[ $path != *"/etc/shadow"* ]] && \
-     [[ $path != *"/etc/subgid"* ]] && \
-     [[ $path != *"/etc/subuid"* ]] && \
-     [[ $path != *"/etc/sudoers"* ]] && \
-     [[ $path != *"/etc/.updated"* ]] && \
-     [[ $path != *"/root/.nix-channels"* ]] && \
-     [[ $path != *"/tmp/"* ]] && \
-     [[ $path != *"/var/.updated"* ]] && \
      [[ $path != *"/.zcompdump"* ]] && \
      [[ $path != *"/.zsh_history"* ]] && \
      [[ $path != *"/.cache/"* ]] && \
      [[ "$path" != *"Cache"* ]] && \
+     [[ "$path" != *"/Crash Reports/"* ]] && \
      [[ "$path" != *"Signal/attachments.noindex"*  ]] && \
      [[ "$path" != *"Signal/badges.noindex"* ]] && \
      [[ "$path" != *"Signal/stickers.noindex"* ]]; then

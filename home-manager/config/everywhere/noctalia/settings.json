@@ -34,38 +34,18 @@
         "monitors": [
         ],
         "outerCorners": false,
-        "position": "right",
+        "position": "bottom",
         "showCapsule": false,
         "widgets": {
             "center": [
+            ],
+            "left": [
                 {
                     "characterCount": 2,
                     "followFocusedScreen": false,
                     "hideUnoccupied": true,
                     "id": "Workspace",
                     "labelMode": "none"
-                }
-            ],
-            "left": [
-                {
-                    "colorizeDistroLogo": true,
-                    "colorizeSystemIcon": "tertiary",
-                    "customIconPath": "",
-                    "enableColorization": true,
-                    "icon": "",
-                    "id": "ControlCenter",
-                    "useDistroLogo": true
-                },
-                {
-                    "diskPath": "/",
-                    "id": "SystemMonitor",
-                    "showCpuTemp": true,
-                    "showCpuUsage": true,
-                    "showDiskUsage": true,
-                    "showMemoryAsPercent": true,
-                    "showMemoryUsage": true,
-                    "showNetworkStats": true,
-                    "usePrimaryColor": false
                 }
             ],
             "right": [
@@ -156,7 +136,7 @@
                 "id": "media-sysmon-card"
             }
         ],
-        "position": "close_to_bar_button",
+        "position": "center",
         "shortcuts": {
             "left": [
                 {
@@ -379,7 +359,7 @@
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 1,
         "panelsAttachedToBar": true,
-        "settingsPanelAttachToBar": true,
+        "settingsPanelAttachToBar": false,
         "tooltipsEnabled": true
     },
     "wallpaper": {
