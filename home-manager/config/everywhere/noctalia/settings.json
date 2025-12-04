@@ -300,13 +300,13 @@
             },
             {
                 "action": "suspend",
-                "command": "loginctl lock-sessions && systemctl suspend",
+                "command": "",
                 "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "hibernate",
-                "command": "noctalia-shell ipc call lockScreen lock && systemctl hibernate",
+                "command": "",
                 "countdownEnabled": true,
                 "enabled": true
             },

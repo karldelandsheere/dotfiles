@@ -23,7 +23,7 @@
 
       # Automatically lock the screen when going to sleep/hibernate
       # -----------------------------------------------------------
-      logind.extraConfig = ''
+      logind.settings.Login = ''
         LockOnSuspend=yes
       '';
     };
