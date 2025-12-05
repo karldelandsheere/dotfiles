@@ -7,7 +7,6 @@
   # Next steps:
   # - @todo Move the dotfiles from /etc/nixos so I can build without --impure,
   #         or find another solution for drop-in config files.
-  # - @todo 
   #
   #############################################################################
 

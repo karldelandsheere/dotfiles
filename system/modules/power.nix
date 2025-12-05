@@ -74,8 +74,8 @@
       # -----------------------
       logind.settings.Login = {
         HandleLidSwitchExternalPower = "suspend";
-        HandleLidSwitchDocked = "ignore";
-        HandlePowerKeyLongPress = "poweroff";
+        HandleLidSwitchDocked        = "ignore";
+        HandlePowerKeyLongPress      = "poweroff";
 
         HandleLidSwitch = if config.nouveauxParadigmes.hibernation.enable
           then "hibernate" # "suspend-then-hibernate"

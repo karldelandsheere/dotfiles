@@ -13,7 +13,6 @@
       jq                     # sed for json
       libsecret
       nix-tree               # Nix dependencies browser
-      # pinentry-curses        # Needed for gnupg
       progress               # Follow the progression of any script
       scooter                # Search & replace
       tree                   # Display a tree of a given folder
@@ -23,7 +22,6 @@
       xev                    # Event monitor, for debugging
       yazi                   # A really cool CLI file explorer
     ];
-
 
 
     programs.gnupg.agent = {

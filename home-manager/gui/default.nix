@@ -5,8 +5,6 @@ in
     inputs.niri.homeModules.niri
     inputs.noctalia.homeModules.default
     
-    # ./niri
-    # ./noctalia
     ./programs
   ];
 
@@ -29,17 +27,17 @@ in
       # ------------------------------
       zsh.profileExtra = ''
         if [[ "$(tty)" == "/dev/tty1" ]]; then
-          exec niri --session
+          exec niri-session
         fi
       '';
     };
 
-    
+
     home = {
+      # Utils
+      # -----
       packages = with pkgs; [
-        # nemo
-        # qt5.qtwayland
-        # qt6.qtwayland
+        nemo
         xwayland-satellite
       ];
 
@@ -50,31 +48,16 @@ in
         # CLUTTER_BACKEND = "wayland";
         # DISABLE_QT5_COMPAT = "0"; # Should I set this to 1?
         # GTK_USE_PORTAL = "1";
-        NIXOS_OZONE_WL = "1"; # Use Ozone Wayland for Electron apps
+        # NIXOS_OZONE_WL = "1"; # Use Ozone Wayland for Electron apps
         XDG_CURRENT_DESKTOP = "niri";
         XDG_SESSION_DESKTOP = "niri";
       };
 
 
-      # Config files/folders
-      # --------------------
+      # Miscellaneous files
+      # -------------------
       file."Pictures/Wallpapers".source =
         config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/themes/wallpapers";
     };
-
-
-    # Config files
-    # ------------
-    # xdg.configFile = {
-    #   niri = {
-    #     source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config/everywhere/niri";
-    #     recursive = true;
-    #   };
-
-    #   noctalia = {
-    #     source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config/everywhere/noctalia";
-    #     recursive = true;
-    #   };
-    # };
   };
 }
