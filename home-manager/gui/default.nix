@@ -47,10 +47,13 @@ in
       # Session vars
       # ------------
       sessionVariables = {
+        # CLUTTER_BACKEND = "wayland";
+        # DISABLE_QT5_COMPAT = "0"; # Should I set this to 1?
+        # GTK_USE_PORTAL = "1";
+        NIXOS_OZONE_WL = "1"; # Use Ozone Wayland for Electron apps
         XDG_CURRENT_DESKTOP = "niri";
         XDG_SESSION_DESKTOP = "niri";
       };
-
 
 
       # Config files/folders
