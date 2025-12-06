@@ -1,11 +1,11 @@
-{ config, osConfig, inputs, pkgs, ... }: let
-  configDir   = "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/config";
-
+{ config, osConfig, ... }: let
   mkConfigSet = paths:
     let
       # List each group of config paths
       configLists = map (group:
-        let names = builtins.attrNames (builtins.readDir "${configDir}/${group}");
+        # But first, check if the path to the group exists
+        let names = if builtins.pathExists ./${group}
+              then builtins.attrNames (builtins.readDir ./${group}) else [];
         in  map (n: { name = n; value = "${group}/${n}"; }) names
       ) paths;
 
@@ -21,7 +21,7 @@ in
     # Automatically import all pertinent configs
     # ------------------------------------------
     xdg.configFile = builtins.mapAttrs (name: subpath: {
-      source    = config.lib.file.mkOutOfStoreSymlink "${configDir}/${subpath}";
+      source    = config.lib.file.mkOutOfStoreSymlink ./${subpath};
       recursive = true;
     }) (mkConfigSet [ "everywhere" "per-host/${osConfig.nouveauxParadigmes.hostname}" ]);
   };

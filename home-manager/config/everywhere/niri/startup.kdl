@@ -5,6 +5,8 @@ spawn-at-startup "xwayland-satellite"
 spawn-at-startup "noctalia-shell"
 
 
+spawn-at-startup "noctalia-shell" "ipc" "call" "bar" "toggle"
+
 // Work around for udiskie to start correctly
 // @todo find the right way to setup udiskie
 // spawn-at-startup "sh" "-c" "systemctl --user start udiskie.service"

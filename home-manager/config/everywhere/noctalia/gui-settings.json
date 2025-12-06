@@ -29,8 +29,8 @@
         "density": "comfortable",
         "exclusive": true,
         "floating": false,
-        "marginHorizontal": 0,
-        "marginVertical": 0,
+        "marginHorizontal": 0.25,
+        "marginVertical": 0.25,
         "monitors": [
         ],
         "outerCorners": false,
