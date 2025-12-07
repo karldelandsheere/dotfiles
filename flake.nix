@@ -5,7 +5,11 @@
   # Git repo: https://github.com/karldelandsheere/dotfiles/
   # 
   # Next steps:
-  #
+  #   - @todo Fix the Open button in Obsidian
+  #   - @todo Fix Ghostty tilde problem (deadkeys don't trigger,
+  #       apparently because of a bug in GTK)
+  #   - @todo Make Affinity Designer work
+  # 
   #############################################################################
 
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781

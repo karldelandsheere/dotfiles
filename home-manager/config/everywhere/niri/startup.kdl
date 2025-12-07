@@ -2,10 +2,7 @@
 // Startup sequence
 //
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "noctalia-shell"
-
-
-spawn-at-startup "noctalia-shell" "ipc" "call" "bar" "toggle"
+// spawn-at-startup "noctalia-shell"
 
 // Work around for udiskie to start correctly
 // @todo find the right way to setup udiskie

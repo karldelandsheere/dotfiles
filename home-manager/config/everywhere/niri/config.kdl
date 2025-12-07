@@ -9,6 +9,13 @@ include "./noctalia.kdl"
 include "./startup.kdl"
 
 
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+// 
+output "eDP-1" {
+    scale 1.2
+    variable-refresh-rate on-demand=true
+}
+
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
 // 
@@ -17,7 +24,7 @@ prefer-no-csd
 
 cursor {
   // xcursor-theme "breeze_cursors"
-  // xcursor-size 48
+  xcursor-size 48
   hide-when-typing
   hide-after-inactive-ms 3000
 }
@@ -39,12 +46,6 @@ overview {
 }
 
 
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-// 
-output "eDP-1" {
-    scale 1.2
-    variable-refresh-rate on-demand=true
-}
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout

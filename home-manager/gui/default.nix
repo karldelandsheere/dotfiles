@@ -2,20 +2,18 @@
 in
 {
   imports = [
-    inputs.niri.homeModules.niri
-    inputs.noctalia.homeModules.default
-    
-    ./programs
+    inputs.niri.homeModules.niri         # Scrollable tiling compositor
+    inputs.noctalia.homeModules.default  # Quickshell integration
+    ./programs                           # All the gui programs
   ];
 
   config = {
-
-    nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+    nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # for niri unstable
 
     programs = {
       niri = {
         enable = true;
-        package = pkgs.niri-unstable;
+        package = pkgs.niri-unstable; # until 25.11 is in nixpkgs stable
       };
       noctalia-shell = {
         enable = true;
@@ -25,11 +23,14 @@ in
       # Launches niri at autologin, but only from tty1
       # @todo make this shell agnostic
       # ------------------------------
-      zsh.profileExtra = ''
-        if [[ "$(tty)" == "/dev/tty1" ]]; then
-          exec niri-session
-        fi
-      '';
+      # zsh = {
+      #   enable = true;
+      #   profileExtra = ''
+      #     if [[ "$(tty)" == "/dev/tty1" ]]; then
+      #       niri-session
+      #     fi
+      #   '';
+      # };
     };
 
 
@@ -37,8 +38,8 @@ in
       # Utils
       # -----
       packages = with pkgs; [
-        nemo
-        xwayland-satellite
+        nemo                 # File explorer
+        xwayland-satellite   # rootless Xwayland integration
       ];
 
 

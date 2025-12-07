@@ -4,9 +4,9 @@
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": false,
         "enableClipboardHistory": true,
-        "pinnedExecs": [
-        ],
+        "pinnedExecs": [],
         "position": "center",
+        "showCategories": true,
         "sortByMostUsed": true,
         "terminalCommand": "ghostty -e",
         "useApp2Unit": false,
@@ -14,9 +14,8 @@
     },
     "audio": {
         "cavaFrameRate": 30,
-        "externalMixer": "pwvucontrol || pavucontrol",
-        "mprisBlacklist": [
-        ],
+        "externalMixer": "pwvucontrol",
+        "mprisBlacklist": [],
         "preferredPlayer": "",
         "visualizerQuality": "high",
         "visualizerType": "linear",
@@ -24,46 +23,51 @@
         "volumeStep": 5
     },
     "bar": {
-        "backgroundOpacity": 0.5,
+        "backgroundOpacity": 0,
         "capsuleOpacity": 1,
         "density": "comfortable",
         "exclusive": true,
         "floating": false,
         "marginHorizontal": 0,
         "marginVertical": 0,
-        "monitors": [
-        ],
+        "monitors": [],
         "outerCorners": false,
         "position": "bottom",
         "showCapsule": false,
         "widgets": {
-            "center": [
-            ],
-            "left": [
-                {
-                    "characterCount": 2,
-                    "followFocusedScreen": false,
-                    "hideUnoccupied": true,
-                    "id": "Workspace",
-                    "labelMode": "none"
-                }
-            ],
+            "center": [],
+            "left": [],
             "right": [
                 {
-                    "blacklist": [
-                    ],
-                    "colorizeIcons": true,
-                    "drawerEnabled": false,
-                    "id": "Tray",
-                    "pinned": [
-                    ]
+                    "colorName": "tertiary",
+                    "hideWhenIdle": true,
+                    "id": "AudioVisualizer",
+                    "width": 300
                 },
                 {
-                    "deviceNativePath": "",
+                    "diskPath": "/",
+                    "id": "SystemMonitor",
+                    "showCpuTemp": false,
+                    "showCpuUsage": false,
+                    "showDiskUsage": false,
+                    "showMemoryAsPercent": false,
+                    "showMemoryUsage": false,
+                    "showNetworkStats": true,
+                    "usePrimaryColor": false
+                },
+                {
+                    "displayMode": "alwaysShow",
+                    "id": "WiFi"
+                },
+                {
                     "displayMode": "onhover",
+                    "id": "Bluetooth"
+                },
+                {
+                    "displayMode": "alwaysShow",
                     "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false,
+                    "showNoctaliaPerformance": true,
+                    "showPowerProfiles": true,
                     "warningThreshold": 15
                 },
                 {
@@ -108,8 +112,8 @@
     "colorSchemes": {
         "darkMode": true,
         "generateTemplatesForPredefined": true,
-        "manualSunrise": "06:30",
-        "manualSunset": "18:30",
+        "manualSunrise": "08:00",
+        "manualSunset": "19:30",
         "matugenSchemeType": "scheme-tonal-spot",
         "predefinedScheme": "Tokyo Night",
         "schedulingMode": "off",
@@ -220,15 +224,16 @@
         "weatherShowEffects": true
     },
     "network": {
-        "wifiEnabled": true
+        "wifiEnabled": true,
+        "bluetoothEnabled": true
     },
     "nightLight": {
         "autoSchedule": true,
         "dayTemp": "6500",
         "enabled": true,
         "forced": false,
-        "manualSunrise": "06:30",
-        "manualSunset": "18:30",
+        "manualSunrise": "08:00",
+        "manualSunset": "19:30",
         "nightTemp": "5273"
     },
     "notifications": {
@@ -262,7 +267,7 @@
         "audioCodec": "opus",
         "audioSource": "default_output",
         "colorRange": "limited",
-        "directory": "/home/unnamedplayer/Videos",
+        "directory": "/home/unnamedplayer/Data/Videos",
         "frameRate": 60,
         "quality": "very_high",
         "showCursor": true,
