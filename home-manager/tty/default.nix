@@ -1,9 +1,15 @@
 { config, pkgs, osConfig, ... }:
 {
+  #############################################################################
+  #
   # All the TTY/CLI related stuff that is not mandatory on every host
   # plus the configs that are /home/username related.
   # Otherwise, it will probably be in system/modules/programs
-  # ---------------------------------------------------------
+  #
+  # Next steps:
+  #   - @todo Test fzf
+  # 
+  #############################################################################
   
   # @todo test fzf
 

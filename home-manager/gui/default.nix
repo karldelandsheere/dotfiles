@@ -1,6 +1,11 @@
-{ config, osConfig, inputs, pkgs, ... }: let
-in
+{ config, osConfig, inputs, pkgs, ... }:
 {
+  ###############################################################################
+  # 
+  # Simple and effective GUI based on Niri and Noctalia, and all the GUI apps.
+  #
+  ############################################################################### 
+
   imports = [
     inputs.niri.homeModules.niri         # Scrollable tiling compositor
     inputs.noctalia.homeModules.default  # Quickshell integration
@@ -22,6 +27,7 @@ in
 
       # Launches niri at autologin, but only from tty1
       # @todo make this shell agnostic
+      # Well... it crashes so yeah, no
       # ------------------------------
       # zsh = {
       #   enable = true;
@@ -53,6 +59,17 @@ in
         XDG_CURRENT_DESKTOP = "niri";
         XDG_SESSION_DESKTOP = "niri";
       };
+
+
+      # Look & feel (@todo implement this so the pointer is the same everywhere)
+      # -----------
+      # pointerCursor = {
+      #   name = "xxx";
+      #   package = ...;
+      #   size = 24;
+      #   gtk.enable = true;
+      #   x11.enable = true;
+      # };
 
 
       # Miscellaneous files

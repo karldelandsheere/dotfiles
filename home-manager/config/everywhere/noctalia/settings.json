@@ -45,6 +45,9 @@
                     "width": 300
                 },
                 {
+                    "id": "plugin:privacy-indicator"
+                },
+                {
                     "diskPath": "/",
                     "id": "SystemMonitor",
                     "showCpuTemp": false,
@@ -106,9 +109,6 @@
             }
         ]
     },
-    "changelog": {
-        "lastSeenVersion": ""
-    },
     "colorSchemes": {
         "darkMode": true,
         "generateTemplatesForPredefined": true,
@@ -155,12 +155,15 @@
                     "id": "KeepAwake"
                 },
                 {
-                    "id": "NightLight"
+                    "id": "PowerProfile"
                 }
             ],
             "right": [
                 {
                     "id": "Notifications"
+                },
+                {
+                    "id": "NightLight"
                 },
                 {
                     "id": "WallpaperSelector"
@@ -365,7 +368,7 @@
         "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 1,
-        "panelsAttachedToBar": true,
+        "panelsAttachedToBar": false,
         "settingsPanelAttachToBar": false,
         "tooltipsEnabled": true
     },
