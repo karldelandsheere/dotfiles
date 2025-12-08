@@ -1,7 +1,17 @@
+###############################################################################
+# 
 # Power management and hibernation
 # https://nixos.wiki/wiki/Laptop
 # https://nixos.wiki/wiki/Hibernation
-# -----------------------------------
+#
+# Next steps:
+# -----------
+#   - @todo Implement https://wiki.archlinux.org/title/Laptop#Hibernate_on_low_battery_level
+#   - @todo Find out why I have this error when resuming from hibernation
+#       "BTRFS error: failed to open device for path /dev/mapper/cryptroot with flags 0x3: -16"
+# 
+###############################################################################
+
 { config, lib, pkgs, ... }:
 {
   options.nouveauxParadigmes = {
@@ -10,14 +20,14 @@
 
       resume = {
         device = lib.mkOption {
-          type = lib.types.str;
-          default = "/dev/mapper/cryptroot";
+          type        = lib.types.str;
+          default     = "/dev/mapper/cryptroot";
           description = "Which device to resume from after hibernation? Defaults to /dev/mapper/cryptroot";
         };
 
         offset = lib.mkOption {
-          type    = lib.types.str;
-          default = "0";
+          type        = lib.types.str;
+          default     = "0";
           description = "Offset to resume after hibernation. Defaults to 0. To find the value, use: sudo btrfs inspect-internal map-swapfile -r /swap/swapfile";
         };
       };
@@ -34,42 +44,44 @@
       # linuxKernel.packages.linux_zen.cpupower
     ];
 
+    boot.kernelParams = [
+      # ...
+    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.hibernation.enable ) [
+      # Resume after hibernation
+      "resume=${config.nouveauxParadigmes.hibernation.resume.device}"
+      "resume_offset=${config.nouveauxParadigmes.hibernation.resume.offset}"
+    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.cpuFlavor == "amd" ) [
+      # https://wiki.cachyos.org/configuration/general_system_tweaks/#enable-rcu-lazy
+      "rcutree.enable_rcu_lazy=1"
+    ];
+
 
     # Enable powerManagement and set it to powersave
     # ----------------------------------------------
     powerManagement = {
-      enable = true;
+      enable          = true;
       cpuFreqGovernor = "powersave"; #performance, ondemand, schedutil
+      powertop.enable = true;
     };
 
 
     services = {
-      tuned.enable = true;
+      auto-epp = lib.mkIf config.nouveauxParadigmes.cpuFlavor == "amd" {
+        enable = true;
+        settings.Settings = {
+          epp_state_for_AC  = "balance_performance";
+          epp_state_for_BAT = "power":
+      };
+
+      # https://documentation.ubuntu.com/server/explanation/performance/perf-tune-tuned/#static-vs-dynamic-tuning
+      tuned = {
+        enable         = true;
+        dynamic_tuning = true;
+      };
+
+      
       upower.enable = true;
     
-      # Service to help with power management
-      # -------------------------------------
-      # tlp = {
-      #   enable = true;
-
-      #   settings = {
-      #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      #     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-
-      #     CPU_MIN_PERF_ON_AC = 0;
-      #     CPU_MAX_PERF_ON_AC = 100;
-      #     CPU_MIN_PERF_ON_BAT = 0;
-      #     CPU_MAX_PERF_ON_BAT = 40;
-
-      #     # Optional helps save long term battery health
-      #     # --------------------------------------------
-      #     START_CHARGE_THRESH_BAT0 = 30; # 30 and below it starts to charge
-      #     STOP_CHARGE_THRESH_BAT0 = 90; # 90 and above it stops charging
-      #   };
-      # };
-
 
       # Lid and powerKey events
       # -----------------------
@@ -89,20 +101,21 @@
     };
 
 
-    # I chose a swapfile
-    # ------------------
+    # https://wiki.nixos.org/wiki/NetworkManager#Power_Saving
+    networking.networkmanager.wifi.powersave = true;
+
+
+    # https://wiki.nixos.org/wiki/Power_Management
+    systemd.sleep.extraConfig = lib.mkIf config.nouveauxParadigmes.hibernation.enable ''
+      HibernateDelaySec=15m
+    '';
+
+
+    # I chose to hibernate into a swapfile
+    # ------------------------------------
     swapDevices = [ {
       device = "/swap/swapfile";
-      size = config.nouveauxParadigmes.swapSize;
+      size   = config.nouveauxParadigmes.swapSize;
     } ];
-
-
-    # Resume after hibernation
-    # ------------------------
-    boot.kernelParams = [
-    ] ++ lib.lists.optionals ( config.nouveauxParadigmes.hibernation.enable ) [
-      "resume=${config.nouveauxParadigmes.hibernation.resume.device}"
-      "resume_offset=${config.nouveauxParadigmes.hibernation.resume.offset}"
-    ];
   };
 }

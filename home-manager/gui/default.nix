@@ -1,11 +1,11 @@
+###############################################################################
+# 
+# Simple and effective GUI based on Niri and Noctalia, and all the GUI apps.
+#
+############################################################################### 
+
 { config, osConfig, inputs, pkgs, ... }:
 {
-  ###############################################################################
-  # 
-  # Simple and effective GUI based on Niri and Noctalia, and all the GUI apps.
-  #
-  ############################################################################### 
-
   imports = [
     inputs.niri.homeModules.niri         # Scrollable tiling compositor
     inputs.noctalia.homeModules.default  # Quickshell integration
@@ -55,7 +55,7 @@
         # CLUTTER_BACKEND = "wayland";
         # DISABLE_QT5_COMPAT = "0"; # Should I set this to 1?
         # GTK_USE_PORTAL = "1";
-        # NIXOS_OZONE_WL = "1"; # Use Ozone Wayland for Electron apps
+        NIXOS_OZONE_WL      = "1"; # Use Ozone Wayland for Electron apps
         XDG_CURRENT_DESKTOP = "niri";
         XDG_SESSION_DESKTOP = "niri";
       };

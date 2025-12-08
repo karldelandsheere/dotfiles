@@ -1,17 +1,24 @@
-{
-  #############################################################################
-  #
-  # Welcome to my dotfiles. This is a work in progress. Enjoy the ride!
-  # Git repo: https://github.com/karldelandsheere/dotfiles/
-  # 
-  # Next steps:
-  #   - @todo Fix the Open button in Obsidian
-  #   - @todo Fix Ghostty tilde problem (deadkeys don't trigger,
-  #       apparently because of a bug in GTK)
-  #   - @todo Make Affinity Designer work
-  # 
-  #############################################################################
+#############################################################################
+#
+# Welcome to my dotfiles. This is a work in progress. Enjoy the ride!
+# Git repo: https://github.com/karldelandsheere/dotfiles/
+#
+# Tips and feedback welcome!
+# 
+# Next steps:
+# -----------
+#   - @todo Fix the Open button in Obsidian
+#   - @todo Fix Ghostty tilde problem (deadkeys don't trigger,
+#       apparently because of a bug in GTK)
+#   - @todo Make Affinity Designer work
+#   - @todo Understand and fix why if multiple tty are opened,
+#       they are not compartimented. Meaning, I'm in tty2 and open Ghostty,
+#       it opens in tty1.
+#   - @todo Actually use this setup for something else than ricing...
+# 
+#############################################################################
 
+{
   # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
     extra-substituters = [
