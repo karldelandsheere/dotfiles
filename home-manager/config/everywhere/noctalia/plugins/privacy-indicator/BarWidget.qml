@@ -42,10 +42,7 @@ Rectangle {
   color: Style.capsuleColor
 
   PwObjectTracker {
-      // Track all audio nodes (including streams) for privacy monitoring
-      objects: Pipewire.ready
-              ? Pipewire.nodes.values.filter(node => node.audio || (node.properties && node.properties["media.class"]))
-              : []
+    objects: Pipewire.ready ? Pipewire.nodes.values : []
   }
 
   Process {
@@ -217,7 +214,12 @@ Rectangle {
     acceptedButtons: Qt.RightButton
     hoverEnabled: true
     
-    onEntered: TooltipService.show(root, buildTooltip(), BarService.getTooltipDirection())
+    onEntered: {
+      var tooltipText = buildTooltip();
+      if (tooltipText) {
+        TooltipService.show(root, tooltipText, BarService.getTooltipDirection());
+      }
+    }
     onExited: TooltipService.hide()
   }
 
