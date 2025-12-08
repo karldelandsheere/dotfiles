@@ -1,8 +1,15 @@
+###############################################################################
+#
+# So far, it's a one user system. I'll need to re-organize that when
+# this changes.
+#
+###############################################################################
+
 { config, osConfig, lib, inputs, ... }:
 {
   imports = [
-    ./config
-    ./tty # No matter what, we'll always have a tty
+    ./config       # All the configs for tty and gui apps
+    ./tty          # No matter what, we'll always have a tty
   ] ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ./gui ];
 
 

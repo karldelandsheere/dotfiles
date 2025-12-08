@@ -1,6 +1,6 @@
 ###############################################################################
 # 
-# Simple and effective GUI based on Niri and Noctalia, and all the GUI apps.
+# Simple yet effective GUI based on Niri and Noctalia, and all the GUI apps.
 #
 ############################################################################### 
 
@@ -30,7 +30,7 @@
       # Well... it crashes so yeah, no
       # ------------------------------
       # zsh = {
-      #   enable = true;
+      #   enable = true;    # Needed otherwise it's not written in .zprofile
       #   profileExtra = ''
       #     if [[ "$(tty)" == "/dev/tty1" ]]; then
       #       niri-session

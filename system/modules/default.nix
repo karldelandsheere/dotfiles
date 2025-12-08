@@ -8,7 +8,7 @@
     ./impermanence.nix
     ./luks.nix
     ./networking.nix
-    ./power.nix # also contains hibernation and swapfile config
+    ./power.nix              # also contains hibernation and swapfile config
     ./programs.nix
     ./secrets.nix
     ./security.nix

@@ -1,3 +1,12 @@
+###############################################################################
+#
+# This is the common part for all systems config.
+#
+# The system-wide options and their default values are defined here,
+# as the parts that are too small for having their own files.
+#
+###############################################################################
+
 { config, lib, pkgs, ... }:
 {
   imports = [

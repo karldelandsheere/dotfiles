@@ -1,3 +1,13 @@
+###############################################################################
+#
+# Users' stuff.
+#
+# So far, I'm the sole user, so yeah this file is going to be small.
+# But when I'll start setting up for more users, I'll move that into
+# a one file per user organization.
+# 
+###############################################################################
+
 { config, pkgs, ... }:
 {
   config = {

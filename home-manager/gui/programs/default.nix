@@ -28,6 +28,7 @@
       # blender
       openscad               # Code based CAD
       prusa-slicer           # Slicer for my Prusa printers
+      signal-desktop         # Privacy focused messaging
       # vlc                  # Replaced by mpv (tty video player)
       vscodium               # Code editor
       
