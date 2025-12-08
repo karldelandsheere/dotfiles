@@ -76,8 +76,8 @@
 
       # https://documentation.ubuntu.com/server/explanation/performance/perf-tune-tuned/#static-vs-dynamic-tuning
       tuned = {
-        enable         = true;
-        dynamic_tuning = true;
+        enable                  = true;
+        settings.dynamic_tuning = true;
       };
 
       
