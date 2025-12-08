@@ -34,6 +34,7 @@
           ".config/Bitwarden"
           ".local/share/prusa-slicer"
           ".config/PrusaSlicer"
+          ".config/Signal"
           ".config/VSCodium"
           ".vscode-oss"
 
