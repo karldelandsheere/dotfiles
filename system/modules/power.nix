@@ -66,11 +66,12 @@
 
 
     services = {
-      auto-epp = lib.mkIf config.nouveauxParadigmes.cpuFlavor == "amd" {
+      auto-epp = lib.mkIf ( config.nouveauxParadigmes.cpuFlavor == "amd" ) {
         enable = true;
         settings.Settings = {
           epp_state_for_AC  = "balance_performance";
-          epp_state_for_BAT = "power":
+          epp_state_for_BAT = "power";
+        };
       };
 
       # https://documentation.ubuntu.com/server/explanation/performance/perf-tune-tuned/#static-vs-dynamic-tuning
@@ -111,8 +112,8 @@
     '';
 
 
-    # I chose to hibernate into a swapfile
-    # ------------------------------------
+    # I chose a swapfile (@todo Not important but, shouldn't this be somewhere else?)
+    # ------------------
     swapDevices = [ {
       device = "/swap/swapfile";
       size   = config.nouveauxParadigmes.swapSize;
