@@ -19,7 +19,7 @@
       niri = {
         enable  = true;
         package = pkgs.niri-unstable;                # Until 25.11 is in nixpkgs stable
-        settings.environment."NIXOS_OZONE_WL" = "1"; # Use Ozone Wayland forx Electron apps
+        # settings.environment."NIXOS_OZONE_WL" = "1"; # Use Ozone Wayland forx Electron apps
       };
       noctalia-shell = {
         enable         = true;
