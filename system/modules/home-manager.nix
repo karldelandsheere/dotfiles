@@ -1,7 +1,25 @@
-# Home-manager setup
-# ------------------
+###############################################################################
+# 
+# Home-manager setup.
+#
+# Next steps:
+#   - @todo Figure out what should be moved to Home-Manager instead of
+#       system, in terms of packages, programs, and stuff.
+#
+###############################################################################
+
 { config, lib, inputs, pkgs, ... }:
 {
+  # Related options and default values definition
+  options.nouveauxParadigmes = {
+    homeManager.enable = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Do we use Home-Manager? Defaults to true.";
+    };
+  };
+
+
   config = lib.mkIf config.nouveauxParadigmes.homeManager.enable {
     home-manager = {
       # General stuff

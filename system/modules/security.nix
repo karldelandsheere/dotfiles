@@ -1,14 +1,19 @@
-# Security stuff
-# --------------
+###############################################################################
+# 
+# Security related stuff
+# 
+###############################################################################
+
 { config, ... }:
 {
   config = {
     security = {
       polkit.enable = true;
-      pam.services = {
-        swaylock = {}; # init I guess?
-        swaylock.fprintAuth = false;
-      };
+      # pam.services = {
+      #   swaylock = {}; # init I guess?
+      #   swaylock.fprintAuth = false;
+      # };
+      rtkit.enable = true;
 
       # Allow running shutdown and reboot as root without a password
       # ------------------------------------------------------------

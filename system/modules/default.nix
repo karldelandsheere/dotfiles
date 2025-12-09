@@ -1,31 +1,50 @@
+###############################################################################
+#
+# Shared config for all systems. To be refined.
+# 
+###############################################################################
+
 { config, lib, inputs, ... }:
 {
   imports = [
-    ./bluetooth.nix
-    ./boot.nix
-    ./filesystem.nix
+    ./boot.nix               # Boot options and GRUB styling
+    ./encryption.nix         # Root encryption with LUKS
+    ./filesystem.nix         # Volumes, swap, options for impermanence and hibernation
+    ./hardware.nix           # All hardware, bluetooth, graphics, sound, ...
     ./home-manager.nix
-    ./impermanence.nix
-    ./luks.nix
-    ./networking.nix
-    ./power.nix              # also contains hibernation and swapfile config
+    ./impermanence.nix       # Stateless system that cleans itself at reboot
+    ./networking.nix         # Networking, SSH, VPN, Tailscale, ...
+    ./power-management.nix   # Power, hibernation, ...
     ./programs.nix
     ./secrets.nix
     ./security.nix
-    ./services.nix
-    ./sound.nix
     ./xdg.nix
   ];
 
 
-  # Nix and NixOS settings
-  # ----------------------
+  # Related options and default values definition
+  options.nouveauxParadigmes = {
+    stateVersion = lib.mkOption {
+      type        = lib.types.str;
+      default     = "25.11";
+      description = "NixOS' state version. Defaults to 25.11";
+    };
+
+    # Philosophical and pragramtic question...
+    allowUnfree = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true,
+      description = "Allow unfree software to be installed? Defaults to true, despite that I'd rather not to.";
+    };
+  };
+
+
   config = {
     # NixOS version
-    # -------------
     system.stateVersion = config.nouveauxParadigmes.stateVersion;
 
 
+    # Nix options
     nix = {
       settings = {
         experimental-features = [ "nix-command" "flakes" ]; # Activate flakes, etc.
@@ -33,9 +52,7 @@
         warn-dirty = false; # For some reason, it still does...
       };
 
-
       # Do some cleanup
-      # ---------------
       gc = {
         automatic = true;
         dates = "weekly";
@@ -47,8 +64,7 @@
     };
 
 
-    # I'd like it to be false, but that's not for today, is it?
-    # ---------------------------------------------------------
+    # Allow unfree software?
     nixpkgs.config.allowUnfree = config.nouveauxParadigmes.allowUnfree;
   };
 }

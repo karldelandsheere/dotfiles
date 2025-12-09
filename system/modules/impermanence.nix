@@ -1,11 +1,15 @@
+###############################################################################
+# 
 # Impermanence setup
 # The idea is to wipe /root at every boot to keep things clean
 # except for directories and files declared persistents
 # Needs the impermanence flake
 #
-# Based on so many sources but the latest is
+# Based on so many sources, the latest being
 # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/persist.nix
-# ---------------------------------------------------------------------------
+#
+###############################################################################
+
 { config, lib, pkgs, ... }: let
   differences = pkgs.writeShellApplication {
     name = "differences";
@@ -22,6 +26,12 @@
     else "dev-nvme0n1p2.device";
 in
 {
+  # Related options and default values definition
+  options.nouveauxParadigmes = {
+    impermanence.enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
+  };
+
+  
   config = lib.mkIf config.nouveauxParadigmes.impermanence.enable {
     # Rollback routine on every boot
     # ------------------------------

@@ -1,7 +1,21 @@
-# XDG related stuff (obviously)
-# -----------------
-{ config, pkgs, ... }:
+###############################################################################
+# 
+# XDG related stuff (obviously). There's a lot to do here.
+#
+###############################################################################
+
+{ config, lib, pkgs, ... }:
 {
+  # Related options and default values definition
+  options.nouveauxParadigmes = {
+    gui.enable = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Enable GUI? Defaults to true.";
+    };
+  };
+
+  
   config = {
     xdg = {
       # Portal, for screenshots, screencast, ...

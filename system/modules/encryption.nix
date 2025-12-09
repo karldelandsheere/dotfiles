@@ -1,7 +1,17 @@
-# LUKS encryption for root partition
-# ----------------------------------
+###############################################################################
+#
+# LUKS encryption for root partition.
+#
+###############################################################################
+
 { config, lib, ... }:
 {
+  # Related options and default values definition
+  options.nouveauxParadigmes = {
+    encryption.enable = lib.mkEnableOption "Use full disk encryption? Defaults to false.";
+  };
+  
+
   config = lib.mkIf config.nouveauxParadigmes.encryption.enable {
     boot = {
       loader.grub = {

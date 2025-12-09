@@ -14,6 +14,7 @@
 
 { config, lib, pkgs, ... }:
 {
+  # Related options and default values definition
   options.nouveauxParadigmes = {
     hibernation = {
       enable = lib.mkEnableOption "Enable hibernation? Defaults to false.";
@@ -110,13 +111,5 @@
     systemd.sleep.extraConfig = lib.mkIf config.nouveauxParadigmes.hibernation.enable ''
       HibernateDelaySec=15m
     '';
-
-
-    # I chose a swapfile (@todo Not important but, shouldn't this be somewhere else?)
-    # ------------------
-    swapDevices = [ {
-      device = "/swap/swapfile";
-      size   = config.nouveauxParadigmes.swapSize;
-    } ];
   };
 }
