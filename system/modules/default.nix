@@ -33,7 +33,7 @@
     # Philosophical and pragramtic question...
     allowUnfree = lib.mkOption {
       type        = lib.types.bool;
-      default     = true,
+      default     = true;
       description = "Allow unfree software to be installed? Defaults to true, despite that I'd rather not to.";
     };
   };

@@ -41,8 +41,8 @@
 
     # Network services
     services = {
-      # Mullvad VPN
-      services.mullvad-vpn.enable = true;
+      # VPN
+      mullvad-vpn.enable = true;
 
       # OpenSSH
       openssh = {

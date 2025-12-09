@@ -4,7 +4,7 @@
 # 
 ###############################################################################
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   # Related options and default values definition
   options.nouveauxParadigmes = {
@@ -60,7 +60,7 @@
       # Sound
       pipewire = {
         enable = true;
-        alse   = {
+        alsa   = {
           enable       = true;
           support32Bit = true;
         };
