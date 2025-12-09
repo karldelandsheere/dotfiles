@@ -13,15 +13,16 @@
   ];
 
   config = {
-    nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # for niri unstable
+    nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
 
     programs = {
       niri = {
-        enable = true;
-        package = pkgs.niri-unstable; # until 25.11 is in nixpkgs stable
+        enable  = true;
+        package = pkgs.niri-unstable;                # Until 25.11 is in nixpkgs stable
+        settings.environment."NIXOS_OZONE_WL" = "1"; # Use Ozone Wayland forx Electron apps
       };
       noctalia-shell = {
-        enable = true;
+        enable         = true;
         systemd.enable = true;
       };
 
@@ -55,7 +56,6 @@
         # CLUTTER_BACKEND = "wayland";
         # DISABLE_QT5_COMPAT = "0"; # Should I set this to 1?
         # GTK_USE_PORTAL = "1";
-        NIXOS_OZONE_WL      = "1"; # Use Ozone Wayland for Electron apps
         XDG_CURRENT_DESKTOP = "niri";
         XDG_SESSION_DESKTOP = "niri";
       };
