@@ -62,10 +62,14 @@
     };
 
 
-    # I speak French, but let's keep it simple
-    # ----------------------------------------
-    i18n.defaultLocale = "en_US.UTF-8";
-
+    i18n = {
+      defaultLocale = "en_US.UTF-8";   # I speak French, but let's keep it simple
+      inputMethod = {
+        enable = true;
+        type = "ibus";
+      };
+    };
+    
 
     # Time settings (let's assume that for now)
     # -------------

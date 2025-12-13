@@ -48,6 +48,8 @@
       # inputs.affinity-nix.packages.x86_64-linux.publisher
     ];
 
+    # home.sessionVariables.GTK_IM_MODULE = lib.mkForce "simple";
+
 
     programs = {
       # Nice terminal emulator with gpu acceleration
@@ -57,5 +59,7 @@
         enableZshIntegration = true;
       };
     };
+
+    
   };
 }

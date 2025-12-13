@@ -70,8 +70,8 @@
       ];
 
       sessionVariables = {
-        NIXOS_OZONE_WL = "1";          # Niri flake setting for electron apps
-        # GTK_IM_MODULE  = "simple";     # Fixing the tilde character in Ghostty
+        NIXOS_OZONE_WL = "1";          # Use Ozone Wayland for Electron apps
+        # GTK_IM_MODULE  = "simple";    # Fixing the tilde character in Ghostty
       };
     };
   };    

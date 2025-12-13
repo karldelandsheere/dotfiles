@@ -4,7 +4,6 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
-      bitwarden-cli          # Easy access to my vault from the tty
       bottom                 # Process/system monitor
       curl
       fastfetch              # (am I a cool kid now?)

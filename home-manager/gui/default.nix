@@ -18,8 +18,7 @@
     programs = {
       niri = {
         enable  = true;
-        package = pkgs.niri-unstable;                # Until 25.11 is in nixpkgs stable
-        # settings.environment."NIXOS_OZONE_WL" = "1"; # Use Ozone Wayland forx Electron apps
+        package = pkgs.niri-unstable;    # Until 25.11 is in nixpkgs stable
       };
       noctalia-shell = {
         enable         = true;
@@ -55,9 +54,21 @@
       sessionVariables = {
         # CLUTTER_BACKEND = "wayland";
         # DISABLE_QT5_COMPAT = "0"; # Should I set this to 1?
+        # GDK_BACKEND = "wayland,x11";
+        # GDK_SCALE = "1";
         # GTK_USE_PORTAL = "1";
+        # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+        # QT_QPA_PLATFORM = "wayland-egl";
+        # QT_QPA_PLATFORMTHEME = "qt6ct";
+        # QT_SCALE_FACTOR = "1";
+        # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+        # SDL_VIDEO_DRIVER = "wayland";
+        # WLR_BACKEND = "vulkan";
+        # WLR_RENDERER = "vulkan";
+        # WLR_NO_HARDWARE_CURSORS = "1";
         XDG_CURRENT_DESKTOP = "niri";
         XDG_SESSION_DESKTOP = "niri";
+        # XDG_SESSION_TYPE = "wayland";
       };
 
 
