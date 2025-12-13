@@ -1,26 +1,28 @@
 ###############################################################################
 #
-# So far, it's a one user system. I'll need to re-organize that when
-# this changes.
+# So far, it's a one user system. I'll need to reorganize that when
+# this changes. I should probably reorganize it anyway though.
 #
 ###############################################################################
 
-{ config, osConfig, lib, inputs, ... }:
+{ config, osConfig, lib, inputs, ... }: let
+  username = "unnamedplayer";
+in
 {
   imports = [
-    ./config       # All the configs for tty and gui apps
+    ../config      # All the configs for tty and gui apps
     ./tty          # No matter what, we'll always have a tty
   ] ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ./gui ];
 
 
   config = {
     home = {
-      username = "unnamedplayer";
-      homeDirectory = "/home/unnamedplayer";
+      username      = "${username}";
+      homeDirectory = "/home/${username}";
 
       # Opt-in what files and directories should persist
       # ------------------------------------------------
-      persistence."/persist/home/unnamedplayer" = {
+      persistence."/persist/home/${username}" = {
         directories = [
           ".gnupg"                     # Pgp utility
           ".local/share/keyrings"
@@ -29,29 +31,27 @@
           ".ssh"                       # Do I need to explain this one?
 
 
-
           # @todo Determinate what is really needed here
           ".config/Bitwarden"
           ".config/obsidian"
-          ".local/share/prusa-slicer"
           ".config/PrusaSlicer"
           ".config/Signal"
           ".config/VSCodium"
-          ".vscode-oss"
-
           # ".local/share/calcurse"
           # ".local/share/gurk"
           # ".local/share/iamb"
+          ".local/share/prusa-slicer"
+          ".vscode-oss"
+
 
           # Obsidian vaults, OpenCloud data, ...
           "Data"
         ];
 
         files = [
+          ".cache/noctalia/wallpapers.json"
           # ".config/mimeapps.list"
           # ".config/Bitwarden CLI/data.json"
-          
-          ".cache/noctalia/wallpapers.json"
           ".local/share/nix/trusted-settings.json"
           ".zshrc"
           ".zsh_history"
@@ -59,6 +59,7 @@
 
         allowOther = true;
       };
+
 
       # @todo 
       shellAliases = {
@@ -77,6 +78,7 @@
         tsdown = "tailscale down && mullvad connect";
       };
     };
+
 
     accounts.email = {
       # maildirBasePath = "/persist/data/mail";
