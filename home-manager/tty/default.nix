@@ -32,10 +32,13 @@
     # CLI programs that either don't need config or are on trial
     # ----------------------------------------------------------
     home.packages = with pkgs; [
+      bitwarden-cli          # Easy access to my vault from the tty
       cmatrix                # Yeah, I know... like the cool kids
       ffmpeg
+      # gurk-rs                # Signal client for the tty
+      # iamb                   # Element client for the tty
       mpv                    # tty video player
-
+      yt-dlp                 # youtube downloader
 
 
       # Day to day
