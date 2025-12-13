@@ -32,6 +32,7 @@
 
           # @todo Determinate what is really needed here
           ".config/Bitwarden"
+          ".config/obsidian"
           ".local/share/prusa-slicer"
           ".config/PrusaSlicer"
           ".config/Signal"
@@ -52,6 +53,7 @@
           
           ".cache/noctalia/wallpapers.json"
           ".local/share/nix/trusted-settings.json"
+          ".zshrc"
           ".zsh_history"
         ];
 

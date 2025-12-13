@@ -7,7 +7,6 @@
 # 
 # Next steps:
 # -----------
-#   - @todo Fix the Open button in Obsidian
 #   - @todo Fix Ghostty tilde problem (deadkeys don't trigger,
 #       apparently because of a bug in GTK)
 #   - @todo Make Affinity Designer work
