@@ -11,7 +11,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../default.nix
+    ../../system/default.nix
   ];
 
   config = {
@@ -25,7 +25,7 @@
       encryption.enable   = true;
       impermanence.enable = true;
       hibernation = {
-        enable = true;
+        enable        = true;
         resume.offset = "1108328";
       };
     };
@@ -38,4 +38,3 @@
     ];
   };
 }
-

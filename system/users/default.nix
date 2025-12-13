@@ -21,7 +21,6 @@
       # passwordFile = config.age.secrets.unnamedplayer.path;
       extraGroups = [
         "wheel"
-
         "audio"
         "input"
         "networkmanager"

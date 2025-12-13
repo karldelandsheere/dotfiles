@@ -1,8 +1,16 @@
+###############################################################################
+#
+# Custom config for q3dm11.
+#
+# This is an old Sony Vaio from like 2005 or so.
+# 
+###############################################################################
+
 { config, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    ../../default.nix
+    ../../system/default.nix
   ];
 
   config = {
@@ -21,7 +29,7 @@
     # Host specific packages
     # ----------------------
     environment.systemPackages = with pkgs; [
-      # microcode-intel
+      # ...
     ];
   };
 }

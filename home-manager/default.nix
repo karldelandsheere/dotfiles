@@ -26,7 +26,7 @@
           ".local/share/keyrings"
           ".mozilla/firefox/default"
           ".mullvad"                   # VPN
-          ".ssh"                       # Do I need to spell this one?
+          ".ssh"                       # Do I need to explain this one?
 
 
 
@@ -196,6 +196,7 @@
         signByDefault = true;
       };
     };
+
 
     # Shouldn't it be enough to set it once in the system part of the config?
     # -----------------------------------------------------------------------

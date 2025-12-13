@@ -91,14 +91,14 @@
       # --------------------
       # utm = mkSystemConfig {
       #   system  = "aarch64-linux";
-      #   modules = [ ./system/hosts/utm ];
+      #   modules = [ ./hosts/utm ];
       # };
 
       # bare-metal on amd ryzen
       # -----------------------
       q3dm10 = mkSystemConfig {
         system  = "x86_64-linux";
-        modules = [ ./system/hosts/q3dm10 ];
+        modules = [ ./hosts/q3dm10 ];
       };
 
       # Sony Vaio VGN-TX5XN/B
@@ -106,7 +106,7 @@
       # -----------------------
       q3dm11 = mkSystemConfig {
         system = "i686-linux";
-        modules = [ ./system/hosts/q3dm11 ];
+        modules = [ ./hosts/q3dm11 ];
       };
     };
   };
