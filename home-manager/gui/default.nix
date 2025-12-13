@@ -86,7 +86,7 @@
       # Miscellaneous files
       # -------------------
       file."Pictures/Wallpapers".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/home-manager/themes/wallpapers";
+        config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/themes/wallpapers";
     };
   };
 }
