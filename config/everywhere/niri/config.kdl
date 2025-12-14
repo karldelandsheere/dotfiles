@@ -96,8 +96,8 @@ window-rule {
 }
 
 window-rule {
-  match app-id="com.mitchellh.ghostty"
-  match app-id="codium"
+  match app-id="com.mitchellh.ghostty" // Ghostty
+  match app-id="codium"                // VSCodium
 
   open-on-workspace "tty"
   opacity 0.85
@@ -120,31 +120,26 @@ window-rule {
   open-maximized true
 }
 
-// window-rule {
-//   match app-id="anytype"
-//   open-on-workspace "docs"
-// }
-
-// window-rule {
-//   match app-id="ONLYOFFICE"
-//   open-on-workspace "docs"
-// }
-
 window-rule {
   match app-id="desktop.opencloud.eu."
-  open-on-workspace "files"
+  match app-id="obsidian"
+
+  open-on-workspace "stuff"
+  open-maximized true
 }
 
 window-rule {
   match app-id="nemo"
-  open-on-workspace "files"
+  open-on-workspace "stuff"
 }
 
 window-rule {
-  match title="aerc"
-  match title="calcurse"
+  match app-id="signal"
   match title="gurk"
-  match title="iamb"
+
+  // match title="aerc"
+  // match title="calcurse"
+  // match title="iamb"
 
   open-on-workspace "daily"
 }
@@ -156,8 +151,7 @@ workspace "tty"
 workspace "browse"
 workspace "daily"
 workspace "3d"
-// workspace "docs"
-workspace "files"
+workspace "stuff"
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations

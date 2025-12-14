@@ -6,7 +6,7 @@
     environment.systemPackages = with pkgs; [
       bottom                 # Process/system monitor
       curl
-      fastfetch              # (am I a cool kid now?)
+      ffmpeg
       git                    # Git is required to manage these dotfiles
       helix                  # Helix > vim imho
       jq                     # sed for json
@@ -15,11 +15,9 @@
       progress               # Follow the progression of any script
       scooter                # Search & replace
       tree                   # Display a tree of a given folder
-      ueberzugpp             # Terminal image viewer (needed for yazi)
       unzip
       usbutils
       xev                    # Event monitor, for debugging
-      yazi                   # A really cool CLI file explorer
     ];
 
 
