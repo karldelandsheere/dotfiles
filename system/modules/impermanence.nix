@@ -58,45 +58,59 @@ in
       # Now, opt-in what needs to persist
       # ---------------------------------
       persistence."/persist" = {
-        hideMounts = true; # What's it doing really?
+        hideMounts = true;             # What's it doing really?
 
+        # System-wide persistent directories and files
         directories = [
-          # /etc/...
-          "/etc/mullvad-vpn"
-          "/etc/nixos"
-          "/etc/NetworkManager/system-connections"
-          "/etc/tuned"
-
-          # /var/lib/...
-          "/var/lib/nixos"
-          "/var/lib/bluetooth"
-          "/var/lib/upower"
-
-          # /var/cache
-          "/var/cache/mullvad-vpn"
-        ];
+          # ...
+        ]
+        ++ lib.forEach [                   # /etc/...
+          "mullvad-vpn"
+          "NetworkManager/syste-connections"
+          "nixos"
+          "ssh"
+          "tuned" ] (x: "/etc/${x}")
+        ++ lib.forEach [                   # /var/lib/...
+          "bluetooth"
+          # "NetworkManager"
+          "nixos"
+          "tailscale"
+          "upower" ] (x: "/var/lib/${x}")
+        ++ lib.forEach [                   # /var/cache/...
+          "mullvad-vpn" ] (x: "/var/cache/${x}");
 
         files = [
-          # /etc/...
           "/etc/machine-id"
-          "/etc/ssh/ssh_host_ed25519_key"
-          "/etc/ssh/ssh_host_ed25519_key.pub"
-          "/etc/ssh/ssh_host_rsa_key"
-          "/etc/ssh/ssh_host_rsa_key.pub"
-
-          # /var/lib/...
-          "/var/lib/NetworkManager/secret_key"
-          "/var/lib/NetworkManager/seen-bssids"
-          "/var/lib/NetworkManager/timestamps"
-          "/var/lib/tailscale/tailscaled.log.conf"
-          "/var/lib/tailscale/tailscaled.state"
-
-          # /root/...
           "/root/.local/share/nix/trusted-settings.json"
         ];
+
+        # User's persistant home subdirectories and files
+        users.${config.nouveauxParadigmes.user.name} = {
+          directories = [
+            { mode = "0700"; directory = ".gnupg"; }                 # PGP utility
+            { mode = "0700"; directory = ".local/share/keyrings"; }  # Gnome keyring
+            { mode = "0700"; directory = ".mullvad"; }               # VPN
+            { mode = "0700"; directory = ".ssh"; }                   # Obvious, innit?
+            { mode = "0700"; directory = "Data"; }                   # Vaults, documents, etc
+          ];
+          
+          files = [
+            ".local/share/nix/trusted-settings.json"
+            ".zshrc"
+            ".zsh_history"
+          ];
+        };
       };
     };
 
+
+    # Persist systemd services' tmp files
+    systemd.tmpfiles.rules = [
+      "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
+      "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
+      "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
+    ];
+    
   
     # Rollback results in sudo lectures after each reboot
     # ---------------------------------------------------

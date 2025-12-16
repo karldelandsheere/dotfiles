@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# @todo Make this a little less hardcoded
+
 # This script needs to be run by priviledge user
 # ----------------------------------------------
 if [ "$UID" -ne "0" ];

@@ -2,6 +2,9 @@
 # 
 # XDG related stuff (obviously). There's a lot to do here.
 #
+# @todo Implement some stuff from this:
+#   https://github.com/jervw/snowflake/blob/main/modules/home/system/xdg/default.nix
+#
 ###############################################################################
 
 { config, lib, pkgs, ... }:

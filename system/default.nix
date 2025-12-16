@@ -18,6 +18,12 @@
   # Set system wide options
   # -----------------------
   options.nouveauxParadigmes = {
+    user.name = lib.mkOption {
+      type        = lib.types.str;
+      default     = "unnamedplayer";
+      description = "Main user's username. Defaults to unnamedplayer";
+    };
+    
     # Inputs
     kbLayout = lib.mkOption {
       type        = lib.types.str;
@@ -49,7 +55,7 @@
       # If the whole system is encrypted and password protected at boot,
       # no need to type a second login right after
       getty = lib.mkIf config.nouveauxParadigmes.encryption.enable {
-        autologinUser = "unnamedplayer";
+        autologinUser = config.nouveauxParadigmes.user.name;
       };
     };
     

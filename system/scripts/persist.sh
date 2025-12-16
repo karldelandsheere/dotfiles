@@ -7,7 +7,7 @@ set -euo pipefail
 
 
 dotfiles=/etc/nixos
-hostname="q3dm10"
+hostname="q3dm10" # @todo Make it less hardcoded
 persist_root="/persist"
 eval_query="${dotfiles}#nixosConfigurations.${hostname}.config"
 

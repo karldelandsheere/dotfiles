@@ -143,13 +143,14 @@ mv /mnt/etc/nixos /mnt/etc/nixos-generated
 # Import our dotfiles and customize them
 # ----------------------------------------
 git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
-cp /mnt/etc/nixos{-generated,/system/hosts/"$HOST"}/hardware-configuration.nix
+cp /mnt/etc/nixos{-generated,/hosts/"$HOST"}/hardware-configuration.nix
 
 # sed -i "s|__BOOT_UUID__|$BOOT_UUID|g" /mnt/etc/nixos/system/modules/boot.nix
 # sed -i "s|__PRIMARY_PART__|$PRIMARY_PART|g" /mnt/etc/nixos/system/modules/impermanence.nix
 
 
 # If LUKS, then uncomment the file import
+# @todo Change the if to reflect use the options
 # ---------------------------------------
 if [[ "$WITH_LUKS" -eq 1 ]]; then
   sed -i 's/# .\/luks.nix/.\/luks.nix/g' /mnt/etc/nixos/system/modules/default.nix

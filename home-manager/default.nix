@@ -6,7 +6,7 @@
 ###############################################################################
 
 { config, osConfig, lib, inputs, ... }: let
-  username = "unnamedplayer";
+  username = ${osConfig.nouveauxParadigmes.user.name};
 in
 {
   imports = [
@@ -24,38 +24,34 @@ in
       # ------------------------------------------------
       persistence."/persist/home/${username}" = {
         directories = [
-          ".gnupg"                     # Pgp utility
-          ".local/share/keyrings"
           ".mozilla/firefox/default"
-          ".mullvad"                   # VPN
-          ".ssh"                       # Do I need to explain this one?
-
-
-          # @todo Determinate what is really needed here
-          ".config/Bitwarden"
-          ".config/obsidian"
-          ".config/PrusaSlicer"
-          ".config/Signal"
-          ".config/Termius"
-          ".config/VSCodium"
-          # ".local/share/calcurse"
-          # ".local/share/gurk"
-          # ".local/share/iamb"
           ".local/share/prusa-slicer"
           ".vscode-oss"
 
+          # @todo Determinate what is really needed here
+          # ".local/share/calcurse"
+          # ".local/share/gurk"
+          # ".local/share/iamb"
 
           # Obsidian vaults, OpenCloud data, ...
           "Data"
-        ];
+        ]
+        ++ lib.forEach [
+          "Bitwarden"
+          "obsidian"
+          "PrusaSlicer"
+          "Signal"
+          "Termius"
+          "VSCodium"
+        ] (x: ".config/${x}");
 
         files = [
           ".cache/noctalia/wallpapers.json"
           # ".config/mimeapps.list"
           # ".config/Bitwarden CLI/data.json"
-          ".local/share/nix/trusted-settings.json"
-          ".zshrc"
-          ".zsh_history"
+          # ".local/share/nix/trusted-settings.json"
+          # ".zshrc"
+          # ".zsh_history"
         ];
 
         allowOther = true;
