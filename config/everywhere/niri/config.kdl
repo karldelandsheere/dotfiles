@@ -1,12 +1,12 @@
 // This config is in the KDL format: https://kdl.dev
 // "/-" comments out the following node.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
-
-
+//
 include "./binds.kdl"
 include "./input.kdl"
 include "./noctalia.kdl"
 include "./startup.kdl"
+include "./workspaces.kdl"
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
@@ -44,8 +44,6 @@ overview {
     off
   }
 }
-
-
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
@@ -86,72 +84,6 @@ layer-rule {
     match namespace="^notifications$"
     block-out-from "screencast"
 }
-
-
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
-// 
-window-rule {
-  geometry-corner-radius 0
-  clip-to-geometry true
-}
-
-window-rule {
-  match app-id="com.mitchellh.ghostty" // Ghostty
-  match app-id="codium"                // VSCodium
-
-  open-on-workspace "tty"
-  opacity 0.85
-}
-
-window-rule {
-  match app-id="firefox"
-
-  open-on-workspace "browse"
-  open-maximized true
-}
-
-window-rule {
-  match app-id="PrusaSlicer"
-  match app-id="OrcaSlicer"
-  match app-id="org.openscad."
-  match app-id="blender"
-
-  open-on-workspace "3d"
-  open-maximized true
-}
-
-window-rule {
-  match app-id="desktop.opencloud.eu."
-  match app-id="obsidian"
-
-  open-on-workspace "stuff"
-  open-maximized true
-}
-
-window-rule {
-  match app-id="nemo"
-  open-on-workspace "stuff"
-}
-
-window-rule {
-  match app-id="signal"
-  match title="gurk"
-
-  // match title="aerc"
-  // match title="calcurse"
-  // match title="iamb"
-
-  open-on-workspace "daily"
-}
-
-
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Named-Workspaces
-// 
-workspace "tty"
-workspace "browse"
-workspace "daily"
-workspace "3d"
-workspace "stuff"
 
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations

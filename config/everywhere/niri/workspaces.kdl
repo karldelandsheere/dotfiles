@@ -1,0 +1,74 @@
+// -- workspaces.kdl
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Named-Workspaces
+// 
+workspace "tty"
+workspace "browse"
+workspace "code"
+workspace "3d"
+workspace "daily"
+workspace "stuff"
+
+
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
+// 
+window-rule {
+  match app-id="com.mitchellh.ghostty" // Ghostty
+
+  open-on-workspace "tty"
+  opacity 0.85
+}
+
+window-rule {
+  geometry-corner-radius 0.15
+  clip-to-geometry true
+}
+
+window-rule {
+  match app-id="firefox"               // Browser
+
+  open-on-workspace "browse"
+  open-maximized true
+}
+
+window-rule {
+  match app-id="codium"                // VSCodium
+  match app-id="Termius"               // Termius
+
+  open-on-workspace "code"
+  open-maximized true
+  opacity 0.85
+}
+
+window-rule {
+  match app-id="PrusaSlicer"
+  match app-id="OrcaSlicer"
+  match app-id="org.openscad."
+  match app-id="blender"
+
+  open-on-workspace "3d"
+  open-maximized true
+}
+
+window-rule {
+  match app-id="signal"
+  match title="gurk"
+
+  // match title="aerc"
+  // match title="calcurse"
+  // match title="iamb"
+
+  open-on-workspace "daily"
+}
+
+window-rule {
+  match app-id="desktop.opencloud.eu."
+  match app-id="obsidian"
+
+  open-on-workspace "stuff"
+  open-maximized true
+}
+
+window-rule {
+  match app-id="nemo"
+  open-on-workspace "stuff"
+}
