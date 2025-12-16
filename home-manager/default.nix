@@ -36,6 +36,7 @@ in
           ".config/obsidian"
           ".config/PrusaSlicer"
           ".config/Signal"
+          ".config/Termius"
           ".config/VSCodium"
           # ".local/share/calcurse"
           # ".local/share/gurk"

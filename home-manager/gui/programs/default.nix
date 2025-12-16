@@ -29,7 +29,8 @@
       # qbittorrent
 
     ] ++ lib.lists.optionals ( osConfig.nixpkgs.config.allowUnfree ) [
-      obsidian     # Markdown note taking app
+      obsidian               # Markdown note taking app
+      termius                # Cross-platform SSH client
       
       # Graphic design
       # Not working on 20250725, try again later if no good alternative found 

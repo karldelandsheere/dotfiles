@@ -65,6 +65,7 @@ in
           "/etc/mullvad-vpn"
           "/etc/nixos"
           "/etc/NetworkManager/system-connections"
+          "/etc/tuned"
 
           # /var/lib/...
           "/var/lib/nixos"
