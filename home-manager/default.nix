@@ -6,7 +6,7 @@
 ###############################################################################
 
 { config, osConfig, lib, inputs, ... }: let
-  username = ${osConfig.nouveauxParadigmes.user.name};
+  username = "${osConfig.nouveauxParadigmes.user.name}";
 in
 {
   imports = [
@@ -24,6 +24,12 @@ in
       # ------------------------------------------------
       persistence."/persist/home/${username}" = {
         directories = [
+          ".gnupg"                         # PGP utility
+          ".local/share/keyrings"          # Gnome keyring
+          ".mullvad"                       # VPN
+          ".ssh"                           # Obvious, innit?
+          "Data"                           # Vaults, documents, etc
+            
           ".mozilla/firefox/default"
           ".local/share/prusa-slicer"
           ".vscode-oss"
@@ -32,9 +38,6 @@ in
           # ".local/share/calcurse"
           # ".local/share/gurk"
           # ".local/share/iamb"
-
-          # Obsidian vaults, OpenCloud data, ...
-          "Data"
         ]
         ++ lib.forEach [
           "Bitwarden"
@@ -49,9 +52,9 @@ in
           ".cache/noctalia/wallpapers.json"
           # ".config/mimeapps.list"
           # ".config/Bitwarden CLI/data.json"
-          # ".local/share/nix/trusted-settings.json"
-          # ".zshrc"
-          # ".zsh_history"
+          ".local/share/nix/trusted-settings.json"
+          ".zshrc"
+          ".zsh_history"
         ];
 
         allowOther = true;

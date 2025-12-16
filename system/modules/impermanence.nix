@@ -57,49 +57,51 @@ in
 
       # Now, opt-in what needs to persist
       # ---------------------------------
-      persistence."/persist" = {
-        hideMounts = true;             # What's it doing really?
-
+      persistence = {
         # System-wide persistent directories and files
-        directories = [
-          # ...
-        ]
-        ++ lib.forEach [                   # /etc/...
-          "mullvad-vpn"
-          "NetworkManager/syste-connections"
-          "nixos"
-          "ssh"
-          "tuned" ] (x: "/etc/${x}")
-        ++ lib.forEach [                   # /var/lib/...
-          "bluetooth"
-          # "NetworkManager"
-          "nixos"
-          "tailscale"
-          "upower" ] (x: "/var/lib/${x}")
-        ++ lib.forEach [                   # /var/cache/...
-          "mullvad-vpn" ] (x: "/var/cache/${x}");
+        "/persist" = {
+          hideMounts = true;             # What's it doing really?
 
-        files = [
-          "/etc/machine-id"
-          "/root/.local/share/nix/trusted-settings.json"
-        ];
-
-        # User's persistant home subdirectories and files
-        users.${config.nouveauxParadigmes.user.name} = {
           directories = [
-            { mode = "0700"; directory = ".gnupg"; }                 # PGP utility
-            { mode = "0700"; directory = ".local/share/keyrings"; }  # Gnome keyring
-            { mode = "0700"; directory = ".mullvad"; }               # VPN
-            { mode = "0700"; directory = ".ssh"; }                   # Obvious, innit?
-            { mode = "0700"; directory = "Data"; }                   # Vaults, documents, etc
-          ];
-          
+            # ...
+          ]
+          ++ lib.forEach [                   # /etc/...
+            "mullvad-vpn"
+            "NetworkManager/system-connections"
+            "nixos"
+            "ssh"
+            "tuned" ] (x: "/etc/${x}")
+          ++ lib.forEach [                   # /var/lib/...
+            "bluetooth"
+            # "NetworkManager"
+            "nixos"
+            "tailscale"
+            "upower" ] (x: "/var/lib/${x}")
+          ++ lib.forEach [                   # /var/cache/...
+            "mullvad-vpn" ] (x: "/var/cache/${x}");
+
           files = [
-            ".local/share/nix/trusted-settings.json"
-            ".zshrc"
-            ".zsh_history"
+            "/etc/machine-id"
+            "/root/.local/share/nix/trusted-settings.json"
           ];
         };
+
+        # User's persistant home subdirectories and files
+        # "/persist/home/${config.nouveauxParadigmes.user.name}" = {
+        #   directories = [
+        #     ".gnupg"                         # PGP utility
+        #     ".local/share/keyrings"          # Gnome keyring
+        #     ".mullvad"                       # VPN
+        #     ".ssh"                           # Obvious, innit?
+        #     "Data"                           # Vaults, documents, etc
+        #   ];
+          
+        #   files = [
+        #     ".local/share/nix/trusted-settings.json"
+        #     ".zshrc"
+        #     ".zsh_history"
+        #   ];
+        # };
       };
     };
 
