@@ -13,6 +13,15 @@ A privacy indicator widget that monitors and displays when microphone, camera, o
 - **App Information**: Tooltip displays which applications are using each resource
 - **Adaptive Layout**: Automatically adjusts layout for horizontal or vertical bar positions
 
+## Configuration
+
+Access the plugin settings in Noctalia to configure the following options:
+
+- **Hide Inactive States**: If enabled, microphone, camera, and screen icons are hidden whenever they are inactive. Only active states are shown.
+- **RemoveMargins**: If enabled, removes all outer margins of the widget.
+- **Icon Spacing**: Controls the horizontal/vertical spacing between the icons.
+
+
 ## Usage
 
 The widget displays three icons in the bar:
@@ -34,4 +43,3 @@ Hover over the widget to see a tooltip listing which applications are using each
 - Uses Pipewire API to monitor audio/video streams
 - Checks `/proc/[0-9]*/fd/` for camera device access
 - Detects screen sharing by analyzing Pipewire node properties and media class
-

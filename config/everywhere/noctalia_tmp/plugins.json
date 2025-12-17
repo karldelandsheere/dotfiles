@@ -1,0 +1,14 @@
+{
+    "sources": [
+        {
+            "name": "Official Noctalia Plugins",
+            "url": "https://github.com/noctalia-dev/noctalia-plugins"
+        }
+    ],
+    "states": {
+        "privacy-indicator": {
+            "enabled": true
+        }
+    },
+    "version": 1
+}

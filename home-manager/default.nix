@@ -34,6 +34,8 @@ in
           ".local/share/prusa-slicer"
           ".vscode-oss"
 
+          ".cache/noctalia"
+
           # @todo Determinate what is really needed here
           # ".local/share/calcurse"
           # ".local/share/gurk"
@@ -49,7 +51,6 @@ in
         ] (x: ".config/${x}");
 
         files = [
-          ".cache/noctalia/wallpapers.json"
           # ".config/mimeapps.list"
           # ".config/Bitwarden CLI/data.json"
           ".local/share/nix/trusted-settings.json"
