@@ -1,8 +1,0 @@
-{
-  "tooltip": {
-    "mic-on": "Mikrofon: {apps}",
-    "cam-on": "Kamera: {apps}",
-    "screen-on": "Bildschirmfreigabe: {apps}"
-  }
-}
-
