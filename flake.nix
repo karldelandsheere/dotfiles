@@ -7,12 +7,7 @@
 # 
 # Next steps:
 # -----------
-#   - @todo Fix Ghostty tilde problem (deadkeys don't trigger,
-#       apparently because of a bug in GTK)
 #   - @todo Make Affinity Designer work
-#   - @todo Understand and fix why if multiple tty are opened,
-#       they are not compartimented. Meaning, I'm in tty2 and open Ghostty,
-#       it opens in tty1.
 #   - @todo Actually use this setup for something else than ricing...
 # 
 #############################################################################
