@@ -29,14 +29,14 @@
       # @todo make this shell agnostic
       # Well... it crashes so yeah, no
       # ------------------------------
-      zsh = {
-        enable = true;    # Needed otherwise it's not written in .zprofile
-        profileExtra = ''
-          if [[ "$(tty)" == "/dev/tty1" ]]; then
-            niri-session
-          fi
-        '';
-      };
+      # zsh = {
+      #   enable = true;    # Needed otherwise it's not written in .zprofile
+      #   profileExtra = ''
+      #     if [[ "$(tty)" == "/dev/tty1" ]]; then
+      #       niri-session
+      #     fi
+      #   '';
+      # };
     };
 
 

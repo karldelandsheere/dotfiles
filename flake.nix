@@ -89,7 +89,7 @@
       #   modules = [ ./hosts/utm ];
       # };
 
-      # bare-metal on amd ryzen
+      # Bare-metal on amd ryzen
       # -----------------------
       q3dm10 = mkSystemConfig {
         system  = "x86_64-linux";
