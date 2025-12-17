@@ -1,7 +1,7 @@
 {
   "id": "privacy-indicator",
   "name": "Privacy Indicator",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "minNoctaliaVersion": "3.6.0",
   "author": "Noctalia Team <team@noctalia.dev>",
   "license": "MIT",
