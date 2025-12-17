@@ -4,9 +4,7 @@
 #
 ############################################################################### 
 
-{ config, osConfig, inputs, pkgs, ... }: let
-  cfg = "${osConfig.nouveauxParadigmes}";
-in
+{ config, osConfig, inputs, pkgs, ... }:
 {
   imports = [
     inputs.niri.homeModules.niri         # Scrollable tiling compositor
@@ -88,8 +86,8 @@ in
       # Miscellaneous files
       # -------------------
       file = {
-        ".face".source = config.lib.file.mkOutOfStoreSymlink "${cfg.dotfiles}/themes/faces/unnamedplayer.jpg";
-        "Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink "${cfg.dotfiles}/themes/wallpapers";
+        ".face".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/themes/faces/unnamedplayer.jpg";
+        "Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/themes/wallpapers";
       };
     };
   };
