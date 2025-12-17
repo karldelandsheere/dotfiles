@@ -97,7 +97,7 @@ in
           
           files = [
             ".local/share/nix/trusted-settings.json"
-            ".zshrc"
+            # ".zshrc"
             ".zsh_history"
           ];
         };

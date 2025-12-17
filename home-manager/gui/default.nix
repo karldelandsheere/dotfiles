@@ -26,17 +26,17 @@
       };
 
       # Launches niri at autologin, but only from tty1
+      # -l : https://github.com/YaLTeR/niri/issues/1914 (thanks nisby!)
       # @todo make this shell agnostic
-      # Well... it crashes so yeah, no
       # ------------------------------
-      # zsh = {
-      #   enable = true;    # Needed otherwise it's not written in .zprofile
-      #   profileExtra = ''
-      #     if [[ "$(tty)" == "/dev/tty1" ]]; then
-      #       niri-session
-      #     fi
-      #   '';
-      # };
+      zsh = {
+        enable = true;    # Needed otherwise it's not written in .zprofile
+        profileExtra = ''
+          if [[ "$(tty)" == "/dev/tty1" ]]; then
+            niri-session -l
+          fi
+        '';
+      };
     };
 
 
