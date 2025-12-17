@@ -24,10 +24,6 @@ in
       # ------------------------------------------------
       persistence."/persist/home/${username}" = {
         directories = [
-          ".gnupg"                         # PGP utility
-          ".local/share/keyrings"          # Gnome keyring
-          ".mullvad"                       # VPN
-          ".ssh"                           # Obvious, innit?
           "Data"                           # Vaults, documents, etc
             
           ".mozilla/firefox/default"
@@ -50,12 +46,10 @@ in
           "VSCodium"
         ] (x: ".config/${x}");
 
+
         files = [
-          # ".config/mimeapps.list"
-          # ".config/Bitwarden CLI/data.json"
-          ".local/share/nix/trusted-settings.json"
-          ".zshrc"
-          ".zsh_history"
+        #   # ".config/mimeapps.list"
+        #   # ".config/Bitwarden CLI/data.json"
         ];
 
         allowOther = true;

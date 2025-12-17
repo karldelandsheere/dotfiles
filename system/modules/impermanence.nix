@@ -57,51 +57,50 @@ in
 
       # Now, opt-in what needs to persist
       # ---------------------------------
-      persistence = {
+      persistence."/persist" = {
+        hideMounts = true;             # What's it doing really?
+
         # System-wide persistent directories and files
-        "/persist" = {
-          hideMounts = true;             # What's it doing really?
+        directories = [
+          # ...
+        ]
+        ++ lib.forEach [                   # /etc/...
+          "mullvad-vpn"
+          "NetworkManager/system-connections"
+          "nixos"
+          "ssh"
+          "tuned" ] (x: "/etc/${x}")
+        ++ lib.forEach [                   # /var/lib/...
+          "bluetooth"
+          # "NetworkManager"
+          "nixos"
+          "tailscale"
+          "upower" ] (x: "/var/lib/${x}")
+        ++ lib.forEach [                   # /var/cache/...
+          "mullvad-vpn" ] (x: "/var/cache/${x}");
 
+        files = [
+          "/etc/machine-id"
+          "/root/.local/share/nix/trusted-settings.json"
+        ];
+
+        
+        # Persistant home subdirectories and files common to all users
+        users.${config.nouveauxParadigmes.user.name} = {
           directories = [
-            # ...
-          ]
-          ++ lib.forEach [                   # /etc/...
-            "mullvad-vpn"
-            "NetworkManager/system-connections"
-            "nixos"
-            "ssh"
-            "tuned" ] (x: "/etc/${x}")
-          ++ lib.forEach [                   # /var/lib/...
-            "bluetooth"
-            # "NetworkManager"
-            "nixos"
-            "tailscale"
-            "upower" ] (x: "/var/lib/${x}")
-          ++ lib.forEach [                   # /var/cache/...
-            "mullvad-vpn" ] (x: "/var/cache/${x}");
-
+            ".gnupg"                         # PGP utility
+            ".local/share/keyrings"          # Gnome keyring
+            ".mullvad"                       # VPN
+            ".ssh"                           # Obvious, innit?
+            # "Data"                           # Vaults, documents, etc
+          ];
+          
           files = [
-            "/etc/machine-id"
-            "/root/.local/share/nix/trusted-settings.json"
+            ".local/share/nix/trusted-settings.json"
+            ".zshrc"
+            ".zsh_history"
           ];
         };
-
-        # User's persistant home subdirectories and files
-        # "/persist/home/${config.nouveauxParadigmes.user.name}" = {
-        #   directories = [
-        #     ".gnupg"                         # PGP utility
-        #     ".local/share/keyrings"          # Gnome keyring
-        #     ".mullvad"                       # VPN
-        #     ".ssh"                           # Obvious, innit?
-        #     "Data"                           # Vaults, documents, etc
-        #   ];
-          
-        #   files = [
-        #     ".local/share/nix/trusted-settings.json"
-        #     ".zshrc"
-        #     ".zsh_history"
-        #   ];
-        # };
       };
     };
 
