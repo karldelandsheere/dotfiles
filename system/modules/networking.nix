@@ -19,7 +19,7 @@
   config = {
     # System-wide packages related to network stuff
     environment.systemPackages = with pkgs; [
-      pkgs.mullvad # Really needed?
+      # ...
     ];
 
 

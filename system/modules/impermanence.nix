@@ -82,7 +82,12 @@ in
         files = [
           "/etc/machine-id"
           "/root/.local/share/nix/trusted-settings.json"
-        ];
+        ]
+        ++ lib.forEach [
+          "secret_key"
+          "seen-bssids"
+          "timestamps"
+        ] (x: "/var/lib/NetworkManager/${x}");
 
         
         # Persistant home subdirectories and files common to all users
@@ -106,11 +111,11 @@ in
 
 
     # Persist systemd services' tmp files
-    systemd.tmpfiles.rules = [
-      "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
-      "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
-      "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
-    ];
+    # systemd.tmpfiles.rules = [
+    #   "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
+    #   "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
+    #   "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
+    # ];
     
   
     # Rollback results in sudo lectures after each reboot
