@@ -4,6 +4,7 @@
   # ------------------------
   imports = [
     ./firefox    # @todo Should I move to something else?
+    ./librewolf
   ];
 
 
