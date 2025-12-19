@@ -25,6 +25,7 @@ window-rule {
 
 window-rule {
   match app-id="firefox"               // Browser
+  match app-id="librewolf"
 
   open-on-workspace "browse"
   open-maximized true
