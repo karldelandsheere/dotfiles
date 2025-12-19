@@ -6,13 +6,13 @@
 ###############################################################################
 
 { config, osConfig, lib, inputs, ... }: let
-  username = "${osConfig.nouveauxParadigmes.user.name}";
+  username = "unnamedplayer";
 in
 {
   imports = [
-    ../config      # All the configs for tty and gui apps
-    ./tty          # No matter what, we'll always have a tty
-  ] ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ./gui ];
+    ../../config   # All the configs for tty and gui apps
+    ../../home-manager/tty          # No matter what, we'll always have a tty
+  ] ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ../../home-manager/gui ];
 
 
   config = {

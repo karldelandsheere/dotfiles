@@ -7,10 +7,12 @@
 #
 ###############################################################################
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }: let
+  cfg = config.nouveauxParadigmes;
+in
 {
   imports = [
-    ../users/unnamedplayer
+    # ../users/unnamedplayer
     ./modules
   ];
 
@@ -18,21 +20,6 @@
   # Set system wide options
   # -----------------------
   options.nouveauxParadigmes = {
-    # System users
-    users = {
-      main = lib.mkOption {
-        type        = lib.types.str;
-        default     = "unnamedplayer";
-        description = "System's main user. Defaults to unnamedplayer (me)";
-      };
-
-      others = lib.mkOption {
-        type        = lib.types.listOf;
-        default     = [];
-        description = "Other users on this system/host. Defaults to []";
-      };
-    };
-    
     # Inputs
     kbLayout = lib.mkOption {
       type        = lib.types.str;
@@ -58,14 +45,13 @@
       xserver = {
         enable = true;
         displayManager.startx.enable = true;
-        xkb.layout = config.nouveauxParadigmes.kbLayout;
+        xkb.layout = cfg.kbLayout;
       };
 
       # If the whole system is encrypted and password protected at boot,
       # and there's only one user, no need to type a second login right after
-      getty = lib.mkIf ( config.nouveauxParadigmes.encryption.enable
-                      && config.nouveauxParadigmes.users.others == [] ) {
-        autologinUser = "${config.nouveauxParadigmes.users.main}";
+      getty = lib.mkIf ( cfg.encryption.enable && cfg.users.others == [] ) {
+        autologinUser = "${cfg.users.main}";
       };
     };
     
@@ -84,16 +70,12 @@
         enable = true;
         type = "ibus";
       };
-    };
-    
+    };   
+
 
     # Time settings (let's assume that for now)
     # -------------
     time.timeZone = "Europe/Brussels";
-
-
-    
-
 
     # Fonts
     # -----

@@ -6,14 +6,9 @@
 
 { config, pkgs, ... }:
 {
-  # imports = [
-  #   ./home-manager.nix 
-  # ];
-
-  
   config = {
     # User registration at system level
-    users.users.unnamedplayer = {
+    unnamedplayer = {
       uid = 1312;
       isNormalUser = true;
       hashedPassword = "$6$BPe.Id8lkpUDdr7Y$HFyDyxc7Bd3uV1Gvx7DhlMEUfPRbHawID5MOuv9XkU7hASw3pG.XgPySR.CEYDGSvh0zdFNLwnB2QlmHBalaC1";

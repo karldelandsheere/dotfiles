@@ -18,6 +18,7 @@
     ./programs.nix
     ./secrets.nix
     ./security.nix
+    ./users.nix
     ./xdg.nix
   ];
 

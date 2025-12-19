@@ -11,17 +11,19 @@
 ###############################################################################
 
 { config, lib, pkgs, ... }: let
+  cfg = config.nouveauxParadigmes;
+
   differences = pkgs.writeShellApplication {
     name = "differences";
     runtimeInputs = [ pkgs.btrfs-progs ];
     text = builtins.readFile ../scripts/differences.sh;
   };
 
-  # isNvme = lib.strings.hasInfix "nvme" config.nouveauxParadigmes.rootDisk;
-  # deviceName = ${config.nouveauxParadigmeS.rootDisk} lib.strings.optionalString isNvme "p";
+  # isNvme = lib.strings.hasInfix "nvme" cfg.rootDisk;
+  # deviceName = ${cfg.rootDisk} lib.strings.optionalString isNvme "p";
 
   # @todo Make this more versatile regarding the disk type etc
-  requiresAfter = if config.nouveauxParadigmes.encryption.enable
+  requiresAfter = if cfg.encryption.enable
     then "systemd-cryptsetup@cryptroot.service"
     else "dev-nvme0n1p2.device";
 in
@@ -32,7 +34,7 @@ in
   };
 
   
-  config = lib.mkIf config.nouveauxParadigmes.impermanence.enable {
+  config = lib.mkIf cfg.impermanence.enable {
     # Rollback routine on every boot
     # ------------------------------
     boot.initrd.systemd.services.rollback = {
@@ -91,9 +93,9 @@ in
 
         
         # Persistant home subdirectories and files common to all users
-        users = lib.forEach [ config.nouveauxParadigmes.users.main ]
-                           ++ config.nouveauxParadigmes.users.others ( x:
-          "${x}" = {
+        
+        users = lib.listToAttrs ( map ( username: {
+          name = username; value = {
             directories = [
               ".gnupg"                         # PGP utility
               ".local/share/keyrings"          # Gnome keyring
@@ -101,14 +103,15 @@ in
               ".ssh"                           # Obvious, innit?
               # "Data"                           # Vaults, documents, etc
             ];
-          
+
             files = [
               ".local/share/nix/trusted-settings.json"
               # ".zshrc"
               ".zsh_history"
             ];
-          }
-        );
+          };
+        } ) ( lib.lists.unique ( [ cfg.users.main ] ++ cfg.users.others ) ) );
+        
         
         # users.${config.nouveauxParadigmes.users.main} = {
         #   directories = [

@@ -8,7 +8,12 @@
 #
 ###############################################################################
 
-{ config, lib, inputs, pkgs, ... }:
+{ config, lib, inputs, pkgs, ... }: let
+  cfg = config.nouveauxParadigmes;
+  # allUsers = lib.lists.unique (
+  #   lib.singleton "${cfg.users.main}"
+  #   ++ lib.lists.optionals (cfg.users.others != []) cfg.users.others );
+in
 {
   # Related options and default values definition
   options.nouveauxParadigmes = {
@@ -20,10 +25,8 @@
   };
 
 
-  config = lib.mkIf config.nouveauxParadigmes.homeManager.enable {
+  config = lib.mkIf cfg.homeManager.enable {
     home-manager = {
-      # General stuff
-      # -------------
       useUserPackages     = true;
       extraSpecialArgs    = { inherit inputs; };
       backupFileExtension = "backup";
@@ -32,31 +35,22 @@
         # inputs.agenix.homeManagerModules.default
         {
           # Enable home-manager
-          # -------------------
           programs.home-manager.enable = true;
           
           # Sync with nixOS stateVersion
-          # ----------------------------
           home.stateVersion = config.system.stateVersion;
 
           # Display the news at rebuild
-          # ---------------------------
           news.display = "show";
         }
-      ] ++ lib.lists.optionals ( config.nouveauxParadigmes.impermanence.enable ) [
+      ] ++ lib.lists.optionals ( cfg.impermanence.enable ) [
         inputs.impermanence.homeManagerModules.impermanence
       ];
 
-      # For the moment, I'm the only user so I leave it like this
-      # ---------------------------------------------------------
-      users = lib.forEach [ "${config.nouveauxParadigmes.users.main}" ]
-                 ++ config.nouveauxParadigmes.users.others ( x:
-        "${x}" = {
-          imports = [ ../../users/${x}/home-manager.nix ];
-        }
-      );
-
-      # users.unnamedplayer = { imports = [ ../../home-manager ]; };
+      # Import all user specific config
+      # users = lib.genAttrs allUsers ( username: {
+      #   imports = [ ../../users/${username}/home-manager.nix ];
+      # } );
     };
   };
 }
