@@ -49,8 +49,8 @@
 
       # For the moment, I'm the only user so I leave it like this
       # ---------------------------------------------------------
-      users = lib.forEach [ config.nouveauxParadigmes.users.main ]
-                         ++ config.nouveauxParadigmes.users.others ( x:
+      users = lib.forEach [ "${config.nouveauxParadigmes.users.main}" ]
+                 ++ config.nouveauxParadigmes.users.others ( x:
         "${x}" = {
           imports = [ ../../users/${x}/home-manager.nix ];
         }
