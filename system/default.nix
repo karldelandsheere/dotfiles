@@ -10,7 +10,7 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./users
+    ../users/unnamedplayer
     ./modules
   ];
 
@@ -18,10 +18,19 @@
   # Set system wide options
   # -----------------------
   options.nouveauxParadigmes = {
-    user.name = lib.mkOption {
-      type        = lib.types.str;
-      default     = "unnamedplayer";
-      description = "Main user's username. Defaults to unnamedplayer";
+    # System users
+    users = {
+      main = lib.mkOption {
+        type        = lib.types.str;
+        default     = "unnamedplayer";
+        description = "System's main user. Defaults to unnamedplayer (me)";
+      };
+
+      others = lib.mkOption {
+        type        = lib.types.listOf;
+        default     = [];
+        description = "Other users on this system/host. Defaults to []";
+      };
     };
     
     # Inputs
@@ -53,9 +62,10 @@
       };
 
       # If the whole system is encrypted and password protected at boot,
-      # no need to type a second login right after
-      getty = lib.mkIf config.nouveauxParadigmes.encryption.enable {
-        autologinUser = "${config.nouveauxParadigmes.user.name}";
+      # and there's only one user, no need to type a second login right after
+      getty = lib.mkIf ( config.nouveauxParadigmes.encryption.enable
+                      && config.nouveauxParadigmes.users.others == [] ) {
+        autologinUser = "${config.nouveauxParadigmes.users.main}";
       };
     };
     
@@ -80,6 +90,9 @@
     # Time settings (let's assume that for now)
     # -------------
     time.timeZone = "Europe/Brussels";
+
+
+    
 
 
     # Fonts

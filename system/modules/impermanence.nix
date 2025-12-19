@@ -91,21 +91,40 @@ in
 
         
         # Persistant home subdirectories and files common to all users
-        users.${config.nouveauxParadigmes.user.name} = {
-          directories = [
-            ".gnupg"                         # PGP utility
-            ".local/share/keyrings"          # Gnome keyring
-            ".mullvad"                       # VPN
-            ".ssh"                           # Obvious, innit?
-            # "Data"                           # Vaults, documents, etc
-          ];
+        users = lib.forEach [ config.nouveauxParadigmes.users.main ]
+                           ++ config.nouveauxParadigmes.users.others ( x:
+          "${x}" = {
+            directories = [
+              ".gnupg"                         # PGP utility
+              ".local/share/keyrings"          # Gnome keyring
+              ".mullvad"                       # VPN
+              ".ssh"                           # Obvious, innit?
+              # "Data"                           # Vaults, documents, etc
+            ];
           
-          files = [
-            ".local/share/nix/trusted-settings.json"
-            # ".zshrc"
-            ".zsh_history"
-          ];
-        };
+            files = [
+              ".local/share/nix/trusted-settings.json"
+              # ".zshrc"
+              ".zsh_history"
+            ];
+          }
+        );
+        
+        # users.${config.nouveauxParadigmes.users.main} = {
+        #   directories = [
+        #     ".gnupg"                         # PGP utility
+        #     ".local/share/keyrings"          # Gnome keyring
+        #     ".mullvad"                       # VPN
+        #     ".ssh"                           # Obvious, innit?
+        #     # "Data"                           # Vaults, documents, etc
+        #   ];
+          
+        #   files = [
+        #     ".local/share/nix/trusted-settings.json"
+        #     # ".zshrc"
+        #     ".zsh_history"
+        #   ];
+        # };
       };
     };
 

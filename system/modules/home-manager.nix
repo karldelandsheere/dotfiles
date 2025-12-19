@@ -49,7 +49,14 @@
 
       # For the moment, I'm the only user so I leave it like this
       # ---------------------------------------------------------
-      users.unnamedplayer = { imports = [ ../../home-manager ]; };
+      users = lib.forEach [ config.nouveauxParadigmes.users.main ]
+                         ++ config.nouveauxParadigmes.users.others ( x:
+        "${x}" = {
+          imports = [ ../../users/${x}/home-manager.nix ];
+        }
+      );
+
+      # users.unnamedplayer = { imports = [ ../../home-manager ]; };
     };
   };
 }

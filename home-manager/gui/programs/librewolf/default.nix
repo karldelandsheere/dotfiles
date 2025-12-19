@@ -486,7 +486,7 @@ in
       # Profile (check about:config for options)
       profiles.default = {
         id = 0;
-        name = "${osConfig.nouveauxParadigmes.user.name}";
+        name = "${osConfig.nouveauxParadigmes.users.main}";
         isDefault = true;
         settings = {
   			};
