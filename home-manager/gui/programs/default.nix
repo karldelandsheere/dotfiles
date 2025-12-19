@@ -3,8 +3,7 @@
   # GUI programs with config
   # ------------------------
   imports = [
-    ./firefox    # @todo Should I move to something else?
-    ./librewolf
+    ./librewolf              # Fork of Firefox, privacy and no AI bullshit
   ];
 
 
@@ -18,6 +17,7 @@
       openscad               # Code based CAD
       prusa-slicer           # Slicer for my Prusa printers
       signal-desktop         # Privacy focused messaging
+      vivaldi                # Privacy focused browser
       # vlc                  # Replaced by mpv (tty video player)
       vscodium               # Foss version of VSCode
 
