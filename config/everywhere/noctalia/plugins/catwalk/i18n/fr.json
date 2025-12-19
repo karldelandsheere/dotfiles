@@ -9,6 +9,10 @@
       "description": "L'utilisation du CPU doit être supérieure à ce pourcentage pour que le chat commence à courir",
       "label": "Seuil minimum CPU"
     },
+    "hideBackground": {
+      "label": "Masquer l'arrière-plan",
+      "description": "Masquer l'arrière-plan du widget de bureau"
+    },
     "title": "Paramètres Catwalk"
   },
   "tooltip": {

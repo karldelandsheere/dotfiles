@@ -9,6 +9,10 @@
       "description": "El uso de CPU debe estar por encima de este porcentaje para que el gato empiece a correr",
       "label": "Umbral mínimo de CPU"
     },
+    "hideBackground": {
+      "label": "Ocultar fondo",
+      "description": "Ocultar el fondo del widget de escritorio"
+    },
     "title": "Configuración de Catwalk"
   },
   "tooltip": {

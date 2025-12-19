@@ -9,6 +9,10 @@
       "description": "猫が走り始めるにはCPU使用率がこの割合を超えている必要があります",
       "label": "最小CPUしきい値"
     },
+    "hideBackground": {
+      "label": "背景を隠す",
+      "description": "デスクトップウィジェットの背景を隠す"
+    },
     "title": "Catwalk設定"
   },
   "tooltip": {

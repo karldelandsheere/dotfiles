@@ -42,34 +42,25 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
 
                     property int frameIndex: 0
-                    property bool isRunning: true 
                     
-                    readonly property var icons: [
-                        "icons/my-active-0-symbolic.svg",
-                        "icons/my-active-1-symbolic.svg",
-                        "icons/my-active-2-symbolic.svg",
-                        "icons/my-active-3-symbolic.svg",
-                        "icons/my-active-4-symbolic.svg"
-                    ]
+                    readonly property bool isRunning: root.pluginApi?.mainInstance?.isRunning ?? false
+                    readonly property var icons: root.pluginApi?.mainInstance?.icons || []
                     
                     property int idleFrameIndex: 0
-                    readonly property var idleIcons: [
-                        "icons/my-idle-0-symbolic.svg",
-                        "icons/my-idle-1-symbolic.svg",
-                        "icons/my-idle-2-symbolic.svg",
-                        "icons/my-idle-3-symbolic.svg"
-                    ]
+                    readonly property var idleIcons: root.pluginApi?.mainInstance?.idleIcons || []
+                    
+                    readonly property real cpuUsage: root.pluginApi?.mainInstance?.cpuUsage ?? 0
 
                     Timer {
-                        interval: Math.max(30, 200 - SystemStatService.cpuUsage * 1.7)
-                        running: bigCatItem.isRunning && SystemStatService.cpuUsage >= (root.pluginApi?.pluginSettings?.minimumThreshold || 10)
+                        interval: Math.max(30, 200 - bigCatItem.cpuUsage * 1.7)
+                        running: bigCatItem.isRunning
                         repeat: true
                         onTriggered: bigCatItem.frameIndex = (bigCatItem.frameIndex + 1) % bigCatItem.icons.length
                     }
                     
                     Timer {
                         interval: 400
-                        running: bigCatItem.isRunning && SystemStatService.cpuUsage < (root.pluginApi?.pluginSettings?.minimumThreshold || 10)
+                        running: !bigCatItem.isRunning
                         repeat: true
                         onTriggered: bigCatItem.idleFrameIndex = (bigCatItem.idleFrameIndex + 1) % bigCatItem.idleIcons.length
                     }
@@ -78,9 +69,11 @@ Item {
                         id: bigCatImage
                         anchors.fill: parent
                         
-                        source: (bigCatItem.isRunning && SystemStatService.cpuUsage >= (root.pluginApi?.pluginSettings?.minimumThreshold || 10)) 
-                                ? Qt.resolvedUrl(bigCatItem.icons[bigCatItem.frameIndex]) 
-                                : Qt.resolvedUrl(bigCatItem.idleIcons[bigCatItem.idleFrameIndex])
+                        source: (bigCatItem.icons && bigCatItem.icons.length > 0 && bigCatItem.idleIcons && bigCatItem.idleIcons.length > 0)
+                                ? (bigCatItem.isRunning
+                                    ? Qt.resolvedUrl(bigCatItem.icons[bigCatItem.frameIndex % bigCatItem.icons.length])
+                                    : Qt.resolvedUrl(bigCatItem.idleIcons[bigCatItem.idleFrameIndex % bigCatItem.idleIcons.length]))
+                                : ""
                         
                         fillMode: Image.PreserveAspectFit
                         smooth: true
@@ -98,7 +91,7 @@ Item {
                 // CPU Stats
                 Text {
                     Layout.alignment: Qt.AlignHCenter
-                    text: (pluginApi?.tr("panel.cpuLabel") || "CPU: {usage}%").replace("{usage}", Math.round(SystemStatService.cpuUsage))
+                    text: (pluginApi?.tr("panel.cpuLabel") || "CPU: {usage}%").replace("{usage}", Math.round(root.pluginApi?.mainInstance?.cpuUsage ?? 0))
                     font.pointSize: Style.fontSizeXL
                     font.weight: Font.Bold
                     color: Settings.data.colorSchemes.darkMode ? "white" : "black"

@@ -10,7 +10,8 @@ ColumnLayout {
     property var pluginApi: null
 
     // Local state - track changes before saving
-    property real valueMinimumThreshold: pluginApi?.pluginSettings?.minimumThreshold || pluginApi?.manifest?.metadata?.defaultSettings?.minimumThreshold || 10
+    property real valueMinimumThreshold: pluginApi?.mainInstance?.minimumThreshold ?? (pluginApi?.pluginSettings?.minimumThreshold || 10)
+    property bool valueHideBackground: pluginApi?.mainInstance?.hideBackground ?? (pluginApi?.pluginSettings?.hideBackground ?? false)
 
     spacing: Style.marginM
 
@@ -45,6 +46,16 @@ ColumnLayout {
         }
     }
 
+    NToggle {
+        label: pluginApi?.tr("settings.hideBackground.label") || "Hide Background"
+        description: pluginApi?.tr("settings.hideBackground.description") || "Hide the background of the desktop widget"
+
+        checked: root.valueHideBackground
+        onToggled: function(checked) {
+            root.valueHideBackground = checked
+        }
+    }
+
     // This function is called by the dialog to save settings
     function saveSettings() {
         if (!pluginApi) {
@@ -54,6 +65,7 @@ ColumnLayout {
 
         // Update the plugin settings object
         pluginApi.pluginSettings.minimumThreshold = root.valueMinimumThreshold;
+        pluginApi.pluginSettings.hideBackground = root.valueHideBackground;
 
         // Save to disk
         pluginApi.saveSettings();

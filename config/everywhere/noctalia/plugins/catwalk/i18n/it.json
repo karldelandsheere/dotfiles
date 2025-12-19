@@ -9,6 +9,10 @@
       "description": "L'utilizzo della CPU deve essere superiore a questa percentuale affinché il gatto inizi a correre",
       "label": "Soglia minima CPU"
     },
+    "hideBackground": {
+      "label": "Nascondi sfondo",
+      "description": "Nascondi lo sfondo del widget desktop"
+    },
     "title": "Impostazioni Catwalk"
   },
   "tooltip": {

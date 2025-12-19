@@ -9,6 +9,10 @@
       "description": "CPU kullanımı, kedinin koşmaya başlaması için bu yüzdeden yüksek olmalıdır.",
       "label": "Minimum CPU Eşiği"
     },
+    "hideBackground": {
+      "label": "Arka planı gizle",
+      "description": "Masaüstü bileşeninin arka planını gizle"
+    },
     "title": "Podyum Ayarları"
   },
   "tooltip": {
