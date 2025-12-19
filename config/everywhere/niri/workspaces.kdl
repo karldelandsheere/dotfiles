@@ -24,7 +24,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="^vivaldi$"             // Browser
+  match app-id="vivaldi"               // Browser
   match app-id="librewolf"
 
   open-on-workspace "browse"

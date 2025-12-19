@@ -10,37 +10,41 @@
   config = {
     # GUI programs that either don't need config or are on trial
     # ----------------------------------------------------------
-    home.packages = with pkgs; [
-      bambu-studio           # Slicer for my Bambu printers
-      bitwarden-desktop      # Passwords & stuff
-      # blender
-      openscad               # Code based CAD
-      prusa-slicer           # Slicer for my Prusa printers
-      signal-desktop         # Privacy focused messaging
-      vivaldi                # Privacy focused browser
-      # vlc                  # Replaced by mpv (tty video player)
-      vscodium               # Foss version of VSCode
+    home = {
+      packages = with pkgs; [
+        bambu-studio           # Slicer for my Bambu printers
+        bitwarden-desktop      # Passwords & stuff
+        # blender
+        openscad               # Code based CAD
+        prusa-slicer           # Slicer for my Prusa printers
+        signal-desktop         # Privacy focused messaging
+        vivaldi                # Privacy focused browser
+        # vlc                  # Replaced by mpv (tty video player)
+        vscodium               # Foss version of VSCode
 
-      # mullvad-browser
+        # mullvad-browser
     
-      # Day to day
-      # opencloud-desktop
+        # Day to day
+        # opencloud-desktop
 
-      # Utils
-      # qbittorrent
+        # Utils
+        # qbittorrent
 
-    ] ++ lib.lists.optionals ( osConfig.nixpkgs.config.allowUnfree ) [
-      obsidian               # Markdown note taking app
-      termius                # Cross-platform SSH client
+      ] ++ lib.lists.optionals ( osConfig.nixpkgs.config.allowUnfree ) [
+        obsidian               # Markdown note taking app
+        termius                # Cross-platform SSH client
       
-      # Graphic design
-      # Not working on 20250725, try again later if no good alternative found 
-      # inputs.affinity-nix.packages.x86_64-linux.designer
-      # inputs.affinity-nix.packages.x86_64-linux.photo
-      # inputs.affinity-nix.packages.x86_64-linux.publisher
-    ];
+        # Graphic design
+        # Not working on 20250725, try again later if no good alternative found 
+        # inputs.affinity-nix.packages.x86_64-linux.designer
+        # inputs.affinity-nix.packages.x86_64-linux.photo
+        # inputs.affinity-nix.packages.x86_64-linux.publisher
+      ];
 
-    # home.sessionVariables.GTK_IM_MODULE = lib.mkForce "simple";
+      sessionVariables = {
+        BROWSER = "${pkgs.vivaldi}/bin/vivaldi";
+      };
+    };
 
 
     programs = {
