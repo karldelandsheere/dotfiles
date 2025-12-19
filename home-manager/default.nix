@@ -44,6 +44,7 @@ in
           "PrusaSlicer"
           "Signal"
           "Termius"
+          "vivaldi"
           "VSCodium"
         ] (x: ".config/${x}");
 
