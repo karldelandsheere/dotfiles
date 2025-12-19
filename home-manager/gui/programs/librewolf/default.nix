@@ -9,6 +9,9 @@ in
   config = {
     programs.librewolf = {
       enable = true;
+      # package = pkgs.librewolf.overrideAttrs (_old: {
+      #   extraNativeMessagingHosts = with pkgs; [pywalfox-native];
+      # });
 
       policies = {
         # Install/update are managed through NixOS
@@ -76,7 +79,7 @@ in
         ExtensionSettings = lib.mapAttrs(
           name: definition: {
             inherit (definition) installation_mode private_browsing settings permissions;
-            install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${definition.id}/latest.xpi";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${definition.id}/latest.xpi";
           }
         ) extensions;
         
@@ -318,9 +321,6 @@ in
         #   "dom.battery.enabled" = lock-false;
         #   "dom.event.clipboardevents.enabled" = lock-false;
         #   "dom.private-attribution.submission.enabled" = lock-false;
-        #   "dom.security.https_first" = true;
-        #   # "dom.security.https_only_mode" = true; # force https
-        #   "dom.security.sanitizer.enabled" = true;
         #   "dom.webaudio.enabled" = lock-false;
         #   # "editor.truncate_user_pastes" = false;
         #   "extensions.ClearURLs@kevinr.whiteList" = "";

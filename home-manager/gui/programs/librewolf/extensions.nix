@@ -26,6 +26,18 @@
     ];
   };
   
+  # "pywalfox@frewacom.org" = {
+  #   id = "pywalfox";
+  #   installation_mode = "normal_installed";
+  #   private_browsing = true;
+  #   settings = {};
+  #   permissions = [
+  #     "activeTab"
+  #     "tabs"
+      
+  #   ];
+  # };
+  
   # "CanvasBlocker@kkapsner.de" = {
   #   id = "canvasblocker";
   #   installation_mode = "normal_installed";

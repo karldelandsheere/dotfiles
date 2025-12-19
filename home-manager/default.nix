@@ -29,6 +29,7 @@ in
           ".mozilla/firefox/default"
           ".local/share/prusa-slicer"
           ".vscode-oss"
+          ".librewolf"
 
           ".cache/noctalia"
 
