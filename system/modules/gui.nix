@@ -83,14 +83,6 @@ in
       #   gtk.enable = true;
       #   x11.enable = true;
       # };
-
-
-      # Miscellaneous files
-      # -------------------
-      file = {
-        # ".face".source = config.lib.file.mkOutOfStoreSymlink "${cfg.dotfiles}/themes/faces/unnamedplayer.jpg";
-        "Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink "${cfg.dotfiles}/themes/wallpapers";
-      };
     };
   };
 }

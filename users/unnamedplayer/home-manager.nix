@@ -22,8 +22,10 @@ in
       username      = "${username}";
       homeDirectory = "/home/${username}";
 
-      file.".face".source = config.lib.file.mkOutOfStoreSymlink
-        "${cfg.dotfiles}/users/${username}/face.jpg";
+      file = {
+        ".face".source = config.lib.file.mkOutOfStoreSymlink ./face.jpg;
+        "Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink ./wallpapers;
+      };
 
 
       # @todo 
