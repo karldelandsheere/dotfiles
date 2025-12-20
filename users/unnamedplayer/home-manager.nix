@@ -22,9 +22,9 @@ in
       username      = "${username}";
       homeDirectory = "/home/${username}";
 
-      file = {
-        ".face".source = config.lib.file.mkOutOfStoreSymlink ./face.jpg;
-        "Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink ./wallpapers;
+      file = with config.lib.file; {
+        ".face".source = mkOutOfStoreSymlink ./face.jpg;
+        "Pictures/Wallpapers".source = mkOutOfStoreSymlink ./wallpapers;
       };
 
 
