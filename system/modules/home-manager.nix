@@ -10,11 +10,13 @@
 
 { config, lib, inputs, pkgs, ... }: let
   cfg = config.nouveauxParadigmes;
-  # allUsers = lib.lists.unique (
-  #   lib.singleton "${cfg.users.main}"
-  #   ++ lib.lists.optionals (cfg.users.others != []) cfg.users.others );
 in
 {
+  imports = [
+    # ...
+  ] ++ lib.lists.optionals ( cfg.gui.enable ) [ ./gui.nix ];
+  
+  
   # Related options and default values definition
   options.nouveauxParadigmes = {
     homeManager.enable = lib.mkOption {
@@ -46,6 +48,9 @@ in
       ] ++ lib.lists.optionals ( cfg.impermanence.enable ) [
         inputs.impermanence.homeManagerModules.impermanence
       ];
+
+      # Shouldn't it be enough to set it once in the system part of the config?
+      # nixpkgs.config.allowUnfree = cfg.allowUnfree;
 
       # Import all user specific config
       # users = lib.genAttrs allUsers ( username: {

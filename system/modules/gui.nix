@@ -4,12 +4,13 @@
 #
 ############################################################################### 
 
-{ config, osConfig, inputs, pkgs, ... }:
+{ config, osConfig, inputs, pkgs, ... }: let
+  cfg = osConfig.nouveauxParadigmes;
+in
 {
   imports = [
     inputs.niri.homeModules.niri         # Scrollable tiling compositor
     inputs.noctalia.homeModules.default  # Quickshell integration
-    ./programs                           # All the gui programs
   ];
 
   config = {
@@ -86,8 +87,8 @@
       # Miscellaneous files
       # -------------------
       file = {
-        ".face".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/themes/faces/unnamedplayer.jpg";
-        "Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.nouveauxParadigmes.dotfiles}/themes/wallpapers";
+        # ".face".source = config.lib.file.mkOutOfStoreSymlink "${cfg.dotfiles}/themes/faces/unnamedplayer.jpg";
+        "Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink "${cfg.dotfiles}/themes/wallpapers";
       };
     };
   };

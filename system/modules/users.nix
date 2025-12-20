@@ -4,7 +4,7 @@
 #
 ###############################################################################
 
-{ config, pkgs, ... }: let
+{ config, pkgs, lib, ... }: let
   cfg = config.nouveauxParadigmes;
   allUsers = lib.lists.unique (
     lib.singleton "${cfg.users.main}"
@@ -31,13 +31,14 @@ in
   
   config = {
     # Import users' system config
-    users = lib.genAttrs allUsers ( username: {
-      # name = username;
-      # home = "/home/${username}";
-  
-      imports = [ ../../users/${username} ];
-    } );
-
+    users.users = ( lib.mergeAttrsList ( map ( username: {
+      "${username}" = {
+        name = username;
+        home = "/home/${username}";
+      } // (
+        import ../../users/${username} { inherit config pkgs lib; }
+      ); } ) allUsers )
+    );
 
     # If home-manager is enabled, import users' config for it
     home-manager = lib.mkIf cfg.homeManager.enable {
@@ -46,29 +47,5 @@ in
         imports = [ ../../users/${username}/home-manager.nix ];
       } );
     };
-    
-
-
-
-
-
-    
-    # # That's me
-    # # ---------
-    # users.users.unnamedplayer = {
-    #   uid = 1312;
-    #   isNormalUser = true;
-    #   hashedPassword = "$6$BPe.Id8lkpUDdr7Y$HFyDyxc7Bd3uV1Gvx7DhlMEUfPRbHawID5MOuv9XkU7hASw3pG.XgPySR.CEYDGSvh0zdFNLwnB2QlmHBalaC1";
-    #   # passwordFile = config.age.secrets.q3dm10.path;
-    #   # passwordFile = config.age.secrets.unnamedplayer.path;
-    #   extraGroups = [
-    #     "wheel"
-    #     "audio"
-    #     "input"
-    #     "networkmanager"
-    #     "plugdev" # What's that again?
-    #     "video"
-    #   ];
-    # };
   };
 }

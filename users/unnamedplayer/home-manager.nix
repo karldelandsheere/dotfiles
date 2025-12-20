@@ -6,19 +6,24 @@
 ###############################################################################
 
 { config, osConfig, lib, inputs, ... }: let
-  username = "unnamedplayer";
+  cfg = osConfig.nouveauxParadigmes;
+  username = "unnamedplayer"; # @todo Get it from the parent
 in
 {
   imports = [
     ../../config   # All the configs for tty and gui apps
-    ../../home-manager/tty          # No matter what, we'll always have a tty
-  ] ++ lib.lists.optionals ( osConfig.nouveauxParadigmes.gui.enable ) [ ../../home-manager/gui ];
+    ./programs.nix      # No matter what, we'll always have a tty
+  ];
+   # ++ lib.lists.optionals ( cfg.gui.enable ) [ ../../home-manager/gui ];
 
 
   config = {
     home = {
       username      = "${username}";
       homeDirectory = "/home/${username}";
+
+      file.".face".source = config.lib.file.mkOutOfStoreSymlink
+        "${cfg.dotfiles}/users/${username}/face.jpg";
 
       # Opt-in what files and directories should persist
       # ------------------------------------------------
@@ -198,6 +203,6 @@ in
 
     # Shouldn't it be enough to set it once in the system part of the config?
     # -----------------------------------------------------------------------
-    nixpkgs.config.allowUnfree = osConfig.nouveauxParadigmes.allowUnfree;
+    nixpkgs.config.allowUnfree = cfg.allowUnfree;
   };
 }
