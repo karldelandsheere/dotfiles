@@ -62,7 +62,7 @@
 
   # Definition of the system, aka outputs
   # -------------------------------------
-  outputs = inputs@{ self, nixpkgs, lib, ... }: 
+  outputs = inputs@{ self, nixpkgs, ... }: 
   let
     inherit (nixpkgs.lib) nixosSystem lists;
 
