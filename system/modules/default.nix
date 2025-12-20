@@ -4,8 +4,9 @@
 # 
 ###############################################################################
 
-{ config, lib, inputs, ... }:
+{ config, lib, inputs, ... }: let
   cfg = config.nouveauxParadigmes;
+in
 {
   imports = [
     ./boot.nix               # Boot options and GRUB styling

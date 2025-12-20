@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   config = {
     # Opt-in what files and directories should persist
