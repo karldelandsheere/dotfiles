@@ -15,14 +15,16 @@
   options.nouveauxParadigmes = {
     rootDisk = lib.mkOption {
       type        = lib.types.str;
-      default     = ""; # @todo Maybe I should define a default value?
-      description = "Which is the root disk?";
+      default     = "";
+      description = "Which is the root disk? No default";
     };
     
     swapSize = lib.mkOption {
       type        = lib.types.int;
       default     = 8*1024; # 8GB is a good default value, right?
-      description = "Size of swapfile. Defaults to 8*1024. If hibernation is enabled, it should be at least the size of your RAM.";
+      description = "Size of swapfile. Defaults to 8*1024. \
+                     If hibernation is enabled, \
+                     it should be at least the size of your RAM.";
     };
   };
 
