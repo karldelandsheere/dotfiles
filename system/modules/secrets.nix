@@ -1,7 +1,13 @@
 { config, inputs, ... }:
 {
+  imports = [
+    inputs.agenix.nixosModules.default
+  ];
+
   config = {
-    environment.systemPackages = [ inputs.agenix.packages.${config.nouveauxParadigmes.system}.default ];
+    environment.systemPackages = [
+      inputs.agenix.packages.${config.nouveauxParadigmes.system}.default
+    ];
 
     age = {
       secrets = {

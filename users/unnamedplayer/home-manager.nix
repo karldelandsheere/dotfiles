@@ -11,10 +11,10 @@
 in
 {
   imports = [
-    ../../config   # All the configs for tty and gui apps
+    ../../config        # All the configs for tty and gui apps
+    ./impermanence.nix  # Define what should be kept between reboots
     ./programs.nix      # No matter what, we'll always have a tty
   ];
-   # ++ lib.lists.optionals ( cfg.gui.enable ) [ ../../home-manager/gui ];
 
 
   config = {
@@ -24,42 +24,6 @@ in
 
       file.".face".source = config.lib.file.mkOutOfStoreSymlink
         "${cfg.dotfiles}/users/${username}/face.jpg";
-
-      # Opt-in what files and directories should persist
-      # ------------------------------------------------
-      persistence."/persist/home/${username}" = {
-        directories = [
-          "Data"                           # Vaults, documents, etc
-            
-          ".local/share/prusa-slicer"
-          ".vscode-oss"
-          ".librewolf"
-
-          ".cache/noctalia"
-
-          # @todo Determinate what is really needed here
-          # ".local/share/calcurse"
-          # ".local/share/gurk"
-          # ".local/share/iamb"
-        ]
-        ++ lib.forEach [
-          "Bitwarden"
-          "obsidian"
-          "PrusaSlicer"
-          "Signal"
-          "Termius"
-          "vivaldi"
-          "VSCodium"
-        ] (x: ".config/${x}");
-
-
-        files = [
-        #   # ".config/mimeapps.list"
-        #   # ".config/Bitwarden CLI/data.json"
-        ];
-
-        allowOther = true;
-      };
 
 
       # @todo 
@@ -152,29 +116,6 @@ in
 
         aerc.enable = true;
       };
-
-      # accounts."karl_at_dimeritium_com" = {
-      #   name = "Dimeritium";
-      #   userName = "karl@dimeritium.com";
-      #   realName = "Karl Delandsheere";
-      #   address = "karl@dimeritium.com";
-      #   signature = {
-      #     showSignature = "append";
-      #     # delimiter = "#-- ¯\\_(ツ)_/¯ --#";
-      #     text = ''
-      #       #-- <b>¯\_(ツ)_/¯</b> --#
-      #       <b>Karl Delandsheere</b>
-      #       <a href="https://longrushtranquille.be">Impression 3D et pleins d'autres choses !</a>
-      #       --
-      #       Liège, Belgique
-      #       Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
-      #     '';
-      #   };
-      #   flavor = "outlook.office365.com";
-      #   passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/karl@dimeritium.com";
-
-      #   aerc.enable = true;
-      # };
     };
 
     # age = {

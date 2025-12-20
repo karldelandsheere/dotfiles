@@ -2,7 +2,10 @@
 #
 # Custom config for q3dm11.
 #
-# This is an old Sony Vaio from like 2005 or so.
+# This is an old Sony Vaio VGN-TX5XN/B from like 2005 or so,
+#   Intel U1500 / 1GB RAM.
+#
+# Single user host, tty only.
 # 
 ###############################################################################
 
@@ -22,7 +25,7 @@
       rootDisk            = "/dev/sda";
       encryption.enable   = true;
       impermanence.enable = true;
-      gui.enable          = false; # full tty on this setup
+      gui.enable          = false;
       stateVersion        = "23.11";
     };
 

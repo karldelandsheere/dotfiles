@@ -12,7 +12,6 @@
 in
 {
   imports = [
-    # ../users/unnamedplayer
     ./modules
   ];
 

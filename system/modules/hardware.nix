@@ -8,7 +8,7 @@
 {
   # Related options and default values definition
   options.nouveauxParadigmes = {
-    system = lib.mkOption {
+    system = lib.mkOption { # @todo Is that used at all?
       type        = lib.types.str;
       default     = "x86_64-linux";
       description = "What is the system architecture? Defaults to x86_64-linux.";

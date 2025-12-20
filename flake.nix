@@ -8,6 +8,7 @@
 # Next steps:
 # -----------
 #   - @todo Make Affinity Designer work
+#   - @todo Implement a local binary cache to speed up rebuild a bit
 #   - @todo Actually use this setup for something else than ricing...
 # 
 #############################################################################
@@ -48,39 +49,32 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs"; };
 
-
-
-    # Applications
+    # Programs
     # affinity-nix.url = "github:mrshmllow/affinity-nix"; # Not working "Unable to find runtime blablabla"
-
-    # Optional add-ons
-    # firefox-addons   = {
-    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    #   inputs.nixpkgs.follows = "nixpkgs"; };
   };
+
+
+  # @todo OK, so why don't I separate nixos and home-manager so
+  # I could just rebuild hm without the whole setup?
+  # Also, wouldn't it be more versatile?
+  # And couldn't I read the hosts dir and load the configurations dynamically?
 
 
   # Definition of the system, aka outputs
   # -------------------------------------
-  outputs = inputs@{ self, nixpkgs, ... }: 
+  outputs = inputs@{ self, nixpkgs, lib, ... }: 
   let
     inherit (nixpkgs.lib) nixosSystem lists;
 
     mkSystemConfig = { system, modules, ... }: nixosSystem
     { 
-      inherit system;
+      inherit system modules;
       specialArgs = { inherit inputs; };
-
-      modules = with inputs; [
-        agenix.nixosModules.default
-        home-manager.nixosModules.home-manager
-        impermanence.nixosModules.impermanence
-      ] ++ modules;
     };
   in
   {
-    # Declare the different systems configs
-    # -------------------------------------
+    # Declare the different hosts configs
+    # -----------------------------------
     nixosConfigurations = {
       # Qemu VM on macOS/UTM
       # --------------------
@@ -92,17 +86,17 @@
       # Bare-metal on amd ryzen
       # -----------------------
       q3dm10 = mkSystemConfig {
-        system  = "x86_64-linux";
+        system  = "x86_64-linux"; # @todo Is this used at all?
         modules = [ ./hosts/q3dm10 ];
       };
 
       # Sony Vaio VGN-TX5XN/B
       # - Intel U1500 / 1GB RAM
       # -----------------------
-      q3dm11 = mkSystemConfig {
-        system = "i686-linux";
-        modules = [ ./hosts/q3dm11 ];
-      };
+      # q3dm11 = mkSystemConfig {
+      #   system = "i686-linux";
+      #   modules = [ ./hosts/q3dm11 ];
+      # };
     };
   };
 }

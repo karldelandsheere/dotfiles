@@ -13,8 +13,8 @@
 in
 {
   imports = [
-    # ...
-  ] ++ lib.lists.optionals ( cfg.gui.enable ) [ ./gui.nix ];
+    inputs.home-manager.nixosModules.home-manager
+  ];
   
   
   # Related options and default values definition
@@ -47,6 +47,8 @@ in
         }
       ] ++ lib.lists.optionals ( cfg.impermanence.enable ) [
         inputs.impermanence.homeManagerModules.impermanence
+      ] ++ lib.lists.optionals ( cfg.gui.enable ) [
+        ./gui.nix
       ];
 
       # Shouldn't it be enough to set it once in the system part of the config?

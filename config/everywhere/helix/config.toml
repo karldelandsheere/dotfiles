@@ -4,6 +4,7 @@ theme = "catppuccin_mocha"
 cursorline = true
 line-number = "absolute"
 middle-click-paste = false
+mouse = true
 
 [editor.cursor-shape]
 insert = "bar"

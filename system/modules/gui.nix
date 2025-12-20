@@ -13,6 +13,7 @@ in
     inputs.noctalia.homeModules.default  # Quickshell integration
   ];
 
+
   config = {
     nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
 

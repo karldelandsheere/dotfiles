@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-{ config, lib, pkgs, ... }: let
+{ config, lib, inputs, pkgs, ... }: let
   cfg = config.nouveauxParadigmes;
 
   differences = pkgs.writeShellApplication {
@@ -28,6 +28,11 @@
     else "dev-nvme0n1p2.device";
 in
 {
+  imports = [
+    inputs.impermanence.nixosModules.impermanence
+  ];
+  
+
   # Related options and default values definition
   options.nouveauxParadigmes = {
     impermanence.enable = lib.mkEnableOption "Use impermanence? Defaults to false.";

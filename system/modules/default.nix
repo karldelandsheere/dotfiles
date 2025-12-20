@@ -5,17 +5,19 @@
 ###############################################################################
 
 { config, lib, inputs, ... }:
+  cfg = config.nouveauxParadigmes;
 {
   imports = [
     ./boot.nix               # Boot options and GRUB styling
     ./encryption.nix         # Root encryption with LUKS
     ./filesystem.nix         # Volumes, swap, options for impermanence and hibernation
+    # ./gui.nix                # GUI (desktop environment)
     ./hardware.nix           # All hardware, bluetooth, graphics, sound, ...
     ./home-manager.nix
     ./impermanence.nix       # Stateless system that cleans itself at reboot
     ./networking.nix         # Networking, SSH, VPN, Tailscale, ...
     ./power-management.nix   # Power, hibernation, ...
-    ./programs.nix
+    ./programs.nix           # Programs that should be by default on all hosts
     ./secrets.nix
     ./security.nix
     ./users.nix
@@ -35,14 +37,14 @@
     allowUnfree = lib.mkOption {
       type        = lib.types.bool;
       default     = true;
-      description = "Allow unfree software to be installed? Defaults to true, despite that I'd rather not to.";
+      description = "Allow unfree software to be installed? Defaults to true";
     };
   };
 
 
   config = {
     # NixOS version
-    system.stateVersion = config.nouveauxParadigmes.stateVersion;
+    system.stateVersion = cfg.stateVersion;
 
 
     # Nix options
@@ -65,7 +67,6 @@
     };
 
 
-    # Allow unfree software?
-    nixpkgs.config.allowUnfree = config.nouveauxParadigmes.allowUnfree;
+    nixpkgs.config.allowUnfree = cfg.allowUnfree;     # Allow unfree software?
   };
 }

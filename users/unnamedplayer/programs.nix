@@ -10,12 +10,6 @@
   cfg = osConfig.nouveauxParadigmes;
 in
 {
-  # GUI programs with config
-  # ------------------------
-  # imports = [
-  #   ../../home-manager/gui/programs/librewolf    # Fork of Firefox, privacy and no AI bullshit
-  # ];
-  
   config = {
     home = {
       # Programs that don't need a lot of config
@@ -30,6 +24,7 @@ in
         cmatrix                # Yeah, I know... like the cool kids
         exiftool
         fastfetch              # Am I a cool already?
+        ffmpeg
         # gurk-rs                # Signal client
         # iamb                   # Element/Synapse client
         mpv                    # Video player
@@ -43,6 +38,7 @@ in
         bambu-studio           # Slicer for my Bambu printers
         bitwarden-desktop      # Passwords & stuff
         # blender
+        ghostty                # Terminal emulator
         # mullvad-browser        # Highly privacy focused browser
         # opencloud-desktop
         openscad               # Code based CAD

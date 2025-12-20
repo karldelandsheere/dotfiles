@@ -2,6 +2,9 @@
 #
 # Users' stuff.
 #
+# Some inspo for writing this:
+#   https://github.com/EmergentMind/nix-config/blob/dev/hosts/common/users/default.nix
+#
 ###############################################################################
 
 { config, pkgs, lib, ... }: let

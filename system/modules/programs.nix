@@ -6,7 +6,6 @@
     environment.systemPackages = with pkgs; [
       bottom                 # Process/system monitor
       curl
-      ffmpeg
       git                    # Git is required to manage these dotfiles
       helix                  # Helix > vim imho
       jq                     # sed for json
@@ -28,7 +27,7 @@
     };
 
 
-    # I use zsh because I'm edgy but not too much
+    # Zsh because I'm edgy but not too much
     # -------------------------------------------
     programs.zsh = {
       enable = true;
