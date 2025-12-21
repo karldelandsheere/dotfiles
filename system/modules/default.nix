@@ -21,7 +21,6 @@ in
     ./programs.nix           # Programs that should be by default on all hosts
     ./secrets.nix
     ./security.nix
-    ./users.nix
     ./xdg.nix
   ];
 

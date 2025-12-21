@@ -4,7 +4,9 @@
 # 
 ###############################################################################
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: let
+  cfg = config.nouveauxParadigmes;
+in
 {
   # Related options and default values definition
   options.nouveauxParadigmes = {
@@ -17,15 +19,9 @@
 
 
   config = {
-    # System-wide packages related to network stuff
-    environment.systemPackages = with pkgs; [
-      # ...
-    ];
-
-
     # Networking parts activation and settings
     networking = {
-      hostName              = config.nouveauxParadigmes.hostname;
+      hostName              = cfg.hostname;
       networkmanager.enable = true;
       enableIPv6            = true;
 
@@ -34,7 +30,6 @@
         enable            = true;
         allowedUDPPorts   = [ config.services.tailscale.port ];
         allowedTCPPorts   = [ 22 ];
-        trustedInterfaces = [ "tailscale0" ];
       };
     };
 
@@ -54,16 +49,17 @@
         # openFirewall = false; # for now
         # banner = "";
       };
-
-      # Tailscale
-      tailscale = {
-        enable             = true;
-        useRoutingFeatures = "client";
-      };
     };
 
 
-    # Systemd for Tailscale
-    systemd.services.tailscaled.wantedBy = lib.mkForce []; # no autostart
+    # Tailscale
+    # @todo Not every user will need or should have access to tailscale,
+    #       maybe there should be a needlist or something.
+    services.tailscale = {
+        enable             = true;
+        useRoutingFeatures = "client";
+    };
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+    systemd.services.tailscaled.wantedBy  = lib.mkForce []; # no autostart
   };
 }

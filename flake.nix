@@ -9,6 +9,7 @@
 # -----------
 #   - @todo Make Affinity Designer work
 #   - @todo Implement a local binary cache to speed up rebuild a bit
+#   - @todo Move what is related to my user away from the system's config
 #   - @todo Actually use this setup for something else than ricing...
 # 
 #############################################################################
@@ -50,6 +51,9 @@
       inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Programs
+    globalprotect-openconnect = {      # Used for one customer -_-
+      url = "github:yuezk/GlobalProtect-openconnect";
+      inputs.nixpkgs.follows = "nixpkgs"; };
     # affinity-nix.url = "github:mrshmllow/affinity-nix"; # Not working "Unable to find runtime blablabla"
   };
 
@@ -60,43 +64,30 @@
   # And couldn't I read the hosts dir and load the configurations dynamically?
 
 
-  # Definition of the system, aka outputs
-  # -------------------------------------
-  outputs = inputs@{ self, nixpkgs, ... }: 
-  let
-    inherit (nixpkgs.lib) nixosSystem lists;
+  # Definition of the system (outputs)
+  outputs = inputs@{ self, nixpkgs, ... }: let
+    inherit (nixpkgs.lib) nixosSystem mapAttrs;
 
-    mkSystemConfig = { system, modules, ... }: nixosSystem
+    mkSystemConfig = { hostname, system,
+                       modules ? [], users ? [], ... }: nixosSystem
     { 
-      inherit system modules;
-      specialArgs = { inherit inputs; };
+      inherit system;
+      modules = [ ./hosts/${hostname} ] ++ modules;
+
+      specialArgs = {
+        inherit inputs;
+        users = [ "unnamedplayer" ] ++ users;
+      };
     };
   in
   {
     # Declare the different hosts configs
-    # -----------------------------------
-    nixosConfigurations = {
-      # Qemu VM on macOS/UTM
-      # --------------------
-      # utm = mkSystemConfig {
-      #   system  = "aarch64-linux";
-      #   modules = [ ./hosts/utm ];
-      # };
-
-      # Bare-metal on amd ryzen
-      # -----------------------
-      q3dm10 = mkSystemConfig {
-        system  = "x86_64-linux"; # @todo Is this used at all?
-        modules = [ ./hosts/q3dm10 ];
+    nixosConfigurations = mapAttrs (hostname: config:
+      mkSystemConfig ( { inherit hostname; } // config ) )
+      {
+        "q3dm10" = { system = "x86_64-linux"; };
+        "q3dm11" = { system = "i686-linux"; };
+        "utm"    = { };
       };
-
-      # Sony Vaio VGN-TX5XN/B
-      # - Intel U1500 / 1GB RAM
-      # -----------------------
-      # q3dm11 = mkSystemConfig {
-      #   system = "i686-linux";
-      #   modules = [ ./hosts/q3dm11 ];
-      # };
-    };
   };
 }

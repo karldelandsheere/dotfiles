@@ -7,12 +7,13 @@
 #
 ###############################################################################
 
-{ config, lib, pkgs, ... }: let
+{ config, lib, pkgs, users, ... }: let
   cfg = config.nouveauxParadigmes;
 in
 {
   imports = [
-    ./modules
+    ./modules      # Common config modules
+    ../users       # Loads the users specific configs
   ];
 
 
@@ -26,7 +27,7 @@ in
       description = "Keyboard layout. Defaults to be";
     };
 
-    # User preferences
+    # Dotfiles path
     dotfiles = lib.mkOption {
       type        = lib.types.str;
       default     = "/etc/nixos";
@@ -49,8 +50,8 @@ in
 
       # If the whole system is encrypted and password protected at boot,
       # and there's only one user, no need to type a second login right after
-      getty = lib.mkIf ( cfg.encryption.enable && cfg.users.others == [] ) {
-        autologinUser = "${cfg.users.main}";
+      getty = lib.mkIf ( cfg.encryption.enable && lib.length users == 1 ) {
+        autologinUser = "${lib.head users}";
       };
     };
     

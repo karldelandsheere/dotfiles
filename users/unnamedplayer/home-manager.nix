@@ -5,6 +5,7 @@
 #
 ###############################################################################
 
+# { username }:
 { config, osConfig, lib, inputs, ... }: let
   cfg = osConfig.nouveauxParadigmes;
   username = "unnamedplayer"; # @todo Get it from the parent
@@ -25,6 +26,14 @@ in
       file = with config.lib.file; {
         ".face".source = mkOutOfStoreSymlink ./face.jpg;
         "Pictures/Wallpapers".source = mkOutOfStoreSymlink ./wallpapers;
+        ".cache/noctalia/wallpapers.json" = let
+            wallpaperPath = "/home/${username}/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg";
+          in {
+          text = builtins.toJSON {
+            defaultWallpaper = wallpaperPath;
+            wallpapers = { "eDP-1" = wallpaperPath; };
+          };
+        };
       };
 
 

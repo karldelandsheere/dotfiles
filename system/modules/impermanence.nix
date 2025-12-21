@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-{ config, lib, inputs, pkgs, ... }: let
+{ config, lib, inputs, pkgs, users, ... }: let
   cfg = config.nouveauxParadigmes;
 
   differences = pkgs.writeShellApplication {
@@ -115,7 +115,7 @@ in
               ".zsh_history"
             ];
           };
-        } ) ( lib.lists.unique ( [ cfg.users.main ] ++ cfg.users.others ) ) );
+        } ) ( lib.lists.unique ( users ) ) );
         
         
         # users.${config.nouveauxParadigmes.users.main} = {

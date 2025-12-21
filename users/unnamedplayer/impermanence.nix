@@ -1,8 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, ... }: let
+  username = "unnamedplayer";
+in
 {
   config = {
     # Opt-in what files and directories should persist
-    home.persistence."/persist/home/unnamedplayer" = {
+    home.persistence."/persist/home/${username}" = {
       directories = [
         "Data"                           # Vaults, documents, etc
             
@@ -10,7 +12,7 @@
         ".vscode-oss"
         ".librewolf"
 
-        ".cache/noctalia"
+        # ".cache/noctalia"
 
         # @todo Determinate what is really needed here
         # ".local/share/calcurse"

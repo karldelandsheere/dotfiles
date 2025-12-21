@@ -4,16 +4,12 @@
     # System-wide packages
     # --------------------
     environment.systemPackages = with pkgs; [
-      bottom                 # Process/system monitor
       curl
       git                    # Git is required to manage these dotfiles
-      helix                  # Helix > vim imho
-      jq                     # sed for json
+      helix                  # Helix > Vim imho
+      jq                     # Like sed but for json, needed for persist.sh
       libsecret
       nix-tree               # Nix dependencies browser
-      progress               # Follow the progression of any script
-      scooter                # Search & replace
-      tree                   # Display a tree of a given folder
       unzip
       usbutils
       xev                    # Event monitor, for debugging
