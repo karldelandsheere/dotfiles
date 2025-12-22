@@ -4,24 +4,23 @@
 # 
 ###############################################################################
 
-{ config, lib, inputs, ... }: let
+{ config, lib, ... }: let
   cfg = config.nouveauxParadigmes;
 in
 {
   imports = [
     ./boot.nix               # Boot options and GRUB styling
     ./encryption.nix         # Root encryption with LUKS
-    ./filesystem.nix         # Volumes, swap, options for impermanence and hibernation
-    ./gui.nix                # GUI (desktop environment)
+    ./filesystem.nix         # Volumes, swap, impermanence, and hibernation
+    ./gui.nix                # GUI and XDG (desktop environment)
     ./hardware.nix           # All hardware, bluetooth, graphics, sound, ...
-    ./home-manager.nix
+    ./home-manager.nix       # Home-manager (setup, not users config)
     ./impermanence.nix       # Stateless system that cleans itself at reboot
     ./networking.nix         # Networking, SSH, VPN, Tailscale, ...
     ./power-management.nix   # Power, hibernation, ...
     ./programs.nix           # Programs that should be by default on all hosts
     ./secrets.nix
     ./security.nix
-    ./xdg.nix
   ];
 
 
@@ -30,7 +29,7 @@ in
     stateVersion = lib.mkOption {
       type        = lib.types.str;
       default     = "25.11";
-      description = "NixOS' state version. Defaults to 25.11";
+      description = "NixOS version. Defaults to 25.11";
     };
 
     # Philosophical and pragramtic question...

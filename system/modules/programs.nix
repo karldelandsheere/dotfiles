@@ -50,7 +50,7 @@
     # ----------------------
     environment.shellAliases = {
       dots = "cd ${config.nouveauxParadigmes.dotfiles}";
-      todo = "grep -rnw ${config.nouveauxParadigmes.dotfiles} -e '@todo'";
+      todo = "clear && grep -rnw ${config.nouveauxParadigmes.dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
       keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
 
       # Git shortcuts for the lazy ass I am

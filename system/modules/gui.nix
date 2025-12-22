@@ -1,7 +1,11 @@
 ###############################################################################
 # 
-# Simple yet effective GUI based on Niri and Noctalia, and all the GUI apps.
+# Simple yet effective GUI based on Niri and Noctalia.
+# GUI related config, including XDG related stuff. Still a lot to do here.
 #
+# Next steps:
+#   - @todo Implement some stuff from this:
+#   https://github.com/jervw/snowflake/blob/main/modules/home/system/xdg/default.nix
 ############################################################################### 
 
 { config, inputs, pkgs, lib, ... }: let
@@ -13,6 +17,16 @@ in
     inputs.noctalia.nixosModules.default   # Quickshell integration
   ];
 
+
+  # Related options and default values definition
+  options.nouveauxParadigmes = {
+    gui.enable = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Enable GUI? Defaults to true.";
+    };
+  };
+  
 
   config = lib.mkIf cfg.gui.enable {
     nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
@@ -35,6 +49,11 @@ in
           niri-session -l
         fi
       '';
+
+      pathsToLink = [
+        "/share/xdg-desktop-portal"
+        "/share/applications"
+      ];
     
       sessionVariables = {
         # CLUTTER_BACKEND = "wayland";
@@ -42,6 +61,7 @@ in
         # GDK_BACKEND = "wayland,x11";
         # GDK_SCALE = "1";
         # GTK_USE_PORTAL = "1";
+        NIXOS_OZONE_WL = "1";          # Use Ozone Wayland for Electron apps
         # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
         # QT_QPA_PLATFORM = "wayland-egl";
         # QT_QPA_PLATFORMTHEME = "qt6ct";
@@ -57,31 +77,54 @@ in
       };
       
       systemPackages = with pkgs; [
-        nemo                 # File explorer
-        xwayland-satellite   # rootless Xwayland integration
+        nemo                           # File explorer
+        xwayland-satellite             # rootless Xwayland integration
       ];
     };
 
 
+    xdg = {
+      # Enable portal for spawning extra windows,
+      # screenshots, screencast, file picker, ...
+      # @todo but no pressure, convert to wlr like
+      #   https://github.com/YaLTeR/niri/issues/544#issuecomment-2906930349
+      portal = {
+        enable           = true;
+        wlr.enable       = true;
+        xdgOpenUsePortal = true;
 
-    # home = {
-      # Utils
-      # -----
+        config = {
+          common = {
+            default = ["gnome"];
+            "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+            "org.freedesktop.impl.portal.OpenURI"     = ["gtk"];
+          };
 
+          niri = {
+            default = ["gnome"];
+            "org.freedesktop.impl.portal.FileChooser"   = ["gtk"];
+            "org.freedesktop.impl.portal.OpenURI"       = ["gtk"];
+            "org.freedesktop.impl.portal.RemoteDesktop" = ["gnome"];
+            "org.freedesktop.impl.portal.ScreenCast"    = ["gnome"];
+            "org.freedesktop.impl.portal.Screenshot"    = ["gnome"];
+            "org.freedesktop.impl.portal.Secret"        = ["gnome-keyring"];
+          };
+        };
 
-      # Session vars
-      # ------------
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gnome
+          xdg-desktop-portal-gtk
+        ];
+      };
 
-
-      # Look & feel (@todo implement this so the pointer is the same everywhere)
-      # -----------
-      # pointerCursor = {
-      #   name = "xxx";
-      #   package = ...;
-      #   size = 24;
-      #   gtk.enable = true;
-      #   x11.enable = true;
+      # @todo What was this about again?
+      # mimeApps.defaultApplications = {
+      #   "application/xhtml+xml" = "firefox.desktop";
+      #   "text/html" = "firefox.desktop";
+      #   "text/xml" = "firefox.desktop";
+      #   "x-scheme-handler/http" = "firefox.desktop";
+      #   "x-scheme-handler/https" = "firefox.desktop";
       # };
-    # };
+    };
   };
 }
