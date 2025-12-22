@@ -7,7 +7,6 @@
 
 { config, osConfig, lib, inputs, ... }: let
   cfg = osConfig.nouveauxParadigmes;
-  username = "unnamedplayer"; # @todo Get this from parent
 in
 {
   imports = [
@@ -21,9 +20,9 @@ in
     home = {
       file = with config.lib.file; {
         ".face".source = mkOutOfStoreSymlink ./face.jpg;
-        "Pictures/Wallpapers".source = mkOutOfStoreSymlink ./wallpapers;
+        "Pictures/Wallpapers".source = mkOutOfStoreSymlink ../wallpapers;
         ".cache/noctalia/wallpapers.json" = let
-            wallpaperPath = "/home/${username}/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg";
+            wallpaperPath = "${config.home.homeDirectory}/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg";
           in {
           text = builtins.toJSON {
             defaultWallpaper = wallpaperPath;
@@ -122,22 +121,6 @@ in
         passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/expo@ventrecontent.be";
 
         aerc.enable = true;
-      };
-    };
-
-
-    # Git ID's and signing options
-    # ----------------------------
-    programs.git = {
-      enable = true;
-      settings.user = {
-        name  = "Karl";
-        email = "karl@delandsheere.be";
-      };
-
-      signing = {
-        key           = "D4EFAA4CD5AE64F4";
-        signByDefault = true;
       };
     };
 

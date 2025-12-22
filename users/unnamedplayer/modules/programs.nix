@@ -78,6 +78,19 @@ in
     };
 
     programs = {
+      git = {                # Git ID's and signing options
+        enable = true;
+        settings.user = {
+          name  = "Karl";
+          email = "karl@delandsheere.be";
+        };
+
+        signing = {
+          key           = "D4EFAA4CD5AE64F4";
+          signByDefault = true;
+        };
+      };
+
       ghostty.enableZshIntegration = config.programs.zsh.enable;
       yazi.enableZshIntegration    = config.programs.zsh.enable;
     };
