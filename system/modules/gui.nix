@@ -4,7 +4,7 @@
 #
 ############################################################################### 
 
-{ config, inputs, pkgs, ... }: let
+{ config, inputs, pkgs, lib, ... }: let
   cfg = config.nouveauxParadigmes;
 in
 {
@@ -14,33 +14,12 @@ in
   ];
 
 
-  config = {
+  config = lib.mkIf cfg.gui.enable {
     nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
 
-    programs = {
-      niri = {
-        enable  = true;
-        package = pkgs.niri-unstable;    # Until 25.11 is in nixpkgs stable
-      };
-
-      # Launches niri at autologin, but only from tty1
-      # -l : https://github.com/YaLTeR/niri/issues/1914 (thanks nisby!)
-      # @todo make this shell agnostic
-      # ------------------------------
-      # zsh = {
-      #   enable = true;    # Needed otherwise it's not written in .zprofile
-      #   profileExtra = ''
-      #     if [ "$(tty)" == "/dev/tty1" ]; then
-      #       niri-session -l
-      #     fi
-      #   '';
-
-
-      #     # if [[ "$(tty)" == "/dev/tty1" ]]; then
-      #     #   niri-session -l
-      #     # fi
-
-      # };
+    programs.niri = {
+      enable  = true;
+      package = pkgs.niri-unstable;    # Until 25.11 is in nixpkgs stable
     };
 
     # Use Noctalia as a systemd service
@@ -49,8 +28,10 @@ in
 
     # Utils for the gui
     environment = {
+      # Launches niri at autologin, but only from tty1
+      # -l : https://github.com/YaLTeR/niri/issues/1914 (thanks nisby!)
       loginShellInit = ''
-        if [ "$(tty)" == "/dev/tty1" ]; then
+        if [ "$(tty)" = "/dev/tty1" ]; then
           niri-session -l
         fi
       '';

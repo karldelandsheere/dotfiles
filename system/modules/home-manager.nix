@@ -47,8 +47,8 @@ in
         }
       ] ++ lib.lists.optionals ( cfg.impermanence.enable ) [
         inputs.impermanence.homeManagerModules.impermanence
-      ] ++ lib.lists.optionals ( cfg.gui.enable ) [
-        ./gui.nix
+      # ] ++ lib.lists.optionals ( cfg.gui.enable ) [
+      #   ./gui.nix
       ];
 
       # Shouldn't it be enough to set it once in the system part of the config?

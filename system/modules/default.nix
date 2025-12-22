@@ -12,7 +12,7 @@ in
     ./boot.nix               # Boot options and GRUB styling
     ./encryption.nix         # Root encryption with LUKS
     ./filesystem.nix         # Volumes, swap, options for impermanence and hibernation
-    # ./gui.nix                # GUI (desktop environment)
+    ./gui.nix                # GUI (desktop environment)
     ./hardware.nix           # All hardware, bluetooth, graphics, sound, ...
     ./home-manager.nix
     ./impermanence.nix       # Stateless system that cleans itself at reboot

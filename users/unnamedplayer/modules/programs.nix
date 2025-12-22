@@ -91,8 +91,9 @@ in
         };
       };
 
-      ghostty.enableZshIntegration = config.programs.zsh.enable;
-      yazi.enableZshIntegration    = config.programs.zsh.enable;
+      zsh.enable = true;
+      ghostty.enableZshIntegration = true;
+      yazi.enableZshIntegration    = true;
     };
   };
 }

@@ -19,7 +19,7 @@ in
   config = {
     home = {
       file = with config.lib.file; {
-        ".face".source = mkOutOfStoreSymlink ./face.jpg;
+        ".face".source = mkOutOfStoreSymlink ../face.jpg;
         "Pictures/Wallpapers".source = mkOutOfStoreSymlink ../wallpapers;
         ".cache/noctalia/wallpapers.json" = let
             wallpaperPath = "${config.home.homeDirectory}/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg";
