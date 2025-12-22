@@ -4,7 +4,7 @@
 # 
 ###############################################################################
 
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, inputs, ... }: let
   cfg = config.nouveauxParadigmes;
 in
 {
@@ -50,6 +50,14 @@ in
         # banner = "";
       };
     };
+
+
+    environment.systemPackages = [
+      # inputs.globalprotect-openconnect.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ];
+    # services.globalprotect = {
+    #   enable = true;
+    # };
 
 
     # Tailscale

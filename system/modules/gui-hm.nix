@@ -4,13 +4,13 @@
 #
 ############################################################################### 
 
-{ config, inputs, pkgs, ... }: let
-  cfg = config.nouveauxParadigmes;
+{ config, osConfig, inputs, pkgs, ... }: let
+  cfg = osConfig.nouveauxParadigmes;
 in
 {
   imports = [
-    inputs.niri.nixosModules.niri          # Scrollable tiling compositor
-    inputs.noctalia.nixosModules.default   # Quickshell integration
+    inputs.niri.homeModules.niri         # Scrollable tiling compositor
+    inputs.noctalia.homeModules.default  # Quickshell integration
   ];
 
 
@@ -22,39 +22,37 @@ in
         enable  = true;
         package = pkgs.niri-unstable;    # Until 25.11 is in nixpkgs stable
       };
+      noctalia-shell = {
+        enable         = true;
+        systemd.enable = true;
+      };
 
       # Launches niri at autologin, but only from tty1
       # -l : https://github.com/YaLTeR/niri/issues/1914 (thanks nisby!)
       # @todo make this shell agnostic
       # ------------------------------
-      # zsh = {
-      #   enable = true;    # Needed otherwise it's not written in .zprofile
-      #   profileExtra = ''
-      #     if [ "$(tty)" == "/dev/tty1" ]; then
-      #       niri-session -l
-      #     fi
-      #   '';
-
-
-      #     # if [[ "$(tty)" == "/dev/tty1" ]]; then
-      #     #   niri-session -l
-      #     # fi
-
-      # };
+      zsh = {
+        enable = true;    # Needed otherwise it's not written in .zprofile
+        profileExtra = ''
+          if [[ "$(tty)" == "/dev/tty1" ]]; then
+            niri-session -l
+          fi
+        '';
+      };
     };
 
-    # Use Noctalia as a systemd service
-    services.noctalia-shell.enable = true;
+
+    home = {
+      # Utils
+      # -----
+      packages = with pkgs; [
+        nemo                 # File explorer
+        xwayland-satellite   # rootless Xwayland integration
+      ];
 
 
-    # Utils for the gui
-    environment = {
-      loginShellInit = ''
-        if [ "$(tty)" == "/dev/tty1" ]; then
-          niri-session -l
-        fi
-      '';
-    
+      # Session vars
+      # ------------
       sessionVariables = {
         # CLUTTER_BACKEND = "wayland";
         # DISABLE_QT5_COMPAT = "0"; # Should I set this to 1?
@@ -74,22 +72,6 @@ in
         XDG_SESSION_DESKTOP = "niri";
         # XDG_SESSION_TYPE = "wayland";
       };
-      
-      systemPackages = with pkgs; [
-        nemo                 # File explorer
-        xwayland-satellite   # rootless Xwayland integration
-      ];
-    };
-
-
-
-    # home = {
-      # Utils
-      # -----
-
-
-      # Session vars
-      # ------------
 
 
       # Look & feel (@todo implement this so the pointer is the same everywhere)
@@ -101,6 +83,6 @@ in
       #   gtk.enable = true;
       #   x11.enable = true;
       # };
-    # };
+    };
   };
 }
