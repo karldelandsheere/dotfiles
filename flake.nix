@@ -7,6 +7,7 @@
 # 
 # Next steps:
 # -----------
+#   - @todo Adapt the shell scripts under system/scripts to reflect the mods
 #   - @todo Make Affinity Designer work
 #   - @todo Implement a local binary cache to speed up rebuild a bit
 #   - @todo Move what is related to my user away from the system's config
@@ -51,9 +52,6 @@
       inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Programs
-    globalprotect-openconnect = {      # Used for one customer -_-
-      url = "github:yuezk/GlobalProtect-openconnect";
-      inputs.nixpkgs.follows = "nixpkgs"; };
     # affinity-nix.url = "github:mrshmllow/affinity-nix"; # Not working "Unable to find runtime blablabla"
   };
 

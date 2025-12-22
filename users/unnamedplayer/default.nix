@@ -4,7 +4,8 @@
 #
 ###############################################################################
 
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, inputs, ... }: let
+  cfg = config.nouveauxParadigmes;
   username = "unnamedplayer";
 in
 {
@@ -21,14 +22,12 @@ in
     };
 
     home-manager.users.${username} = {
-      imports = [ ../../users/${username}/home-manager.nix ];
+      home = {
+        username      = "${username}";
+        homeDirectory = "/home/${username}";
+      };
+      
+      imports = [ ../../users/${username}/modules/home-manager.nix ];
     };
-
-    # Additional VPN
-    # services.globalprotect = {
-    #   enable = true;
-    #   settings = {};
-    # };
-    # systemd.services.globalprotect.wantedBy = lib.mkForce []; # no autostart
   };
 }

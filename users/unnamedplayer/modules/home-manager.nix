@@ -5,14 +5,12 @@
 #
 ###############################################################################
 
-# { username }:
 { config, osConfig, lib, inputs, ... }: let
   cfg = osConfig.nouveauxParadigmes;
-  username = "unnamedplayer"; # @todo Get it from the parent
 in
 {
   imports = [
-    ../../config        # All the configs for tty and gui apps
+    ../../../config     # All the configs for tty and gui apps
     ./impermanence.nix  # Define what should be kept between reboots
     ./programs.nix      # No matter what, we'll always have a tty
   ];
@@ -20,10 +18,7 @@ in
 
   config = {
     home = {
-      username      = "${username}";
-      homeDirectory = "/home/${username}";
-
-      file = with config.lib.file; {
+      file = with lib.file; {
         ".face".source = mkOutOfStoreSymlink ./face.jpg;
         "Pictures/Wallpapers".source = mkOutOfStoreSymlink ./wallpapers;
         ".cache/noctalia/wallpapers.json" = let
@@ -31,7 +26,7 @@ in
           in {
           text = builtins.toJSON {
             defaultWallpaper = wallpaperPath;
-            wallpapers = { "eDP-1" = wallpaperPath; };
+            wallpapers       = { "eDP-1" = wallpaperPath; };
           };
         };
       };
@@ -128,13 +123,6 @@ in
         aerc.enable = true;
       };
     };
-
-    # age = {
-    #   identityPaths = [ "/home/unnamedplayer/.ssh/id_ed25519" ];
-    #   secrets = {
-    #     unnamedplayer.file = ../secrets/unnamedplayer-secrets.age;
-    #   };
-    # };
 
 
     # Git ID's and signing options
