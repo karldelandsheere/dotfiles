@@ -7,6 +7,7 @@
 
 { config, osConfig, lib, inputs, ... }: let
   cfg = osConfig.nouveauxParadigmes;
+  username = "unnamedplayer"; # @todo Get this from parent
 in
 {
   imports = [
@@ -18,7 +19,7 @@ in
 
   config = {
     home = {
-      file = with lib.file; {
+      file = with config.lib.file; {
         ".face".source = mkOutOfStoreSymlink ./face.jpg;
         "Pictures/Wallpapers".source = mkOutOfStoreSymlink ./wallpapers;
         ".cache/noctalia/wallpapers.json" = let
