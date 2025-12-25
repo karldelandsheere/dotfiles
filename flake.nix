@@ -53,7 +53,7 @@
 
     # Programs
     # globalprotect-openconnect.url = "github:yuezk/GlobalProtect-openconnect";
-    # affinity-nix.url = "github:mrshmllow/affinity-nix"; # Not working "Unable to find runtime blablabla"
+    # affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
 

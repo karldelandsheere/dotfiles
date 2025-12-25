@@ -6,7 +6,7 @@
 # 
 #############################################################################
   
-{ config, pkgs, osConfig, lib, ... }: let
+{ config, pkgs, osConfig, lib, inputs, ... }: let
   cfg = osConfig.nouveauxParadigmes;
   username = "unnamedplayer";
 in
@@ -33,6 +33,7 @@ in
         # iamb                   # Element/Synapse client
         mpv                    # Video player
         progress               # Follow the progression of any command
+        rustdesk-flutter       # Screen sharing / RDC
         scooter                # Directory wide search & replace
         # termusic               # @todo Test and config that
         tree                   # Kinda ls but as a tree
@@ -47,6 +48,7 @@ in
         bitwarden-desktop      # Passwords & stuff
         # blender
         ghostty                # Terminal emulator
+        inkscape               # Vector graphics editor
         # mullvad-browser        # Highly privacy focused browser
         # opencloud-desktop
         openscad               # Code based CAD
@@ -64,10 +66,7 @@ in
         termius                # Cross-platform SSH client
 
         # Graphic design
-        # Not working on 20250725, try again later if no good alternative found
-        # inputs.affinity-nix.packages.x86_64-linux.designer
-        # inputs.affinity-nix.packages.x86_64-linux.photo
-        # inputs.affinity-nix.packages.x86_64-linux.publisher
+        # inputs.affinity-nix.packages.${pkgs.stdenv.hostPlatform.system}.v3
       ];
 
       sessionVariables = with pkgs; {
