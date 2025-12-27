@@ -12,6 +12,7 @@ in
       jq                     # Like sed but for json, needed for persist.sh
       libsecret
       nix-tree               # Nix dependencies browser
+      tmux                   # Terminal multiplexer
       unzip
       usbutils
       xev                    # Event monitor, for debugging

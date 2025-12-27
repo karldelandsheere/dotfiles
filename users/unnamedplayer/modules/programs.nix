@@ -33,8 +33,10 @@ in
         # iamb                   # Element/Synapse client
         mpv                    # Video player
         progress               # Follow the progression of any command
+        pure-prompt
         scooter                # Directory wide search & replace
         # termusic               # @todo Test and config that
+        tmux                   # Terminal multiplexer
         tree                   # Kinda ls but as a tree
         ueberzugpp             # Terminal image viewer (needed for yazi)
         yazi                   # A really cool CLI file explorer
@@ -90,11 +92,18 @@ in
         };
       };
 
-      zsh.enable      = true;
-      starship.enable = true;
+      zsh = {
+        enable = true;
+        initContent = ''
+          autoload -U promptinit; promptinit
+          zstyle ':prompt:pure:path' color red
+          zstyle ':prompt:pure:prompt:*' color red
+          zstyle ':prompt:pure:git:stash' show yes 
+          prompt pure
+        '';
+      };
 
       ghostty.enableZshIntegration  = true;
-      starship.enableZshIntegration = true;
       yazi.enableZshIntegration     = true;
     };
   };
