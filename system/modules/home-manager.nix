@@ -34,30 +34,16 @@ in
       backupFileExtension = "backup";
 
       sharedModules = [
-        # inputs.agenix.homeManagerModules.default
         {
-          # Enable home-manager
-          programs.home-manager.enable = true;
-          
-          # Sync with nixOS stateVersion
+          programs.home-manager.enable = true;   # Enable home-manager
           home.stateVersion = config.system.stateVersion;
-
-          # Display the news at rebuild
-          news.display = "show";
+          news.display = "show";                 # Display the news at rebuild
         }
+
+        inputs.agenix.homeManagerModules.default
       ] ++ lib.lists.optionals ( cfg.impermanence.enable ) [
         inputs.impermanence.homeManagerModules.impermanence
-      # ] ++ lib.lists.optionals ( cfg.gui.enable ) [
-      #   ./gui.nix
       ];
-
-      # Shouldn't it be enough to set it once in the system part of the config?
-      # nixpkgs.config.allowUnfree = cfg.allowUnfree;
-
-      # Import all user specific config
-      # users = lib.genAttrs allUsers ( username: {
-      #   imports = [ ../../users/${username}/home-manager.nix ];
-      # } );
     };
   };
 }

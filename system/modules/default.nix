@@ -19,7 +19,7 @@ in
     ./networking.nix         # Networking, SSH, VPN, Tailscale, ...
     ./power-management.nix   # Power, hibernation, ...
     ./programs.nix           # Programs that should be by default on all hosts
-    ./secrets.nix
+    # ./secrets.nix
     ./security.nix
   ];
 

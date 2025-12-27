@@ -5,6 +5,7 @@
     # --------------------
     environment.systemPackages = with pkgs; [
       curl
+      flac                   # FLAC codecs
       git                    # Git is required to manage these dotfiles
       helix                  # Helix > Vim imho
       jq                     # Like sed but for json, needed for persist.sh

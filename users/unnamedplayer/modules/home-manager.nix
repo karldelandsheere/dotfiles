@@ -13,6 +13,7 @@ in
     ../../../config     # All the configs for tty and gui apps
     ./impermanence.nix  # Define what should be kept between reboots
     ./programs.nix      # No matter what, we'll always have a tty
+    ./secrets.nix       # Agenix files 
   ];
 
 

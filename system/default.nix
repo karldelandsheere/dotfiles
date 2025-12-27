@@ -18,7 +18,6 @@ in
 
 
   # Set system wide options
-  # -----------------------
   options.nouveauxParadigmes = {
     # Inputs
     kbLayout = lib.mkOption {
@@ -36,8 +35,8 @@ in
   };
 
 
-  # These are too small on their own for a dedicated file
-  # -----------------------------------------------------
+  # These are too small on their own for dedicated files
+  # ----------------------------------------------------
   config = {
     services = {
       dbus.implementation = "broker";
@@ -56,29 +55,25 @@ in
     };
     
     # Console
-    # -------
     console = {
       useXkbConfig = true;
       earlySetup = true;
       font = "Lat2-Terminus16";
     };
 
-
+    # Internationalization
     i18n = {
-      defaultLocale = "en_US.UTF-8";   # I speak French, but let's keep it simple
+      defaultLocale = "en_US.UTF-8";   # @todo Make it an option maybe?
       inputMethod = {
         enable = true;
         type = "ibus";
       };
     };   
 
-
-    # Time settings (let's assume that for now)
-    # -------------
+    # Time settings
     time.timeZone = "Europe/Brussels";
 
     # Fonts
-    # -----
     fonts.packages = with pkgs; [
       font-awesome
       nerd-fonts.jetbrains-mono

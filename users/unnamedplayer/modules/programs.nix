@@ -33,8 +33,8 @@ in
         # iamb                   # Element/Synapse client
         mpv                    # Video player
         progress               # Follow the progression of any command
-        rustdesk-flutter       # Screen sharing / RDC
         scooter                # Directory wide search & replace
+        starship
         # termusic               # @todo Test and config that
         tree                   # Kinda ls but as a tree
         ueberzugpp             # Terminal image viewer (needed for yazi)
@@ -53,6 +53,7 @@ in
         # opencloud-desktop
         openscad               # Code based CAD
         prusa-slicer           # Slicer for my Prusa printers
+        rustdesk-flutter       # Open source Remote Desktop (like AnyDesk or TimeViewer)
         # qbittorrent
         signal-desktop         # Privacy focused messaging
         vivaldi                # Privacy focused browser
@@ -91,8 +92,9 @@ in
       };
 
       zsh.enable = true;
-      ghostty.enableZshIntegration = true;
-      yazi.enableZshIntegration    = true;
+      ghostty.enableZshIntegration  = true;
+      starship.enableZshIntegration = true;
+      yazi.enableZshIntegration     = true;
     };
   };
 }
