@@ -1,8 +1,7 @@
 ###############################################################################
 #
-# So far, it's a one user system. I'll need to reorganize that when
-# this changes. I should probably reorganize it anyway though.
-#
+# Home manager config for user unnamedplayer (that's me).
+# 
 ###############################################################################
 
 { config, osConfig, lib, inputs, ... }: let
@@ -35,6 +34,8 @@ in
 
       # @todo 
       shellAliases = {
+        todo = "clear && grep -rnw ${cfg.dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
+
         tsup-dimeritium = ''
           mullvad disconnect && \
           tailscale up --force-reauth --operator=$USER \
@@ -127,7 +128,6 @@ in
 
 
     # Shouldn't it be enough to set it once in the system part of the config?
-    # -----------------------------------------------------------------------
     nixpkgs.config.allowUnfree = cfg.allowUnfree;
   };
 }

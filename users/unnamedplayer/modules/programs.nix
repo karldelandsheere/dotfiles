@@ -34,7 +34,6 @@ in
         mpv                    # Video player
         progress               # Follow the progression of any command
         scooter                # Directory wide search & replace
-        starship
         # termusic               # @todo Test and config that
         tree                   # Kinda ls but as a tree
         ueberzugpp             # Terminal image viewer (needed for yazi)
@@ -91,7 +90,9 @@ in
         };
       };
 
-      zsh.enable = true;
+      zsh.enable      = true;
+      starship.enable = true;
+
       ghostty.enableZshIntegration  = true;
       starship.enableZshIntegration = true;
       yazi.enableZshIntegration     = true;
