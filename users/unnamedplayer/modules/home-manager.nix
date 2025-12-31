@@ -48,7 +48,7 @@ in
             --login-server=https://headscale.nouveaux-paradigmes.be \
             --auth-key $(cat /run/agenix/auth/tailscale/nouveauxparadigmes)
         '';
-        tsdown = "tailscale down && mullvad connect";
+        tsdown = "tailscale down --accept-risk=all && mullvad connect";
       };
     };
 

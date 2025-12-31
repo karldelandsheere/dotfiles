@@ -75,6 +75,7 @@
                     "id": "plugin:privacy-indicator"
                 },
                 {
+                    "compactMode": false,
                     "diskPath": "/",
                     "id": "SystemMonitor",
                     "showCpuTemp": false,
