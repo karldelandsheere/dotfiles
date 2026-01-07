@@ -5,13 +5,13 @@
   },
   "settings": {
     "currentThreshold": "Текущий порог: {value}%",
+    "hideBackground": {
+      "description": "Скрыть фон виджета рабочего стола",
+      "label": "Скрыть фон"
+    },
     "minimumThreshold": {
       "description": "Использование CPU должно быть выше этого процента, чтобы кот начал бежать",
       "label": "Минимальный порог CPU"
-    },
-    "hideBackground": {
-      "label": "Скрыть фон",
-      "description": "Скрыть фон виджета рабочего стола"
     },
     "title": "Настройки Catwalk"
   },

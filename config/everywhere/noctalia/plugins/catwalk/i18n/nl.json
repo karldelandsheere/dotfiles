@@ -5,13 +5,13 @@
   },
   "settings": {
     "currentThreshold": "Huidige drempelwaarde: {value}%",
+    "hideBackground": {
+      "description": "Verberg de achtergrond van de bureaubladwidget",
+      "label": "Achtergrond verbergen"
+    },
     "minimumThreshold": {
       "description": "CPU-gebruik moet boven dit percentage liggen voordat de kat begint te rennen.",
       "label": "Minimale CPU-drempel"
-    },
-    "hideBackground": {
-      "label": "Achtergrond verbergen",
-      "description": "Verberg de achtergrond van de bureaubladwidget"
     },
     "title": "Catwalk Instellingen"
   },

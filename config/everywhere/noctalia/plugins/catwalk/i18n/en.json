@@ -5,13 +5,13 @@
   },
   "settings": {
     "currentThreshold": "Current threshold: {value}%",
+    "hideBackground": {
+      "description": "Hide the background of the desktop widget",
+      "label": "Hide Background"
+    },
     "minimumThreshold": {
       "description": "CPU usage must be above this percentage for the cat to start running",
       "label": "Minimum CPU Threshold"
-    },
-    "hideBackground": {
-      "label": "Hide Background",
-      "description": "Hide the background of the desktop widget"
     },
     "title": "Catwalk Settings"
   },

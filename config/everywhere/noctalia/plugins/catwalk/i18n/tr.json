@@ -5,13 +5,13 @@
   },
   "settings": {
     "currentThreshold": "Mevcut eşik: {value}%",
+    "hideBackground": {
+      "description": "Masaüstü bileşeninin arka planını gizle",
+      "label": "Arka planı gizle"
+    },
     "minimumThreshold": {
       "description": "CPU kullanımı, kedinin koşmaya başlaması için bu yüzdeden yüksek olmalıdır.",
       "label": "Minimum CPU Eşiği"
-    },
-    "hideBackground": {
-      "label": "Arka planı gizle",
-      "description": "Masaüstü bileşeninin arka planını gizle"
     },
     "title": "Podyum Ayarları"
   },

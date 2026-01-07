@@ -19,7 +19,7 @@ in
         # TUI/CLI programs
         # ----------------
         # aerc                   # Email client
-        # basalt                 # @todo check back in a couple months
+        basalt                 # @todo check back in a couple months
         bitwarden-cli          # Easy access to my vault in tty
         bottom                 # Process/system monitor
         # calcurse               # CalDav client
@@ -31,6 +31,7 @@ in
         # gurk-rs                # Signal client
         helix                  # Helix > Vim imho
         # iamb                   # Element/Synapse client
+        jellyfin-tui           # TUI client for Jellyfin Media Server
         mpv                    # Video player
         progress               # Follow the progression of any command
         pure-prompt
@@ -59,16 +60,12 @@ in
         signal-desktop         # Privacy focused messaging
         vivaldi                # Privacy focused browser
         # vlc                  # Replaced by mpv (tty video player)
-        vscodium               # Foss version of VSCode
       ]
 
        # GUI and unfree programs
        ++ lib.lists.optionals ( cfg.gui.enable && osConfig.nixpkgs.config.allowUnfree ) [
         obsidian               # Markdown note taking app
         termius                # Cross-platform SSH client
-
-        # Graphic design
-        # inputs.affinity-nix.packages.${pkgs.stdenv.hostPlatform.system}.v3
       ];
 
       sessionVariables = with pkgs; {
@@ -89,6 +86,30 @@ in
         signing = {
           key           = "D4EFAA4CD5AE64F4";
           signByDefault = true;
+        };
+      };
+
+      zed-editor = {
+        enable       = true;
+        extensions   = [ "html" "nix" "php" "xml" ];
+        userSettings = {
+          base_keymap      = "VSCode";
+          buffer_font_size = 16;
+          disable_ai       = true;
+          helix_mode       = true;
+          icon_theme       = {
+            mode = "dark";
+            dark = "Zed (Default)";
+          };
+          telemetry        = {
+            diagnostics = false;
+            metrics     = false;
+          };
+          theme            = {
+            mode = "dark";
+            dark = "One Dark";
+          };
+          ui_font_size     = 16;
         };
       };
 

@@ -1,0 +1,48 @@
+{
+  "bar_widget": {
+    "todo_count_plural": "{count} Aufgaben",
+    "todo_count_singular": "{count} Todo"
+  },
+  "desktop_widget": {
+    "empty_state": "Neniu tasko",
+    "header_title": "Lista de tareas",
+    "items_count": "{active} nga butang sa {total}"
+  },
+  "main": {
+    "added_new_todo": "Dodano nowy element do zrobienia:",
+    "cleared_completed_todos": "Geklart",
+    "completed_todos_suffix": "dokončané úkoly",
+    "not_found_suffix": "nicht gefunden",
+    "removed_todo": "Entferntes To-do-Element",
+    "todo_completed": "završeno",
+    "todo_marked_incomplete": "markiert als unvollständig",
+    "todo_not_found": "Todo con ID",
+    "todo_status_changed": "Ĉiuj fariendaĵoj"
+  },
+  "panel": {
+    "add_todo": {
+      "add_button": "Idagdag",
+      "placeholder": "Gib ein neues To-do-Element ein..."
+    },
+    "empty_state": {
+      "message": "Nema stavki popisa zadataka."
+    },
+    "header": {
+      "clear_completed_button": "Klar ferdig",
+      "title": "Lista zadań"
+    },
+    "todo_item": {
+      "delete_button_tooltip": "Fshij"
+    }
+  },
+  "settings": {
+    "background_color": {
+      "description": "Farbhintergrund des Todo-Widgets",
+      "label": "Ngjyra e sfondit"
+    },
+    "show_completed": {
+      "description": "Prikaži dovršene stavke popisa zadataka u panelu.",
+      "label": "Zeige erledigte Todos"
+    }
+  }
+}

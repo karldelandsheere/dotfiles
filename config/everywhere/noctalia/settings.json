@@ -96,9 +96,6 @@
                     "id": "Bluetooth"
                 },
                 {
-                    "id": "plugin:virtual-keyboard"
-                },
-                {
                     "deviceNativePath": "",
                     "displayMode": "alwaysShow",
                     "id": "Battery",
@@ -394,7 +391,7 @@
     "templates": {
         "alacritty": false,
         "cava": true,
-        "code": true,
+        "code": false,
         "discord": false,
         "emacs": false,
         "enableUserTemplates": false,
@@ -413,7 +410,7 @@
         "walker": false,
         "wezterm": false,
         "yazi": true,
-        "zed": false
+        "zed": true
     },
     "ui": {
         "fontDefault": "JetBrainsMono Nerd Font",

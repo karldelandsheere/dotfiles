@@ -5,13 +5,13 @@
   },
   "settings": {
     "currentThreshold": "Limite atual: {value}%",
+    "hideBackground": {
+      "description": "Ocultar o fundo do widget da área de trabalho",
+      "label": "Ocultar fundo"
+    },
     "minimumThreshold": {
       "description": "O uso da CPU deve estar acima desta porcentagem para o gato começar a correr",
       "label": "Limite mínimo de CPU"
-    },
-    "hideBackground": {
-      "label": "Ocultar fundo",
-      "description": "Ocultar o fundo do widget da área de trabalho"
     },
     "title": "Configurações do Catwalk"
   },

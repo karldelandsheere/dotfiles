@@ -44,7 +44,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="codium"                // VSCodium
+  match app-id="dev.zed.Zed"           // Zed Editor
   match app-id="Termius"               // Termius
 
   open-on-workspace "code"
@@ -63,7 +63,6 @@ window-rule {
 }
 
 window-rule {
-  match app-id="affinity.exe"               // Affinity Suite
   match app-id="inkscape"
 
   open-on-workspace "graphics"
