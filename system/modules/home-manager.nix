@@ -41,8 +41,6 @@ in
         }
 
         inputs.agenix.homeManagerModules.default
-      ] ++ lib.lists.optionals ( cfg.impermanence.enable ) [
-        inputs.impermanence.homeManagerModules.impermanence
       ];
     };
   };

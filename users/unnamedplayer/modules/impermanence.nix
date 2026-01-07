@@ -1,10 +1,8 @@
-{ config, lib, ... }: let
-  username = "unnamedplayer";
-in
+{ config, lib, ... }:
 {
   config = {
     # Opt-in what files and directories should persist
-    home.persistence."/persist/home/${username}" = {
+    home.persistence."/persist" = {
       directories = [
         "Data"                           # Vaults, documents, etc
             
@@ -34,8 +32,6 @@ in
         # ".config/mimeapps.list"
         # ".config/Bitwarden CLI/data.json"
       ];
-
-      allowOther = true;
     };
   };
 }
