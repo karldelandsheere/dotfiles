@@ -1,0 +1,30 @@
+{
+  "settings": {
+    "title": "RSSリーダー設定",
+    "updateInterval": "更新間隔",
+    "updateIntervalDesc": "新しいアイテムをチェックする頻度（秒）",
+    "seconds": "秒",
+    "maxItems": "フィード毎の最大アイテム数",
+    "maxItemsDesc": "各フィードから取得する最大アイテム数",
+    "showOnlyUnread": "未読のみ表示",
+    "showOnlyUnreadDesc": "パネルに未読アイテムのみを表示",
+    "markOnClick": "クリック時に既読にする",
+    "markOnClickDesc": "開いたアイテムを自動的に既読にする",
+    "feeds": "RSSフィード",
+    "addFeed": "新しいフィードを追加",
+    "feedName": "フィード名",
+    "feedUrl": "フィードURL",
+    "add": "追加",
+    "remove": "削除",
+    "noFeeds": "フィードが設定されていません。上で追加してください！"
+  },
+  "widget": {
+    "title": "RSSフィード",
+    "markAllRead": "すべて既読にする",
+    "noItems": "表示するアイテムがありません",
+    "timeNow": "今",
+    "timeMinutes": "%1分前",
+    "timeHours": "%1時間前",
+    "timeDays": "%1日前"
+  }
+}

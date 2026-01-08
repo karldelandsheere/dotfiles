@@ -79,8 +79,8 @@
                 },
                 {
                     "defaultSettings": {
-                        "hideInactive": true,
-                        "removeMargins": true
+                        "hideInactive": false,
+                        "removeMargins": false
                     },
                     "id": "plugin:privacy-indicator"
                 },
@@ -101,11 +101,41 @@
                 },
                 {
                     "displayMode": "alwaysShow",
+                    "id": "WiFi"
+                },
+                {
+                    "displayMode": "onhover",
+                    "id": "Bluetooth"
+                },
+                {
+                    "displayMode": "alwaysShow",
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": true,
                     "showPowerProfiles": true,
                     "warningThreshold": 15
+                },
+                {
+                    "customFont": "",
+                    "formatHorizontal": "dd MMM",
+                    "formatVertical": "dd MMM",
+                    "id": "Clock",
+                    "tooltipFormat": "HH:mm:ss // dd MMM yyyy",
+                    "useCustomFont": false,
+                    "usePrimaryColor": false
+                },
+                {
+                    "defaultSettings": {
+                        "feeds": [
+                        ],
+                        "markAsReadOnClick": true,
+                        "maxItemsPerFeed": 10,
+                        "readItems": [
+                        ],
+                        "showOnlyUnread": false,
+                        "updateInterval": 600
+                    },
+                    "id": "plugin:rss-feed"
                 },
                 {
                     "defaultSettings": {
@@ -174,7 +204,7 @@
                 "id": "brightness-card"
             },
             {
-                "enabled": false,
+                "enabled": true,
                 "id": "weather-card"
             },
             {
@@ -183,20 +213,20 @@
             }
         ],
         "diskPath": "/",
-        "position": "center",
+        "position": "close_to_bar_button",
         "shortcuts": {
             "left": [
                 {
-                    "id": "WiFi"
+                    "id": "Network"
                 },
                 {
                     "id": "Bluetooth"
                 },
                 {
-                    "id": "KeepAwake"
+                    "id": "ScreenRecorder"
                 },
                 {
-                    "id": "PowerProfile"
+                    "id": "WallpaperSelector"
                 }
             ],
             "right": [
@@ -204,39 +234,21 @@
                     "id": "Notifications"
                 },
                 {
+                    "id": "PowerProfile"
+                },
+                {
+                    "id": "KeepAwake"
+                },
+                {
                     "id": "NightLight"
-                },
-                {
-                    "id": "WallpaperSelector"
-                },
-                {
-                    "id": "ScreenRecorder"
                 }
             ]
         }
     },
     "desktopWidgets": {
-        "enabled": true,
-        "gridSnap": true,
+        "enabled": false,
+        "gridSnap": false,
         "monitorWidgets": [
-            {
-                "name": "eDP-1",
-                "widgets": [
-                    {
-                        "clockStyle": "binary",
-                        "customFont": "",
-                        "format": "HH:mm",
-                        "id": "Clock",
-                        "roundedCorners": false,
-                        "scale": 8,
-                        "showBackground": false,
-                        "useCustomFont": false,
-                        "usePrimaryColor": false,
-                        "x": 1530,
-                        "y": 700
-                    }
-                ]
-            }
         ]
     },
     "dock": {
@@ -245,7 +257,7 @@
         "colorizeIcons": false,
         "deadOpacity": 0.6,
         "displayMode": "auto_hide",
-        "enabled": false,
+        "enabled": true,
         "floatingRatio": 1,
         "inactiveIndicators": false,
         "monitors": [
@@ -263,20 +275,20 @@
         "avatarImage": "/home/unnamedplayer/.face",
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
-        "dimmerOpacity": 0.3,
-        "enableShadows": false,
+        "dimmerOpacity": 0.2,
+        "enableShadows": true,
         "forceBlackScreenCorners": false,
         "iRadiusRatio": 1,
         "language": "",
         "lockOnSuspend": true,
-        "radiusRatio": 0.2,
+        "radiusRatio": 1,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
-        "showChangelogOnStartup": false,
-        "showHibernateOnLockScreen": true,
+        "showChangelogOnStartup": true,
+        "showHibernateOnLockScreen": false,
         "showScreenCorners": false,
         "showSessionButtonsOnLockScreen": true
     },
@@ -291,16 +303,16 @@
     },
     "location": {
         "analogClockInCalendar": false,
-        "firstDayOfWeek": 1,
+        "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "Liège",
+        "name": "Tokyo",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
-        "showWeekNumberInCalendar": true,
+        "showWeekNumberInCalendar": false,
         "use12hourFormat": false,
         "useFahrenheit": false,
-        "weatherEnabled": false,
+        "weatherEnabled": true,
         "weatherShowEffects": true
     },
     "network": {
@@ -316,20 +328,20 @@
         "dayTemp": "6500",
         "enabled": false,
         "forced": false,
-        "manualSunrise": "08:00",
-        "manualSunset": "19:30",
+        "manualSunrise": "06:30",
+        "manualSunset": "18:30",
         "nightTemp": "4000"
     },
     "notifications": {
         "backgroundOpacity": 1,
-        "criticalUrgencyDuration": 30,
+        "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
         "enabled": true,
         "location": "top_right",
-        "lowUrgencyDuration": 6,
+        "lowUrgencyDuration": 3,
         "monitors": [
         ],
-        "normalUrgencyDuration": 10,
+        "normalUrgencyDuration": 8,
         "overlayLayer": true,
         "respectExpireTimeout": false,
         "saveToHistory": {
@@ -355,7 +367,7 @@
             0,
             1,
             2,
-            4
+            null
         ],
         "location": "top_right",
         "monitors": [
@@ -367,7 +379,7 @@
         "audioSource": "default_output",
         "colorRange": "limited",
         "copyToClipboard": false,
-        "directory": "/home/unnamedplayer/Data/Videos",
+        "directory": "/home/unnamedplayer/Videos",
         "frameRate": 60,
         "quality": "very_high",
         "showCursor": true,
@@ -376,7 +388,7 @@
     },
     "sessionMenu": {
         "countdownDuration": 10000,
-        "enableCountdown": false,
+        "enableCountdown": true,
         "largeButtonsLayout": "grid",
         "largeButtonsStyle": false,
         "position": "center",
@@ -436,44 +448,44 @@
     },
     "templates": {
         "alacritty": false,
-        "cava": true,
+        "cava": false,
         "code": false,
         "discord": false,
         "emacs": false,
         "enableUserTemplates": false,
         "foot": false,
         "fuzzel": false,
-        "ghostty": true,
-        "gtk": true,
+        "ghostty": false,
+        "gtk": false,
         "helix": false,
         "hyprland": false,
-        "kcolorscheme": true,
+        "kcolorscheme": false,
         "kitty": false,
         "mango": false,
-        "niri": true,
+        "niri": false,
         "pywalfox": false,
-        "qt": true,
+        "qt": false,
         "spicetify": false,
         "telegram": false,
         "vicinae": false,
         "walker": false,
         "wezterm": false,
-        "yazi": true,
-        "zed": true,
+        "yazi": false,
+        "zed": false,
         "zenBrowser": false
     },
     "ui": {
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "boxBorderEnabled": false,
-        "fontDefault": "JetBrainsMono Nerd Font",
+        "fontDefault": "Sans Serif",
         "fontDefaultScale": 1,
-        "fontFixed": "JetBrainsMono Nerd Font Mono",
+        "fontFixed": "monospace",
         "fontFixedScale": 1,
         "networkPanelView": "wifi",
-        "panelBackgroundOpacity": 0.4,
-        "panelsAttachedToBar": false,
-        "settingsPanelMode": "centered",
+        "panelBackgroundOpacity": 0.93,
+        "panelsAttachedToBar": true,
+        "settingsPanelMode": "attached",
         "tooltipsEnabled": true,
         "wifiDetailsViewMode": "grid"
     },
@@ -487,7 +499,7 @@
         "monitorDirectories": [
         ],
         "overviewEnabled": false,
-        "panelPosition": "center",
+        "panelPosition": "follow_bar",
         "randomEnabled": false,
         "randomIntervalSec": 300,
         "recursiveSearch": false,
@@ -495,7 +507,7 @@
         "solidColor": "#1a1a2e",
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
-        "transitionType": "fade",
+        "transitionType": "random",
         "useSolidColor": false,
         "useWallhaven": false,
         "wallhavenApiKey": "",

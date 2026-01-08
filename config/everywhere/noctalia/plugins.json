@@ -7,14 +7,17 @@
         }
     ],
     "states": {
-        "catwalk": {
-            "enabled": true
-        },
         "privacy-indicator": {
-            "enabled": true
+            "enabled": true,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
-        "virtual-keyboard": {
-            "enabled": true
+        "rss-feed": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
+        },
+        "todo": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         }
     },
     "version": 1

@@ -1,0 +1,30 @@
+{
+  "settings": {
+    "title": "Paramètres du Lecteur RSS",
+    "updateInterval": "Intervalle de Mise à Jour",
+    "updateIntervalDesc": "Fréquence de vérification des nouveaux éléments (secondes)",
+    "seconds": "secondes",
+    "maxItems": "Max d'Éléments par Flux",
+    "maxItemsDesc": "Nombre maximum d'éléments à récupérer de chaque flux",
+    "showOnlyUnread": "Afficher Uniquement Non Lus",
+    "showOnlyUnreadDesc": "Afficher uniquement les éléments non lus dans le panneau",
+    "markOnClick": "Marquer Comme Lu au Clic",
+    "markOnClickDesc": "Marquer automatiquement les éléments comme lus en les ouvrant",
+    "feeds": "Flux RSS",
+    "addFeed": "Ajouter un Nouveau Flux",
+    "feedName": "Nom du Flux",
+    "feedUrl": "URL du Flux",
+    "add": "Ajouter",
+    "remove": "Supprimer",
+    "noFeeds": "Aucun flux configuré. Ajoutez-en un ci-dessus!"
+  },
+  "widget": {
+    "title": "Flux RSS",
+    "markAllRead": "Tout marquer comme lu",
+    "noItems": "Aucun élément à afficher",
+    "timeNow": "maintenant",
+    "timeMinutes": "il y a %1min",
+    "timeHours": "il y a %1h",
+    "timeDays": "il y a %1j"
+  }
+}

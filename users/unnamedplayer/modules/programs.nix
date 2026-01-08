@@ -8,7 +8,6 @@
   
 { config, pkgs, osConfig, lib, inputs, ... }: let
   cfg = osConfig.nouveauxParadigmes;
-  username = "unnamedplayer";
 in
 {
   config = {
