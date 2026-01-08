@@ -20,7 +20,8 @@ in
   config = {
     # Automatically import all pertinent configs
     # ------------------------------------------
-    xdg.configFile = builtins.mapAttrs (name: subpath: {
+    home.file = builtins.mapAttrs (name: subpath: {
+    # xdg.configFile = builtins.mapAttrs (name: subpath: {
       source    = config.lib.file.mkOutOfStoreSymlink ./${subpath};
       recursive = true;
     }) (mkConfigSet [ "everywhere" "per-host/${osConfig.nouveauxParadigmes.hostname}" ]);
