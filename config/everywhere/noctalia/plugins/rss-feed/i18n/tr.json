@@ -1,0 +1,30 @@
+{
+  "settings": {
+    "title": "RSS Okuyucu Ayarları",
+    "updateInterval": "Güncelleme Aralığı",
+    "updateIntervalDesc": "Yeni öğeleri ne sıklıkla kontrol etmeli (saniye)",
+    "seconds": "saniye",
+    "maxItems": "Kaynak Başına Maks. Öğe",
+    "maxItemsDesc": "Her kaynaktan alınacak maksimum öğe sayısı",
+    "showOnlyUnread": "Sadece Okunmamışları Göster",
+    "showOnlyUnreadDesc": "Panelde sadece okunmamış öğeleri göster",
+    "markOnClick": "Tıklandığında Okundu Olarak İşaretle",
+    "markOnClickDesc": "Öğeler açıldığında otomatik olarak okundu olarak işaretle",
+    "feeds": "RSS Kaynakları",
+    "addFeed": "Yeni Kaynak Ekle",
+    "feedName": "Kaynak Adı",
+    "feedUrl": "Kaynak URL'si",
+    "add": "Ekle",
+    "remove": "Kaldır",
+    "noFeeds": "Yapılandırılmış kaynak yok. Yukarıdan bir tane ekleyin!"
+  },
+  "widget": {
+    "title": "RSS Kaynakları",
+    "markAllRead": "Tümünü okundu olarak işaretle",
+    "noItems": "Gösterilecek öğe yok",
+    "timeNow": "şimdi",
+    "timeMinutes": "%1dk önce",
+    "timeHours": "%1sa önce",
+    "timeDays": "%1g önce"
+  }
+}
