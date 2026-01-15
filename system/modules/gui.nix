@@ -29,11 +29,82 @@ in
   
 
   config = lib.mkIf cfg.gui.enable {
-    nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
+    # nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
 
     programs.niri = {
       enable  = true;
-      package = pkgs.niri-unstable;    # Until 25.11 is in nixpkgs stable
+      # package = pkgs.niri-unstable;    # For niri unstable
+
+      # settings = {
+      #   # General stuff
+      #   # -------------
+      #   cursor = {
+      #     hide-after-inactive-ms = 3000;
+      #     hide-when-typing       = true;
+      #   };
+        
+      #   # Allows notification actions and window activation from Noctalia
+      #   debug.honor-xdg-activation-with-invalid-serial = true;
+        
+      #   environment.DISPLAY = ":0";
+
+      #   hotkey-overlay = {
+      #     hide-not-bound  = true;
+      #     skip-at-startup = true;
+      #   };
+
+      #   layer-rules = [
+      #     { # Block notifications from screencast
+      #       matches = [ { namespace = "^notification$"; } ];
+      #       block-out-from = "screencast";
+      #     }
+
+      #     { # Place Noctalia's wallpaper within the backdrop
+      #       matches = [ { namespace = "^noctalia-wallpaper*"; } ];
+      #       place-within-backdrop = true;
+      #     }
+      #   ];
+
+      #   layout = {
+      #     background-color      = "transparent";
+      #     center-focused-column = "never";
+      #     default-column-width.proportion = 0.5;
+      #     focus-ring = {
+      #       active.gradient = {
+      #         angle       = 210;
+      #         from        = "#80c8ff";
+      #         relative-to = "workspace-view";
+      #         to          = "#223366";
+      #       };
+      #       inactive.gradient = {
+      #         angle       = 45;
+      #         from        = "#505050";
+      #         relative-to = "workspace-view";
+      #         to          = "#808080";
+      #       };
+      #       width = 1;
+      #     };
+      #     gaps = 5;
+      #     preset-column-widths = [
+      #       { proportion = 0.5; }
+      #       { proportion = 0.66667; }
+      #     ];
+      #   };
+
+      #   outputs."eDP-1" = {
+      #     scale                 = 1.2;
+      #     variable-refresh-rate = "on-demand=true";
+      #   };
+
+      #   overview = {
+      #     workspace-shadow.enable = false;
+      #     zoom                    = 0.5;
+      #   };
+
+      #   prefer-no-csd = true;
+      #
+      #   spawn-at-startup = [ { argv = ["xwayland-satellite"]; } ];
+      # };
     };
 
     # Use Noctalia as a systemd service

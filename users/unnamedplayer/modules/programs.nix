@@ -72,6 +72,20 @@ in
         EDITOR  = "${helix}/bin/hx";
         VISUAL  = "${helix}/bin/hx";
       };
+
+
+      # Config files for all those wonderful apps
+      # -----------------------------------------
+      file = lib.listToAttrs ( map ( path: {
+        name = ".config/${path}";
+        value = { source = ../../../config/everywhere/${path}; };
+      } ) [
+        "bottom/bottom.toml"
+        "fastfetch/config.jsonc"
+        "helix/config.toml"
+        "yazi/theme.toml" # Do I keep this though?
+        "yazi/yazi.toml"
+      ] );
     };
 
     programs = {
@@ -87,6 +101,13 @@ in
           signByDefault = true;
         };
       };
+
+      # niri.settings = {
+      #   screenshot-path = "~/Data/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+      #   spawn-at-startup = [
+      #     { argv = ["ghostty"]; }
+      #   ];
+      # };
 
       zed-editor = {
         enable       = true;
@@ -126,5 +147,7 @@ in
       ghostty.enableZshIntegration  = true;
       yazi.enableZshIntegration     = true;
     };
+
+
   };
 }

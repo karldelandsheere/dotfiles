@@ -36,7 +36,16 @@ in
       sharedModules = [
         {
           programs.home-manager.enable = true;   # Enable home-manager
-          home.stateVersion = config.system.stateVersion;
+          home = {
+            stateVersion = config.system.stateVersion;
+
+            # Config files for the gui (Niri and Noctalia)
+            # @todo How could I move this in system/modules/gui.nix instead?
+            file = lib.mkIf cfg.gui.enable {
+              ".config/niri".source     = ../../config/everywhere/niri;
+              ".config/noctalia".source = ../../config/everywhere/noctalia;
+            };
+          };
           news.display = "show";                 # Display the news at rebuild
         }
 
