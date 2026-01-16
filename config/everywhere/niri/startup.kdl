@@ -1,7 +1,6 @@
 // -- startup.kdl
 // Startup sequence
 //
-spawn-at-startup "xwayland-satellite"
 spawn-at-startup "ghostty"
 
 // Work around for udiskie to start correctly

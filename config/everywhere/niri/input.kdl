@@ -6,19 +6,16 @@ input {
 
   // Keyboard settings
   // -----------------
-  keyboard {
-    xkb {
-      layout "be"
-    }
-  }
+  // keyboard {
+  //   xkb {
+  //     layout "be"
+  //   }
+  // }
 
   // Touchpad settings
   // -----------------
   touchpad {
-    tap
     dwt
-    drag-lock
-    natural-scroll
     accel-speed 0.2
     accel-profile "adaptive"
   }
