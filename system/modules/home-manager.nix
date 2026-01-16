@@ -50,6 +50,8 @@ in
         }
 
         inputs.agenix.homeManagerModules.default
+      ] ++ lib.lists.optionals ( cfg.gui.enable ) [
+        ./home-manager/niri.nix
       ];
     };
   };
