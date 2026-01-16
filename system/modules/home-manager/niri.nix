@@ -22,9 +22,11 @@ in
       };
 
       # Allows notification actions and window activation from Noctalia
-      debug.honor-xdg-activation-with-invalid-serial = true;
+      # debug.honor-xdg-activation-with-invalid-serial = true;
 
-      environment.DISPLAY = ":0"; # @todo Do we really need it in single screen setups?
+      environment = {
+        DISPLAY = ":0"; # @todo Do we really need it in single screen setups?
+      };
 
       gestures.hot-corners.enable = false;
 
@@ -71,7 +73,7 @@ in
 
       outputs."eDP-1" = {
         scale                 = 1.2;
-        variable-refresh-rate = "on-demand=true";
+        variable-refresh-rate = "on-demand";
       };
 
       overview = {
@@ -120,9 +122,9 @@ in
 
         # Screenshot utils
         # ----------------
-        "Print".action.spawn      = "screenshot";
-        "Alt+Print".action.spawn  = "screenshot-window";
-        "Ctrl+Print".action.spawn = "screenshot-screen";
+        "Print".action.screenshot             = { show-pointer = false; };
+        "Alt+Print".action.screenshot-window  = {};
+        "Ctrl+Print".action.screenshot-screen = { show-pointer = false; };
 
         # Launching different kinds of menus and panels
         # -----------------------------------------------
@@ -130,65 +132,65 @@ in
         "Mod+F11".action.spawn   = [ "noctalia-shell" "ipc" "call" "sessionMenu" "toggle" ];
         "Mod+F12".action.spawn   = [ "noctalia-shell" "ipc" "call" "controlCenter" "toggle" ];
         "Mod+Space".action.spawn = [ "noctalia-shell" "ipc" "call" "launcher" "toggle" ];
-        "Mod+Tab".action.spawn   = "toggle-overview";
+        "Mod+Tab".action.toggle-overview = {};
 
         # Change focus
         # ------------
-        "Mod+Down".action.spawn        = "focus-window-or-workspace-down";
-        "Mod+Left".action.spawn        = "focus-column-left";
-        "Mod+Right".action.spawn       = "focus-column-right";
-        "Mod+Up".action.spawn          = "focus-window-or-workspace-up";
-        "Mod+Home".action.spawn        = "focus-column-first";
-        "Mod+End".action.spawn         = "focus-column-last";
-        # "Mod+Shift+Down".action.spawn  = "focus-monitor-down";
-        # "Mod+Shift+Left".action.spawn  = "focus-monitor-left";
-        # "Mod+Shift+Right".action.spawn = "focus-monitor-right";
-        # "Mod+Shift+Up".action.spawn    = "focus-monitor-up";
+        "Mod+Down".action.focus-window-or-workspace-down = {};
+        "Mod+Left".action.focus-column-left              = {};
+        "Mod+Right".action.focus-column-right            = {};
+        "Mod+Up".action.focus-window-or-workspace-up     = {};
+        "Mod+Home".action.focus-column-first             = {};
+        "Mod+End".action.focus-column-last               = {};
+        # "Mod+Shift+Down".action.focus-monitor-down       = {};
+        # "Mod+Shift+Left".action.focus-monitor-left       = {};
+        # "Mod+Shift+Right".action.focus-monitor-right     = {};
+        # "Mod+Shift+Up".action.focus-monitor-up           = {};
 
         # Move focused column/window/workspace
         # ------------------------------------
-        "Mod+Ctrl+Down".action.spawn        = "move-window-down";
-        "Mod+Ctrl+Left".action.spawn        = "move-column-left";
-        "Mod+Ctrl+Right".action.spawn       = "move-column-right";
-        "Mod+Ctrl+Up".action.spawn          = "move-window-up";
-        "Mod+Ctrl+Home".action.spawn        = "move-column-to-first";
-        "Mod+Ctrl+End".action.spawn         = "move-column-to-last";
-        # "Mod+Shift+Ctrl+Down".action.spawn  = "move-window-to-monitor-down";
-        # "Mod+Shift+Ctrl+Left".action.spawn  = "move-window-to-monitor-left";
-        # "Mod+Shift+Ctrl+Right".action.spawn = "move-window-to-monitor-right";
-        # "Mod+Shift+Ctrl+Up".action.spawn    = "move-window-to-monitor-up";
-        "Mod+C".action.spawn                = "center-column";
-        "Mod+Shift+Comma".action.spawn      = "consume-window-into-column";
-        "Mod+Shift+Semicolon".action.spawn  = "expel-window-from-column";
+        "Mod+Ctrl+Down".action.move-window-down                    = {};
+        "Mod+Ctrl+Left".action.move-column-left                    = {};
+        "Mod+Ctrl+Right".action.move-column-right                  = {};
+        "Mod+Ctrl+Up".action.move-window-up                        = {};
+        "Mod+Ctrl+Home".action.move-column-to-first                = {};
+        "Mod+Ctrl+End".action.move-column-to-last                  = {};
+        # "Mod+Shift+Ctrl+Down".action.move-window-to-monitor-down   = {};
+        # "Mod+Shift+Ctrl+Left".action.move-window-to-monitor-left   = {};
+        # "Mod+Shift+Ctrl+Right".action.move-window-to-monitor-right = {};
+        # "Mod+Shift+Ctrl+Up".action.move-window-to-monitor-up       = {};
+        "Mod+C".action.center-column                               = {};
+        "Mod+Shift+Comma".action.consume-window-into-column        = {};
+        "Mod+Shift+Semicolon".action.expel-window-from-column      = {};
 
         # Toggle floating and move focus between floating and tiling
         # ----------------------------------------------------------
-        "Mod+V".action.spawn       = "toggle-window-floating";
-        "Mod+Shift+V".action.spawn = "switch-focus-between-floating-and-tiling";
+        "Mod+V".action.toggle-window-floating                         = {};
+        "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = {};
 
         # Control the width/height of the focused column/window
         # -----------------------------------------------------
-        "Mod+Equal".action.spawn       = [ "set-column-width" "+10%" ];
-        "Mod+F".action.spawn           = "maximize-column";
-        "Mod+Minus".action.spawn       = [ "set-column-width" "-10%" ];
-        "Mod+R".action.spawn           = "switch-preset-column-width";
-        "Mod+Shift+Equal".action.spawn = [ "set-window-height" "+10%" ];
-        "Mod+Shift+F".action.spawn     = "fullscreen-window";
-        "Mod+Shift+Minus".action.spawn = [ "set-window-height" "-10%" ];
+        "Mod+Equal".action.set-column-width        = "+10%";
+        "Mod+F".action.maximize-column             = {};
+        "Mod+Minus".action.set-column-width        = "-10%";
+        "Mod+R".action.switch-preset-column-width  = {};
+        "Mod+Shift+Equal".action.set-window-height = "+10%";
+        "Mod+Shift+F".action.fullscreen-window     = {};
+        "Mod+Shift+Minus".action.set-window-height = "-10%";
 
         # Toggle window opacity
         # ---------------------
-        "Mod+O".action.spawn = "toggle-window-rule-opacity";
+        "Mod+O".action.toggle-window-rule-opacity = {};
 
         # Toggle keyboard shortcuts inhibit (such as in remote-desktop and such)
         # ---------------------------------
         "Mod+Alt+Escape" = {
-          action.spawn     = "toggle-keyboard-shortcuts-inhibit";
-          allow-inhibiting = false; };
+          action.toggle-keyboard-shortcuts-inhibit = {};
+          allow-inhibiting                         = false; };
 
         # Close stuff
         # -----------
-        "Mod+Q".action.spawn = "close-window";
+        "Mod+Q".action.close-window = {};
       };
 
       # Inputs

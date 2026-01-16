@@ -111,6 +111,7 @@ in
         # Binds
         # -----
         binds = {
+          "Mod+Ctrl+T".action.spawn = "ghostty";
           "Ctrl+Alt+W".action.spawn = [ "sh" "-c" "loginctl terminate-user $USER" ];
         };
 
