@@ -26,6 +26,8 @@ in
 
       environment.DISPLAY = ":0"; # @todo Do we really need it in single screen setups?
 
+      gestures.hot-corners.enable = false;
+
       hotkey-overlay = {
         hide-not-bound  = true;
         skip-at-startup = true;
@@ -192,8 +194,6 @@ in
       # Inputs
       # ------
       input = {
-        gestures.hot-corners.enable = false;
-
         touchpad = {
           accel-profile = "adaptive";
           accel-speed   = 0.2;
