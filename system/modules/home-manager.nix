@@ -43,7 +43,7 @@ in
             # @todo How could I move this in system/modules/gui.nix instead?
             file = lib.mkIf cfg.gui.enable {
               # ".config/niri".source     = ../../config/everywhere/niri;
-              ".config/noctalia".source = ../../config/everywhere/noctalia;
+              # ".config/noctalia".source = ../../config/everywhere/noctalia;
             };
           };
           news.display = "show";                 # Display the news at rebuild
@@ -52,6 +52,7 @@ in
         inputs.agenix.homeManagerModules.default
       ] ++ lib.lists.optionals ( cfg.gui.enable ) [
         ./home-manager/niri.nix
+        ./home-manager/noctalia.nix
       ];
     };
   };

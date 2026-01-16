@@ -118,29 +118,29 @@ in
         # Workspaces and windows rules
         # ----------------------------
         workspaces = {
-          "01-daily"    = { name = "Daily"; };
-          "02-tty"      = { name = "TTY"; };
-          "03-web"      = { name = "Web"; };
-          "04-dev"      = { name = "Dev"; };
-          "05-3d"       = { name = "3D"; };
-          "06-graphics" = { name = "Graphics"; };
-          "07-stuff"    = { name = "Stuff"; };
+          "01-daily"    = { name = "daily"; };
+          "02-tty"      = { name = "tty"; };
+          "03-web"      = { name = "web"; };
+          "04-dev"      = { name = "dev"; };
+          "05-3d"       = { name = "3d"; };
+          "06-graphics" = { name = "graphics"; };
+          "07-stuff"    = { name = "stuff"; };
         };
 
         window-rules = [
           { # Messaging apps, planning, etc are daily apps
             matches           = [ { app-id = "signal"; } ];
-            open-on-workspace = "01-daily"; }
+            open-on-workspace = "daily"; }
 
           { # All tty apps run in Ghostty that are not assigned somewhere else
             matches           = [ { app-id = "com.mitchellh.ghostty"; } ];
             opacity           = 0.85;
-            open-on-workspace = "02-tty"; }
+            open-on-workspace = "tty"; }
 
           { # Internet browser, etc.
             matches           = [ { app-id = "vivaldi"; } ];
             open-maximized    = true;
-            open-on-workspace = "03-web"; }
+            open-on-workspace = "web"; }
 
           { # Code editor, SSH clients, etc.
             matches           = [
@@ -148,7 +148,7 @@ in
               { app-id = "Termius"; } ];
             opacity           = 0.85;
             open-maximized    = true;
-            open-on-workspace = "04-dev"; }
+            open-on-workspace = "dev"; }
 
           { # All apps regarding 3D modeling, printing, ...
             matches           = [
@@ -156,12 +156,12 @@ in
               { app-id = "org.openscad."; }
               { app-id = "PrusaSlicer"; } ];
             open-maximized    = true;
-            open-on-workspace = "05-3d"; }
+            open-on-workspace = "3d"; }
 
           { # Graphic design apps
             matches           = [ { app-id = "inkscape"; } ];
             open-maximized    = true;
-            open-on-workspace = "06-graphics"; }
+            open-on-workspace = "graphics"; }
 
           { # Stuff like journaling, documents, file explorer, etc.
             matches           = [
@@ -169,7 +169,7 @@ in
               { app-id = "nemo"; }
               { app-id = "obsidian"; } ];
             open-maximized    = true;
-            open-on-workspace = "07-stuff"; }
+            open-on-workspace = "stuff"; }
         ];
       };
 
