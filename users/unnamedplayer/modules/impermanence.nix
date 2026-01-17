@@ -7,10 +7,6 @@
         "Data"                           # Vaults, documents, etc
             
         ".local/share/prusa-slicer"
-        ".vscode-oss"
-        ".librewolf"
-
-        # ".cache/noctalia"
 
         # @todo Determinate what is really needed here
         # ".local/share/calcurse"
@@ -24,7 +20,7 @@
         "Signal"
         "Termius"
         "vivaldi"
-        "VSCodium"
+        "zed"
       ] (x: ".config/${x}");
 
 

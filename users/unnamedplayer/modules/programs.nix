@@ -3,6 +3,10 @@
 # All programs related stuff that is not mandatory on every host
 # plus the configs that are /home/username related.
 # Otherwise, it will probably be in system/modules/programs
+#
+# Next steps:
+# -----------
+# - @todo Find a way to display images in Gurk
 # 
 #############################################################################
   
@@ -33,9 +37,8 @@ in
         jellyfin-tui           # TUI client for Jellyfin Media Server
         mpv                    # Video player
         progress               # Follow the progression of any command
-        pure-prompt
+        pure-prompt            # Still on the fence with this one
         scooter                # Directory wide search & replace
-        # termusic               # @todo Test and config that
         tmux                   # Terminal multiplexer
         tree                   # Kinda ls but as a tree
         ueberzugpp             # Terminal image viewer (needed for yazi)
@@ -82,6 +85,7 @@ in
       } ) [
         "bottom/bottom.toml"
         "fastfetch/config.jsonc"
+        # "gurk/gurk.toml"
         "helix/config.toml"
         "yazi/theme.toml" # Do I keep this though?
         "yazi/yazi.toml"
@@ -89,17 +93,15 @@ in
     };
 
     programs = {
-      git = {                # Git ID's and signing options
+      git = {      # Git ID's and signing options
         enable = true;
         settings.user = {
           name  = "Karl";
-          email = "karl@delandsheere.be";
-        };
+          email = "karl@delandsheere.be"; };
 
         signing = {
           key           = "D4EFAA4CD5AE64F4";
-          signByDefault = true;
-        };
+          signByDefault = true; };
       };
 
       niri.settings = {

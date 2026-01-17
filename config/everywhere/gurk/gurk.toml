@@ -1,4 +1,4 @@
-signal_db_path = "/home/unnamedplayer/.local/share/gurk/signal-db"
+# signal_db_path = "/home/unnamedplayer/.local/share/gurk/signal-db"
 first_name_only = false
 show_receipts = true
 notifications = true
@@ -11,7 +11,7 @@ name = "Karl"
 phone_number = "+32498139866"
 
 [sqlite]
-url = "sqlite:///home/unnamedplayer/.local/share/gurk/gurk.sqlite"
-_preserve_unencryped = false
+# url = "sqlite:///home/unnamedplayer/.local/share/gurk/gurk.sqlite"
+# _preserve_unencryped = false
 
 [keybindings]
