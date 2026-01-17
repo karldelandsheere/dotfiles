@@ -10,13 +10,13 @@
   cfg = osConfig.nouveauxParadigmes;
 in
 {
-  # imports = [ inputs.noctalia.homeModules.default ];
+  imports = [ inputs.noctalia.homeModules.default ];
 
   config = {
     programs.noctalia-shell = {
-      # systemd.enable = true;
-      
-      settings = {
+      enable         = true;
+      systemd.enable = true;
+      settings       = {
         settingsVersion = 1; # @todo What is this?
 
         appLauncher = {
@@ -66,7 +66,7 @@ in
           widgets = {
             center = [];
             left   = [
-              { id                         = "Workspace";
+              { id = "Workspace";
 
                 characterCount             = 10;
                 colorizeIcons              = false;
@@ -99,7 +99,8 @@ in
 
                 defaultSettings = {
                   hideInactive  = true;
-                  removeMargins = true;
+                  iconSpacing   = 4;
+                  removeMargins = false;
                 }; }
 
               { id = "SystemMonitor";
@@ -140,7 +141,7 @@ in
                   showCompleted  = true;
                 }; }
 
-              { id = "plugin:simple-notes"; }
+              # { id = "plugin:simple-notes"; }
 
               { id = "Clock";
 
@@ -439,7 +440,34 @@ in
         };
 
         templates = {
-          activeTemplates     = [ "cava" "ghostty" "gtk" "kcolorscheme" "niri" "qt" "yazi" "zed" ];
+          activeTemplates     = [
+            { id      = "cava";
+              enabled = true; }
+
+            { id      = "ghostty";
+              enabled = true; }
+
+            { id      = "gtk";
+              enabled = true; }
+
+            { id      = "helix";
+              enabled = true; }
+
+            { id      = "kcolorscheme";
+              enabled = true; }
+
+            { id      = "niri";
+              enabled = true; }
+
+            { id      = "qt";
+              enabled = true; }
+
+            { id      = "yazi";
+              enabled = true; }
+
+            { id      = "zed";
+              enabled = true; }
+          ];
           enableUserTemplates = false;
         };
 

@@ -13,8 +13,8 @@
 in
 {
   imports = [
-    inputs.niri.nixosModules.niri          # Scrollable tiling compositor
-    inputs.noctalia.nixosModules.default   # Quickshell integration
+    # inputs.niri.nixosModules.niri          # Scrollable tiling compositor
+    # inputs.noctalia.nixosModules.default   # Quickshell integration
   ];
 
 
@@ -31,13 +31,13 @@ in
   config = lib.mkIf cfg.gui.enable {
     # nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
 
-    programs.niri = {
-      enable  = true;
+    # programs.niri = {
+      # enable  = true;
       # package = pkgs.niri-unstable;    # For niri unstable
-    };
+    # };
 
     # Use Noctalia as a systemd service
-    services.noctalia-shell.enable = true;
+    # services.noctalia-shell.enable = true;
 
 
     # Utils for the gui

@@ -107,6 +107,8 @@ in
               ".mullvad"                       # VPN
               ".ssh"                           # Obvious, innit?
               # "Data"                           # Vaults, documents, etc
+            ] ++ lib.lists.optionals ( cfg.gui.enable ) [
+              ".config/noctalia"
             ];
 
             files = [

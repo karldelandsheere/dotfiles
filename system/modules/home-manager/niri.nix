@@ -15,11 +15,11 @@
   cfg = osConfig.nouveauxParadigmes;
 in
 {
-  # imports = [ inputs.niri.homeModules.niri ];
+  imports = [ inputs.niri.homeModules.niri ];
 
   config = {
     programs.niri = {
-      # enable   = true;
+      enable   = true;
       settings = {
         # General stuff
         # -------------
