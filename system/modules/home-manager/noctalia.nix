@@ -182,9 +182,9 @@ in
               { id = "Clock";
 
                 customFont       = "";
-                formatHorizontal = "yyyy-MM-dd";
-                formatVertical   = "dd MM";
-                tooltipFormat    = "HH:mm:ss yyyy-MM-dd (ddd)";
+                formatHorizontal = "HH:mm:ss";
+                formatVertical   = "HH mm";
+                tooltipFormat    = "dddd yyyy-MM-dd HH:mm:ss";
                 useCustomFont    = false;
                 usePrimaryColor  = false; }
             ];

@@ -8,7 +8,6 @@
 # Next steps:
 # -----------
 #   - @todo Adapt the shell scripts under system/scripts to reflect the mods
-#   - @todo Make Affinity Designer work
 #   - @todo Implement a local binary cache to speed up rebuild a bit
 #   - @todo Move what is related to my user away from the system's config
 #   - @todo Actually use this setup for something else than ricing...
@@ -45,7 +44,7 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs"; };
 
-    # GUI/WM
+    # GUI
     niri.url         = "github:sodiboo/niri-flake";
     noctalia         = {
       url = "github:noctalia-dev/noctalia-shell";

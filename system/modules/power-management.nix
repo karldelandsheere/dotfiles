@@ -1,14 +1,15 @@
 ###############################################################################
 # 
 # Power management and hibernation
-# https://nixos.wiki/wiki/Laptop
-# https://nixos.wiki/wiki/Hibernation
+#
+# Resources:
+# - https://nixos.wiki/wiki/Laptop
+# - https://nixos.wiki/wiki/Hibernation
 #
 # Next steps:
 # -----------
-#   - @todo Implement https://wiki.archlinux.org/title/Laptop#Hibernate_on_low_battery_level
-#   - @todo Find out why I have this error when resuming from hibernation
-#       "BTRFS error: failed to open device for path /dev/mapper/cryptroot with flags 0x3: -16"
+# - @todo Find out why I have this error when resuming from hibernation
+#   "BTRFS error: failed to open device for path /dev/mapper/cryptroot with flags 0x3: -16"
 # 
 ###############################################################################
 
@@ -81,8 +82,16 @@
         settings.dynamic_tuning = true;
       };
 
-      
-      upower.enable = true;
+
+      # https://wiki.archlinux.org/title/Laptop#UPower
+      upower = {
+        enable                 = true;
+        criticalPowerAction    = "Hibernate";
+        percentageAction       = 5;
+        percentageLow          = 15;
+        percentageCritical     = 10;
+        usePercentageForPolicy = true;
+      };
     
 
       # Lid and powerKey events

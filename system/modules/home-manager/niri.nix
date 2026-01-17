@@ -31,11 +31,8 @@ in
           hide-when-typing       = true;
         };
 
-        # Allows notification actions and window activation from Noctalia
-        # debug.honor-xdg-activation-with-invalid-serial = true;
-
         environment = {
-          DISPLAY             = ":0"; # @todo Do we really need it in single screen setups?
+          DISPLAY             = ":0";
           XDG_CURRENT_DESKTOP = "niri";
           XDG_SESSION_DESKTOP = "niri";
         };
