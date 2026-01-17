@@ -32,6 +32,13 @@ in
       default     = "/etc/nixos";
       description = "Path to NixOS dotfiles. Defaults to /etc/nixos";
     };
+
+    # GUI or not
+    gui.enable = lib.mkOption {
+      type        = lib.types.bool;
+      default     = true;
+      description = "Enable GUI? Defaults to true.";
+    };
   };
 
 

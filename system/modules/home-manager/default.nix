@@ -23,7 +23,6 @@ in
     };
   };
 
-
   config = lib.mkIf cfg.homeManager.enable {
     home-manager = {
       useUserPackages     = true;
@@ -39,8 +38,21 @@ in
 
         inputs.agenix.homeManagerModules.default
       ] ++ lib.lists.optionals ( cfg.gui.enable ) [
-        ./home-manager/niri.nix
-        ./home-manager/noctalia.nix
+        {
+          home.sessionVariables = {
+            # GDK_BACKEND                         = "wayland,x11";
+            # GTK_USE_PORTAL                      = "1";
+            NIXOS_OZONE_WL                      = "1"; # Use Ozone Wayland for Electron apps
+            QT_QPA_PLATFORM                     = "wayland";
+            # QT_QPA_PLATFORMTHEME                = "qt6ct";
+            # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+            # SDL_VIDEO_DRIVER                    = "wayland,x11";
+            # WLR_NO_HARDWARE_CURSORS             = "1"; # Reactivate this only if cursor glitches occur
+          };
+        }
+        
+        ./niri.nix      # Compositor
+        ./noctalia.nix  # Quickshell integration
       ];
     };
   };

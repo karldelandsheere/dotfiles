@@ -12,14 +12,14 @@ in
     ./boot.nix               # Boot options and GRUB styling
     ./encryption.nix         # Root encryption with LUKS
     ./filesystem.nix         # Volumes, swap, impermanence, and hibernation
-    ./gui.nix                # GUI and XDG (desktop environment)
     ./hardware.nix           # All hardware, bluetooth, graphics, sound, ...
-    ./home-manager.nix       # Home-manager (setup, not users config)
+    ./home-manager           # Home-manager (setup, not users config)
     ./impermanence.nix       # Stateless system that cleans itself at reboot
     ./networking.nix         # Networking, SSH, VPN, Tailscale, ...
     ./power-management.nix   # Power, hibernation, ...
     ./programs.nix           # Programs that should be by default on all hosts
     ./security.nix
+    ./xdg.nix                # XDG (desktop environment)
   ];
 
 

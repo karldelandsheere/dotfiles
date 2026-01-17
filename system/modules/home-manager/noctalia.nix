@@ -3,11 +3,15 @@
 # Global config for Noctalia, a quickshell integration to pair with niri.
 #
 # User related preferences are in their config under /users/...
+#
+# Resources:
+# - https://docs.noctalia.dev/getting-started/nixos/
 # 
 ###############################################################################
 
 { config, osConfig, lib, inputs, ... }: let
   cfg = osConfig.nouveauxParadigmes;
+  officialNoctaliaPlugins = "https://github.com/noctalia-dev/noctalia-plugins";
 in
 {
   imports = [ inputs.noctalia.homeModules.default ];
@@ -16,6 +20,33 @@ in
     programs.noctalia-shell = {
       enable         = true;
       systemd.enable = true;
+
+      plugins = {
+        sources = [
+          { enabled = true;
+            name    = "Official Noctalia Plugins";
+            url     = officialNoctaliaPlugins; }
+        ];
+        
+        states = lib.listToAttrs ( map ( plugin: {
+          name  = plugin;
+          value = {
+            enabled   = true;
+            sourceUrl = officialNoctaliaPlugins;
+          };
+        } ) [ "privacy-indicator" "screen-recorder" "simple-notes" "todo" ] );
+        
+        version = 1;
+      };
+
+      # pluginSettings = {
+      #   catwalk = {
+      #     minimumThreshold = 25;
+      #     hideBackground = true;
+      #   };
+      #   # this may also be a string or a path to a JSON file.
+      # };
+      
       settings       = {
         settingsVersion = 1; # @todo What is this?
 
@@ -141,7 +172,12 @@ in
                   showCompleted  = true;
                 }; }
 
-              # { id = "plugin:simple-notes"; }
+              { id = "plugin:simple-notes";
+
+                defaultSettings = {
+                  notes          = [];
+                  showCountInBar = true;
+                }; }
 
               { id = "Clock";
 
@@ -220,30 +256,45 @@ in
               { id = "Notifications"; }
               { id = "NightLight"; }
               { id = "WallpaperSelector"; }
-              { id = "ScreenRecorder"; }
+              { id = "plugin:screen-recorder";
+
+                defaultSettings = {
+                  audioCodec      = "opus";
+                  audioSource     = "default_output";
+                  colorRange      = "limited";
+                  copyToClipboard = false;
+                  directory       = "~/Data/Screenshots"; # @todo Find how to write it for all users at once here
+                  filenamePattern = "yyyyMMdd_HHmmss-screen_recording";
+                  frameRate       = 60;
+                  quality         = "very_high";
+                  resolution      = "original";
+                  showCursor      = true;
+                  videoCodec      = "h264";
+                  videoSource     = "portal";
+                }; }
             ];
           };
         };
 
         desktopWidgets = {
-          enabled        = true;
+          enabled        = false; # true;
           gridSnap       = true;
           monitorWidgets = [
             {
               name    = "eDP-1";
               widgets = [
-                { id = "Clock";
+                # { id = "Clock";
 
-                  clockStyle      = "binary";
-                  customFont      = "";
-                  format          = "HH:mm";
-                  roundedCorners  = false;
-                  scale           = 7;
-                  showBackground  = false;
-                  useCustomFont   = false;
-                  usePrimaryColor = false;
-                  x               = 1600;
-                  y               = 750; }
+                #   clockStyle      = "binary";
+                #   customFont      = "";
+                #   format          = "HH:mm";
+                #   roundedCorners  = false;
+                #   scale           = 7;
+                #   showBackground  = false;
+                #   useCustomFont   = false;
+                #   usePrimaryColor = false;
+                #   x               = 1600;
+                #   y               = 750; }
               ];
             }
           ];
@@ -270,7 +321,7 @@ in
           allowPanelsOnScreenWithoutBar  = true;
           animationDisabled              = false;
           animationSpeed                 = 1;
-          avatarImage                    = "/home/unnamedplayer/.face"; # @todo move this in user's config
+          avatarImage                    = "~/.face"; # @todo Find how to write it so I don't have to set it for every user
           boxRadiusRatio                 = 1;
           compactLockScreen              = false;
           dimmerOpacity                  = 0.3;
@@ -370,19 +421,6 @@ in
           location          = "top_right";
           monitors          = [];
           overlayLayer      = true;
-        };
-
-        screenRecorder = {
-          audioCodec      = "opus";
-          audioSource     = "default_output";
-          colorRange      = "limited";
-          copyToClipboard = false;
-          directory       = "/home/unnamedplayer/Data/Videos"; # @todo Move this to user's config
-          frameRate       = 60;
-          quality         = "very_high";
-          showCursor      = true;
-          videoCodec      = "h264";
-          videoSource     = "portal";
         };
 
         sessionMenu = {
@@ -488,7 +526,7 @@ in
         };
 
         wallpaper = {
-          directory                     = "/home/unnamedplayer/Pictures/Wallpapers"; # @todo Move this to user's config
+          directory                     = "~/Pictures/Wallpapers"; # @todo Find how to make it work so I don't have to write it for every user
           enableMultiMonitorDirectories = false;
           enabled                       = true;
           fillColor                     = "#000000";

@@ -77,7 +77,7 @@ in
       # Config files for all those wonderful apps
       # -----------------------------------------
       file = lib.listToAttrs ( map ( path: {
-        name = ".config/${path}";
+        name  = ".config/${path}";
         value = { source = ../../../config/everywhere/${path}; };
       } ) [
         "bottom/bottom.toml"
@@ -172,6 +172,11 @@ in
             open-on-workspace = "stuff"; }
         ];
       };
+
+      # noctalia-shell.settings = {
+      #   general.avatarImage      = "/home/unnamedplayer/.face";
+      #   # wallpaper.directory      = "/home/unnamedplayer/Pictures/Wallpapers";
+      # };
 
       zed-editor = {
         enable       = true;

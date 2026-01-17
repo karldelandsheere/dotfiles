@@ -5,7 +5,7 @@
 # User related preferences, like special binds or workspaces
 #   are in their config under /users/...
 #
-# Ressources:
+# Resources:
 # - https://github.com/YaLTeR/niri/wiki/Configuration
 # - https://github.com/sodiboo/niri-flake/blob/main/docs.md
 # 
@@ -18,8 +18,11 @@ in
   imports = [ inputs.niri.homeModules.niri ];
 
   config = {
+    # nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
+
     programs.niri = {
       enable   = true;
+      # package  = pkgs.niri-unstable; # For niri unstable
       settings = {
         # General stuff
         # -------------
