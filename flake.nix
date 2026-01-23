@@ -5,10 +5,13 @@
 #
 # Tips and feedback welcome!
 # 
-# Next steps:
-# -----------
+# Current steps:
+# --------------
 #   - @todo Migrate to flake-parts: https://flake.parts
 #   - @todo Learn Dendritic
+#
+# Next steps:
+# -----------
 #   - @todo Explore wrappers: https://github.com/Lassulus/wrappers
 #   - @todo Try out nix-init: https://www.youtube.com/shorts/RUszKmnq9y4
 #   - @todo Try out specialisation: https://www.youtube.com/shorts/cyX8Imfb0Mg
@@ -21,7 +24,6 @@
 #############################################################################
 
 {
-  # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
@@ -59,67 +61,5 @@
   };
 
 
-  # When the move to flake-parts will be done, use this one instead:
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ( inputs.import-tree ./modules );
-
-  # outputs = inputs @ { self, ... }:
-  #   inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-  #     systems = [ "x86_64-linux" "i686-linux" "aarch64-darwin" ];
-  #     # imports = [ (inputs.import-tree ./modules) ];
-
-  #     flake =
-  #       let
-  #         inherit (inputs.nixpkgs.lib) nixosSystem mapAttrs;
-
-  #         mkSystemConfig = { hostname, system,
-  #                      modules ? [], users ? [], ... }: nixosSystem
-  #         { 
-  #           inherit system;
-  #           modules = [ ./hosts/${hostname} ] ++ modules;
-
-  #           specialArgs = {
-  #             inherit inputs;
-  #             users = [ "unnamedplayer" ] ++ users;
-  #           };
-  #         };
-  #       in
-  #       {
-  #         # Declare the different hosts configs
-  #         nixosConfigurations = mapAttrs (hostname: config:
-  #           mkSystemConfig ( { inherit hostname; } // config ) )
-  #           {
-  #             "q3dm10" = { system = "x86_64-linux"; };
-  #             "q3dm11" = { system = "i686-linux"; };
-  #             "utm"    = { };
-  #           };
-  #       };
-  #   };
-
-
-
-  # outputs = inputs@{ self, nixpkgs, ... }: let
-  #   inherit (nixpkgs.lib) nixosSystem mapAttrs;
-
-  #   mkSystemConfig = { hostname, system,
-  #                      modules ? [], users ? [], ... }: nixosSystem
-  #   { 
-  #     inherit system;
-  #     modules = [ ./hosts/${hostname} ] ++ modules;
-
-  #     specialArgs = {
-  #       inherit inputs;
-  #       users = [ "unnamedplayer" ] ++ users;
-  #     };
-  #   };
-  # in
-  # {
-  #   # Declare the different hosts configs
-  #   nixosConfigurations = mapAttrs (hostname: config:
-  #     mkSystemConfig ( { inherit hostname; } // config ) )
-  #     {
-  #       "q3dm10" = { system = "x86_64-linux"; };
-  #       "q3dm11" = { system = "i686-linux"; };
-  #       "utm"    = { };
-  #     };
-  # };
 }
