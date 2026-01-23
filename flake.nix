@@ -43,15 +43,11 @@
     # Core parts of my systems
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    
     impermanence.url = "github:nix-community/impermanence";
-
     agenix = { url = "github:ryantm/agenix";
                inputs.nixpkgs.follows = "nixpkgs"; };
-
     # wrappers.url = "github:Lassulus/wrappers";
     home-manager = { url = "github:nix-community/home-manager/release-25.11";
                      inputs.nixpkgs.follows = "nixpkgs"; };
@@ -64,40 +60,40 @@
 
 
   # When the move to flake-parts will be done, use this one instead:
-  # outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ( inputs.import-tree ./modules );
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ( inputs.import-tree ./modules );
 
-  outputs = inputs @ { self, ... }:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "i686-linux" "aarch64-darwin" ];
-      imports = [ (inputs.import-tree ./modules) ];
+  # outputs = inputs @ { self, ... }:
+  #   inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+  #     systems = [ "x86_64-linux" "i686-linux" "aarch64-darwin" ];
+  #     # imports = [ (inputs.import-tree ./modules) ];
 
-      flake =
-        let
-          inherit (inputs.nixpkgs.lib) nixosSystem mapAttrs;
+  #     flake =
+  #       let
+  #         inherit (inputs.nixpkgs.lib) nixosSystem mapAttrs;
 
-          mkSystemConfig = { hostname, system,
-                       modules ? [], users ? [], ... }: nixosSystem
-          { 
-            inherit system;
-            modules = [ ./hosts/${hostname} ] ++ modules;
+  #         mkSystemConfig = { hostname, system,
+  #                      modules ? [], users ? [], ... }: nixosSystem
+  #         { 
+  #           inherit system;
+  #           modules = [ ./hosts/${hostname} ] ++ modules;
 
-            specialArgs = {
-              inherit inputs;
-              users = [ "unnamedplayer" ] ++ users;
-            };
-          };
-        in
-        {
-          # Declare the different hosts configs
-          nixosConfigurations = mapAttrs (hostname: config:
-            mkSystemConfig ( { inherit hostname; } // config ) )
-            {
-              "q3dm10" = { system = "x86_64-linux"; };
-              "q3dm11" = { system = "i686-linux"; };
-              "utm"    = { };
-            };
-        };
-    };
+  #           specialArgs = {
+  #             inherit inputs;
+  #             users = [ "unnamedplayer" ] ++ users;
+  #           };
+  #         };
+  #       in
+  #       {
+  #         # Declare the different hosts configs
+  #         nixosConfigurations = mapAttrs (hostname: config:
+  #           mkSystemConfig ( { inherit hostname; } // config ) )
+  #           {
+  #             "q3dm10" = { system = "x86_64-linux"; };
+  #             "q3dm11" = { system = "i686-linux"; };
+  #             "utm"    = { };
+  #           };
+  #       };
+  #   };
 
 
 
