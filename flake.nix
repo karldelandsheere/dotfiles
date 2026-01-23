@@ -41,65 +41,89 @@
   # ---------------------------------------
   inputs = {
     # Core parts of my systems
-    nixpkgs.url      = "github:nixos/nixpkgs/nixos-25.11";
-    unstable.url     = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # flake-parts.url  = "github:hercules-ci/flake-parts";
-    # import-tree.url  = "github:vic/import-tree";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     
     impermanence.url = "github:nix-community/impermanence";
 
-    agenix           = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs"; };
+    agenix = { url = "github:ryantm/agenix";
+               inputs.nixpkgs.follows = "nixpkgs"; };
 
-    # wrappers.url     = "github:Lassulus/wrappers";
-    home-manager     = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs"; };
+    # wrappers.url = "github:Lassulus/wrappers";
+    home-manager = { url = "github:nix-community/home-manager/release-25.11";
+                     inputs.nixpkgs.follows = "nixpkgs"; };
 
     # GUI
-    niri.url         = "github:sodiboo/niri-flake";
-    noctalia         = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs"; };
+    niri.url = "github:sodiboo/niri-flake";
+    noctalia = { url = "github:noctalia-dev/noctalia-shell";
+                 inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
 
-  # @todo OK, so why don't I separate nixos and home-manager so
-  # I could just rebuild hm without the whole setup?
-  # Also, wouldn't it be more versatile?
-  # And couldn't I read the hosts dir and load the configurations dynamically?
-
-
-  # Definition of the system (outputs)
-
-  # For the next iteration, introducing flake-parts
+  # When the move to flake-parts will be done, use this one instead:
   # outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ( inputs.import-tree ./modules );
 
-  outputs = inputs@{ self, nixpkgs, ... }: let
-    inherit (nixpkgs.lib) nixosSystem mapAttrs;
+  outputs = inputs @ { self, ... }:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" "i686-linux" "aarch64-darwin" ];
+      imports = [ (inputs.import-tree ./modules) ];
 
-    mkSystemConfig = { hostname, system,
+      flake =
+        let
+          inherit (inputs.nixpkgs.lib) nixosSystem mapAttrs;
+
+          mkSystemConfig = { hostname, system,
                        modules ? [], users ? [], ... }: nixosSystem
-    { 
-      inherit system;
-      modules = [ ./hosts/${hostname} ] ++ modules;
+          { 
+            inherit system;
+            modules = [ ./hosts/${hostname} ] ++ modules;
 
-      specialArgs = {
-        inherit inputs;
-        users = [ "unnamedplayer" ] ++ users;
-      };
+            specialArgs = {
+              inherit inputs;
+              users = [ "unnamedplayer" ] ++ users;
+            };
+          };
+        in
+        {
+          # Declare the different hosts configs
+          nixosConfigurations = mapAttrs (hostname: config:
+            mkSystemConfig ( { inherit hostname; } // config ) )
+            {
+              "q3dm10" = { system = "x86_64-linux"; };
+              "q3dm11" = { system = "i686-linux"; };
+              "utm"    = { };
+            };
+        };
     };
-  in
-  {
-    # Declare the different hosts configs
-    nixosConfigurations = mapAttrs (hostname: config:
-      mkSystemConfig ( { inherit hostname; } // config ) )
-      {
-        "q3dm10" = { system = "x86_64-linux"; };
-        "q3dm11" = { system = "i686-linux"; };
-        "utm"    = { };
-      };
-  };
+
+
+
+  # outputs = inputs@{ self, nixpkgs, ... }: let
+  #   inherit (nixpkgs.lib) nixosSystem mapAttrs;
+
+  #   mkSystemConfig = { hostname, system,
+  #                      modules ? [], users ? [], ... }: nixosSystem
+  #   { 
+  #     inherit system;
+  #     modules = [ ./hosts/${hostname} ] ++ modules;
+
+  #     specialArgs = {
+  #       inherit inputs;
+  #       users = [ "unnamedplayer" ] ++ users;
+  #     };
+  #   };
+  # in
+  # {
+  #   # Declare the different hosts configs
+  #   nixosConfigurations = mapAttrs (hostname: config:
+  #     mkSystemConfig ( { inherit hostname; } // config ) )
+  #     {
+  #       "q3dm10" = { system = "x86_64-linux"; };
+  #       "q3dm11" = { system = "i686-linux"; };
+  #       "utm"    = { };
+  #     };
+  # };
 }
