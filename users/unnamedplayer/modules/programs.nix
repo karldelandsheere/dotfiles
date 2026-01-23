@@ -15,10 +15,25 @@
 in
 {
   config = {
+    # # this allows you to access `unstable` anywhere in your config
+    # # https://discourse.nixos.org/t/mixing-stable-and-unstable-packages-on-flake-based-nixos-system/50351/4
+    # #
+    # _module.args.pkgsUnstable = import inputs.unstable {
+    #   inherit (pkgs.stdenv.hostPlatform) system;
+    #   inherit (config.nixpkgs) config;
+    # };
+    nixpkgs.overlays = [ (final: _: {
+      # this allows you to access `pkgs.unstable` anywhere in your config
+      unstable = import inputs.unstable {
+        inherit (final.stdenv.hostPlatform) system;
+        inherit (final) config;
+      };
+    } ) ];
+    
     home = {
       # Programs that don't need a lot of config
       # ----------------------------------------
-      packages = with pkgs; [
+      packages = ( with pkgs; [
         # TUI/CLI programs
         # ----------------
         # aerc                   # Email client
@@ -46,8 +61,8 @@ in
         yt-dlp                 # Youtube downloader
       ]
 
-       # GUI programs
-       ++ lib.lists.optionals ( cfg.gui.enable ) [
+      # GUI programs
+      ++ lib.lists.optionals ( cfg.gui.enable ) [
         bambu-studio           # Slicer for my Bambu printers
         bitwarden-desktop      # Passwords & stuff
         # blender
@@ -68,7 +83,9 @@ in
        ++ lib.lists.optionals ( cfg.gui.enable && osConfig.nixpkgs.config.allowUnfree ) [
         obsidian               # Markdown note taking app
         termius                # Cross-platform SSH client
-      ];
+      ] )
+
+      ++ [ pkgs.unstable.gurk-rs ];
 
       sessionVariables = with pkgs; {
         BROWSER = "${vivaldi}/bin/vivaldi";
@@ -104,6 +121,7 @@ in
           signByDefault = true; };
       };
 
+
       niri.settings = {
         screenshot-path = "~/Data/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
         spawn-at-startup = [
@@ -131,7 +149,10 @@ in
 
         window-rules = [
           { # Messaging apps, planning, etc are daily apps
-            matches           = [ { app-id = "signal"; } ];
+            matches           = [
+              { app-id = "signal"; }
+              { title  = "gurk"; }
+            ];
             open-on-workspace = "daily"; }
 
           { # All tty apps run in Ghostty that are not assigned somewhere else

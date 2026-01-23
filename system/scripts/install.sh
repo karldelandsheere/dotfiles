@@ -24,6 +24,7 @@ PASSWORD=temp0123
 
 HOST=q3dm10
 USER=unnamedplayer
+DOTFILES=/home/"$USER"/dotfiles
 
 
 # Unmount everything before starting
@@ -137,13 +138,14 @@ mount -t vfat \
 # Generate hardware-configuration.nix
 # -----------------------------------
 nixos-generate-config --root /mnt
-mv /mnt/etc/nixos /mnt/etc/nixos-generated
-
+mv /mnt/etc/nixos /mnt/etc/nixos-generated # rename to avoid any future confusion
 
 # Import our dotfiles and customize them
 # ----------------------------------------
-git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
-cp /mnt/etc/nixos{-generated,/hosts/"$HOST"}/hardware-configuration.nix
+# git clone https://github.com/karldelandsheere/dotfiles.git /mnt/etc/nixos
+# cp /mnt/etc/nixos{-generated,/hosts/"$HOST"}/hardware-configuration.nix
+git clone https://github.com/karldelandsheere/dotfiles.git /mnt/"$DOTFILES"
+cp /mnt{/etc/nixos-generated,"$DOTFILES"/hosts/"$HOST"}/hardware-configuration.nix
 
 # sed -i "s|__BOOT_UUID__|$BOOT_UUID|g" /mnt/etc/nixos/system/modules/boot.nix
 # sed -i "s|__PRIMARY_PART__|$PRIMARY_PART|g" /mnt/etc/nixos/system/modules/impermanence.nix
@@ -153,13 +155,15 @@ cp /mnt/etc/nixos{-generated,/hosts/"$HOST"}/hardware-configuration.nix
 # @todo Change the if to reflect use the options
 # ---------------------------------------
 if [[ "$WITH_LUKS" -eq 1 ]]; then
-  sed -i 's/# .\/luks.nix/.\/luks.nix/g' /mnt/etc/nixos/system/modules/default.nix
+  # sed -i 's/# .\/luks.nix/.\/luks.nix/g' /mnt/etc/nixos/system/modules/default.nix
+  sed -i 's/# .\/luks.nix/.\/luks.nix/g' /mnt/"$DOTFILES"/system/modules/default.nix
 fi
 
 
 # Let's go
 # --------
-nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"
+# nixos-install --root /mnt --flake /mnt/etc/nixos#"$HOST"
+nixos-install --root /mnt --flake /mnt/"$DOTFILES"#"$HOST"
 
 
 # nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $SCRIPT_DIR#user;

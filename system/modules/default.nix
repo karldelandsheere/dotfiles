@@ -4,7 +4,7 @@
 # 
 ###############################################################################
 
-{ config, lib, ... }: let
+{ config, inputs, pkgs, lib, ... }: let
   cfg = config.nouveauxParadigmes;
 in
 {

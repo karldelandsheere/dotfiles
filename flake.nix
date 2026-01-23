@@ -7,6 +7,12 @@
 # 
 # Next steps:
 # -----------
+#   - @todo Migrate to flake-parts: https://flake.parts
+#   - @todo Learn Dendritic
+#   - @todo Explore wrappers: https://github.com/Lassulus/wrappers
+#   - @todo Try out nix-init: https://www.youtube.com/shorts/RUszKmnq9y4
+#   - @todo Try out specialisation: https://www.youtube.com/shorts/cyX8Imfb0Mg
+#   - @todo Figure out Devenv in Nix
 #   - @todo Adapt the shell scripts under system/scripts to reflect the mods
 #   - @todo Implement a local binary cache to speed up rebuild a bit
 #   - @todo Move what is related to my user away from the system's config
@@ -36,10 +42,18 @@
   inputs = {
     # Core parts of my systems
     nixpkgs.url      = "github:nixos/nixpkgs/nixos-25.11";
+    unstable.url     = "github:nixos/nixpkgs/nixos-unstable";
+
+    # flake-parts.url  = "github:hercules-ci/flake-parts";
+    # import-tree.url  = "github:vic/import-tree";
+    
     impermanence.url = "github:nix-community/impermanence";
+
     agenix           = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs"; };
+
+    # wrappers.url     = "github:Lassulus/wrappers";
     home-manager     = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs"; };
@@ -59,6 +73,10 @@
 
 
   # Definition of the system (outputs)
+
+  # For the next iteration, introducing flake-parts
+  # outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ( inputs.import-tree ./modules );
+
   outputs = inputs@{ self, nixpkgs, ... }: let
     inherit (nixpkgs.lib) nixosSystem mapAttrs;
 
