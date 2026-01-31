@@ -43,13 +43,16 @@ in
         config = {
           common = {
             default = ["gnome"];
-            "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+            # "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+            "org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
             "org.freedesktop.impl.portal.OpenURI"     = ["gtk"];
+
           };
 
           niri = {
             default = ["gnome"];
-            "org.freedesktop.impl.portal.FileChooser"   = ["gtk"];
+            # "org.freedesktop.impl.portal.FileChooser"   = ["gtk"];
+            # "org.freedesktop.impl.portal.FileChooser"   = ["termfilechooser"];
             "org.freedesktop.impl.portal.OpenURI"       = ["gtk"];
             "org.freedesktop.impl.portal.RemoteDesktop" = ["gnome"];
             "org.freedesktop.impl.portal.ScreenCast"    = ["gnome"];
@@ -61,8 +64,22 @@ in
         extraPortals = with pkgs; [
           xdg-desktop-portal-gnome
           xdg-desktop-portal-gtk
+          xdg-desktop-portal-termfilechooser
         ];
       };
+
+      # configFile."xdg-desktop-portal-termfilechooser/config" = {
+      #   # enable = false;
+      #   text = ''
+      #     [filechooser]
+      #     cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+      #     default_dir=$HOME
+      #     env=TERMCMD='ghostty --title="terminal-filechooser" -e'
+      #     open_mode=suggested
+      #     save_mode=last
+      #   '';
+      # };
+
 
       # @todo What was this about again?
       # mimeApps.defaultApplications = {

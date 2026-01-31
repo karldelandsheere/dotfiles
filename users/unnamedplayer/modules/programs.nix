@@ -189,7 +189,6 @@ in
           { # Stuff like journaling, documents, file explorer, etc.
             matches           = [
               { app-id = "desktop.opencloud.eu."; }
-              { app-id = "nemo"; }
               { app-id = "obsidian"; } ];
             open-maximized    = true;
             open-on-workspace = "stuff"; }

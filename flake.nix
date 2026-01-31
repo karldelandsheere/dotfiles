@@ -24,6 +24,8 @@
 #############################################################################
 
 {
+  description = "Hi! These dotfiles are chaotic even for my ADHD.";
+  
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"

@@ -17,7 +17,6 @@ in
       usbutils
       xev                    # Event monitor, for debugging
     ] ++ lib.lists.optionals (cfg.gui.enable) [
-      nemo                   # Graphical file explorer
       xwayland-satellite     # Rootless Xwayland integration
     ];
 

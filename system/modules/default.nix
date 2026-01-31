@@ -46,25 +46,25 @@ in
 
 
     # Nix options
-    nix = {
-      settings = {
-        experimental-features = [ "nix-command" "flakes" ]; # Activate flakes, etc.
-        trusted-users = [ "@wheel" ];
-        warn-dirty = false; # For some reason, it still does...
-      };
+    # nix = {
+    #   settings = {
+    #     experimental-features = [ "nix-command" "flakes" ]; # Activate flakes, etc.
+    #     trusted-users = [ "@wheel" ];
+    #     warn-dirty = false; # For some reason, it still does...
+    #   };
 
-      # Do some cleanup
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 30d --keep-generations 25";
-        randomizedDelaySec = "1 hour";
-      };
-      optimise.automatic = true;
-      settings.auto-optimise-store = true;
-    };
+    #   # Do some cleanup
+    #   gc = {
+    #     automatic = true;
+    #     dates = "weekly";
+    #     options = "--delete-older-than 30d --keep-generations 25";
+    #     randomizedDelaySec = "1 hour";
+    #   };
+    #   optimise.automatic = true;
+    #   settings.auto-optimise-store = true;
+    # };
 
 
-    nixpkgs.config.allowUnfree = cfg.allowUnfree;     # Allow unfree software?
+    # nixpkgs.config.allowUnfree = cfg.allowUnfree;     # Allow unfree software?
   };
 }

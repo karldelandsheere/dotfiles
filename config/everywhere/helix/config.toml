@@ -2,7 +2,8 @@ theme = "catppuccin_mocha"
 
 [editor]
 cursorline = true
-line-number = "absolute"
+# line-number = "absolute"
+line-number = "relative"
 middle-click-paste = false
 mouse = true
 
