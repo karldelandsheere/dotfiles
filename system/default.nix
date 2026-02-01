@@ -7,13 +7,13 @@
 #
 ###############################################################################
 
-{ config, lib, pkgs, users, ... }: let
+{ config, lib, pkgs, ... }: let
   cfg = config.nouveauxParadigmes;
+  users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
 in
 {
   imports = [
     ./modules      # Common config modules
-    ../users       # Loads the users specific configs
   ];
 
 
@@ -38,6 +38,12 @@ in
       type        = lib.types.bool;
       default     = true;
       description = "Enable GUI? Defaults to true.";
+    };
+
+    stateVersion = lib.mkOption {
+      type        = lib.types.str;
+      default     = "25.11";
+      description = "NixOS version. Defaults to 25.11";
     };
   };
 
@@ -77,13 +83,12 @@ in
       };
     };   
 
-    # Time settings
-    time.timeZone = "Europe/Brussels";
-
     # Fonts
     fonts.packages = with pkgs; [
       font-awesome
       nerd-fonts.jetbrains-mono
     ];
+
+    system.stateVersion = cfg.stateVersion;
   };
 }

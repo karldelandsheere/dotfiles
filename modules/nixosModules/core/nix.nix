@@ -1,10 +1,23 @@
+###############################################################################
+#
+# Nix related config.
+#
+###############################################################################
+
 { inputs, self, ... }:
 {
-  config = {
-    flake.nixosModules.core = { config, ...}: let
-      cfg = config.nouveauxParadigmes;
-    in
-    {
+  flake.nixosModules.core = { lib, config, ...}: let
+    cfg = config.nouveauxParadigmes;
+  in
+  {
+    # Philosophical vs pragramtic question...
+    options.nouveauxParadigmes.allowUnfree = lib.mkOption {
+        type        = lib.types.bool;
+        default     = true;
+        description = "Allow unfree software to be installed? Defaults to true";
+    };
+  
+    config = {
       # Nix options
       nix = {
         settings = {
@@ -22,7 +35,7 @@
         };
       };
 
-      nixpkgs.config.allowUnfree = cfg.allowUnfree;  # Whether to allow unfree software or not
+      nixpkgs.config.allowUnfree = cfg.allowUnfree;
     };
   };
 }

@@ -22,8 +22,8 @@
     {
       imports = [
         self.nixosModules.core
-        self.nixosModules.extra_home-manager
-        self.nixosModules.extra_impermanence
+        self.nixosModules.extra_home-manager # Home-manager setup (not users' config)
+        self.nixosModules.extra_impermanence # Stateless system that cleans itself at reboot
 
         ../../../../system
       ];

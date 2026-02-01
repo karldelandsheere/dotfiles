@@ -28,7 +28,10 @@
       enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
     };
 
-    config = {
+    config = let
+      scriptsDir = ../../../system/scripts;
+    in
+    {
       # Rollback routine on every boot
       # ------------------------------
       boot.initrd.systemd.services.rollback = let
@@ -45,7 +48,7 @@
         before      = [ "sysroot.mount" ];
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type             = "oneshot";
-        script = builtins.readFile ../scripts/rollback.sh;
+        script = builtins.readFile "${scriptsDir}/rollback.sh";
       };
 
       environment = {
@@ -55,7 +58,7 @@
           ( pkgs.writeShellApplication {
             name = "differences";
             runtimeInputs = [ pkgs.btrfs-progs ];
-            text = builtins.readFile ../scripts/differences.sh;
+            text = builtins.readFile "${scriptsDir}/differences.sh";
           } )
         ];
 
