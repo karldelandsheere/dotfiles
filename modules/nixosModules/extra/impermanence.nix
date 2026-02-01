@@ -13,8 +13,9 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.extra_impermanence = { lib, config, pkgs, users, ... }: let
+  flake.nixosModules.extra_impermanence = { lib, config, pkgs, ... }: let
     cfg = config.nouveauxParadigmes;
+    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
 
     # isNvme = lib.strings.hasInfix "nvme" cfg.rootDisk;
     # deviceName = ${cfg.rootDisk} lib.strings.optionalString isNvme "p";
