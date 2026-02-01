@@ -13,8 +13,8 @@ in
     ./encryption.nix         # Root encryption with LUKS
     ./filesystem.nix         # Volumes, swap, impermanence, and hibernation
     ./hardware.nix           # All hardware, bluetooth, graphics, sound, ...
-    ./home-manager           # Home-manager (setup, not users config)
-    ./impermanence.nix       # Stateless system that cleans itself at reboot
+    # ./home-manager           # Home-manager (setup, not users config)
+    # ./impermanence.nix       # Stateless system that cleans itself at reboot
     ./networking.nix         # Networking, SSH, VPN, Tailscale, ...
     ./power-management.nix   # Power, hibernation, ...
     ./programs.nix           # Programs that should be by default on all hosts
@@ -42,7 +42,7 @@ in
 
   config = {
     # NixOS version
-    system.stateVersion = cfg.stateVersion;
+    # system.stateVersion = cfg.stateVersion;
 
 
     # Nix options

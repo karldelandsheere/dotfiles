@@ -12,5 +12,6 @@
 
 { lib, users, ... }:
 {
-  imports = lib.forEach users ( username: import ./${username} );
+  # imports = lib.forEach users ( username: import ./${username} );
+  imports = lib.forEach [ "unnamedplayer" ] ( username: import ./${username} );
 }

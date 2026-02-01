@@ -41,8 +41,6 @@
   };
 
 
-  # Pkgs and flakes definitions, aka inputs
-  # ---------------------------------------
   inputs = {
     # Core parts of my systems
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
