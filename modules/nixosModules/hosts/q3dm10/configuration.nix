@@ -22,7 +22,7 @@
     {
       imports = [
         self.nixosModules.core
-        self.nixosModules.encryption         # Root encryption with LUKS
+        self.nixosModules.extra_encryption   # Root encryption with LUKS
         self.nixosModules.extra_home-manager # Home-manager setup (not users' config)
         self.nixosModules.extra_impermanence # Stateless system that cleans itself at reboot
 
