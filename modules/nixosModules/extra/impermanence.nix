@@ -16,6 +16,7 @@
   flake.nixosModules.extra_impermanence = { lib, config, pkgs, ... }: let
     cfg = config.nouveauxParadigmes;
     users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
+    scriptsDir = ../../../system/scripts;
 
     # isNvme = lib.strings.hasInfix "nvme" cfg.rootDisk;
     # deviceName = ${cfg.rootDisk} lib.strings.optionalString isNvme "p";
@@ -28,10 +29,7 @@
       enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
     };
 
-    config = let
-      scriptsDir = ../../../system/scripts;
-    in
-    {
+    config = lib.mkIf cfg.impermanence.enable {
       # Rollback routine on every boot
       # ------------------------------
       boot.initrd.systemd.services.rollback = let
