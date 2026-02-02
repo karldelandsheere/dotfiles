@@ -15,7 +15,7 @@
     config = {
       hardware.graphics = {
         enable = true;
-        support32Bit = true; # Should I move that one to host?
+        enable32Bit = true; # Should I move that one to host?
       };
     };
   };
