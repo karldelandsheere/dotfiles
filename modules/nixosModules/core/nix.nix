@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Nix related config.
+# Nix/NixOS related config.
 #
 ###############################################################################
 
@@ -10,15 +10,23 @@
     cfg = config.nouveauxParadigmes;
   in
   {
-    # Philosophical vs pragramtic question...
-    options.nouveauxParadigmes.allowUnfree = lib.mkOption {
+    options.nouveauxParadigmes = {
+      # Philosophical vs pragramtic question...
+      allowUnfree = lib.mkOption {
         type        = lib.types.bool;
         default     = true;
         description = "Allow unfree software to be installed? Defaults to true";
+      };
+
+      # Nix/NixOS version
+      stateVersion = lib.mkOption {
+        type        = lib.types.str;
+        default     = "25.11";
+        description = "Nix/NixOS version. Defaults to 25.11";
+      };
     };
   
     config = {
-      # Nix options
       nix = {
         settings = {
           auto-optimise-store = true;
@@ -36,6 +44,7 @@
       };
 
       nixpkgs.config.allowUnfree = cfg.allowUnfree;
+      system.stateVersion = cfg.stateVersion;
     };
   };
 }

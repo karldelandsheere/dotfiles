@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Bluetooth generic config.
+# Hardware accelerated graphics generic config.
 #
 # For host|user specific options, go to host|user's config.
 #
@@ -8,18 +8,15 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.features_bluetooth = { lib, config, ...}: let
+  flake.nixosModules.features_graphics = { lib, config, pkgs, ...}: let
     cfg = config.nouveauxParadigmes;
   in
   {
     config = {
-      hardware.bluetooth = {
+      hardware.graphics = {
         enable = true;
-        powerOnBoot = true;
-        # settings.General.Experimental = true;
+        support32Bit = true; # Should I move that one to host?
       };
-
-      services.blueman.enable = true; # Enable bluetooth manager (@todo is it gui only?)
     };
   };
 }

@@ -22,9 +22,15 @@
     {
       imports = [
         self.nixosModules.core
+
+        self.nixosModules.features_audio
+        self.nixosModules.features_bluetooth
+        self.nixosModules.features_graphics
+
         self.nixosModules.extra_encryption   # Root encryption with LUKS
         self.nixosModules.extra_home-manager # Home-manager setup (not users' config)
         self.nixosModules.extra_impermanence # Stateless system that cleans itself at reboot
+        self.nixosModules.extra_tailscale
 
         ../../../../system
       ];
@@ -45,7 +51,9 @@
           };
         };
 
-        system.stateVersion = cfg.stateVersion;
+        hardware.cpu.amd.updateMicrocode = true;
+
+        services.mullvad-vpn.enable = true;
       };
     };
   };

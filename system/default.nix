@@ -45,6 +45,18 @@ in
       default     = "25.11";
       description = "NixOS version. Defaults to 25.11";
     };
+
+    system = lib.mkOption { # @todo Is that used at all?
+      type        = lib.types.str;
+      default     = "x86_64-linux";
+      description = "What is the system architecture? Defaults to x86_64-linux.";
+    };
+
+    cpuFlavor = lib.mkOption { # On its way out I guess
+      type        = lib.types.str;
+      default     = "";
+      description = "amd or intel?";
+    };
   };
 
 
@@ -74,6 +86,9 @@ in
       font = "Lat2-Terminus16";
     };
 
+    hardware.enableAllFirmware = true; # @todo Is it really required for me?
+    services.udisks2.enable = true; # DBus service that allows applications to query and manipulate storage devices
+
     # Internationalization
     i18n = {
       defaultLocale = "en_US.UTF-8";   # @todo Make it an option maybe?
@@ -88,7 +103,5 @@ in
       font-awesome
       nerd-fonts.jetbrains-mono
     ];
-
-    system.stateVersion = cfg.stateVersion;
   };
 }
