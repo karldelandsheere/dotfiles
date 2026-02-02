@@ -25,7 +25,7 @@
         firewall.enable = true;
       };
 
-      openssh = {
+      services.openssh = {
         enable = true;
         hostKeys = [
           { path = "/etc/ssh/ssh_host_rsa_key"; type = "rsa"; bits = 4096; }
