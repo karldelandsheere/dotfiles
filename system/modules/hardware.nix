@@ -37,13 +37,6 @@
     hardware = {
       enableAllFirmware = true;
 
-      # Bluetooth
-      bluetooth = {
-        enable      = true;
-        powerOnBoot = true;
-        settings.General.Experimental = true; # Don't remember why
-      };
-
       # Graphics
       graphics = {
         enable      = true;
@@ -54,9 +47,6 @@
 
     # Hardware services
     services = {
-      # Bluetooth
-      blueman.enable = true; # Is this doing anything in tty?
-
       # Sound
       pipewire = {
         enable = true;
