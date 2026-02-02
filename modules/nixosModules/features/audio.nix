@@ -24,8 +24,6 @@
           pulse.enable = true;
           wireplumber.enable = true;
         };
-
-        pulseaudio.enable = true;
       };
     };
   };
