@@ -40,12 +40,6 @@ in
       description = "Enable GUI? Defaults to true.";
     };
 
-    stateVersion = lib.mkOption {
-      type        = lib.types.str;
-      default     = "25.11";
-      description = "NixOS version. Defaults to 25.11";
-    };
-
     system = lib.mkOption { # @todo Is that used at all?
       type        = lib.types.str;
       default     = "x86_64-linux";
