@@ -22,16 +22,22 @@
     {
       imports = [
         self.nixosModules.core
+        self.nixosModules.core_amd
 
-        self.nixosModules.features_audio
-        self.nixosModules.features_bluetooth
-        self.nixosModules.features_graphics
+        self.nixosModules.home-manager   # Home-manager setup (not users' config)
 
-        self.nixosModules.extra_encryption   # Root encryption with LUKS
-        self.nixosModules.extra_home-manager # Home-manager setup (not users' config)
-        self.nixosModules.extra_impermanence # Stateless system that cleans itself at reboot
-        self.nixosModules.extra_tailscale
+        self.nixosModules.encryption     # Root encryption with LUKS
+        self.nixosModules.impermanence   # Stateless system that cleans itself at reboot
 
+        self.nixosModules.tailscale
+
+        self.nixosModules.desktop
+
+        self.nixosModules.hibernation
+        self.nixosModules.powersave
+        self.nixosModules.powersave_amd
+
+        # Old stuff
         ../../../../system
       ];
 
@@ -39,19 +45,16 @@
         # Custom options
         # --------------
         nouveauxParadigmes = {
-          hostname            = "q3dm10";
-          cpuFlavor           = "amd";
-          rootDisk            = "/dev/nvme0n1";
-          swapSize            = 96*1024;
-          encryption.enable   = true;
+          hostname = "q3dm10";
+          rootDisk = "/dev/nvme0n1";
+          swapSize = 96*1024;
+          encryption.enable = true;
           impermanence.enable = true;
-          hibernation         = {
-            enable        = true;
+          hibernation = {
+            enable = true;
             resume.offset = "1108328";
           };
         };
-
-        hardware.cpu.amd.updateMicrocode = true;
 
         services.mullvad-vpn.enable = true;
       };

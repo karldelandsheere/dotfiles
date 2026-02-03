@@ -8,7 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.extra_tailscale = { lib, config, ... }: let
+  flake.nixosModules.tailscale = { lib, config, ... }: let
     cfg = config.nouveauxParadigmes;
   in
   {

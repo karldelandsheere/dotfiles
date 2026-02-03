@@ -8,7 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.features_graphics = { lib, config, pkgs, ...}: let
+  flake.nixosModules.graphics = { lib, config, pkgs, ...}: let
     cfg = config.nouveauxParadigmes;
   in
   {

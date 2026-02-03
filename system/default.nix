@@ -12,13 +12,14 @@
   users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
 in
 {
-  imports = [
-    ./modules      # Common config modules
-  ];
-
-
   # Set system wide options
   options.nouveauxParadigmes = {
+    rootDisk = lib.mkOption {
+      type        = lib.types.str;
+      default     = "";
+      description = "Which is the root disk? No default";
+    };
+
     # Inputs
     kbLayout = lib.mkOption {
       type        = lib.types.str;

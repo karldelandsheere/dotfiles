@@ -6,11 +6,18 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}: let
+  flake.nixosModules.core = { lib, config, pkgs, ...}: let
     cfg = config.nouveauxParadigmes;
   in
   {
     config = {
+      # GNU Privacy Guard / OpenPGP
+      programs.gnupg.agent = {
+        enable = true;
+        pinentryPackage = pkgs.pinentry-curses;
+        enableSSHSupport = true;
+      };
+      
       security = {
         polkit.enable = true;
         rtkit.enable = true;

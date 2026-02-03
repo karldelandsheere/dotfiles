@@ -8,7 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.features_bluetooth = { lib, config, ...}: let
+  flake.nixosModules.bluetooth = { lib, config, ...}: let
     cfg = config.nouveauxParadigmes;
   in
   {

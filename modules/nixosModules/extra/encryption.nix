@@ -6,7 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.extra_encryption = { lib, config, ... }: let
+  flake.nixosModules.encryption = { lib, config, ... }: let
     cfg = config.nouveauxParadigmes;
   in
   {

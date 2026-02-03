@@ -10,7 +10,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.extra_home-manager = { lib, config, ... }: let
+  flake.nixosModules.home-manager = { lib, config, ... }: let
     cfg = config.nouveauxParadigmes;
   in
   {
@@ -40,21 +40,7 @@
 
           inputs.agenix.homeManagerModules.default
 
-
         ] ++ lib.lists.optionals ( cfg.gui.enable ) [
-          {
-            home.sessionVariables = {
-              # GDK_BACKEND                         = "wayland,x11";
-              # GTK_USE_PORTAL                      = "1";
-              NIXOS_OZONE_WL                      = "1"; # Use Ozone Wayland for Electron apps
-              QT_QPA_PLATFORM                     = "wayland";
-              # QT_QPA_PLATFORMTHEME                = "qt6ct";
-              # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-              # SDL_VIDEO_DRIVER                    = "wayland,x11";
-              # WLR_NO_HARDWARE_CURSORS             = "1"; # Reactivate this only if cursor glitches occur
-            };
-          }
-        
           ../../../../system/modules/home-manager/niri.nix      # Compositor
           ../../../../system/modules/home-manager/noctalia.nix  # Quickshell integration
         ];

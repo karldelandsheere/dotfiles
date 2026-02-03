@@ -8,12 +8,16 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.features_audio = { lib, config, pkgs, ...}: let
+  flake.nixosModules.audio = { lib, config, pkgs, ...}: let
     cfg = config.nouveauxParadigmes;
   in
   {
     config = {
-      environment.systemPackages = with pkgs; [ pwvucontrol ];
+      environment.systemPackages = with pkgs; [
+        flac            # FLAC codecs
+        pwvucontrol
+      ];
+
       services = {
         pipewire = {
           enable = true;

@@ -13,7 +13,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.extra_impermanence = { lib, config, pkgs, ... }: let
+  flake.nixosModules.impermanence = { lib, config, pkgs, ... }: let
     cfg = config.nouveauxParadigmes;
     users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
     scriptsDir = ../../../system/scripts;
@@ -30,6 +30,30 @@
     };
 
     config = lib.mkIf cfg.impermanence.enable {
+      # Adding options to the filesystems
+      fileSystems = {
+        "/".options = [ "compress=zstd" "noatime" ];
+
+        "/home" = { neededForBoot = true;
+                    options = [ "compress=zstd" "noatime" ]; };
+        "/home/.snapshots".options = [ "compress=zstd" "noatime" ];
+
+        "/nix".options = [ "noatime" ];
+
+        "/persist" = { neededForBoot = true;
+                       options = [ "compress=zstd" "noatime" ]; };
+        "/persist/.snapshots" = { neededForBoot = true;
+                                  options = [ "compress=zstd" "noatime" ]; };
+
+        "/var/local".options = [ "compress=zstd" "noatime" ];
+        "/var/local/.snapshots".options = [ "compress=zstd" "noatime" ];
+
+        "/var/log" = { neededForBoot = true;
+                       options = [ "compress=zstd" "noatime" ]; };
+      };
+
+
+      
       # Rollback routine on every boot
       # ------------------------------
       boot.initrd.systemd.services.rollback = let
