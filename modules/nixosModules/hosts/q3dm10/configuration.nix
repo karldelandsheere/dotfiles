@@ -38,7 +38,7 @@
         self.nixosModules.powersave_amd
 
         # Old stuff
-        ../../../../system
+        # ../../../../system
       ];
 
       config = {

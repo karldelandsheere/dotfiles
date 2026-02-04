@@ -16,7 +16,7 @@
   flake.nixosModules.impermanence = { lib, config, pkgs, ... }: let
     cfg = config.nouveauxParadigmes;
     users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-    scriptsDir = ../../../system/scripts;
+    scriptsDir = ../../scripts;
 
     # isNvme = lib.strings.hasInfix "nvme" cfg.rootDisk;
     # deviceName = ${cfg.rootDisk} lib.strings.optionalString isNvme "p";

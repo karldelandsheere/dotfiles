@@ -46,6 +46,11 @@
           xwayland-satellite   # Rootless Xwayland integration
         ];
       };
+
+      services.xserver = {
+        enable = true;
+        displayManager.startx.enable = true; # No need for a DM
+      };
     };
   };
 }

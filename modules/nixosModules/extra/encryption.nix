@@ -8,6 +8,7 @@
 {
   flake.nixosModules.encryption = { lib, config, ... }: let
     cfg = config.nouveauxParadigmes;
+    users = [ "unnamedplayer" ]; # @todo Repair the users provisining
   in
   {
     # Related options and default values definition
@@ -29,6 +30,12 @@
             # preLVM = true; # @todo Determine if I should enable this
           };
         };
+      };
+
+      # If the whole system is encrypted and password protected at boot,
+      # and there's only one user, no need for a second login screen right after
+      services.getty = lib.mkIf (lib.length users == 1) {
+        autologinUser = "${lib.head users}";
       };
     };
   };
