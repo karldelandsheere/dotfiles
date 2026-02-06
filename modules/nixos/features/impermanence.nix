@@ -179,7 +179,7 @@
 
       # Allow non-root users
       # --------------------
-      programs.fuse.userAllowOther = true;
+      # programs.fuse.userAllowOther = true;
     };
   };
 }

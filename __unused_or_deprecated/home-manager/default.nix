@@ -41,7 +41,7 @@ in
         #   # ".config/Bitwarden CLI/data.json"
         ];
 
-        allowOther = true;
+        
       };
     };
 

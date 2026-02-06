@@ -22,23 +22,21 @@
     {
       imports = [
         self.nixosModules.core
-        self.nixosModules.core_amd
-
-        self.nixosModules.home-manager   # Home-manager setup (not users' config)
+        self.nixosModules.tailscale
 
         self.nixosModules.encryption     # Root encryption with LUKS
         self.nixosModules.impermanence   # Stateless system that cleans itself at reboot
-
-        self.nixosModules.tailscale
+        self.nixosModules.hibernation
+        self.nixosModules.powersave
 
         self.nixosModules.desktop
 
-        self.nixosModules.hibernation
-        self.nixosModules.powersave
+        # AMD specific options
+        self.nixosModules.core_amd
         self.nixosModules.powersave_amd
 
-        # Old stuff
-        # ../../../../system
+        # User(s)
+        self.nixosModules.unnamedplayer
       ];
 
       config = {

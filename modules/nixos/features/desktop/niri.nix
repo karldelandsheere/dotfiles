@@ -27,7 +27,6 @@
         # package = pkgs.niri-unstable; # For niri unstable
         settings = {
           # General stuff
-          # -------------
           cursor = { # Auto hide cursor when we don't need it
             hide-after-inactive-ms = 3000;
             hide-when-typing = true;
@@ -95,10 +94,8 @@
           prefer-no-csd = true;
 
           # Binds
-          # -----
           binds = {
             # Control sound levels
-            # --------------------
             "XF86AudioLowerVolume" = {
               action.spawn = [ "noctalia-shell" "ipc" "call" "volume" "decrease" ];
               allow-when-locked = true; };
@@ -119,7 +116,6 @@
               allow-when-locked = true; };
 
             # Control monitor brightness
-            # --------------------------
             "XF86MonBrightnessDown" = {
               action.spawn = [ "noctalia-shell" "ipc" "call" "brightness" "decrease" ];
               allow-when-locked = true; };
@@ -132,13 +128,11 @@
             # XF86TouchpadToggle
 
             # Screenshot utils
-            # ----------------
             "Print".action.screenshot = { show-pointer = false; };
             "Alt+Print".action.screenshot-window = {};
             "Ctrl+Print".action.screenshot-screen = { show-pointer = false; };
 
             # Launching different kinds of menus and panels
-            # -----------------------------------------------
             "Mod+F10".action.spawn = [ "noctalia-shell" "ipc" "call" "settings" "toggle" ];
             "Mod+F11".action.spawn = [ "noctalia-shell" "ipc" "call" "sessionMenu" "toggle" ];
             "Mod+F12".action.spawn = [ "noctalia-shell" "ipc" "call" "controlCenter" "toggle" ];
@@ -146,7 +140,6 @@
             "Mod+Tab".action.toggle-overview = {};
 
             # Change focus
-            # ------------
             "Mod+Down".action.focus-window-or-workspace-down = {};
             "Mod+Left".action.focus-column-left = {};
             "Mod+Right".action.focus-column-right = {};
@@ -159,7 +152,6 @@
             # "Mod+Shift+Up".action.focus-monitor-up = {};
 
             # Move focused column/window/workspace
-            # ------------------------------------
             "Mod+Ctrl+Down".action.move-window-down = {};
             "Mod+Ctrl+Left".action.move-column-left = {};
             "Mod+Ctrl+Right".action.move-column-right = {};
@@ -175,12 +167,10 @@
             "Mod+Shift+Semicolon".action.expel-window-from-column = {};
 
             # Toggle floating and move focus between floating and tiling
-            # ----------------------------------------------------------
             "Mod+V".action.toggle-window-floating = {};
             "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = {};
 
             # Control the width/height of the focused column/window
-            # -----------------------------------------------------
             "Mod+Equal".action.set-column-width = "+10%";
             "Mod+F".action.maximize-column = {};
             "Mod+Minus".action.set-column-width = "-10%";
@@ -190,22 +180,18 @@
             "Mod+Shift+Minus".action.set-window-height = "-10%";
 
             # Toggle window opacity
-            # ---------------------
             "Mod+O".action.toggle-window-rule-opacity = {};
 
             # Toggle keyboard shortcuts inhibit (such as in remote-desktop and such)
-            # ---------------------------------
             "Mod+Alt+Escape" = {
               action.toggle-keyboard-shortcuts-inhibit = {};
               allow-inhibiting = false; };
 
             # Close stuff
-            # -----------
             "Mod+Q".action.close-window = {};
           };
 
           # Inputs
-          # ------
           input = {
             touchpad = {
               accel-profile = "adaptive";

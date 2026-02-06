@@ -15,24 +15,8 @@ in
     ./secrets.nix       # Agenix files 
   ];
 
-
   config = {
     home = {
-      file = with config.lib.file; {
-        ".face".source = mkOutOfStoreSymlink ../face.jpg;
-        "Pictures/Wallpapers".source = mkOutOfStoreSymlink ../wallpapers;
-        ".cache/noctalia/wallpapers.json" = let
-            wallpaperPath = "${config.home.homeDirectory}/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg";
-          in {
-          text = builtins.toJSON {
-            defaultWallpaper = wallpaperPath;
-            wallpapers       = { "eDP-1" = wallpaperPath; };
-          };
-        };
-      };
-
-
-      # @todo 
       shellAliases = {
         todo = "clear && grep -rnw ${cfg.dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
 
@@ -40,15 +24,26 @@ in
           mullvad disconnect && \
           tailscale up --force-reauth --operator=$USER \
             --login-server=https://headscale.sunflower-cloud.com:8080 \
-            --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)
-        '';
+            --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)                                                                 '';
         tsup-np = ''
-          mullvad disconnect && \
-          tailscale up --force-reauth --operator=$USER \
+          mullvad disconnect && \                                                                                                     tailscale up --force-reauth --operator=$USER \
             --login-server=https://headscale.nouveaux-paradigmes.be \
-            --auth-key $(cat /run/agenix/auth/tailscale/nouveauxparadigmes)
-        '';
+            --auth-key $(cat /run/agenix/auth/tailscale/nouveauxparadigmes)                                                         '';
         tsdown = "tailscale down --accept-risk=all && mullvad connect";
+      };
+          
+      file = with config.lib.file; {
+        ".face".source = mkOutOfStoreSymlink ../face.jpg;
+        "Pictures/Wallpapers".source = mkOutOfStoreSymlink ../wallpapers;
+        ".cache/noctalia/wallpapers.json" = let
+            wallpaperPath = "${config.home.homeDirectory}/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg";
+        in
+        {
+          text = builtins.toJSON {
+            defaultWallpaper = wallpaperPath;
+            wallpapers = { "eDP-1" = wallpaperPath; };
+          };
+        };
       };
     };
 

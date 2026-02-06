@@ -25,7 +25,7 @@
       users = [ "unnamedplayer" ];
     in
     {
-      imports = lib.forEach users ( username: import ../../../users/${username} );
+      # imports = lib.forEach users ( username: import ../../../users/${username} );
 
     };
   };
