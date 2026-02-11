@@ -37,7 +37,7 @@ in
         # TUI/CLI programs
         # ----------------
         # aerc                   # Email client
-        basalt                 # @todo check back in a couple months
+        # basalt                 # @todo check back in a couple months
         bitwarden-cli          # Easy access to my vault in tty
         bottom                 # Process/system monitor
         # calcurse               # CalDav client
@@ -68,7 +68,7 @@ in
         # blender
         ghostty                # Terminal emulator
         inkscape               # Vector graphics editor
-        # mullvad-browser        # Highly privacy focused browser
+        mullvad-browser        # Highly privacy focused browser
         # opencloud-desktop
         openscad               # Code based CAD
         prusa-slicer           # Slicer for my Prusa printers
@@ -113,7 +113,7 @@ in
       
 
       sessionVariables = with pkgs; {
-        BROWSER = "${vivaldi}/bin/vivaldi";
+        BROWSER = "${mullvad-browser}/bin/mullvad-browser";
         EDITOR  = "${helix}/bin/hx";
         VISUAL  = "${helix}/bin/hx";
       };
@@ -186,7 +186,9 @@ in
             open-on-workspace = "tty"; }
 
           { # Internet browser, etc.
-            matches           = [ { app-id = "vivaldi"; } ];
+            matches           = [
+              { app-id = "vivaldi"; }
+              { app-id = "Mullvad Browser"; } ];
             open-maximized    = true;
             open-on-workspace = "web"; }
 
@@ -263,7 +265,5 @@ in
       ghostty.enableZshIntegration  = true;
       yazi.enableZshIntegration     = true;
     };
-
-
   };
 }

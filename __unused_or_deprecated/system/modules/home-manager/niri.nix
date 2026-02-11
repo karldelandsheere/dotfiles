@@ -15,21 +15,21 @@
   cfg = osConfig.nouveauxParadigmes;
 in
 {
-  imports = [ inputs.niri.homeModules.niri ];
+  # imports = [ inputs.niri.homeModules.niri ];
 
   config = {
     # nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
 
     programs.niri = {
-      enable   = true;
+      # enable   = true;
       # package  = pkgs.niri-unstable; # For niri unstable
       settings = {
         # General stuff
         # -------------
-        cursor = { # Auto hide cursor when we don't need it
-          hide-after-inactive-ms = 3000;
-          hide-when-typing       = true;
-        };
+        # cursor = { # Auto hide cursor when we don't need it
+        #   hide-after-inactive-ms = 3000;
+        #   hide-when-typing       = true;
+        # };
 
         environment = {
           DISPLAY             = ":0";

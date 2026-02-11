@@ -12,17 +12,6 @@
 {
   imports = [ inputs.home-manager.flakeModules.home-manager ];
 
-  # flake = {
-  #   homeModules.basics = { lib, config, ... }:
-  #   {
-  #     programs.home-manager.enable = true;
-  #     home.stateVersion = config.system.stateVersion;
-  #     news.display = "show"; # Display the news at rebuild
-  #   };
-
-  # #   # homeConfigurations = bla;
-  # };
-
   flake.nixosModules.core = { lib, config, ... }: let
     cfg = config.nouveauxParadigmes;
   in
@@ -39,16 +28,15 @@
 
         sharedModules = [
           {
-            programs.home-manager.enable = true;   # Enable home-manager
+            programs.home-manager.enable = true;
             home.stateVersion = config.system.stateVersion;
-            news.display = "show"; # Display the news at rebuild
+            news.display = "show";
           }
 
           inputs.agenix.homeManagerModules.default
 
         ] ++ lib.lists.optionals ( cfg.gui.enable ) [
-          ../../system/modules/home-manager/niri.nix      # Compositor
-          ../../system/modules/home-manager/noctalia.nix  # Quickshell integration
+          self.homeModules.desktop
         ];
       };
     };

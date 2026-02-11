@@ -17,9 +17,6 @@
       self.nixosModules.audio
       self.nixosModules.bluetooth
       self.nixosModules.graphics
-
-      # self.nixosModules.niri
-      # self.nixosModules.noctalia
     ];
     
     config = {
@@ -52,5 +49,13 @@
         displayManager.startx.enable = true; # No need for a DM
       };
     };
+  };
+
+  flake.homeModules.desktop = { ... }:
+  {
+    imports = [
+      self.homeModules.niri
+      self.homeModules.noctalia
+    ];
   };
 }
