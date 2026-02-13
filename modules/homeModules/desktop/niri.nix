@@ -6,34 +6,13 @@
 #   are in their config under /users/...
 #
 # Resources:
-# - https://github.com/YaLTeR/niri/wiki/Configuration
+# - https://github.com/niri-wm/niri/wiki/Configuration
 # - https://github.com/sodiboo/niri-flake/blob/main/docs.md
 #
 ###############################################################################
 
 { inputs, self, ... }:
 {
-  # flake.nixosModules.niri = { lib, config, pkgs, ...}: let
-  #   cfg = config.nouveauxParadigmes;
-  # in
-  # {
-  #   # imports = [ inputs.niri.nixosModules.niri ];
-    
-  #   config = {
-  #     # nixpkgs.overlays = [ inputs.niri.overlays.niri ]; # For niri unstable
-
-  #     programs.niri = {
-  #       enable = true;
-  #       # package = pkgs.niri-unstable; # For niri unstable
-  #     };
-  #   };
-  # };
-
-  # flake.homeConfigurations.default = { lib, config, ... }:
-  # {
-  #   imports = [ self.homeModules.niri ];
-  # };
-
   flake.homeModules.niri = { lib, config, pkgs, ...}:
   {
     imports = [ inputs.niri.homeModules.niri ];

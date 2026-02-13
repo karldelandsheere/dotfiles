@@ -11,17 +11,6 @@
 
 { inputs, self, ... }:
 {
-  # flake.nixosModules.noctalia = { lib, config, pkgs, ...}: let
-  #   cfg = config.nouveauxParadigmes;
-  # in
-  # {
-  #   imports = [ inputs.noctalia.nixosModules.default ];
-    
-  #   config = {
-  #     services.noctalia-shell.enable = true; # Run as a systemd service
-  #   };
-  # };
-
   flake.homeModules.noctalia = { lib, config, pkgs, ... }: let
     officialNoctaliaPlugins = "https://github.com/noctalia-dev/noctalia-plugins";
   in
@@ -325,7 +314,7 @@
             allowPanelsOnScreenWithoutBar  = true;
             animationDisabled              = false;
             animationSpeed                 = 1;
-            avatarImage                    = "~/.face"; # @todo Find how to write it so I don't have to set it for every user
+            avatarImage                    = "~/.face";
             boxRadiusRatio                 = 1;
             compactLockScreen              = false;
             dimmerOpacity                  = 0.3;

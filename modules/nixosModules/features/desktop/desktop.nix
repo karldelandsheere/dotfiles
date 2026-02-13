@@ -51,6 +51,7 @@
     };
   };
 
+  # @todo I would really like to move those back to nixos
   flake.homeModules.desktop = { ... }:
   {
     imports = [

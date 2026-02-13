@@ -12,7 +12,6 @@
 #
 # Next steps:
 # -----------
-#   - @todo Explore wrappers: https://github.com/Lassulus/wrappers
 #   - @todo Try out nix-init: https://www.youtube.com/shorts/RUszKmnq9y4
 #   - @todo Try out specialisation: https://www.youtube.com/shorts/cyX8Imfb0Mg
 #   - @todo Figure out Devenv in Nix
@@ -50,7 +49,6 @@
     impermanence.url = "github:nix-community/impermanence";
     agenix = { url = "github:ryantm/agenix";
                inputs.nixpkgs.follows = "nixpkgs"; };
-    # wrappers.url = "github:Lassulus/wrappers";
     home-manager = { url = "github:nix-community/home-manager/release-25.11";
                      inputs.nixpkgs.follows = "nixpkgs"; };
 
