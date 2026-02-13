@@ -24,10 +24,15 @@
           jq              # Like sed but for json, needed for persist.sh
           libsecret
           nix-tree        # Nix dependencies browser
+          progress        # Follow the progression of any command
+          scooter         # Directory wide search & replace
           tmux            # Terminal multiplexer
+          tree            # Kinda ls but as a tree
+          ueberzugpp      # Terminal image viewer (needed for yazi)
           unzip
           usbutils
           xev             # Event monitor, for debugging
+          yazi            # A really cool CLI file explorer
         ];
 
         variables = with pkgs; {

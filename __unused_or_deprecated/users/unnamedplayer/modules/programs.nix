@@ -44,8 +44,6 @@ in
         curl
         exiftool
         ffmpeg
-        # gurk-rs                # Signal client
-        # iamb                   # Element/Synapse client
         jellyfin-tui           # TUI client for Jellyfin Media Server
         mpv                    # Video player
         progress               # Follow the progression of any command
@@ -79,9 +77,9 @@ in
        ++ lib.lists.optionals ( cfg.gui.enable && osConfig.nixpkgs.config.allowUnfree ) [
         obsidian               # Markdown note taking app
         termius                # Cross-platform SSH client
-      ] )
+      ] );
 
-      ++ [ pkgs.unstable.gurk-rs ];
+      # ++ [ pkgs.unstable.gurk-rs ];
 
 
       shellAliases = {
@@ -260,6 +258,24 @@ in
           signByDefault = true; };
       };
 
+      gurk-rs = { # Signal client for the tty. @todo fix images and transfer
+        enable = false; # for now
+        package = pkgs.unstable.gurk-rs;
+        settings = {
+          bell = true;
+          colored_messages = false;
+          data_dir = "${config.home.homeDirectory}/.local/share/gurk";
+          default_keybindings = true;
+          first_name_only = false;
+          keybindings =  {};
+          show_receipts = true;
+          user = { # @todo Move this to secrets
+            name = "Karl";
+            phone_number = "+32498139866";
+          };
+        };
+      };
+
       helix = { # Helix > Vim imho
         enable = true;
         settings = {
@@ -274,6 +290,43 @@ in
             line-number = "relative";
             middle-click-paste = false;
             mouse = true;
+          };
+        };
+      };
+
+      iamb = { # Element/Synapse client
+        enable = false; # for now
+        settings = {
+          default_profile = "dimeritium"; #config.home.username;
+          layout = {
+            style = "config";
+            tabs = [
+              { window = "iamb://dms"; }
+              { window = "iamb://rooms"; }
+            ];
+          };
+          profiles = { # @todo Move this to secrets
+            "dimeritium" = {
+              url = "https://matrix.dimeritium.com";
+              user_id = "@karldelandsheere:matrix.dimeritium.com";
+            };
+          };
+          settings = {
+            image_preview = {
+              protocol.type = "sixel";
+              size = {
+                height = 20;
+                width = 66;
+              };
+            };
+            log_level = "warn";
+            notifications.enabled = true;
+            sort = {
+              rooms = [ "unread" "favorite" "name" "lowpriority" ];
+              members = [ "id" "power" ];
+            };
+            user_gutter_width = 30;
+            username_display = "username";
           };
         };
       };

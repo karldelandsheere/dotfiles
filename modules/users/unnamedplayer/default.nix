@@ -35,19 +35,10 @@ in
     };
   };
 
-  # flake.homeModules.${username} = import ../../../../users/unnamedplayer/modules/home-manager.nix;
   flake.homeModules.${username} = { config, pkgs, osConfig, lib, inputs, ... }: let
     cfg = osConfig.nouveauxParadigmes;
   in
   {
-    imports = [
-      ../../../../config     # All the configs for tty and gui apps
-      ../../../../users/unnamedplayer/modules/impermanence.nix  # Define what should be kept between reboots
-      ../../../../users/unnamedplayer/modules/programs.nix      # No matter what, we'll always have a tty
-      ../../../../users/unnamedplayer/modules/secrets.nix       # Agenix files
-      ../../../../users/unnamedplayer/modules/mail.nix          # Mail
-    ];
-
     config = {
       home = {
         shellAliases = {
@@ -66,10 +57,10 @@ in
         };
 
         file = with config.lib.file; {
-          ".face".source = mkOutOfStoreSymlink ../../../../users/unnamedplayer/face.jpg;
-          "Pictures/Wallpapers".source = mkOutOfStoreSymlink ../../../../users/unnamedplayer/wallpapers;
+          ".face".source = mkOutOfStoreSymlink ./profile.jpg;
+          ".wallpaper".source = mkOutOfStoreSymlink ./20181014-04-Croptic-Karl_Delandsheere.jpg;
           ".cache/noctalia/wallpapers.json" = let
-              wallpaperPath = "${config.home.homeDirectory}/Pictures/Wallpapers/20181014-04-Croptic-Karl_Delandsheere.jpg";
+              wallpaperPath = "${config.home.homeDirectory}/.wallpaper";
           in
           {
             text = builtins.toJSON {
@@ -78,6 +69,14 @@ in
             };
           };
         };
+      };
+
+      age.secrets = { # @todo Auto discover and add those, and move out of the repo
+        "auth/bw".file = ./secrets/auth/bw.age;
+        "auth/mail/karl_at_delandsheere_be".file = ./secrets/auth/mail/karl_at_delandsheere_be.age;
+        "auth/mail/karl_at_nouveaux-paradigmes_be".file = ./secrets/auth/mail/karl_at_nouveaux-paradigmes_be.age;
+        "auth/matrix/dimeritium".file = ./secrets/auth/matrix/dimeritium.age;
+        "auth/tailscale/dimeritium".file = ./secrets/auth/tailscale/dimeritium.age;
       };
 
       nixpkgs.config.allowUnfree = cfg.allowUnfree;

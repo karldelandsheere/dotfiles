@@ -519,7 +519,7 @@
           };
 
           wallpaper = {
-            directory                     = "~/Pictures/Wallpapers"; # @todo Find how to make it work so I don't have to write it for every user
+            directory                     = "~/";
             enableMultiMonitorDirectories = false;
             enabled                       = true;
             fillColor                     = "#000000";

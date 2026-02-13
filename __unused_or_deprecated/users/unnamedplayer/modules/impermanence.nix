@@ -25,7 +25,7 @@
 
 
       files = [
-        ".config/gurk/gurk.toml"
+        # ".config/gurk/gurk.toml"
         # ".config/mimeapps.list"
         # ".config/Bitwarden CLI/data.json"
       ];
