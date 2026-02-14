@@ -44,7 +44,7 @@
         # https://wiki.archlinux.org/title/Laptop#UPower
         upower = {
           enable = true;
-          percentageAction = 5;
+          percentageAction = 3;
           percentageLow = 15;
           percentageCritical = 10;
           usePercentageForPolicy = true;

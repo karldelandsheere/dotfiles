@@ -14,76 +14,94 @@ in
   in
   {
     config = {
-      accounts.email = { # @todo Should I move this to secrets?
+      accounts.email = let
+        passwordCmd = name: "cat /run/agenix/auth/bw | bw get password Mail/${name}";
+
+        defaultSignature = ''
+          #-- <b>¯\_(ツ)_/¯</b> --#
+          <b>Karl Delandsheere</b>
+          <a href="https://shotbykarl.be">Photographie</a> / <a href="https://karl.delandsheere.be/webdev/">Développement web & infographie</a> / <a href="https://longrushtranquille.be">Impression 3D</a>
+          --
+          Liège, Belgique
+          Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
+        '';
+      in
+      { # @todo Shouldn't I move this to secrets?
         # maildirBasePath = "/persist/data/mail";
 
-        accounts."karl_at_delandsheere_be" = {
-          primary = true;
-          name = "Karl Delandsheere";
+        accounts."karl_at_delandsheere_be" = let
           userName = "karl@delandsheere.be";
+          passwordCommand = passwordCmd userName;
+          signature = defaultSignature;
+        in
+        {
+          inherit userName passwordCommand;
+
+          primary = true;
+
+          name = "Karl Delandsheere";
           realName = "Karl Delandsheere";
-          address = "karl@delandsheere.be";
+          address = userName;
           signature = {
             showSignature = "append";
-            # delimiter = "#-- ¯\\_(ツ)_/¯ --#";
-            text = ''
-              #-- <b>¯\_(ツ)_/¯</b> --#
-              <b>Karl Delandsheere</b>
-              <a href="https://shotbykarl.be">Photographie</a> / <a href="https://karl.delandsheere.be/webdev/">Développement web & infographie</a> / <a href="https://longrushtranquille.be">Impression 3D</a>
-              --
-              Liège, Belgique
-              Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
-            '';
+            text = signature;
           };
-          flavor = "migadu.com";
-          passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/karl@delandsheere.be";
 
-          aerc.enable = true;
+          flavor = "migadu.com";
+
+          aerc.enable = config.home.programs.aerc.enable;
+          thunderbird.enable = config.home.programs.thunderbird.enable;
         };
 
-        accounts."karl_at_nouveaux-paradigmes_be" = {
-          name = "Nouveaux paradigmes";
+        accounts."karl_at_nouveaux-paradigmes_be" = let
           userName = "karl@nouveaux-paradigmes.be";
+          passwordCommand = passwordCmd userName;
+          signature = defaultSignature;
+        in
+        {
+          inherit userName passwordCommand;
+
+          name = "Nouveaux paradigmes";
           realName = "Karl Delandsheere";
-          address = "karl@nouveaux-paradigmes.be";
+          address = userName;
           signature = {
             showSignature = "append";
-            # delimiter = "#-- ¯\\_(ツ)_/¯ --#";
-            text = ''
-              #-- <b>¯\_(ツ)_/¯</b> --#
-              <b>Karl Delandsheere</b>
-              <a href="https://shotbykarl.be">Photographie</a> / <a href="https://karl.delandsheere.be/webdev/">Développement web & infographie</a> / <a href="https://longrushtranquille.be">Impression 3D</a>
-              --
-              Liège, Belgique
-              Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
-            '';
+            text = signature;
           };
-          flavor = "migadu.com";
-          passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/karl@nouveaux-paradigmes.be";
 
-          aerc.enable = true;
+          flavor = "migadu.com";
+
+          aerc.enable = config.home.programs.aerc.enable;
+          thunderbird.enable = config.home.programs.thunderbird.enable;
         };
 
-        accounts."expo_at_ventrecontent_be" = {
-          name = "Expo @ Ventre Content";
+        accounts."expo_at_ventrecontent_be" = let
+          host = "mail.ventrecontent.be";
           userName = "expo@ventrecontent.be";
+          passwordCommand = passwordCmd userName;
+          signature = ''
+            --
+            <b>Karl pour Ventre Content<a href="https://ventrecontent.be">Ventre Content</a></b>
+            --
+            Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
+          '';
+        in
+        {
+          inherit userName passwordCommand;
+          
+          name = "Expo @ Ventre Content";
           realName = "Ventre Content";
-          address = "expo@ventrecontent.be";
+          address = userName;
           signature = {
             showSignature = "append";
-            # delimiter = "#-- ¯\\_(ツ)_/¯ --#";
-            text = ''
-              --
-              <b>Karl pour Ventre Content<a href="https://ventrecontent.be">Ventre Content</a></b>
-              --
-              Tel/Signal : <a href="tel:+32498139866">+32 498 13 98 66</a>
-            '';
+            text = signature;
           };
-          imap.host = "mail.ventrecontent.be";
-          smtp.host = "mail.ventrecontent.be";
-          passwordCommand = "cat /run/agenix/auth/bw | bw get password Mail/expo@ventrecontent.be";
 
-          aerc.enable = true;
+          imap.host = host;
+          smtp.host = host;
+
+          aerc.enable = config.home.programs.aerc.enable;
+          thunderbird.enable = config.home.programs.thunderbird.enable;
         };
       };
     };

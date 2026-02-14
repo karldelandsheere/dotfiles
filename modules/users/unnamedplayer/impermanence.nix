@@ -22,14 +22,12 @@ in
 
         # @todo Determinate what is really needed here
         # ".local/share/calcurse"
-        # ".local/share/gurk"
         # ".local/share/iamb"
       ]
       ++ lib.forEach [
         "Bitwarden"
         "obsidian"
         "PrusaSlicer"
-        "Signal"
         "Termius"
         "vivaldi"
         "zed"
@@ -37,7 +35,6 @@ in
 
 
       files = [
-        # ".config/gurk/gurk.toml"
         # ".config/mimeapps.list"
         # ".config/Bitwarden CLI/data.json"
       ];
