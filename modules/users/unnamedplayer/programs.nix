@@ -13,11 +13,16 @@ in
   in
   {
     imports = [
+      self.homeModules.bitwarden
       self.homeModules.bottom
+      self.homeModules.email_clients
       self.homeModules.fastfetch
+      self.homeModules.ghostty
+      self.homeModules.helix
       self.homeModules.matrix_clients
       self.homeModules.signal
       self.homeModules.yazi
+      self.homeModules.zed-editor
     ];
     
     config = {
@@ -25,9 +30,7 @@ in
         packages = ( with pkgs; [
           # TUI/CLI programs
           # ----------------
-          # aerc                   # Email client
           # basalt                 # @todo check back in a couple months
-          bitwarden-cli          # Easy access to my vault in tty
           # calcurse               # CalDav client
           cmatrix                # Yeah, I know... like the cool kids
           curl
@@ -47,7 +50,6 @@ in
         # GUI programs
         ++ lib.lists.optionals ( cfg.gui.enable ) [
           bambu-studio           # Slicer for my Bambu printers
-          bitwarden-desktop      # Passwords & stuff
           # blender
           inkscape               # Vector graphics editor
           mullvad-browser        # Highly privacy focused browser
@@ -90,44 +92,18 @@ in
 
         sessionVariables = with pkgs; {
           BROWSER = "${mullvad-browser}/bin/mullvad-browser";
-          EDITOR  = "${helix}/bin/hx";
-          VISUAL  = "${helix}/bin/hx";
         };
       };
 
       programs = {
-        ghostty = {
-          enable = true;
-          enableZshIntegration = config.programs.zsh.enable;
-        };
-
-        git = { # Git ID's and signing options
+        git = {
           enable = true;
           settings.user = {
-            name  = "Karl";
+            name = "Karl";
             email = "karl@delandsheere.be"; };
-
           signing = {
-            key           = "D4EFAA4CD5AE64F4";
+            key = "D4EFAA4CD5AE64F4";
             signByDefault = true; };
-        };
-
-        helix = { # Helix > Vim imho
-          enable = true;
-          settings = {
-            theme = "catppuccin_mocha";
-            editor = {
-              cursorline = true;
-              cursor-shape = {
-                insert = "bar";
-                normal = "block";
-                select = "underline";
-              };
-              line-number = "relative";
-              middle-click-paste = false;
-              mouse = true;
-            };
-          };
         };
 
         niri.settings = {
@@ -200,36 +176,6 @@ in
               open-maximized    = true;
               open-on-workspace = "stuff"; }
           ];
-        };
-
-        thunderbird = {
-          enable = false; # For now
-          profiles = {};
-          settings = {};
-        };
-
-        zed-editor = {
-          enable       = true;
-          extensions   = [ "html" "nix" "php" "xml" ];
-          userSettings = {
-            base_keymap      = "VSCode";
-            buffer_font_size = 16;
-            disable_ai       = true;
-            helix_mode       = true;
-            icon_theme       = {
-              mode = "dark";
-              dark = "Zed (Default)";
-            };
-            telemetry        = {
-              diagnostics = false;
-              metrics     = false;
-            };
-            theme            = {
-              mode = "dark";
-              dark = "One Dark";
-            };
-            ui_font_size     = 16;
-          };
         };
 
         zsh = {

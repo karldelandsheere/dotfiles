@@ -30,7 +30,6 @@ in
         "PrusaSlicer"
         "Termius"
         "vivaldi"
-        "zed"
       ] (x: ".config/${x}");
 
 

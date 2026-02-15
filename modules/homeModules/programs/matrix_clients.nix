@@ -60,6 +60,12 @@
         #   settings = {};
         # };
       };
+
+      # @todo make this conditional
+      home.persistence."/persist".directories = [
+        ".local/share/iamb"
+        # ".config/Element"
+      ];
     };
   };
 }

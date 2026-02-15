@@ -49,12 +49,10 @@
       ] );
 
       # @todo make this conditional
-      home.persistence."/persist" = {
-        directories = [
-          ".local/share/gurk"
-          ".config/Signal"
-        ];
-      };
+      home.persistence."/persist".directories = [
+        ".local/share/gurk"
+        ".config/Signal"
+      ];
     };
   };
 }
