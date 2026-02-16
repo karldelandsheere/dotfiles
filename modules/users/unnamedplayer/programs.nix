@@ -14,14 +14,10 @@ in
   {
     imports = [
       self.homeModules.bitwarden
-      self.homeModules.bottom
       self.homeModules.email_clients
-      self.homeModules.fastfetch
       self.homeModules.ghostty
-      self.homeModules.helix
       self.homeModules.matrix_clients
       self.homeModules.signal
-      self.homeModules.yazi
       self.homeModules.zed-editor
     ];
     
@@ -32,19 +28,8 @@ in
           # ----------------
           # basalt                 # @todo check back in a couple months
           # calcurse               # CalDav client
-          cmatrix                # Yeah, I know... like the cool kids
-          curl
-          exiftool
-          ffmpeg
           jellyfin-tui           # TUI client for Jellyfin Media Server
           mpv                    # Video player
-          progress               # Follow the progression of any command
-          pure-prompt            # Still on the fence with this one
-          scooter                # Directory wide search & replace
-          tmux                   # Terminal multiplexer
-          tree                   # Kinda ls but as a tree
-          ueberzugpp             # Terminal image viewer (needed for yazi)
-          yt-dlp                 # Youtube downloader
         ]
 
         # GUI programs
@@ -67,45 +52,12 @@ in
           termius                # Cross-platform SSH client
         ] );
 
-        shellAliases = {
-          dots = "cd ${cfg.dotfiles}";
-          keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
-
-          # Git shortcuts for the lazy ass I am
-          ga    = "git add";
-          gaa   = "git add --all";
-          gaacm = "git add --all && git commit -S -m";
-          gb    = "git branch";
-          gc    = "git commit -S";
-          gch   = "git checkout";
-          gchb  = "git checkout -b";
-          gcl   = "git clone";
-          gcm   = "git commit -S -m";
-          gd    = "git diff";
-          gm    = "git merge";
-          gpl   = "git pull";
-          gplo  = "git pull origin";
-          gps   = "git push";
-          gpso  = "git push origin";
-          gs    = "git status";
-        };
-
         sessionVariables = with pkgs; {
           BROWSER = "${mullvad-browser}/bin/mullvad-browser";
         };
       };
 
       programs = {
-        git = {
-          enable = true;
-          settings.user = {
-            name = "Karl";
-            email = "karl@delandsheere.be"; };
-          signing = {
-            key = "D4EFAA4CD5AE64F4";
-            signByDefault = true; };
-        };
-
         niri.settings = {
           screenshot-path = "~/Data/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
@@ -176,17 +128,6 @@ in
               open-maximized    = true;
               open-on-workspace = "stuff"; }
           ];
-        };
-
-        zsh = {
-          enable = true;
-          initContent = ''
-            autoload -U promptinit; promptinit
-            zstyle ':prompt:pure:path' color red
-            zstyle ':prompt:pure:prompt:*' color red
-            zstyle ':prompt:pure:git:stash' show yes
-            prompt pure
-          '';
         };
       };
     };
