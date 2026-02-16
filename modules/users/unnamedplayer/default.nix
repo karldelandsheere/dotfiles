@@ -40,33 +40,16 @@ in
   in
   {
     config = {
-      home = {
-        shellAliases = {
-          todo = "clear && grep -rnw ${cfg.dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
-
-          tsup-dimeritium = ''
-            mullvad disconnect && \
-            tailscale up --force-reauth --operator=$USER \
-              --login-server=https://headscale.sunflower-cloud.com:8080 \
-              --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)                                                                 '';
-          tsup-np = ''
-            mullvad disconnect && \                                                                                                     tailscale up --force-reauth --operator=$USER \
-              --login-server=https://headscale.nouveaux-paradigmes.be \
-              --auth-key $(cat /run/agenix/auth/tailscale/nouveauxparadigmes)                                                         '';
-          tsdown = "tailscale down --accept-risk=all && mullvad connect";
-        };
-
-        file = with config.lib.file; {
-          ".face".source = mkOutOfStoreSymlink ./profile.jpg;
-          ".wallpaper".source = mkOutOfStoreSymlink ./20181014-04-Croptic-Karl_Delandsheere.jpg;
-          ".cache/noctalia/wallpapers.json" = let
-              wallpaperPath = "${config.home.homeDirectory}/.wallpaper";
-          in
-          {
-            text = builtins.toJSON {
-              defaultWallpaper = wallpaperPath;
-              wallpapers = { "eDP-1" = wallpaperPath; };
-            };
+      home.file = with config.lib.file; {
+        ".face".source = mkOutOfStoreSymlink ./profile.jpg;
+        ".wallpaper".source = mkOutOfStoreSymlink ./20181014-04-Croptic-Karl_Delandsheere.jpg;
+        ".cache/noctalia/wallpapers.json" = let
+            wallpaperPath = "${config.home.homeDirectory}/.wallpaper";
+        in
+        {
+          text = builtins.toJSON {
+            defaultWallpaper = wallpaperPath;
+            wallpapers = { "eDP-1" = wallpaperPath; };
           };
         };
       };

@@ -37,6 +37,7 @@ in
 
         shellAliases = {
           dots = "cd ${cfg.dotfiles}";
+          todo = "clear && grep -rnw ${cfg.dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
           keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
 
           # Git shortcuts for the lazy ass I am
@@ -56,6 +57,18 @@ in
           gps   = "git push";
           gpso  = "git push origin";
           gs    = "git status";
+
+          # Tailscale shortcuts
+          tsup-dimeritium = ''
+            mullvad disconnect && \
+            tailscale up --force-reauth --operator=$USER \
+              --login-server=https://headscale.sunflower-cloud.com:8080 \
+              --auth-key $(cat /run/agenix/auth/tailscale/dimeritium)                                                                 '';
+          tsup-np = ''
+            mullvad disconnect && \                                                                                                     tailscale up --force-reauth --operator=$USER \
+              --login-server=https://headscale.nouveaux-paradigmes.be \
+              --auth-key $(cat /run/agenix/auth/tailscale/nouveauxparadigmes)                                                         '';
+          tsdown = "tailscale down --accept-risk=all && mullvad connect";
         };
       };
 
