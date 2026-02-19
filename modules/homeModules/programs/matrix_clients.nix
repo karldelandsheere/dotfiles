@@ -61,11 +61,12 @@
         # };
       };
 
-      # @todo make this conditional
-      home.persistence."/persist".directories = [
-        ".local/share/iamb"
-        # ".config/Element"
-      ];
+      # What data should persist
+      home.persistence."/persist" = lib.mkIf cfg.impermanence.enable {
+        directories =
+          [ ".local/share/iamb" ];
+          # ++ lib.lists.optionals cfg.gui.enable [ ".config/Element" ];
+      };
     };
   };
 }

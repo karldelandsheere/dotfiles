@@ -48,11 +48,12 @@
         signal-desktop
       ] );
 
-      # @todo make this conditional
-      home.persistence."/persist".directories = [
-        ".local/share/gurk"
-        ".config/Signal"
-      ];
+      # What data should persist
+      home.persistence."/persist" = lib.mkIf cfg.impermanence.enable {
+        directories =
+          [ ".local/share/gurk" ]
+          ++ lib.lists.optionals cfg.gui.enable [ ".config/Signal" ];
+      };
     };
   };
 }

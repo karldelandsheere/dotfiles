@@ -17,7 +17,7 @@
   {
     config = {
       boot = {
-        kernelParams = [ "quiet" "splash" ];
+        kernelParams = [ "quiet" "splash" "loglevel=3"];
 
         loader = {
           efi.canTouchEfiVariables = true;

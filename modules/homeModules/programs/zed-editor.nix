@@ -35,8 +35,10 @@
         };
       };
 
-      # @todo make this conditional
-      home.persistence."/persist".directories = [ ".config/zed" ];
+      # What data should persist
+      home.persistence."/persist" = lib.mkIf cfg.impermanence.enable {
+        directories = [ ".config/zed" ];
+      };
     };
   };
 }
