@@ -2,10 +2,6 @@
 # 
 # Home-manager setup.
 #
-# Next steps:
-#   - @todo Figure out what should be moved to Home-Manager instead of
-#       system, in terms of packages, programs, and stuff.
-#
 ###############################################################################
 
 { inputs, self, ... }:

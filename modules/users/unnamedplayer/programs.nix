@@ -10,6 +10,7 @@ in
 {
   flake.homeModules.${username} = { config, pkgs, osConfig, lib, ... }: let
     withDesktop = osConfig.features.desktop.enable;
+    withImpermanence = osConfig.features.impermanence.enable;
   in
   {
     imports = [
@@ -54,6 +55,15 @@ in
 
         sessionVariables = with pkgs; {
           BROWSER = "${mullvad-browser}/bin/mullvad-browser";
+        };
+
+        persistence."/persist" = lib.mkIf withImpermanence {
+          directories = lib.mkIf withDesktop [
+            ".config/obsidian"
+            ".local/share/prusa-slicer"
+            ".config/PrusaSlicer"
+            ".config/Termius"
+          ];
         };
       };
 

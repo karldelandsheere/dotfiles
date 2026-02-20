@@ -50,9 +50,11 @@
       # ------------------------------
       boot.initrd.systemd.services.rollback = let
         # @todo Make this more versatile regarding the disk type etc
-        requiresAfter = if config.features.encryption.enable
-          then "systemd-cryptsetup@cryptroot.service"
-          else "dev-nvme0n1p2.device"; # @todo Also, this should depend on install.sh
+        # requiresAfter = if config.features.encryption.enable
+        #   then "systemd-cryptsetup@cryptroot.service"
+        #   else "dev-nvme0n1p2.device"; # @todo Also, this should depend on install.sh
+
+        requiresAfter = "initrd-root-device.target";
       in
       {
         description = "Rollback BTRFS root and home subvolumes to a pristine state";
@@ -114,7 +116,6 @@
             "tuned" ] (x: "/etc/${x}")
           ++ lib.forEach [                   # /var/lib/...
             "bluetooth"
-            # "NetworkManager"
             "nixos"
             "tailscale"
             "upower" ] (x: "/var/lib/${x}")
@@ -140,7 +141,7 @@
                 ".local/share/keyrings"          # Gnome keyring
                 ".mullvad"                       # VPN
                 ".ssh"                           # Obvious, innit?
-                # "Data"                           # Vaults, documents, etc
+                "Data"                           # Vaults, documents, etc
               ];
 
               files = [

@@ -257,7 +257,7 @@
                     audioSource     = "default_output";
                     colorRange      = "limited";
                     copyToClipboard = false;
-                    directory       = "~/Data/Screenshots"; # @todo Find how to write it for all users at once here
+                    directory       = "~/Data/Screenshots";
                     filenamePattern = "yyyyMMdd_HHmmss-screen_recording";
                     frameRate       = 60;
                     quality         = "very_high";
@@ -276,20 +276,7 @@
             monitorWidgets = [
               {
                 name    = "eDP-1";
-                widgets = [
-                  # { id = "Clock";
-
-                  #   clockStyle      = "binary";
-                  #   customFont      = "";
-                  #   format          = "HH:mm";
-                  #   roundedCorners  = false;
-                  #   scale           = 7;
-                  #   showBackground  = false;
-                  #   useCustomFont   = false;
-                  #   usePrimaryColor = false;
-                  #   x               = 1600;
-                  #   y               = 750; }
-                ];
+                widgets = [];
               }
             ];
           };
@@ -455,7 +442,12 @@
             diskPollingInterval    = 3000;
             diskWarningThreshold   = 80;
             enableDgpuMonitoring   = false;
-            externalMonitor        = "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor";
+            externalMonitor        = lib.strings.join " || " [
+              "resources" "missioncenter" "jdsystemmonitor" "corestats"
+              "system-monitoring-center" "gnome-system-monitor"
+              "plasma-systemmonitor" "mate-system-monitor" "ukui-system-monitor"
+              "deepin-system-monitor" "pantheon-system-monitor"
+            ];
             gpuCriticalThreshold   = 90;
             gpuPollingInterval     = 3000;
             gpuWarningThreshold    = 80;

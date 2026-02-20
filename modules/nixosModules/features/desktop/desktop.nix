@@ -9,9 +9,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.desktop = { lib, config, pkgs, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.desktop = { lib, config, pkgs, ...}:
   {
     config = {
       features.desktop.enable = true; # So other modules know
