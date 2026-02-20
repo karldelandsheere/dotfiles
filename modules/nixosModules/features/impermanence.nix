@@ -60,7 +60,7 @@
         # @todo Make this more versatile regarding the disk type etc
         requiresAfter = if cfg.encryption.enable
           then "systemd-cryptsetup@cryptroot.service"
-          else "dev-nvme0n1p2.device";
+          else "dev-nvme0n1p2.device"; # @todo Also, this should depend on install.sh
       in
       {
         description = "Rollback BTRFS root and home subvolumes to a pristine state";
@@ -82,6 +82,26 @@
             runtimeInputs = [ pkgs.btrfs-progs ];
             text = builtins.readFile "${scriptsDir}/differences.sh";
           } )
+
+          ( let
+              ignore = lib.strings.join "|" [
+                ".cache"
+                "/etc/(.clean|group|passwd|resolv.conf|shadow|subgid|subuid|sudoers|.updated)"
+                "/root/.nix-channels"
+                "/tmp/.X0-lock"
+                "/var/lib/(lastlog/lastlog2.db|logrotate.status|NetworkManager)"
+              ];
+            in
+              pkgs.writeShellScriptBin "differences-root" ''
+                exec differences "root" "" "${ignore}"
+              '' )
+
+          ( let
+              ignore = lib.strings.join "|" [];
+            in
+              pkgs.writeShellScriptBin "differences-home" ''
+                exec differences "home/active" "home" "${ignore}"
+              '' )
         ];
 
 
@@ -175,11 +195,6 @@
       security.sudo.extraConfig = ''
         Defaults lecture = never
       '';
-
-
-      # Allow non-root users
-      # --------------------
-      # programs.fuse.userAllowOther = true;
     };
   };
 }

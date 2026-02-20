@@ -37,10 +37,6 @@ in
         ] );
 
         shellAliases = {
-          dots = "cd ${cfg.dotfiles}";
-          todo = "clear && grep -rnw ${cfg.dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
-          keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
-
           # Tailscale shortcuts
           tsup-dimeritium = ''
             mullvad disconnect && \

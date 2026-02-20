@@ -44,13 +44,13 @@
         # --------------
         nouveauxParadigmes = {
           hostname = "q3dm10";
-          rootDisk = "/dev/nvme0n1";
+          rootDisk = "/dev/nvme0n1"; # @todo Should also be determined in install.sh?
           swapSize = 96*1024;
           encryption.enable = true;
           impermanence.enable = true;
           hibernation = {
             enable = true;
-            resume.offset = "1108328";
+            resume.offset = "1108328"; # @todo Shouldn't that be determined in install.sh?
           };
         };
 

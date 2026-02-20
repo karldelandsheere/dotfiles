@@ -1,80 +1,66 @@
 #!/usr/bin/env bash
-# @todo Make it more dynamic and less system dependant
-#       by replacing /nvme0n1p2 with a global const or something
-# --------------------------------------------------------------
 
-# Creating a tmp root mount
-# -------------------------
-_tmp_root=$(mktemp -d)
-mkdir -p "${_tmp_root}"
-# mount -o subvol=/ /dev/nvme0n1p2 "${_tmp_root}" > /dev/null 2>&1
-mount -o subvol=/ /dev/mapper/cryptroot "${_tmp_root}" > /dev/null 2>&1
+###############################################################################
+#
+# differences.sh does a few things:
+#   It reads everything under the root and home subvolumes and
+#   compares what it finds on the pristine versions of those subvolumes.
+#   Everything that is not on the pristine versions (except what is ignored)
+#   is considered a difference.
+#   It echoes those differences so you can then decide what you want to add
+#   to the /persist subvolume.
+#
+###############################################################################
 
 # If any error occurs, exit
 # -------------------------
 set -euo pipefail
 
+ROOT_PART=/dev/mapper/cryptroot
 
-# Get pristine root transid
+# Creating a tmp root mount
 # -------------------------
-OLD_ROOT_TRANSID=$(sudo btrfs subvolume find-new "${_tmp_root}/root-blank" 9999999)
-OLD_ROOT_TRANSID=${OLD_ROOT_TRANSID#transid marker was }
+TMP_ROOT=$(mktemp -d)
+mkdir -p "${TMP_ROOT}"
+mount -o subvol=/ "${ROOT_PART}" "${TMP_ROOT}" > /dev/null 2>&1
 
-# Search for differences on root
-# ------------------------------
-sudo btrfs subvolume find-new "${_tmp_root}/root" "$OLD_ROOT_TRANSID" | sed '$d' | cut -f17- -d' ' | sort | uniq | 
-while read -r path; do
+# Process given arguments
+# -----------------------
+SUBVOL="${1:-root}"          # subvolume to check (e.g. root, home/active, ...)
+BLANK="${2:-$SUBVOL}-blank"  # subvolume to compare it to
+IGNORE="${3:-}"              # ignore paths matching this|these pattern|s
+
+# Retrieve transient id
+BLANK_TRANSID=$(sudo btrfs subvolume find-new "${TMP_ROOT}/${BLANK}" 9999999)
+BLANK_TRANSID=${BLANK_TRANSID#transid marker was }
+
+# Let's go then
+# -------------
+echo "Checking for differences/new files on subvolume '${SUBVOL}'"
+echo "--------"
+
+sudo btrfs subvolume find-new "${TMP_ROOT}/${SUBVOL}" "$BLANK_TRANSID" \
+  | sed '$d' | cut -f17- -d' ' | sort -u | while read -r path; do
   path="/$path"
-  fpath="$_tmp_root/root$path"
+  fpath="${TMP_ROOT}/${SUBVOL}${path}"
   rpath="$(realpath "$fpath")"
 
-  if [[ $rpath == "$fpath"  ]] && \
-     [[ $path != *"/etc/.clean"* ]] && \
-     [[ $path != *"/etc/group"* ]] && \
-     [[ $path != *"/etc/passwd"* ]] && \
-     [[ $path != *"/etc/resolv.conf"* ]] && \
-     [[ $path != *"/etc/shadow"* ]] && \
-     [[ $path != *"/etc/subgid"* ]] && \
-     [[ $path != *"/etc/subuid"* ]] && \
-     [[ $path != *"/etc/sudoers"* ]] && \
-     [[ $path != *"/etc/.updated"* ]] && \
-     [[ $path != *"/root/.nix-channels"* ]] && \
-     [[ $path != *"/tmp/"* ]] && \
-     [[ $path != *"/var/.updated"* ]] && \
-     [[ $path != *"/.cache/"* ]]; then
-    echo "$path"
-  fi
+  # Skip if symlink-resolved
+  [[ $rpath != "$fpath" ]] && continue
+
+  # Skip if ignore pattern is provided and $path matches it
+  [[ -n $IGNORE && $path =~ $IGNORE ]] && continue
+
+  # echo this one
+  echo "$path"
 done
 
-
-# Get pristine home transid
-# -------------------------
-OLD_HOME_TRANSID=$(sudo btrfs subvolume find-new "${_tmp_root}/home-blank" 9999999)
-OLD_HOME_TRANSID=${OLD_HOME_TRANSID#transid marker was }
-
-# Search for differences on home
-# ------------------------------
-sudo btrfs subvolume find-new "${_tmp_root}/home/active" "$OLD_HOME_TRANSID" | sed '$d' | cut -f17- -d' ' | sort | uniq | 
-while read -r path; do
-  path="/$path"
-  fpath="$_tmp_root/home/active$path"
-  rpath="$(realpath "$fpath")"
-
-  if [[ $rpath == "$fpath"  ]] && \
-     [[ $path != *"/.zcompdump"* ]] && \
-     [[ $path != *"/.zsh_history"* ]] && \
-     [[ $path != *"/.cache/"* ]] && \
-     [[ "$path" != *"Cache"* ]] && \
-     [[ "$path" != *"/Crash Reports/"* ]] && \
-     [[ "$path" != *"Signal/attachments.noindex"*  ]] && \
-     [[ "$path" != *"Signal/badges.noindex"* ]] && \
-     [[ "$path" != *"Signal/stickers.noindex"* ]]; then
-    echo "$path"
-  fi
-done
-
+echo "--------"
+echo "That's it."
 
 # We're done, so unmount temp root mount
 # --------------------------------------
-umount "${_tmp_root}"
-rm -rf "${_tmp_root}"
+echo "Unmounting temp root mount."
+umount "${TMP_ROOT}"
+rm -rf "${TMP_ROOT}"
+echo "We're done here. Bye."

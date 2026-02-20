@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-# @todo Make this a little less hardcoded
+###############################################################################
+#
+# rollback.sh takes care of getting root and home/active subvolumes to their
+# pristine states.
+#
+###############################################################################
 
 # This script needs to be run by priviledge user
 # ----------------------------------------------
@@ -10,34 +15,21 @@ then
 	exit 1
 fi
 
+# If any error occurs, exit
+# -------------------------
+set -euo pipefail
+
+# This is replaced during install.sh, default is __PRIMARY_PART__
+ROOT_PART=/dev/mapper/cryptroot
+
 # Create root mount
 # -----------------
 MNT_DIR=/mnt
 mkdir -p ${MNT_DIR}
 
-# @todo Is there a way to make the script less hard coded?
-# --------------------------------------------------------
-
-# First we check if there is a LUKS encrypted root
-BTRFS_VOL=/dev/mapper/cryptroot 
-if [ ! -r "$BTRFS_VOL" ];
-then
-  >&2 echo "LUKS encrypted volume not found, trying for a non-encrypted volume."
-
-  # If there is no LUKS encrypted root,
-  # we check for a regular BTRFS volume.
-  BTRFS_VOL=/dev/nvme0n1p2
-  # Check if the volume exists, if not exit
-  if [ ! -r "$BTRFS_VOL" ];
-  then
-    >&2 echo "Device '$BTRFS_VOL' not found"
-    exit 1
-  fi
-fi
-
 # Go on, mount it then
 # --------------------
-mount -o subvol=/ ${BTRFS_VOL} ${MNT_DIR}
+mount -o subvol=/ ${ROOT_PART} ${MNT_DIR}
 
 
 # Rolling back root to its pristine state

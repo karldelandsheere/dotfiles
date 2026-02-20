@@ -23,6 +23,7 @@
       enable = lib.mkEnableOption "Enable hibernation? Defaults to false.";
 
       resume = {
+        # @todo this should be determined in install.sh
         device = lib.mkOption {
           type = lib.types.str;
           default = "/dev/mapper/cryptroot";
@@ -30,6 +31,7 @@
                          Defaults to /dev/mapper/cryptroot";
         };
 
+        # @todo this should be determined in install.sh
         offset = lib.mkOption {
           type = lib.types.str;
           default = "0";
