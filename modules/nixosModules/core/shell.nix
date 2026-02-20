@@ -19,7 +19,7 @@
 
         shellAliases = {
           dots = "cd ${dotfiles}";
-          todo = "clear && grep -rnw ${dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
+          todo = "clear && grep -rnw ${dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo' | grep -v 'todo ='";
           keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
         };
         

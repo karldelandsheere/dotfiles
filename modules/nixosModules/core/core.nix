@@ -6,12 +6,12 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { config, pkgs, ...}:
+  flake.nixosModules.core = { config, pkgs, lib, ...}:
   {
     config = {
       console = {
         earlySetup = true;
-        font = "Lat2-Terminus16";
+        font = lib.mkDefault "Lat2-Terminus16";
         useXkbConfig = true;
       };
 
@@ -20,20 +20,24 @@
         nerd-fonts.jetbrains-mono
       ];
       
-      hardware.enableAllFirmware = true; # Don't remember what it does exactly
+      hardware.enableRedistributableFirmware = true;
 
       i18n = {
-        defaultLocale = "en_US.UTF-8";
+        defaultLocale = lib.mkDefault "en_US.UTF-8";
         inputMethod = {
           enable = true;
           type = "ibus";
         };
       };
 
+      time.timeZone = lib.mkDefault "Europe/Brussels";
+
       services = {
         dbus.implementation = "broker";
         udisks2.enable = true; # DBus service that allows apps to query/manipulate storage devices
       };
+
+      system.stateVersion = lib.mkDefault "25.11";
     };
   };
 }

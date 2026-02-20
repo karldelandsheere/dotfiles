@@ -5,11 +5,6 @@
 # Resources:
 # - https://nixos.wiki/wiki/Hibernation
 #
-# Next steps:
-# -----------
-# - @todo Find out why I have this error when resuming from hibernation
-#   "BTRFS error: failed to open device for path /dev/mapper/cryptroot with flags 0x3: -16"
-# 
 ###############################################################################
 
 { inputs, self, ... }:
@@ -25,7 +20,8 @@
       ];
 
       # For hibernation to work, swap size needs to be at least ram size
-      # nouveauxParadigmes.swapSize = cfg.ramSize + 1024;
+      # @todo Add a check for swapSize to be bigger than ram size
+      #  filesystem.swapSize = cfg.ramSize + 1024;
       
       services = {
         # Lid and powerKey events

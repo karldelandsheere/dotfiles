@@ -24,46 +24,39 @@
       features.impermanence.enable = true; # So other modules know
 
       # Adding options to the filesystems
-      fileSystems = {
-        "/".options = [ "compress=zstd" "noatime" ];
+      fileSystems = let
+        neededForBoot = true;
+        options = [ "compress=zstd" "noatime" ];
+        fullOptions = { inherit neededForBoot options; };
+      in
+      {
+        "/".options = options;
 
-        "/home" = { neededForBoot = true;
-                    options = [ "compress=zstd" "noatime" ]; };
-        "/home/.snapshots".options = [ "compress=zstd" "noatime" ];
+        "/home" = fullOptions;
+        "/home/.snapshots".options = options;
 
         "/nix".options = [ "noatime" ];
 
-        "/persist" = { neededForBoot = true;
-                       options = [ "compress=zstd" "noatime" ]; };
-        "/persist/.snapshots" = { neededForBoot = true;
-                                  options = [ "compress=zstd" "noatime" ]; };
+        "/persist" = fullOptions;
+        "/persist/.snapshots" = fullOptions;
 
-        "/var/local".options = [ "compress=zstd" "noatime" ];
-        "/var/local/.snapshots".options = [ "compress=zstd" "noatime" ];
+        "/var/local".options = options;
+        "/var/local/.snapshots".options = options;
 
-        "/var/log" = { neededForBoot = true;
-                       options = [ "compress=zstd" "noatime" ]; };
+        "/var/log" = fullOptions;
       };
 
       
       # Rollback routine on every boot
       # ------------------------------
-      boot.initrd.systemd.services.rollback = let
-        # @todo Make this more versatile regarding the disk type etc
-        # requiresAfter = if config.features.encryption.enable
-        #   then "systemd-cryptsetup@cryptroot.service"
-        #   else "dev-nvme0n1p2.device"; # @todo Also, this should depend on install.sh
-
-        requiresAfter = "initrd-root-device.target";
-      in
-      {
+      boot.initrd.systemd.services.rollback = {
         description = "Rollback BTRFS root and home subvolumes to a pristine state";
-        wantedBy    = [ "initrd.target" ];
-        requires    = [ requiresAfter ];
-        after       = [ requiresAfter ];
-        before      = [ "sysroot.mount" ];
+        wantedBy = [ "initrd.target" ];
+        requires = [ "initrd-root-device.target" ];
+        after = [ "initrd-root-device.target" ];
+        before = [ "sysroot.mount" ];
         unitConfig.DefaultDependencies = "no";
-        serviceConfig.Type             = "oneshot";
+        serviceConfig.Type = "oneshot";
         script = builtins.readFile "${scriptsDir}/rollback.sh";
       };
 

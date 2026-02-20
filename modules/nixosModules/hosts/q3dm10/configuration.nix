@@ -49,11 +49,6 @@
         features.hibernation.resumeOffset = "1108328";
         filesystem.swapSize = 96*1024;
 
-        time.timeZone = "Europe/Brussels";
-
-        nixpkgs.config.allowUnfree = true;
-        system.stateVersion = "25.11";
-
         services = {
           mullvad-vpn.enable = true;
           xserver.xkb.layout = "be";

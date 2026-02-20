@@ -24,6 +24,11 @@
           randomizedDelaySec = "1 hour";
         };
       };
+
+      nixpkgs.config = {
+        allowUnfree = false;
+        # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
+      };
     };
   };
 }

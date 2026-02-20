@@ -18,23 +18,25 @@ in
       self.homeModules.email_clients
       self.homeModules.ghostty
       self.homeModules.matrix_clients
+      self.homeModules.obsidian
       self.homeModules.signal
+      self.homeModules.termius
       self.homeModules.zed-editor
     ];
     
     config = {
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "obsidian"
+        "termius"
+      ];
+
       home = {
-        packages = ( with pkgs; [
-          # TUI/CLI programs
-          # ----------------
-          # basalt                 # @todo check back in a couple months
+        packages = ( with pkgs; [ # TUI/CLI
           # calcurse               # CalDav client
           jellyfin-tui           # TUI client for Jellyfin Media Server
           mpv                    # Video player
         ]
-
-        # GUI programs
-        ++ lib.lists.optionals withDesktop [
+        ++ lib.lists.optionals withDesktop [ # GUI
           bambu-studio           # Slicer for my Bambu printers
           # blender
           inkscape               # Vector graphics editor
@@ -45,12 +47,6 @@ in
           rustdesk-flutter       # Open source Remote Desktop (like AnyDesk or TimeViewer)
           # qbittorrent
           # vlc                  # Replaced by mpv (tty video player)
-        ]
-
-        # GUI and unfree programs
-        ++ lib.lists.optionals ( withDesktop && osConfig.nixpkgs.config.allowUnfree ) [
-          obsidian               # Markdown note taking app
-          termius                # Cross-platform SSH client
         ] );
 
         sessionVariables = with pkgs; {
@@ -59,10 +55,8 @@ in
 
         persistence."/persist" = lib.mkIf withImpermanence {
           directories = lib.mkIf withDesktop [
-            ".config/obsidian"
             ".local/share/prusa-slicer"
             ".config/PrusaSlicer"
-            ".config/Termius"
           ];
         };
       };

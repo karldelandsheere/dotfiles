@@ -15,7 +15,9 @@
 #   - @todo Try out specialisation: https://www.youtube.com/shorts/cyX8Imfb0Mg
 #   - @todo Figure out Devenv in Nix
 #   - @todo Implement a local binary cache to speed up rebuild a bit
-#
+#   - @todo Find out why I have this error when resuming from hibernation
+#       "BTRFS error: failed to open device
+#          for path /dev/mapper/cryptroot with flags 0x3: -16"
 # Probably never at this point:
 # -----------------------------
 #   - Actually use this setup for something else than ricing...

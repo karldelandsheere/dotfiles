@@ -19,12 +19,9 @@
           extraGrubInstallArgs = [ "--modules=cryptodisk luks" ];
         };
 
-        initrd = {
-          luks.devices.cryptroot = {
-            allowDiscards = true;
-            bypassWorkqueues = true;
-            # preLVM = true; # @todo Determine if I should enable this
-          };
+        initrd.luks.devices.cryptroot = {
+          allowDiscards = true;
+          bypassWorkqueues = true;
         };
       };
 
