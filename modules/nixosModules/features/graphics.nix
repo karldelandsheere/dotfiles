@@ -8,14 +8,12 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.graphics = { lib, config, pkgs, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.graphics = { lib, config, pkgs, ...}:
   {
     config = {
       hardware.graphics = {
         enable = true;
-        enable32Bit = true; # Should I move that one to host?
+        enable32Bit = true;
       };
     };
   };

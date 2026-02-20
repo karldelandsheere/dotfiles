@@ -16,18 +16,20 @@
       modules = [ self.nixosModules.hostQ3dm10 ];
     };
 
-    nixosModules.hostQ3dm10 = { config, ... }: let
-      cfg = config.nouveauxParadigmes;
-    in
+    nixosModules.hostQ3dm10 = { config, ... }:
     {
       imports = [
         self.nixosModules.core
         self.nixosModules.tailscale
 
-        self.nixosModules.encryption     # Root encryption with LUKS
-        self.nixosModules.impermanence   # Stateless system that cleans itself at reboot
-        self.nixosModules.hibernation
+        self.nixosModules.encryption
+        self.nixosModules.impermanence
         self.nixosModules.powersave
+        self.nixosModules.hibernation
+
+        self.nixosModules.audio
+        self.nixosModules.bluetooth
+        self.nixosModules.graphics
 
         self.nixosModules.desktop
 
@@ -40,21 +42,22 @@
       ];
 
       config = {
-        # Custom options
-        # --------------
-        nouveauxParadigmes = {
-          hostname = "q3dm10";
-          rootDisk = "/dev/nvme0n1"; # @todo Should also be determined in install.sh?
-          swapSize = 96*1024;
-          encryption.enable = true;
-          impermanence.enable = true;
-          hibernation = {
-            enable = true;
-            resume.offset = "1108328"; # @todo Shouldn't that be determined in install.sh?
-          };
-        };
+        # Preferences
+        # -----------
+        networking.hostName = "q3dm10";
 
-        services.mullvad-vpn.enable = true;
+        features.hibernation.resumeOffset = "1108328";
+        filesystem.swapSize = 96*1024;
+
+        time.timeZone = "Europe/Brussels";
+
+        nixpkgs.config.allowUnfree = true;
+        system.stateVersion = "25.11";
+
+        services = {
+          mullvad-vpn.enable = true;
+          xserver.xkb.layout = "be";
+        };
       };
     };
   };

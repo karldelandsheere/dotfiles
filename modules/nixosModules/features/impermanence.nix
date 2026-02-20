@@ -14,22 +14,15 @@
 { inputs, self, ... }:
 {
   flake.nixosModules.impermanence = { lib, config, pkgs, ... }: let
-    cfg = config.nouveauxParadigmes;
     users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
     scriptsDir = ../../scripts;
-
-    # isNvme = lib.strings.hasInfix "nvme" cfg.rootDisk;
-    # deviceName = ${cfg.rootDisk} lib.strings.optionalString isNvme "p";
   in
   {
     imports = [ inputs.impermanence.nixosModules.impermanence ];
 
-    # Related options and default values definition
-    options.nouveauxParadigmes.impermanence = {
-      enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
-    };
+    config = {
+      features.impermanence.enable = true; # So other modules know
 
-    config = lib.mkIf cfg.impermanence.enable {
       # Adding options to the filesystems
       fileSystems = {
         "/".options = [ "compress=zstd" "noatime" ];
@@ -52,13 +45,12 @@
                        options = [ "compress=zstd" "noatime" ]; };
       };
 
-
       
       # Rollback routine on every boot
       # ------------------------------
       boot.initrd.systemd.services.rollback = let
         # @todo Make this more versatile regarding the disk type etc
-        requiresAfter = if cfg.encryption.enable
+        requiresAfter = if config.features.encryption.enable
           then "systemd-cryptsetup@cryptroot.service"
           else "dev-nvme0n1p2.device"; # @todo Also, this should depend on install.sh
       in
@@ -141,7 +133,6 @@
 
 
           # Persistant home subdirectories and files common to all users
-
           users = lib.listToAttrs ( map ( username: {
             name = username; value = {
               directories = [
@@ -150,8 +141,6 @@
                 ".mullvad"                       # VPN
                 ".ssh"                           # Obvious, innit?
                 # "Data"                           # Vaults, documents, etc
-              ] ++ lib.lists.optionals ( cfg.gui.enable ) [
-                ".config/noctalia"
               ];
 
               files = [
@@ -161,23 +150,6 @@
               ];
             };
           } ) ( lib.lists.unique ( users ) ) );
-
-
-          # users.${config.nouveauxParadigmes.users.main} = {
-          #   directories = [
-          #     ".gnupg"                         # PGP utility
-          #     ".local/share/keyrings"          # Gnome keyring
-          #     ".mullvad"                       # VPN
-          #     ".ssh"                           # Obvious, innit?
-          #     # "Data"                           # Vaults, documents, etc
-          #   ];
-
-          #   files = [
-          #     ".local/share/nix/trusted-settings.json"
-          #     # ".zshrc"
-          #     ".zsh_history"
-          #   ];
-          # };
         };
       };
 

@@ -12,7 +12,8 @@
 { inputs, self, ... }:
 {
   flake.homeModules.signal = { config, osConfig, lib, pkgs, ... }: let
-    cfg = osConfig.nouveauxParadigmes;
+    withDesktop = osConfig.features.desktop.enable;
+    withImpermanence = osConfig.features.impermanence.enable;
   in
   {
     config = {
@@ -44,15 +45,15 @@
         };
       };
 
-      home.packages = ( with pkgs; lib.lists.optionals cfg.gui.enable [
+      home.packages = ( with pkgs; lib.lists.optionals withDesktop [
         signal-desktop
       ] );
 
       # What data should persist
-      home.persistence."/persist" = lib.mkIf cfg.impermanence.enable {
+      home.persistence."/persist" = lib.mkIf withImpermanence {
         directories =
           [ ".local/share/gurk" ]
-          ++ lib.lists.optionals cfg.gui.enable [ ".config/Signal" ];
+          ++ lib.lists.optionals withDesktop [ ".config/Signal" ];
       };
     };
   };

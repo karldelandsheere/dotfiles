@@ -8,9 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.bluetooth = { lib, config, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.bluetooth = { lib, config, ...}:
   {
     config = {
       hardware.bluetooth = {
@@ -19,7 +17,7 @@
         # settings.General.Experimental = true;
       };
 
-      services.blueman.enable = true; # Enable bluetooth manager (@todo is it gui only?)
+      services.blueman.enable = config.features.desktop.enable;
     };
   };
 }

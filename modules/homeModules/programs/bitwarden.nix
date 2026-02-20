@@ -9,14 +9,14 @@
 { inputs, self, ... }:
 {
   flake.homeModules.bitwarden = { config, osConfig, lib, pkgs, ... }: let
-    cfg = osConfig.nouveauxParadigmes;
+    withDesktop = osConfig.features.desktop.enable;
   in
   {
     config = {
       home.packages = ( with pkgs; [
         bitwarden-cli
       ]
-      ++ lib.lists.optionals cfg.gui.enable [
+      ++ lib.lists.optionals withDesktop [
         bitwarden-desktop
       ] );
     };

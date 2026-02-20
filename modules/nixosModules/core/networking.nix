@@ -6,19 +6,10 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.core = { lib, config, ...}:
   {
-    options.nouveauxParadigmes.hostname = lib.mkOption {
-      type        = lib.types.str;
-      default     = "unnamedhost";
-      description = "What is the host's name? Defaults to unnamedhost.";
-    };
-  
     config = {
       networking = {
-        hostName = cfg.hostname;
         networkmanager.enable = true;
         enableIPv6 = true;
 

@@ -6,26 +6,8 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.core = { lib, config, ...}:
   {
-    options.nouveauxParadigmes = {
-      # Philosophical vs pragramtic question...
-      allowUnfree = lib.mkOption {
-        type        = lib.types.bool;
-        default     = true;
-        description = "Allow unfree software to be installed? Defaults to true";
-      };
-
-      # Nix/NixOS version
-      stateVersion = lib.mkOption {
-        type        = lib.types.str;
-        default     = "25.11";
-        description = "Nix/NixOS version. Defaults to 25.11";
-      };
-    };
-  
     config = {
       nix = {
         settings = {
@@ -42,9 +24,6 @@
           randomizedDelaySec = "1 hour";
         };
       };
-
-      nixpkgs.config.allowUnfree = cfg.allowUnfree;
-      system.stateVersion = cfg.stateVersion;
     };
   };
 }

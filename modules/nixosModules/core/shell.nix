@@ -10,7 +10,7 @@
 { inputs, self, ... }:
 {
   flake.nixosModules.core = { lib, config, pkgs, ...}: let
-    cfg = config.nouveauxParadigmes;
+    dotfiles = config.filesystem.dotfiles;
   in
   {
     config = {
@@ -18,8 +18,8 @@
         shells = [ pkgs.zsh ];
 
         shellAliases = {
-          dots = "cd ${cfg.dotfiles}";
-          todo = "clear && grep -rnw ${cfg.dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
+          dots = "cd ${dotfiles}";
+          todo = "clear && grep -rnw ${dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo'";
           keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
         };
         

@@ -9,9 +9,7 @@
   homeDirectory = "/home/${username}";
 in
 {
-  flake.nixosModules.${username} = { lib, config, ... }: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.${username} = { lib, config, ... }:
   {
     config = {
       users.users.${username} = {
@@ -35,9 +33,7 @@ in
     };
   };
 
-  flake.homeModules.${username} = { config, pkgs, osConfig, lib, inputs, ... }: let
-    cfg = osConfig.nouveauxParadigmes;
-  in
+  flake.homeModules.${username} = { config, pkgs, osConfig, lib, ... }:
   {
     config = {
       home.file = with config.lib.file; {
@@ -62,7 +58,7 @@ in
         "auth/tailscale/dimeritium".file = ./secrets/auth/tailscale/dimeritium.age;
       };
 
-      nixpkgs.config.allowUnfree = cfg.allowUnfree;
+      nixpkgs.config.allowUnfree = osConfig.nixpkgs.config.allowUnfree;
     };
   };
 }

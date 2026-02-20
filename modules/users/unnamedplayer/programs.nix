@@ -8,8 +8,8 @@
   username = "unnamedplayer";
 in
 {
-  flake.homeModules.${username} = { config, pkgs, osConfig, lib, inputs, ... }: let
-    cfg = osConfig.nouveauxParadigmes;
+  flake.homeModules.${username} = { config, pkgs, osConfig, lib, ... }: let
+    withDesktop = osConfig.features.desktop.enable;
   in
   {
     imports = [
@@ -33,7 +33,7 @@ in
         ]
 
         # GUI programs
-        ++ lib.lists.optionals ( cfg.gui.enable ) [
+        ++ lib.lists.optionals withDesktop [
           bambu-studio           # Slicer for my Bambu printers
           # blender
           inkscape               # Vector graphics editor
@@ -47,7 +47,7 @@ in
         ]
 
         # GUI and unfree programs
-        ++ lib.lists.optionals ( cfg.gui.enable && osConfig.nixpkgs.config.allowUnfree ) [
+        ++ lib.lists.optionals ( withDesktop && osConfig.nixpkgs.config.allowUnfree ) [
           obsidian               # Markdown note taking app
           termius                # Cross-platform SSH client
         ] );
@@ -57,78 +57,76 @@ in
         };
       };
 
-      programs = {
-        niri.settings = {
-          screenshot-path = "~/Data/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
+      programs.niri.settings = lib.mkIf withDesktop {
+        screenshot-path = "~/Data/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
-          # Binds
-          # -----
-          binds = {
-            "Mod+Ctrl+T".action.spawn = "ghostty";
-            "Ctrl+Alt+W".action.spawn = [ "sh" "-c" "loginctl terminate-user $USER" ];
-          };
-
-          # Workspaces and windows rules
-          # ----------------------------
-          workspaces = {
-            "01-daily"    = { name = "daily"; };
-            "02-tty"      = { name = "tty"; };
-            "03-web"      = { name = "web"; };
-            "04-dev"      = { name = "dev"; };
-            "05-3d"       = { name = "3d"; };
-            "06-graphics" = { name = "graphics"; };
-            "07-stuff"    = { name = "stuff"; };
-          };
-
-          window-rules = [
-            { # Messaging apps, planning, etc are daily apps
-              matches           = [
-                { app-id = "signal"; }
-                { title  = "gurk"; }
-              ];
-              open-on-workspace = "daily"; }
-
-            { # All tty apps run in Ghostty that are not assigned somewhere else
-              matches           = [ { app-id = "com.mitchellh.ghostty"; } ];
-              opacity           = 0.85;
-              open-on-workspace = "tty"; }
-
-            { # Internet browser, etc.
-              matches           = [
-                { app-id = "vivaldi"; }
-                { app-id = "Mullvad Browser"; } ];
-              open-maximized    = true;
-              open-on-workspace = "web"; }
-
-            { # Code editor, SSH clients, etc.
-              matches           = [
-                { app-id = "dev.zed.Zed"; }
-                { app-id = "Termius"; } ];
-              opacity           = 0.85;
-              open-maximized    = true;
-              open-on-workspace = "dev"; }
-
-            { # All apps regarding 3D modeling, printing, ...
-              matches           = [
-                { app-id = "blender"; }
-                { app-id = "org.openscad."; }
-                { app-id = "PrusaSlicer"; } ];
-              open-maximized    = true;
-              open-on-workspace = "3d"; }
-
-            { # Graphic design apps
-              matches           = [ { app-id = "inkscape"; } ];
-              open-maximized    = true;
-              open-on-workspace = "graphics"; }
-
-            { # Stuff like journaling, documents, file explorer, etc.
-              matches           = [
-                { app-id = "desktop.opencloud.eu."; }
-                { app-id = "obsidian"; } ];
-              open-maximized    = true;
-              open-on-workspace = "stuff"; }
-          ];
+        # Binds
+        # -----
+        binds = {
+          "Mod+Ctrl+T".action.spawn = "ghostty";
+          "Ctrl+Alt+W".action.spawn = [ "sh" "-c" "loginctl terminate-user $USER" ];
         };
+
+        # Workspaces and windows rules
+        # ----------------------------
+        workspaces = {
+          "01-daily"    = { name = "daily"; };
+          "02-tty"      = { name = "tty"; };
+          "03-web"      = { name = "web"; };
+          "04-dev"      = { name = "dev"; };
+          "05-3d"       = { name = "3d"; };
+          "06-graphics" = { name = "graphics"; };
+          "07-stuff"    = { name = "stuff"; };
+        };
+
+        window-rules = [
+          { # Messaging apps, planning, etc are daily apps
+            matches           = [
+              { app-id = "signal"; }
+              { title  = "gurk"; }
+            ];
+            open-on-workspace = "daily"; }
+
+          { # All tty apps run in Ghostty that are not assigned somewhere else
+            matches           = [ { app-id = "com.mitchellh.ghostty"; } ];
+            opacity           = 0.85;
+            open-on-workspace = "tty"; }
+
+          { # Internet browser, etc.
+            matches           = [
+              { app-id = "vivaldi"; }
+              { app-id = "Mullvad Browser"; } ];
+            open-maximized    = true;
+            open-on-workspace = "web"; }
+
+          { # Code editor, SSH clients, etc.
+            matches           = [
+              { app-id = "dev.zed.Zed"; }
+              { app-id = "Termius"; } ];
+            opacity           = 0.85;
+            open-maximized    = true;
+            open-on-workspace = "dev"; }
+
+          { # All apps regarding 3D modeling, printing, ...
+            matches           = [
+              { app-id = "blender"; }
+              { app-id = "org.openscad."; }
+              { app-id = "PrusaSlicer"; } ];
+            open-maximized    = true;
+            open-on-workspace = "3d"; }
+
+          { # Graphic design apps
+            matches           = [ { app-id = "inkscape"; } ];
+            open-maximized    = true;
+            open-on-workspace = "graphics"; }
+
+          { # Stuff like journaling, documents, file explorer, etc.
+            matches           = [
+              { app-id = "desktop.opencloud.eu."; }
+              { app-id = "obsidian"; } ];
+            open-maximized    = true;
+            open-on-workspace = "stuff"; }
+        ];
       };
     };
   };

@@ -13,15 +13,8 @@
     cfg = config.nouveauxParadigmes;
   in
   {
-    imports = [
-      self.nixosModules.audio
-      self.nixosModules.bluetooth
-      self.nixosModules.graphics
-    ];
-    
     config = {
-      # @todo Change the options paradigm:
-      #   If this file is imported, set cfg.gui = true;
+      features.desktop.enable = true; # So other modules know
 
       environment = {
         # Launches niri at autologin, but only from tty1

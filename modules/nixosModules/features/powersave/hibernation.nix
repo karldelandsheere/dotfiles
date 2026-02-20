@@ -14,38 +14,14 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.hibernation = { lib, config, ... }: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.hibernation = { lib, config, ... }:
   {
-    # Related options and default values definition
-    options.nouveauxParadigmes.hibernation = {
-      enable = lib.mkEnableOption "Enable hibernation? Defaults to false.";
-
-      resume = {
-        # @todo this should be determined in install.sh
-        device = lib.mkOption {
-          type = lib.types.str;
-          default = "/dev/mapper/cryptroot";
-          description = "Which device to resume from after hibernation? \
-                         Defaults to /dev/mapper/cryptroot";
-        };
-
-        # @todo this should be determined in install.sh
-        offset = lib.mkOption {
-          type = lib.types.str;
-          default = "0";
-          description = "Offset to resume after hibernation. \
-                         Defaults to 0. To find the value, use: \
-                         sudo btrfs inspect-internal map-swapfile -r /swap/swapfile";
-        };
-      };
-    };
-
-    config = lib.mkIf cfg.hibernation.enable {
+    config = {
+      features.hibernation.enable = true; # So other modules know
+      
       boot.kernelParams = [
-        "resume=${cfg.hibernation.resume.device}"
-        "resume_offset=${cfg.hibernation.resume.offset}"
+        "resume=${config.filesystem.root}"
+        "resume_offset=${config.features.hibernation.resumeOffset}"
       ];
 
       # For hibernation to work, swap size needs to be at least ram size

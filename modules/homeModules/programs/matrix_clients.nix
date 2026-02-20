@@ -12,7 +12,8 @@
 { inputs, self, ... }:
 {
   flake.homeModules.matrix_clients = { config, osConfig, lib, ... }: let
-    cfg = osConfig.nouveauxParadigmes;
+    withDesktop = osConfig.features.desktop.enable;
+    withImpermanence = osConfig.features.impermanence.enable;
   in
   {
     config = {
@@ -54,7 +55,7 @@
           };
         };
 
-        # element-desktop = lib.mkIf cfg.gui.enable {
+        # element-desktop = lib.mkIf withDesktop {
         #   enable = false; # For now
         #   profiles = {};
         #   settings = {};
@@ -62,10 +63,10 @@
       };
 
       # What data should persist
-      home.persistence."/persist" = lib.mkIf cfg.impermanence.enable {
+      home.persistence."/persist" = lib.mkIf withImpermanence {
         directories =
           [ ".local/share/iamb" ];
-          # ++ lib.lists.optionals cfg.gui.enable [ ".config/Element" ];
+          # ++ lib.lists.optionals withDesktop [ ".config/Element" ];
       };
     };
   };

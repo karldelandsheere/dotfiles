@@ -11,7 +11,8 @@
 
 { inputs, self, ... }:
 {
-  flake.homeModules.noctalia = { lib, config, pkgs, ... }: let
+  flake.homeModules.noctalia = { lib, config, osConfig, pkgs, ... }: let
+    withImpermanence = osConfig.features.impermanence.enable;
     officialNoctaliaPlugins = "https://github.com/noctalia-dev/noctalia-plugins";
   in
   {
@@ -551,6 +552,10 @@
             wallpaperChangeMode           = "random";
           };
         };
+      };
+
+      home.persistence."/persist" = lib.mkIf withImpermanence {
+        directories = [ ".config/noctalia" ];
       };
     };
   };

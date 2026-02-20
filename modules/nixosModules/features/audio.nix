@@ -9,23 +9,22 @@
 { inputs, self, ... }:
 {
   flake.nixosModules.audio = { lib, config, pkgs, ...}: let
-    cfg = config.nouveauxParadigmes;
+    withDesktop = config.features.desktop.enable;
   in
   {
     config = {
       environment.systemPackages = with pkgs; [
         flac            # FLAC codecs
-        pwvucontrol
-      ];
+      ] ++ lib.lists.optionals withDesktop [ pwvucontrol ];
 
       services = {
         pipewire = {
           enable = true;
           alsa = {
             enable = true;
-            support32Bit = true; # Should I move that one to host?
+            support32Bit = withDesktop;
           };
-          pulse.enable = true;
+          pulse.enable = withDesktop;
           wireplumber.enable = true;
         };
       };

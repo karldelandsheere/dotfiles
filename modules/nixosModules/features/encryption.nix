@@ -7,16 +7,12 @@
 { inputs, self, ... }:
 {
   flake.nixosModules.encryption = { lib, config, ... }: let
-    cfg = config.nouveauxParadigmes;
     users = [ "unnamedplayer" ]; # @todo Repair the users provisining
   in
   {
-    # Related options and default values definition
-    options.nouveauxParadigmes.encryption = {
-      enable = lib.mkEnableOption "Use full disk encryption? Defaults to false.";
-    };
-
-    config = lib.mkIf cfg.encryption.enable {
+    config = {
+      features.encryption.enable = true; # So other modules know
+      
       boot = {
         loader.grub = {
           enableCryptodisk = true;

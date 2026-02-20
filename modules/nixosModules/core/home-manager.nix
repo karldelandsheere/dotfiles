@@ -12,9 +12,7 @@
 {
   imports = [ inputs.home-manager.flakeModules.home-manager ];
 
-  flake.nixosModules.core = { lib, config, ... }: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.core = { lib, config, ... }:
   {
     imports = [
       inputs.home-manager.nixosModules.home-manager
@@ -35,7 +33,7 @@
 
           inputs.agenix.homeManagerModules.default
 
-        ] ++ lib.lists.optionals ( cfg.gui.enable ) [
+        ] ++ lib.lists.optionals config.features.desktop.enable [
           self.homeModules.desktop
         ];
       };

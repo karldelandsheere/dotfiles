@@ -12,7 +12,7 @@
 { inputs, self, ... }:
 {
   flake.homeModules.email_clients = { config, osConfig, lib, ... }: let
-    cfg = osConfig.nouveauxParadigmes;
+    withDesktop = osConfig.features.desktop.enable;
   in
   {
     config = {
@@ -21,7 +21,7 @@
         #   enable = false;
         # };
 
-        # thunderbird = lib.mkIf cfg.gui.enable {
+        # thunderbird = lib.mkIf withDesktop {
         #   enable = false; # For now
         #   profiles = {};
         #   settings = {};
