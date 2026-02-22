@@ -49,8 +49,10 @@ in
 
           flavor = "migadu.com";
 
-          aerc.enable = config.home.programs.aerc.enable;
-          thunderbird.enable = config.home.programs.thunderbird.enable;
+          # @todo is this the most logical way to set this?
+          aerc.enable = config.programs.aerc.enable;
+          himalaya.enable = config.programs.himalaya.enable;
+          thunderbird.enable = config.programs.thunderbird.enable;
         };
 
         accounts."karl_at_nouveaux-paradigmes_be" = let
@@ -71,8 +73,9 @@ in
 
           flavor = "migadu.com";
 
-          aerc.enable = config.home.programs.aerc.enable;
-          thunderbird.enable = config.home.programs.thunderbird.enable;
+          aerc.enable = config.programs.aerc.enable;
+          himalaya.enable = config.programs.himalaya.enable;
+          thunderbird.enable = config.programs.thunderbird.enable;
         };
 
         accounts."expo_at_ventrecontent_be" = let
@@ -100,8 +103,9 @@ in
           imap.host = host;
           smtp.host = host;
 
-          aerc.enable = config.home.programs.aerc.enable;
-          thunderbird.enable = config.home.programs.thunderbird.enable;
+          aerc.enable = config.programs.aerc.enable;
+          himalaya.enable = config.programs.himalaya.enable;
+          thunderbird.enable = config.programs.thunderbird.enable;
         };
       };
     };

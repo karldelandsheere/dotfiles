@@ -26,21 +26,10 @@
             home.stateVersion = config.system.stateVersion;
             news.display = "show";
           }
-
-          inputs.agenix.homeManagerModules.default
-
         ] ++ lib.lists.optionals config.features.desktop.enable [
           self.homeModules.desktop
         ];
       };
     };
   };
-
-#   flake.homeModules.common = {
-#     default = {
-      
-#     };
-#   };
 }
-
-

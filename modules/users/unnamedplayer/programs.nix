@@ -14,14 +14,25 @@ in
   in
   {
     imports = [
+      # Core utils
       self.homeModules.bitwarden
-      self.homeModules.email_clients
       self.homeModules.ghostty
-      self.homeModules.matrix_clients
+      self.homeModules.mullvad-browser
+
+      # Comms
+      # self.homeModules.aerc
+      # self.homeModules.thunderbird
+      self.homeModules.signal-desktop
+      self.homeModules.gurk-rs
+      self.homeModules.iamb
+
+      # Work
+      self.homeModules.basalt
       self.homeModules.obsidian
-      self.homeModules.signal
       self.homeModules.termius
       self.homeModules.zed-editor
+
+      self.homeModules.jellyfin-tui
     ];
     
     config = {
@@ -33,14 +44,12 @@ in
       home = {
         packages = ( with pkgs; [ # TUI/CLI
           # calcurse               # CalDav client
-          jellyfin-tui           # TUI client for Jellyfin Media Server
           mpv                    # Video player
         ]
         ++ lib.lists.optionals withDesktop [ # GUI
           bambu-studio           # Slicer for my Bambu printers
           # blender
           inkscape               # Vector graphics editor
-          mullvad-browser        # Highly privacy focused browser
           # opencloud-desktop
           openscad               # Code based CAD
           prusa-slicer           # Slicer for my Prusa printers
@@ -48,10 +57,6 @@ in
           # qbittorrent
           # vlc                  # Replaced by mpv (tty video player)
         ] );
-
-        sessionVariables = with pkgs; {
-          BROWSER = "${mullvad-browser}/bin/mullvad-browser";
-        };
 
         persistence."/persist" = lib.mkIf withImpermanence {
           directories = lib.mkIf withDesktop [

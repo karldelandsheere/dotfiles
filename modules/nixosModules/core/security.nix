@@ -10,6 +10,10 @@
     cfg = config.nouveauxParadigmes;
   in
   {
+    imports = [
+      inputs.sops-nix.nixosModules.sops
+    ];
+    
     config = {
       # GNU Privacy Guard / OpenPGP
       programs.gnupg.agent = {

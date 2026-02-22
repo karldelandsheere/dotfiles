@@ -1,20 +1,19 @@
 ###############################################################################
 #
-# Obsidian is a (not foss) Markdown note taking app. 
+# Signal is a privacy focused messaging platform and protocol.
 #
 ###############################################################################
 
 { inputs, self, ... }:
 {
-  flake.homeModules.obsidian = { config, osConfig, lib, pkgs, ... }:
+  flake.homeModules.signal-desktop = { config, osConfig, lib, pkgs, ... }:
   {
     config = lib.mkIf osConfig.features.desktop.enable {
       home = {
-        packages = [ pkgs.obsidian ];
+        packages = [ pkgs.signal-desktop ];
 
-        # What data should persist
         persistence."/persist" = lib.mkIf osConfig.features.impermanence.enable {
-          directories = [ ".config/obsidian" ];
+          directories = [ ".config/Signal" ];
         };
       };
     };

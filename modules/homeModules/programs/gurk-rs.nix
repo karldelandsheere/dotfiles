@@ -1,20 +1,13 @@
 ###############################################################################
 #
-# Signal is a privacy focused messaging platform and protocol.
-#
-# This module enables clients: gurk-rs (tty) and signal-desktop.
-#
-# @todo Move the profiles out of this
-#       in order to make this module more reusable.
+# Gurk-rs is a tty client for Signal
+#   (the privacy focused messaging platform and protocol).
 #
 ###############################################################################
 
 { inputs, self, ... }:
 {
-  flake.homeModules.signal = { config, osConfig, lib, pkgs, ... }: let
-    withDesktop = osConfig.features.desktop.enable;
-    withImpermanence = osConfig.features.impermanence.enable;
-  in
+  flake.homeModules.gurk-rs = { config, osConfig, lib, pkgs, ... }:
   {
     config = {
       # # this allows you to access `unstable` anywhere in your config
@@ -45,15 +38,9 @@
         };
       };
 
-      home.packages = ( with pkgs; lib.lists.optionals withDesktop [
-        signal-desktop
-      ] );
-
       # What data should persist
-      home.persistence."/persist" = lib.mkIf withImpermanence {
-        directories =
-          [ ".local/share/gurk" ]
-          ++ lib.lists.optionals withDesktop [ ".config/Signal" ];
+      home.persistence."/persist" = lib.mkIf osConfig.features.impermanence.enable {
+        directories = [ ".local/share/gurk" ]
       };
     };
   };

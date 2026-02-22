@@ -7,6 +7,7 @@
 # 
 # Current steps:
 # --------------
+#   - @todo Setup Sops-Nix and implement secrets once and for all!
 #   - @todo Adapt the shell scripts under system/scripts to reflect the mods
 #
 # Next steps:
@@ -42,20 +43,24 @@
   };
 
   inputs = {
-    # Core
+    # NixOS/nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Dendritic pattern
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    agenix = { url = "github:ryantm/agenix";
-               inputs.nixpkgs.follows = "nixpkgs"; };
+
+    # Configs etc
     home-manager = { url = "github:nix-community/home-manager/release-25.11";
                      inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Features
     impermanence.url = "github:nix-community/impermanence";
+    sops-nix = { url = "github:Mic92/sops-nix";
+                 inputs.nixpkgs.follows = "nixpkgs"; };
 
-    # Desktop
+    # Desktop stuff
     niri.url = "github:sodiboo/niri-flake";
     noctalia = { url = "github:noctalia-dev/noctalia-shell";
                  inputs.nixpkgs.follows = "nixpkgs"; };

@@ -1,18 +1,19 @@
 ###############################################################################
 #
-# Obsidian is a (not foss) Markdown note taking app. 
+# Basalt is a tty editor for Obsidian vaults.
+#
+# It is still in early beta stage though.
 #
 ###############################################################################
 
 { inputs, self, ... }:
 {
-  flake.homeModules.obsidian = { config, osConfig, lib, pkgs, ... }:
+  flake.homeModules.basalt = { config, osConfig, lib, pkgs, ... }:
   {
-    config = lib.mkIf osConfig.features.desktop.enable {
+    config = {
       home = {
-        packages = [ pkgs.obsidian ];
+        packages = [ pkgs.basalt ];
 
-        # What data should persist
         persistence."/persist" = lib.mkIf osConfig.features.impermanence.enable {
           directories = [ ".config/obsidian" ];
         };
