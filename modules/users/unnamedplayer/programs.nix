@@ -10,7 +10,6 @@ in
 {
   flake.homeModules.${username} = { config, pkgs, osConfig, lib, ... }: let
     withDesktop = osConfig.features.desktop.enable;
-    withImpermanence = osConfig.features.impermanence.enable;
   in
   {
     imports = [
@@ -23,16 +22,28 @@ in
       # self.homeModules.aerc
       # self.homeModules.thunderbird
       self.homeModules.signal-desktop
-      self.homeModules.gurk-rs
-      self.homeModules.iamb
+      # self.homeModules.gurk-rs
+      # self.homeModules.iamb
 
-      # Work
-      self.homeModules.basalt
+      # Organizing and stuff
+      # self.homeModules.basalt
       self.homeModules.obsidian
+      # self.homeModules.calcurse
+
+      # Dev and work stuff
+      self.homeModules.rustdesk
       self.homeModules.termius
       self.homeModules.zed-editor
 
+      # 3D stuff
+      self.homeModules.openscad
+      self.homeModules.bambu-studio
+      self.homeModules.prusa-slicer
+
+      # Media
       self.homeModules.jellyfin-tui
+      self.homeModules.mpv
+      # self.homeModules.vlc
     ];
     
     config = {
@@ -40,31 +51,6 @@ in
         "obsidian"
         "termius"
       ];
-
-      home = {
-        packages = ( with pkgs; [ # TUI/CLI
-          # calcurse               # CalDav client
-          mpv                    # Video player
-        ]
-        ++ lib.lists.optionals withDesktop [ # GUI
-          bambu-studio           # Slicer for my Bambu printers
-          # blender
-          inkscape               # Vector graphics editor
-          # opencloud-desktop
-          openscad               # Code based CAD
-          prusa-slicer           # Slicer for my Prusa printers
-          rustdesk-flutter       # Open source Remote Desktop (like AnyDesk or TimeViewer)
-          # qbittorrent
-          # vlc                  # Replaced by mpv (tty video player)
-        ] );
-
-        persistence."/persist" = lib.mkIf withImpermanence {
-          directories = lib.mkIf withDesktop [
-            ".local/share/prusa-slicer"
-            ".config/PrusaSlicer"
-          ];
-        };
-      };
 
       programs.niri.settings = lib.mkIf withDesktop {
         screenshot-path = "~/Data/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";

@@ -9,12 +9,10 @@
 { inputs, self, ... }:
 {
   flake.nixosModules.tailscale = { lib, config, ... }: let
-    cfg = config.nouveauxParadigmes;
+    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
   in
   {
     config = {
-      # @todo Not every user will need or should have access to tailscale,
-      #       maybe there should be a needlist or something.
       services.tailscale = {
         enable = true;
         useRoutingFeatures = "client";
@@ -26,6 +24,12 @@
         allowedUDPPorts = [ config.services.tailscale.port ];
         allowedTCPPorts = [ 22 ];
         trustedInterfaces = [ "tailscale0" ];
+      };
+
+      environment = {
+        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
+          directories = [ "/var/lib/tailscale" ];
+        };
       };
     };
   };

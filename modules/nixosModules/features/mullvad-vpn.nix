@@ -1,29 +1,32 @@
 ###############################################################################
 #
-# Bluetooth generic config.
+# Mullvad VPN config.
 #
 # For host|user specific options, go to host|user's config.
-#
+# 
 ###############################################################################
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.bluetooth = { lib, config, ...}: let
+  flake.nixosModules.mullvad-vpn = { lib, config, ... }: let
     users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
   in
   {
     config = {
-      hardware.bluetooth = {
-        enable = true;
-        powerOnBoot = true;
-        # settings.General.Experimental = true;
-      };
-
-      services.blueman.enable = config.features.desktop.enable;
+      services.mullvad-vpn.enable = true;
 
       environment = {
         persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          directories = [ "/var/lib/bluetooth" ];
+          directories = [
+            "/etc/mullvad-vpn"
+            "/var/cache/mullvad-vpn"
+          ];
+
+          users = lib.listToAttrs ( map ( username: {
+            name = username; value = {
+              directories = [ ".mullvad" ];
+            };
+          } ) ( lib.lists.unique ( users ) ) );
         };
       };
     };

@@ -6,7 +6,9 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}:
+  flake.nixosModules.core = { lib, config, ...}: let
+    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
+  in
   {
     config = {
       nix = {
@@ -28,6 +30,23 @@
       nixpkgs.config = {
         allowUnfree = false;
         # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
+      };
+
+      environment = {
+        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
+          directories = [
+            "/etc/nixos"
+            "/var/lib/nixos"
+          ];
+
+          files = [ "/root/.local/share/nix/trusted-settings.json" ];
+
+          users = lib.listToAttrs ( map ( username: {
+            name = username; value = {
+              files = [ ".local/share/nix/trusted-settings.json" ];
+            };
+          } ) ( lib.lists.unique ( users ) ) );
+        };
       };
     };
   };

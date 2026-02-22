@@ -20,13 +20,24 @@
 { inputs, self, ... }:
 {
   config = {
-    flake.nixosModules.core = { lib, config, ...}: let
-      cfg = config.nouveauxParadigmes;
-      users = [ "unnamedplayer" ];
-    in
+    flake.nixosModules.core = { lib, config, ...}:
     {
-      # imports = lib.forEach users ( username: import ../../../users/${username} );
+      core.users = builtins.attrNames (
+        lib.filterAttrs ( _: v: ( v.isNormalUser ) )
+          config.users.users
+      );
 
+      # If impermanence is enabled,
+      #   persist the directories and files common to all users
+      environment.persistence."/persist" = lib.mkIf config.features.impermanence.enable {
+        users = lib.listToAttrs ( map ( username: {
+          name = username; value = {
+            directories = [
+              "Data"  # Vaults, documents, etc
+            ];
+          };
+        } ) ( lib.lists.unique ( config.core.users ) ) );
+      };
     };
   };
 }

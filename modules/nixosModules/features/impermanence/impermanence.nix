@@ -13,10 +13,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.impermanence = { lib, config, pkgs, ... }: let
-    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-    scriptsDir = ../../scripts;
-  in
+  flake.nixosModules.impermanence = { lib, config, pkgs, ... }:
   {
     imports = [ inputs.impermanence.nixosModules.impermanence ];
 
@@ -57,7 +54,7 @@
         before = [ "sysroot.mount" ];
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
-        script = builtins.readFile "${scriptsDir}/rollback.sh";
+        script = builtins.readFile ./rollback.sh;
       };
 
       environment = {
@@ -67,7 +64,7 @@
           ( pkgs.writeShellApplication {
             name = "differences";
             runtimeInputs = [ pkgs.btrfs-progs ];
-            text = builtins.readFile "${scriptsDir}/differences.sh";
+            text = builtins.readFile ./differences.sh;
           } )
 
           ( let
@@ -94,66 +91,8 @@
 
         # Now, opt-in what needs to persist
         # ---------------------------------
-        persistence."/persist" = {
-          hideMounts = true;             # What's it doing really?
-
-          # System-wide persistent directories and files
-          directories = [
-            # ...
-          ]
-          ++ lib.forEach [                   # /etc/...
-            "mullvad-vpn"
-            "NetworkManager/system-connections"
-            "nixos"
-            "ssh"
-            "tuned" ] (x: "/etc/${x}")
-          ++ lib.forEach [                   # /var/lib/...
-            "bluetooth"
-            "nixos"
-            "tailscale"
-            "upower" ] (x: "/var/lib/${x}")
-          ++ lib.forEach [                   # /var/cache/...
-            "mullvad-vpn" ] (x: "/var/cache/${x}");
-
-          files = [
-            "/etc/machine-id"
-            "/root/.local/share/nix/trusted-settings.json"
-          ]
-          ++ lib.forEach [
-            "secret_key"
-            "seen-bssids"
-            "timestamps"
-          ] (x: "/var/lib/NetworkManager/${x}");
-
-
-          # Persistant home subdirectories and files common to all users
-          users = lib.listToAttrs ( map ( username: {
-            name = username; value = {
-              directories = [
-                ".gnupg"                         # PGP utility
-                ".local/share/keyrings"          # Gnome keyring
-                ".mullvad"                       # VPN
-                ".ssh"                           # Obvious, innit?
-                "Data"                           # Vaults, documents, etc
-              ];
-
-              files = [
-                ".local/share/nix/trusted-settings.json"
-                # ".zshrc"
-                ".zsh_history"
-              ];
-            };
-          } ) ( lib.lists.unique ( users ) ) );
-        };
+        persistence."/persist".hideMounts = true;  # What's it doing really?
       };
-
-
-      # Persist systemd services' tmp files
-      # systemd.tmpfiles.rules = [
-      #   "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
-      #   "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
-      #   "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
-      # ];
 
 
       # Rollback results in sudo lectures after each reboot

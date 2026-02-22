@@ -40,7 +40,7 @@
 
       # What data should persist
       home.persistence."/persist" = lib.mkIf osConfig.features.impermanence.enable {
-        directories = [ ".local/share/gurk" ]
+        directories = [ ".local/share/gurk" ];
       };
     };
   };

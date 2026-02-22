@@ -21,6 +21,7 @@
       imports = [
         self.nixosModules.core
         self.nixosModules.tailscale
+        self.nixosModules.mullvad-vpn
 
         self.nixosModules.encryption
         self.nixosModules.impermanence
@@ -45,14 +46,9 @@
         # Preferences
         # -----------
         networking.hostName = "q3dm10";
-
         features.hibernation.resumeOffset = "1108328";
         filesystem.swapSize = 96*1024;
-
-        services = {
-          mullvad-vpn.enable = true;
-          xserver.xkb.layout = "be";
-        };
+        services.xserver.xkb.layout = "be";
       };
     };
   };

@@ -7,7 +7,7 @@
 { inputs, self, ... }:
 {
   flake.nixosModules.core = { lib, config, pkgs, ...}: let
-    cfg = config.nouveauxParadigmes;
+    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
   in
   {
     imports = [
@@ -37,6 +37,19 @@
       };
 
       services.gnome.gnome-keyring.enable = true;
+
+      environment = {
+        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
+          users = lib.listToAttrs ( map ( username: {
+            name = username; value = {
+              directories = [
+                ".gnupg"                    # PGP utility
+                ".local/share/keyrings"     # Gnome keyring
+              ];
+            };
+          } ) ( lib.lists.unique ( users ) ) );
+        };
+      };
     };
   };
 }

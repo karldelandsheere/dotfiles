@@ -1,25 +1,21 @@
 ###############################################################################
 #
-# Mullvad Browser is a highly privacy focused browser. 
-#
-# It's a Firefox fork, developped by Mullvad and the Tor Project.
+# Openscad, code based 2D/3D CAD.
 #
 ###############################################################################
 
 { inputs, self, ... }:
 {
-  flake.homeModules.mullvad-browser = { config, osConfig, lib, pkgs, ... }:
+  flake.homeModules.openscad = { config, osConfig, lib, pkgs, ... }:
   {
     config = lib.mkIf osConfig.features.desktop.enable {
       home = {
-        packages = [ pkgs.mullvad-browser ];
-
-        sessionVariables.BROWSER =
-          "${pkgs.mullvad-browser}/bin/mullvad-browser";
+        packages = [ pkgs.openscad ];
 
         # What data should persist
         # persistence."/persist" = lib.mkIf osConfig.features.impermanence.enable {
-        #   directories = [ ".config/obsidian" ];
+        #   directories = [
+        #   ];
         # };
       };
     };

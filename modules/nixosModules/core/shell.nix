@@ -11,9 +11,20 @@
 {
   flake.nixosModules.core = { lib, config, pkgs, ...}: let
     dotfiles = config.filesystem.dotfiles;
+    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
   in
   {
     config = {
+      # Zsh because I'm edgy but not too much
+      programs.zsh = {
+        enable = true;
+        autosuggestions.enable = true;
+        enableCompletion = true;
+        syntaxHighlighting.enable = true;
+      };
+
+      users.defaultUserShell = pkgs.zsh;
+
       environment = {
         shells = [ pkgs.zsh ];
 
@@ -45,17 +56,18 @@
           EDITOR = "${helix}/bin/hx";
           VISUAL = "${helix}/bin/hx";
         };
-      };
 
-      # Zsh because I'm edgy but not too much
-      programs.zsh = {
-        enable = true;
-        autosuggestions.enable = true;
-        enableCompletion = true;
-        syntaxHighlighting.enable = true;
+        persistence."/persist" = {
+          users = lib.listToAttrs ( map ( username: {
+            name = username; value = {
+              files = [
+                # ".zshrc"
+                ".zsh_history"
+              ];
+            };
+          } ) ( lib.lists.unique ( users ) ) );
+        };
       };
-
-      users.defaultUserShell = pkgs.zsh;
     };
   };
 }

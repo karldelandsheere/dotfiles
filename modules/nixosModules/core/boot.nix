@@ -11,9 +11,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { config, pkgs, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.core = { lib, config, pkgs, ...}:
   {
     config = {
       boot = {
@@ -41,6 +39,12 @@
         };
 
         supportedFilesystems = [ "btrfs" "fat" "vfat" "exfat" "hfsplus" "ntfs" ];
+      };
+
+      environment = {
+        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
+          files = [ "/etc/machine-id" ];
+        };
       };
     };
   };

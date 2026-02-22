@@ -9,6 +9,20 @@
   flake.nixosModules.core = { lib, config, ...}:
   {
     options = {
+      core = {
+        mainUser = lib.mkOption {
+          type = lib.types.str;
+          default = "unnamedplayer";
+          description = "Main user of the host.";
+        };
+
+        users = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [];
+          description = "Registered users on the host.";
+        };
+      };
+
       features = {
         desktop.enable = lib.mkEnableOption "Enable desktop environment? Defaults to false.";
 
@@ -27,7 +41,23 @@
           };
         };
 
-        impermanence.enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
+        impermanence = {
+          enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
+
+          persist = {
+            directories = {
+              type = lib.types.listOf lib.types.str;
+              default = [];
+              description = "List of directories to persist.";
+            };
+
+            files = {
+              type = lib.types.listOf lib.types.str;
+              default = [];
+              description = "List of files to persist.";
+            };
+          };
+        };
       };
       
       filesystem = {
