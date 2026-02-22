@@ -6,9 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}: let
-    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-  in
+  flake.nixosModules.core = { lib, config, ...}:
   {
     config = {
       networking = {
@@ -28,24 +26,26 @@
         # banner = "";
       };
 
-      environment = {
+      features.impermanence.persist = {
+        directories = lib.forEach [
+          "NetworkManager/system-connections"
+          "ssh"
+        ] (x: "/etc/${x}");
+
+        files = lib.forEach [
+          "secret_key"
+          "seen-bssids"
+          "timestamps"
+        ] (x: "/var/lib/NetworkManager/${x}");
+      };
+
+      environment = { # @todo Re-write for features.impermanence.persist
         persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          directories = lib.forEach [
-            "NetworkManager/system-connections"
-            "ssh"
-          ] (x: "/etc/${x}");
-
-          files = lib.forEach [
-            "secret_key"
-            "seen-bssids"
-            "timestamps"
-          ] (x: "/var/lib/NetworkManager/${x}");
-
           users = lib.listToAttrs ( map ( username: {
             name = username; value = {
               directories = [ ".ssh" ];
             };
-          } ) ( lib.lists.unique ( users ) ) );
+          } ) ( lib.lists.unique ( config.core.users ) ) );
         };
 
         # Persist systemd services' tmp files

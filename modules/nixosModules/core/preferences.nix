@@ -45,13 +45,13 @@
           enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
 
           persist = {
-            directories = {
+            directories = lib.mkOption {
               type = lib.types.listOf lib.types.str;
               default = [];
               description = "List of directories to persist.";
             };
 
-            files = {
+            files = lib.mkOption {
               type = lib.types.listOf lib.types.str;
               default = [];
               description = "List of files to persist.";

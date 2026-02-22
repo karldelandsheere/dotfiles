@@ -8,9 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.bluetooth = { lib, config, ...}: let
-    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-  in
+  flake.nixosModules.bluetooth = { lib, config, ...}:
   {
     config = {
       hardware.bluetooth = {
@@ -21,11 +19,7 @@
 
       services.blueman.enable = config.features.desktop.enable;
 
-      environment = {
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          directories = [ "/var/lib/bluetooth" ];
-        };
-      };
+      features.impermanence.persist.directories = [ "/var/lib/bluetooth" ];
     };
   };
 }

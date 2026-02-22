@@ -32,14 +32,18 @@
         # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
       };
 
-      environment = {
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          directories = [
-            "/etc/nixos"
-            "/var/lib/nixos"
-          ];
+      # Persist
+      features.impermanence.persist = {
+        directories = [
+          "/etc/nixos"
+          "/var/lib/nixos"
+        ];
 
-          files = [ "/root/.local/share/nix/trusted-settings.json" ];
+        files = [ "/root/.local/share/nix/trusted-settings.json" ];
+      };
+      
+      environment = { # @todo Re-write for features.impermanence.persist
+        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
 
           users = lib.listToAttrs ( map ( username: {
             name = username; value = {

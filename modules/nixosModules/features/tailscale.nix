@@ -8,9 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.tailscale = { lib, config, ... }: let
-    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-  in
+  flake.nixosModules.tailscale = { lib, config, ... }:
   {
     config = {
       services.tailscale = {
@@ -26,11 +24,7 @@
         trustedInterfaces = [ "tailscale0" ];
       };
 
-      environment = {
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          directories = [ "/var/lib/tailscale" ];
-        };
-      };
+      features.impermanence.persist.directories = [ "/var/lib/tailscale" ];
     };
   };
 }

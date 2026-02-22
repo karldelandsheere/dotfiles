@@ -41,11 +41,8 @@
         supportedFilesystems = [ "btrfs" "fat" "vfat" "exfat" "hfsplus" "ntfs" ];
       };
 
-      environment = {
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          files = [ "/etc/machine-id" ];
-        };
-      };
+      # Persist this file, used to determine if first boot or not
+      features.impermanence.persist.files = [ "/etc/machine-id" ];
     };
   };
 }

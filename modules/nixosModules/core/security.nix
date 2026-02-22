@@ -6,9 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, pkgs, ...}: let
-    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-  in
+  flake.nixosModules.core = { lib, config, pkgs, ...}:
   {
     imports = [
       inputs.sops-nix.nixosModules.sops
@@ -38,7 +36,7 @@
 
       services.gnome.gnome-keyring.enable = true;
 
-      environment = {
+      environment = { # @todo Re-write for features.impermanence.persist.directories
         persistence."/persist" = lib.mkIf config.features.impermanence.enable {
           users = lib.listToAttrs ( map ( username: {
             name = username; value = {
@@ -47,7 +45,7 @@
                 ".local/share/keyrings"     # Gnome keyring
               ];
             };
-          } ) ( lib.lists.unique ( users ) ) );
+          } ) ( lib.lists.unique ( config.core.users ) ) );
         };
       };
     };

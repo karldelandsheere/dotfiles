@@ -8,25 +8,23 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.mullvad-vpn = { lib, config, ... }: let
-    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-  in
+  flake.nixosModules.mullvad-vpn = { lib, config, ... }:
   {
     config = {
       services.mullvad-vpn.enable = true;
 
-      environment = {
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          directories = [
-            "/etc/mullvad-vpn"
-            "/var/cache/mullvad-vpn"
-          ];
+      features.impermanence.persist.directories = [
+        "/etc/mullvad-vpn"
+        "/var/cache/mullvad-vpn"
+      ];
 
+      environment = { # @todo Re-write this to fit the new way
+        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
           users = lib.listToAttrs ( map ( username: {
             name = username; value = {
               directories = [ ".mullvad" ];
             };
-          } ) ( lib.lists.unique ( users ) ) );
+          } ) ( lib.lists.unique ( config.core.users ) ) );
         };
       };
     };

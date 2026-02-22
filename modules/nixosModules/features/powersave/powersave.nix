@@ -9,9 +9,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.powersave = { lib, config, pkgs, ...}: let
-    users = [ "unnamedplayer" ]; # @todo Repair the users provisioning
-  in
+  flake.nixosModules.powersave = { lib, config, pkgs, ...}:
   {
     config = {
       environment.systemPackages = with pkgs; [
@@ -54,14 +52,11 @@
       # https://wiki.nixos.org/wiki/NetworkManager#Power_Saving
       networking.networkmanager.wifi.powersave = true;
 
-      environment = {
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          directories = [
-            "/etc/tuned"
-            "/var/lib/upower"
-          ];
-        };
-      };
+      # Files to persist
+      features.impermanence.persist.directories = [
+        "/etc/tuned"
+        "/var/lib/upower"
+      ];
     };
   };
 }
