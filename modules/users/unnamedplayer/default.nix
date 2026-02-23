@@ -44,8 +44,8 @@ in
   {
     config = {
       home.file = with config.lib.file; {
-        ".face".source = mkOutOfStoreSymlink ./profile.jpg;
-        ".wallpaper".source = mkOutOfStoreSymlink ./20181014-04-Croptic-Karl_Delandsheere.jpg;
+        ".face".source = mkOutOfStoreSymlink ./assets/profile.jpg;
+        ".wallpaper".source = mkOutOfStoreSymlink ./assets/20181014-04-Croptic-Karl_Delandsheere.jpg;
         ".cache/noctalia/wallpapers.json" = let
             wallpaperPath = "${config.home.homeDirectory}/.wallpaper";
         in
