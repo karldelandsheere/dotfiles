@@ -26,7 +26,11 @@
       features = {
         desktop.enable = lib.mkEnableOption "Enable desktop environment? Defaults to false.";
 
-        encryption.enable = lib.mkEnableOption "Encrypt the whole system? Defaults to false.";
+        encryption.enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Encrypt the whole system? Defaults to true.";
+        };
 
         hibernation = {
           enable = lib.mkEnableOption "Enable hibernation? Defaults to false.";
@@ -44,18 +48,30 @@
         impermanence = {
           enable = lib.mkEnableOption "Use impermanence? Defaults to false.";
 
-          persist = {
-            directories = lib.mkOption {
-              type = lib.types.listOf lib.types.str;
-              default = [];
-              description = "List of directories to persist.";
-            };
+          # The idea is to tidy up the code of the other modules.
+          # You want to persist something? Do it.
+          # Wether impermanence is enabled or not, just add to the list.
+          # And if it is enabled, then the feature module will take care of it.
+          # So, no need to check if it's enabled 100 times.
+          persist = let
+            stuff = {
+              directories = lib.mkOption {
+                type = lib.types.listOf lib.types.str;
+                default = [];
+                description = "List of directories to persist.";
+              };
 
-            files = lib.mkOption {
-              type = lib.types.listOf lib.types.str;
-              default = [];
-              description = "List of files to persist.";
+              files = lib.mkOption {
+                type = lib.types.listOf lib.types.str;
+                default = [];
+                description = "List of files to persist.";
+              };
             };
+          in
+          {
+            inherit (stuff) directories files;
+
+            # @todo Make this work for users' stuff too
           };
         };
       };
