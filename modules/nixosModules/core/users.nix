@@ -27,26 +27,14 @@
           config.users.users
       );
 
-      # @todo Rewrite for config.features.impermanence.persist.directories
-      environment.persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-        users = lib.listToAttrs ( map ( username: {
-          name = username; value = {
-            directories = [
-              "Data"  # Vaults, documents, etc
-            ];
-          };
-        } ) ( lib.lists.unique ( config.core.users ) ) );
-      };
-
-      # features.impermanence.persist = {
-      #   users = lib.listToAttrs ( map ( username: {
-      #     name = username; value = {
-      #       directories = [
-      #         "Data"  # Vaults, documents, etc
-      #       ];
-      #     };
-      #   } ) ( lib.lists.unique ( config.core.users ) ) );
-      # };
+      # Ressources to persist
+      features.impermanence.persist.users = lib.listToAttrs ( map ( username: {
+        name = username; value = {
+          directories = [
+            "Data"  # Vaults, documents, etc
+          ];
+        };
+      } ) ( lib.lists.unique ( config.core.users ) ) );
     };
   };
 }

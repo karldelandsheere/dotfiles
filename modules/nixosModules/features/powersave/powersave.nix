@@ -52,7 +52,7 @@
       # https://wiki.nixos.org/wiki/NetworkManager#Power_Saving
       networking.networkmanager.wifi.powersave = true;
 
-      # Files to persist
+      # Ressources to persist
       features.impermanence.persist.directories = [
         "/etc/tuned"
         "/var/lib/upower"

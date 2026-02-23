@@ -91,10 +91,11 @@
 
         # Now, opt-in what needs to persist
         # ---------------------------------
-        persistence."/persist" = {
-          hideMounts = true;  # What's it doing really?
-          directories = config.features.impermanence.persist.directories;
-          files = config.features.impermanence.persist.files;
+        persistence."/persist" = with config.features.impermanence.persist; {
+          hideMounts = true;
+          directories = directories;
+          files = files;
+          users = users;
         };
       };
 

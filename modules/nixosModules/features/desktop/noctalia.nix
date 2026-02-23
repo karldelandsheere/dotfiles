@@ -12,7 +12,6 @@
 { inputs, self, ... }:
 {
   flake.homeModules.noctalia = { lib, config, osConfig, pkgs, ... }: let
-    withImpermanence = osConfig.features.impermanence.enable;
     officialNoctaliaPlugins = "https://github.com/noctalia-dev/noctalia-plugins";
   in
   {
@@ -546,9 +545,11 @@
         };
       };
 
-      home.persistence."/persist" = lib.mkIf withImpermanence {
-        directories = [ ".config/noctalia" ];
-      };
+      # Ressources to persist
+      home.persistence."/persist" =
+        lib.mkIf osConfig.features.impermanence.enable {
+          directories = [ ".config/noctalia" ];
+        };
     };
   };
 }

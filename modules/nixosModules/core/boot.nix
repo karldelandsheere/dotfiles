@@ -41,7 +41,8 @@
         supportedFilesystems = [ "btrfs" "fat" "vfat" "exfat" "hfsplus" "ntfs" ];
       };
 
-      # Persist this file, used to determine if first boot or not
+      # Ressources to persist
+      # File used to determine if first boot or not
       features.impermanence.persist.files = [ "/etc/machine-id" ];
     };
   };

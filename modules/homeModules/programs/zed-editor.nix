@@ -6,12 +6,9 @@
 
 { inputs, self, ... }:
 {
-  flake.homeModules.zed-editor = { config, osConfig, lib, ... }: let
-    withDesktop = osConfig.features.desktop.enable;
-    withImpermanence = osConfig.features.impermanence.enable;
-  in
+  flake.homeModules.zed-editor = { config, osConfig, lib, ... }:
   {
-    config = lib.mkIf withDesktop {
+    config = lib.mkIf osConfig.features.desktop.enable {
       programs.zed-editor = {
         enable = true;
         extensions   = [ "html" "nix" "php" "xml" ];
@@ -36,10 +33,11 @@
         };
       };
 
-      # What data should persist
-      home.persistence."/persist" = lib.mkIf withImpermanence {
-        directories = [ ".config/zed" ];
-      };
+      # Ressources to persist
+      home.persistence."/persist" =
+        lib.mkIf osConfig.features.impermanence.enable {
+          directories = [ ".config/zed" ];
+        };
     };
   };
 }

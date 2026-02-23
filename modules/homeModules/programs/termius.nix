@@ -6,18 +6,16 @@
 
 { inputs, self, ... }:
 {
-  flake.homeModules.termius = { config, osConfig, lib, pkgs, ... }: let
-    withDesktop = osConfig.features.desktop.enable;
-    withImpermanence = osConfig.features.impermanence.enable;
-  in
+  flake.homeModules.termius = { config, osConfig, lib, pkgs, ... }:
   {
-    config = lib.mkIf withDesktop {
+    config = lib.mkIf osConfig.features.desktop.enable {
       home.packages = [ pkgs.termius ];
 
-      # What data should persist
-      home.persistence."/persist" = lib.mkIf withImpermanence {
-        directories = [ ".config/Termius" ];
-      };
+      # Ressources to persist
+      home.persistence."/persist" =
+        lib.mkIf osConfig.features.impermanence.enable {
+          directories = [ ".config/Termius" ];
+        };
     };
   };
 }

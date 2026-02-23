@@ -19,6 +19,7 @@
 
       services.blueman.enable = config.features.desktop.enable;
 
+      # Ressources to persist
       features.impermanence.persist.directories = [ "/var/lib/bluetooth" ];
     };
   };

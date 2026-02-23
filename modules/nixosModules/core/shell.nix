@@ -56,18 +56,14 @@
           EDITOR = "${helix}/bin/hx";
           VISUAL = "${helix}/bin/hx";
         };
-
-        persistence."/persist" = {
-          users = lib.listToAttrs ( map ( username: {
-            name = username; value = {
-              files = [
-                # ".zshrc"
-                ".zsh_history"
-              ];
-            };
-          } ) ( lib.lists.unique ( users ) ) );
-        };
       };
+
+      # Ressources to persist
+      features.impermanence.persist.users = lib.listToAttrs ( map ( username: {
+        name = username; value = {
+          files = [ ".zsh_history" ];
+        };
+      } ) ( lib.lists.unique ( config.core.users ) ) );
     };
   };
 }

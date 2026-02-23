@@ -24,6 +24,7 @@
         trustedInterfaces = [ "tailscale0" ];
       };
 
+      # Ressources to persist
       features.impermanence.persist.directories = [ "/var/lib/tailscale" ];
     };
   };

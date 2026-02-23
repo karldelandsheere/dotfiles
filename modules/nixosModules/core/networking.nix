@@ -26,6 +26,7 @@
         # banner = "";
       };
 
+      # Ressources to persist
       features.impermanence.persist = {
         directories = lib.forEach [
           "NetworkManager/system-connections"
@@ -37,23 +38,12 @@
           "seen-bssids"
           "timestamps"
         ] (x: "/var/lib/NetworkManager/${x}");
-      };
 
-      environment = { # @todo Re-write for features.impermanence.persist
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          users = lib.listToAttrs ( map ( username: {
-            name = username; value = {
-              directories = [ ".ssh" ];
-            };
-          } ) ( lib.lists.unique ( config.core.users ) ) );
-        };
-
-        # Persist systemd services' tmp files
-        # systemd.tmpfiles.rules = [
-        #   "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
-        #   "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
-        #   "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
-        # ];
+        users = lib.listToAttrs ( map ( username: {
+          name = username; value = {
+            directories = [ ".ssh" ];
+          };
+        } ) ( lib.lists.unique ( config.core.users ) ) );
       };
     };
   };

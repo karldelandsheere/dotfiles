@@ -36,18 +36,15 @@
 
       services.gnome.gnome-keyring.enable = true;
 
-      environment = { # @todo Re-write for features.impermanence.persist.directories
-        persistence."/persist" = lib.mkIf config.features.impermanence.enable {
-          users = lib.listToAttrs ( map ( username: {
-            name = username; value = {
-              directories = [
-                ".gnupg"                    # PGP utility
-                ".local/share/keyrings"     # Gnome keyring
-              ];
-            };
-          } ) ( lib.lists.unique ( config.core.users ) ) );
+      # Ressources to persist
+      features.impermanence.persist.users = lib.listToAttrs ( map ( username: {
+        name = username; value = {
+          directories = [
+            ".gnupg"                    # PGP utility
+            ".local/share/keyrings"     # Gnome keyring
+          ];
         };
-      };
+      } ) ( lib.lists.unique ( config.core.users ) ) );
     };
   };
 }

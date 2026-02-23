@@ -67,11 +67,24 @@
                 description = "List of files to persist.";
               };
             };
+
+            # userStuff = lib.mkSubModule {
+            #   inherit (stuff) directories files;
+            # };
           in
           {
             inherit (stuff) directories files;
 
             # @todo Make this work for users' stuff too
+            users = lib.mkOption {
+                type = lib.types.attrsOf ( lib.types.submodule {
+                  options = {
+                    inherit (stuff) directories files;
+                  };
+                } );
+                default = {};
+                description = "List of users' stuff to persist.";
+            };
           };
         };
       };
