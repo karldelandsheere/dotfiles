@@ -8,7 +8,7 @@
   experimental-features = [ "nix-command" "flakes" ]; # Activate flakes, etc.
   _gc = options: {
     automatic = true;
-    dates = "weekly";
+    interval = { Weekday = 7; };
   } // options;
 in
 {
