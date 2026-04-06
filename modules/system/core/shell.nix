@@ -1,0 +1,118 @@
+###############################################################################
+#
+# Basic common things for the shell config.
+# -> Zsh + Helix + the little things that help me get through the day.
+#
+# For host|user specific options, go to host|user's config.
+#
+###############################################################################
+
+{ inputs, self, ... }:
+{
+  flake = {
+    nixosModules.core = { lib, config, pkgs, ...}: let
+      dotfiles = config.filesystem.dotfiles;
+    in
+    {
+      config = {
+        # Zsh because I'm edgy but not too much
+        programs.zsh = {
+          enable = true;
+          autosuggestions.enable = true;
+          enableCompletion = true;
+          syntaxHighlighting.enable = true;
+        };
+
+        users.defaultUserShell = pkgs.zsh;
+
+        environment = {
+          shells = [ pkgs.zsh ];
+
+          shellAliases = {
+            dots = "cd ${dotfiles}";
+            todo = "clear && grep -rnw ${dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo' | grep -v 'todo ='";
+            keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
+          };
+        
+          systemPackages = with pkgs; [
+            curl 
+            git             # Git is required to manage these dotfiles
+            foremost
+            helix           # Helix > Vim imho
+            jq              # Like sed but for json, needed for persist.sh
+            libsecret
+            nix-tree        # Nix dependencies browser
+            progress        # Follow the progression of any command
+            scooter         # Directory wide search & replace
+            tmux            # Terminal multiplexer
+            tree            # Kinda ls but as a tree
+            ueberzugpp      # Terminal image viewer (needed for yazi)
+            unzip
+            usbutils
+            xev             # Event monitor, for debugging
+            yazi            # A really cool CLI file explorer
+          ];
+
+          variables = with pkgs; {
+            EDITOR = "${helix}/bin/hx";
+            VISUAL = "${helix}/bin/hx";
+          };
+        };
+
+        # Ressources to persist
+        features.impermanence.persist.users = lib.listToAttrs ( map ( username: {
+          name = username; value = {
+            files = [ ".zsh_history" ];
+          };
+        } ) ( lib.lists.unique ( config.core.users ) ) );
+      };
+    };
+
+    darwinModules.core = { config, pkgs, ... }: let
+      dotfiles = config.filesystem.dotfiles;
+    in
+    {
+      config = {
+        # Zsh because I'm edgy but not too much
+        programs.zsh = {
+          enable = true;
+          autosuggestions.enable = true;
+          enableCompletion = true;
+          syntaxHighlighting.enable = true;
+        };
+
+        users.defaultUserShell = pkgs.zsh;
+
+        environment = {
+          shells = [ pkgs.zsh ];
+
+          shellAliases = {
+            dots = "cd ${dotfiles}";
+            todo = "clear && grep -rnw ${dotfiles} --exclude-dir=__unused_or_deprecated -e '@todo' | grep -v 'todo ='";
+            keycodes = "xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'";
+          };
+        
+          systemPackages = with pkgs; [
+            # git             # Git is required to manage these dotfiles
+            foremost
+            helix           # Helix > Vim imho
+            jq              # Like sed but for json, needed for persist.sh
+            nix-tree        # Nix dependencies browser
+            progress        # Follow the progression of any command
+            scooter         # Directory wide search & replace
+            tmux            # Terminal multiplexer
+            tree            # Kinda ls but as a tree
+            ueberzugpp      # Terminal image viewer (needed for yazi)
+            xev             # Event monitor, for debugging
+            yazi            # A really cool CLI file explorer
+          ];
+
+          variables = with pkgs; {
+            EDITOR = "${helix}/bin/hx";
+            VISUAL = "${helix}/bin/hx";
+          };
+        };
+      };
+    };
+  };
+}

@@ -38,8 +38,6 @@
         };
       };
     };
-    
-    darwinModules.core = { ... }: { };
   };
 }
 

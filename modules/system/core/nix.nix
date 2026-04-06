@@ -68,7 +68,7 @@ in
           };
         };
       
-        system.stateVersion = lib.mkDefault "4";
+        system.stateVersion = lib.mkDefault 6;
       };
     };
   };
