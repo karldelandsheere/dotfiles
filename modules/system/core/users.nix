@@ -19,9 +19,9 @@
 
 { inputs, self, ... }:
 {
-  config = {
-    flake.nixosModules.core = { lib, config, ...}:
-    {
+  flake.modules.nixos.core = { lib, config, ... }:
+  {
+    config = {
       core.users = builtins.attrNames (
         lib.filterAttrs ( _: v: ( v.isNormalUser ) )
           config.users.users

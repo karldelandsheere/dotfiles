@@ -9,7 +9,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.desktop = { lib, config, pkgs, ...}:
+  flake.modules.nixos.desktop = { lib, config, pkgs, ... }:
   {
     config = {
       features.desktop.enable = true; # So other modules know

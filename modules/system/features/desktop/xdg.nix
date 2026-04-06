@@ -12,9 +12,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.desktop = { lib, config, pkgs, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.modules.nixos.desktop = { lib, config, pkgs, ... }:
   {
     config = {
       environment = {

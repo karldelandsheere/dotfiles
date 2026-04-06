@@ -8,7 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.graphics = { lib, config, pkgs, ...}:
+  flake.modules.nixos.graphics = { config, ... }:
   {
     config = {
       hardware.graphics = {

@@ -6,7 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}:
+  flake.modules.nixos.core = { lib, config, ... }:
   {
     config = {
       fileSystems."/swap".options = [ "compress=none" "noatime" ];

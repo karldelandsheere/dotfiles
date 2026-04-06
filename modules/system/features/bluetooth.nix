@@ -8,7 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.bluetooth = { lib, config, ...}:
+  flake.modules.nixos.bluetooth = { lib, config, ... }:
   {
     config = {
       hardware.bluetooth = {

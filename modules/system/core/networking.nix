@@ -6,7 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}:
+  flake.modules.nixos.core = { lib, config, ... }:
   {
     config = {
       networking = {
@@ -31,13 +31,13 @@
         directories = lib.forEach [
           "NetworkManager/system-connections"
           "ssh"
-        ] (x: "/etc/${x}");
+        ] ( x: "/etc/${x}" );
 
         files = lib.forEach [
           "secret_key"
           "seen-bssids"
           "timestamps"
-        ] (x: "/var/lib/NetworkManager/${x}");
+        ] ( x: "/var/lib/NetworkManager/${x}" );
 
         users = lib.listToAttrs ( map ( username: {
           name = username; value = {

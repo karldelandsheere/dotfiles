@@ -2,7 +2,7 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  flake.nixosModules.hostQ3dm10 = { config, lib, pkgs, modulesPath, ... }:
+  flake.modules.nixos.hostQ3dm10 = { config, lib, pkgs, modulesPath, ... }:
 
   {
     imports =

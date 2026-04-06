@@ -8,8 +8,8 @@
 {
   imports = [ inputs.home-manager.flakeModules.home-manager ];
 
-  flake = {
-    nixosModules.core = { config, lib, ... }: {
+  flake.modules = {
+    nixos.core = { config, lib, ... }: {
       imports = [
         inputs.home-manager.nixosModules.home-manager
       ];
@@ -34,7 +34,7 @@
       };
     };
 
-    darwinModules.core = { config, ... }: {
+    darwin.core = { config, ... }: {
       imports = [
         inputs.home-manager.darwinModules.home-manager
       ];

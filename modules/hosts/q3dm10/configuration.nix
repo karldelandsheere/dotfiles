@@ -13,37 +13,34 @@
 {
   flake = {
     nixosConfigurations.q3dm10 = inputs.nixpkgs.lib.nixosSystem {
-      modules = [
-        self.nixosModules.core
-        self.modules.nixos.core
+      modules = with self.modules.nixos; [
+        core
 
-        self.nixosModules.hostQ3dm10
+        mullvad-vpn
+        tailscale
+
+        hostQ3dm10
       ];
     };
 
-    nixosModules.hostQ3dm10 = { config, ... }:
+    modules.nixos.hostQ3dm10 = { config, lib, ... }:
     {
-      imports = [
-        self.nixosModules.tailscale
-        self.nixosModules.mullvad-vpn
+      imports = with self.modules.nixos; [
+        audio
+        bluetooth
+        desktop
+        encryption
+        graphics
+        hibernation
+        impermanence
+        powersave
 
-        self.nixosModules.encryption
-        self.nixosModules.impermanence
-        self.nixosModules.powersave
-        self.nixosModules.hibernation
-
-        self.nixosModules.audio
-        self.nixosModules.bluetooth
-        self.nixosModules.graphics
-
-        self.nixosModules.desktop
-
-        # AMD specific options
-        self.nixosModules.core_amd
-        self.nixosModules.powersave_amd
+        # AMD
+        core_amd
+        powersave_amd
 
         # User(s)
-        self.nixosModules.unnamedplayer
+        unnamedplayer
       ];
 
       config = {

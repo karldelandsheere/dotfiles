@@ -9,7 +9,7 @@
   homeDirectory = "/home/${username}";
 in
 {
-  flake.nixosModules.${username} = { lib, config, ... }:
+  flake.modules.nixos.${username} = { lib, config, ... }:
   {
     config = {
       users.users.${username} = {

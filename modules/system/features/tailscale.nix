@@ -8,7 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.tailscale = { lib, config, ... }:
+  flake.modules.nixos.tailscale = { lib, config, ... }:
   {
     config = {
       services.tailscale = {

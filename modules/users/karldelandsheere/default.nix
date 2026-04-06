@@ -9,7 +9,7 @@
   homeDirectory = "/Users/${username}";
 in
 {
-  flake.darwinModules.${username} = { lib, config, ... }:
+  flake.modules.darwin.${username} = { lib, config, ... }:
   {
     config = {
       home-manager.users.${username} = {

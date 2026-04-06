@@ -6,7 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core_amd = { lib, config, ...}:
+  flake.modules.nixos.core_amd = { lib, config, ... }:
   {
     config = {
       hardware.cpu.amd.updateMicrocode = true;

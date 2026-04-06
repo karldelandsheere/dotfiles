@@ -9,8 +9,8 @@
 
 { inputs, self, ... }:
 {
-  flake = {
-    nixosModules.core = { lib, config, pkgs, ...}: let
+  flake.modules = {
+    nixos.core = { lib, config, pkgs, ... }: let
       dotfiles = config.filesystem.dotfiles;
     in
     {
@@ -68,7 +68,7 @@
       };
     };
 
-    darwinModules.core = { config, pkgs, ... }: let
+    darwin.core = { config, pkgs, ... }: let
       dotfiles = config.filesystem.dotfiles;
     in
     {

@@ -8,7 +8,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.audio = { lib, config, pkgs, ...}: let
+  flake.modules.nixos.audio = { lib, config, pkgs, ... }: let
     withDesktop = config.features.desktop.enable;
   in
   {

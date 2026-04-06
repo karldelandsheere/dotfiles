@@ -13,7 +13,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.impermanence = { lib, config, pkgs, ... }:
+  flake.modules.nixos.impermanence = { lib, config, pkgs, ... }:
   {
     imports = [ inputs.impermanence.nixosModules.impermanence ];
 

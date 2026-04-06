@@ -6,7 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, pkgs, ...}:
+  flake.modules.nixos.core = { lib, config, pkgs, ... }:
   {
     imports = [
       inputs.sops-nix.nixosModules.sops
@@ -48,4 +48,3 @@
     };
   };
 }
-

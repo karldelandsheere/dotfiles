@@ -6,7 +6,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core = { lib, config, ...}:
+  flake.modules.nixos.core = { lib, ... }:
   {
     options = {
       core = {
@@ -104,7 +104,7 @@
 
         swapSize = lib.mkOption {
           type        = lib.types.int;
-          default     = lib.mkDefault 8*1024; # 8GB is a good default value, right?
+          default     = 8*1024; # 8GB is a good default value, right?
           description = "Size of swapfile. Defaults to 8*1024.";
         };
       };

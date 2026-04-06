@@ -9,7 +9,7 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.hibernation = { lib, config, ... }:
+  flake.modules.nixos.hibernation = { lib, config, ... }:
   {
     config = {
       features.hibernation.enable = true; # So other modules know

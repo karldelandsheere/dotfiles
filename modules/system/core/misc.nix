@@ -6,8 +6,8 @@
 
 { inputs, self, ... }:
 {
-  flake = {
-    nixosModules.core = { config, pkgs, lib, ...}: {
+  flake.modules = {
+    nixos.core = { config, pkgs, lib, ...}: {
       config = {
         console = {
           earlySetup = true;

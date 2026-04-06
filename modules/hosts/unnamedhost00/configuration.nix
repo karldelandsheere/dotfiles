@@ -12,17 +12,18 @@
 {
   flake = {
     darwinConfigurations.unnamedhost00 = inputs.darwin.lib.darwinSystem {
-      modules = [
-        self.darwinModules.core
+      modules = with self.modules.darwin; [
+        core
 
-        self.darwinModules.hostUnnamedhost00
+        hostUnnamedhost00
       ];
     };
 
-    darwinModules.hostUnnamedhost00 = { config, ... }:
+    modules.darwin.hostUnnamedhost00 = { config, ... }:
     {
-      imports = [
-        self.darwinModules.unnamedplayer
+      imports = with self.modules.darwin; [
+        # User(s)
+        karldelandsheere
       ];
 
       config = {
