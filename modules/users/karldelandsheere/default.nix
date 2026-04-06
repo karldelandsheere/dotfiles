@@ -6,7 +6,6 @@
 
 { inputs, self, ... }: let
   username = "karldelandsheere";
-  homeDirectory = "/Users/${username}";
 in
 {
   flake.modules.darwin.${username} = { lib, config, ... }:
@@ -17,7 +16,7 @@ in
         
         home = {
           username = username;
-          homeDirectory = homeDirectory;
+          homeDirectory = "/Users/${username}";
         };
       };
     };
