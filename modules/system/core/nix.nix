@@ -10,8 +10,7 @@
     inherit options;
     automatic = true;
     dates = "weekly";
-    randomizedDelaySec = "1 hour";
-  };
+  } // options;
 in
 {
   # Import and enable flake.modules
@@ -32,7 +31,10 @@ in
     nixos.core = { lib, config, ... }: {
       config = {
         nix = {
-          gc = _gc "--delete-older-than 30d --keep-generations 10";
+          gc = _gc {
+            "--delete-older-than 30d --keep-generations 10";
+            randomizedDelaySec = "1 hour";
+          };
         
           settings = {
             inherit experimental-features;
@@ -65,7 +67,9 @@ in
     darwin.core = { config, lib, ... }: {
       config = {
         nix = {
-          gc = _gc "--delete-older-than 15d";
+          gc = _gc {
+            "--delete-older-than 15d";
+          };
 
           settings = {
             inherit experimental-features;
