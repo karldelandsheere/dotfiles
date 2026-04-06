@@ -37,6 +37,7 @@
         systemPackages = with pkgs; [
           curl 
           git             # Git is required to manage these dotfiles
+          foremost
           helix           # Helix > Vim imho
           jq              # Like sed but for json, needed for persist.sh
           libsecret

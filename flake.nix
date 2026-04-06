@@ -7,18 +7,16 @@
 # 
 # Current steps:
 # --------------
+#   - @todo Add nix-darwin support for my MacBook Pro M1
 #   - @todo Setup Sops-Nix and implement secrets once and for all!
+#   - @todo Figure out Devenv in Nix
 #   - @todo Adapt the shell scripts under system/scripts to reflect the mods
 #
 # Next steps:
 # -----------
-#   - @todo Try out nix-init: https://www.youtube.com/shorts/RUszKmnq9y4
 #   - @todo Try out specialisation: https://www.youtube.com/shorts/cyX8Imfb0Mg
-#   - @todo Figure out Devenv in Nix
 #   - @todo Implement a local binary cache to speed up rebuild a bit
-#   - @todo Find out why I have this error when resuming from hibernation
-#       "BTRFS error: failed to open device
-#          for path /dev/mapper/cryptroot with flags 0x3: -16"
+#
 # Probably never at this point:
 # -----------------------------
 #   - Actually use this setup for something else than ricing...
@@ -45,7 +43,11 @@
   inputs = {
     # NixOS/nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Nix-Darwin
+    darwin = { url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+               inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Dendritic pattern
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -67,5 +69,5 @@
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; }
-    ( inputs.import-tree ./modules );
+            ( inputs.import-tree ./modules );
 }

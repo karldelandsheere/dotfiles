@@ -22,7 +22,7 @@
       
       programs.gurk-rs = { # @todo fix images and transfer
         enable = true;
-        package = pkgs.unstable.gurk-rs;
+        package = pkgs.nixpkgs-unstable.gurk-rs;
         settings = {
           bell = true;
           colored_messages = false;

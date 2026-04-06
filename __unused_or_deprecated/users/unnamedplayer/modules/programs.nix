@@ -79,7 +79,7 @@ in
         termius                # Cross-platform SSH client
       ] );
 
-      # ++ [ pkgs.unstable.gurk-rs ];
+      # ++ [ pkgs.nixpkgs-unstable.gurk-rs ];
 
 
       shellAliases = {
@@ -260,7 +260,7 @@ in
 
       gurk-rs = { # Signal client for the tty. @todo fix images and transfer
         enable = false; # for now
-        package = pkgs.unstable.gurk-rs;
+        package = pkgs.nixpkgs-unstable.gurk-rs;
         settings = {
           bell = true;
           colored_messages = false;

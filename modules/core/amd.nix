@@ -1,14 +1,12 @@
 ###############################################################################
 #
-# Additional options for AMD
+# Additional setup for AMD flavoured devices
 #
 ###############################################################################
 
 { inputs, self, ... }:
 {
-  flake.nixosModules.core_amd = { lib, config, ...}: let
-    cfg = config.nouveauxParadigmes;
-  in
+  flake.nixosModules.core_amd = { lib, config, ...}:
   {
     config = {
       hardware.cpu.amd.updateMicrocode = true;

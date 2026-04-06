@@ -56,8 +56,6 @@ in
           };
         };
       };
-
-      nixpkgs.config.allowUnfree = osConfig.nixpkgs.config.allowUnfree;
     };
   };
 }

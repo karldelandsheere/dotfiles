@@ -13,13 +13,16 @@
 {
   flake = {
     nixosConfigurations.q3dm10 = inputs.nixpkgs.lib.nixosSystem {
-      modules = [ self.nixosModules.hostQ3dm10 ];
+      modules = [
+        self.nixosModules.core
+
+        self.nixosModules.hostQ3dm10
+      ];
     };
 
     nixosModules.hostQ3dm10 = { config, ... }:
     {
       imports = [
-        self.nixosModules.core
         self.nixosModules.tailscale
         self.nixosModules.mullvad-vpn
 
