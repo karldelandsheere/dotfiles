@@ -6,17 +6,23 @@
 
 { inputs, self, ... }: let
   username = "karldelandsheere";
+  homeDirectory = "/Users/${username}";
 in
 {
   flake.modules.darwin.${username} = { lib, config, ... }:
   {
     config = {
+      users.users.${username} = {
+        name = username;
+        home = homeDirectory;
+      };
+
       home-manager.users.${username} = {
         imports = [ self.homeModules.${username} ];
         
         home = {
           username = username;
-          homeDirectory = "/Users/${username}";
+          homeDirectory = homeDirectory;
         };
       };
     };
