@@ -15,6 +15,7 @@
     nixosConfigurations.q3dm10 = inputs.nixpkgs.lib.nixosSystem {
       modules = [
         self.nixosModules.core
+        self.modules.nixos.core
 
         self.nixosModules.hostQ3dm10
       ];

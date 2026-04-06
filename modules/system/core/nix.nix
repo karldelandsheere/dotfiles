@@ -14,6 +14,10 @@
   };
 in
 {
+  # Import and enable flake.modules
+  imports = [ inputs.flake-parts.flakeModules.modules ];
+  
+  # Apply this on all systems
   perSystem = { config, nixpkgs, system, ... }: {
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
@@ -24,8 +28,8 @@ in
     };
   };
   
-  flake = {
-    nixosModules.core = { lib, config, ... }: {
+  flake.modules = {
+    nixos.core = { lib, config, ... }: {
       config = {
         nix = {
           gc = _gc "--delete-older-than 30d --keep-generations 10";
@@ -58,7 +62,7 @@ in
       };
     };
 
-    darwinModules.core = { lib, ... }: {
+    darwin.core = { lib, ... }: {
       config = {
         nix = {
           gc = _gc "--delete-older-than 15d";
