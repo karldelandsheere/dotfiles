@@ -76,7 +76,7 @@
         # Zsh because I'm edgy but not too much
         programs.zsh = {
           enable = true;
-          autosuggestions.enable = true;
+          # autosuggestions.enable = true;
           enableCompletion = true;
           syntaxHighlighting.enable = true;
         };
