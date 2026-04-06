@@ -7,7 +7,6 @@
 { inputs, self, ... }: let
   experimental-features = [ "nix-command" "flakes" ]; # Activate flakes, etc.
   _gc = options: {
-    inherit options;
     automatic = true;
     dates = "weekly";
   } // options;
@@ -32,7 +31,7 @@ in
       config = {
         nix = {
           gc = _gc {
-            "--delete-older-than 30d --keep-generations 10";
+            options = "--delete-older-than 30d --keep-generations 10";
             randomizedDelaySec = "1 hour";
           };
         
@@ -68,7 +67,7 @@ in
       config = {
         nix = {
           gc = _gc {
-            "--delete-older-than 15d";
+            options = "--delete-older-than 15d";
           };
 
           settings = {
