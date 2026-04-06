@@ -58,11 +58,11 @@ in
           } ) ( lib.lists.unique ( config.core.users ) ) );
         };
 
-        system.stateVersion = lib.mkDefault "25.11";
+        system.stateVersion = config.core.stateVersion;
       };
     };
 
-    darwin.core = { lib, ... }: {
+    darwin.core = { config, lib, ... }: {
       config = {
         nix = {
           gc = _gc "--delete-older-than 15d";
@@ -72,7 +72,7 @@ in
           };
         };
       
-        system.stateVersion = lib.mkDefault "25.11";
+        system.stateVersion = config.darwin.version;
       };
     };
   };

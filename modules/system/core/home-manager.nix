@@ -24,7 +24,7 @@
           sharedModules = [
             {
               programs.home-manager.enable = true;
-              home.stateVersion = config.system.stateVersion;
+              home.stateVersion = config.core.stateVersion;
               news.display = "show";
             }
           ] ++ lib.lists.optionals config.features.desktop.enable [
@@ -47,7 +47,7 @@
           sharedModules = [
             {
               programs.home-manager.enable = true;
-              home.stateVersion = config.system.stateVersion;
+              home.stateVersion = config.core.stateVersion;
             }
 
             # self.homeModules.desktop

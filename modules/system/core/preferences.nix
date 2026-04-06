@@ -18,6 +18,12 @@
         default = [];
         description = "Registered users on the host.";
       };
+      
+      stateVersion = lib.mkOption {
+        type = lib.types.str;
+        default = "25.11";
+        description = "Nixpkgs and Home-Manager stateVersion. Defaults to 25.11";
+      };
     };
   
     filesystem = {
@@ -117,7 +123,13 @@ in
 
     darwin.core = { ... }: {
       options = lib.recursiveUpdate _options {
-        # ...
+        darwin = {
+          version = lib.mkOption {
+            type        = lib.types.int;
+            default     = 6;
+            description = "Darwin's version. Defaults to 6.";
+          };
+        };
       };
     };
   };
