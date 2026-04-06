@@ -78,7 +78,7 @@
           enable = true;
           # autosuggestions.enable = true;
           enableCompletion = true;
-          syntaxHighlighting.enable = true;
+          # syntaxHighlighting.enable = true;
         };
 
         users.defaultUserShell = pkgs.zsh;
