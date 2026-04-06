@@ -11,7 +11,7 @@
 { inputs, self, ... }:
 {
   flake = {
-    darwinConfigurations.unnamedhost00 = inputs.nixpkgs.lib.darwinSystem {
+    darwinConfigurations.unnamedhost00 = inputs.darwin.lib.darwinSystem {
       modules = [
         self.darwinModules.core
 
